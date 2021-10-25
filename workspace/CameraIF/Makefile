@@ -89,6 +89,10 @@ IPATH += ./include
 # Enable assertion checking for development
 PROJ_CFLAGS+=-DMXC_ASSERT_ENABLE
 
+#Added from sd make
+# Control program based on board
+PROJ_CFLAGS+=-D$(BOARD)
+
 # Enable all warnings
 PROJ_CFLAGS+=-Wall
 
@@ -125,6 +129,12 @@ include $(BOARD_DIR)/board.mk
 PERIPH_DRIVER_DIR=$(LIBS_DIR)/PeriphDrivers
 include $(PERIPH_DRIVER_DIR)/periphdriver.mk
 export PERIPH_DRIVER_DIR
+
+SDHC_DRIVER_DIR=$(LIBS_DIR)/SDHC
+FAT32_DRIVER_DIR=$(SDHC_DRIVER_DIR)/ff13
+include $(FAT32_DRIVER_DIR)/fat32.mk
+include $(SDHC_DRIVER_DIR)/sdhc.mk
+
 
 ################################################################################
 # Include the rules for building for this target. All other makefiles should be
