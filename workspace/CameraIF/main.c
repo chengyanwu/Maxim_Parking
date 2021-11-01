@@ -57,14 +57,31 @@
 #include "camera.h"
 #include "utils.h"
 #include "dma.h"
+
+#include <stdlib.h>
+#include <string.h>
+#include <gpio.h>
+#include <uart.h>
+#include <mxc_delay.h>
+
+#include "ff.h"
 #include "sd.h"
 
 #define IMAGE_XRES  64
 #define IMAGE_YRES  64
 #define CAMERA_FREQ (10 * 1000 * 1000)
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+#define MAXLEN 256
+
 uint32_t imNum = 0;
 
+extern FRESULT err;
+extern TCHAR cwd[MAXLEN];
+extern TCHAR* FF_ERRORS[20];
+
+int imgCount = 0;
 
 void process_img(void)
 {
@@ -78,11 +95,9 @@ void process_img(void)
     // A python program will read from the console and write
     // to an image file.
     //utils_send_img_to_pc(raw, imgLen, w, h, camera_get_pixel_format());
+    createRawImage(raw, imgLen, imgCount);
+    imgCount++;
 
-    if (imNum < 1000)
-    	createFile(raw, imgLen, imNum);
-
-    imNum += 1;
 }
 
 // *****************************************************************************
@@ -139,6 +154,27 @@ int main(void)
     printf("In 5 seconds...\n");
     MXC_Delay(SEC(5));
     
+    	FF_ERRORS[0] = "FR_OK";
+        FF_ERRORS[1] = "FR_DISK_ERR";
+        FF_ERRORS[2] = "FR_INT_ERR";
+        FF_ERRORS[3] = "FR_NOT_READY";
+        FF_ERRORS[4] = "FR_NO_FILE";
+        FF_ERRORS[5] = "FR_NO_PATH";
+        FF_ERRORS[6] = "FR_INVLAID_NAME";
+        FF_ERRORS[7] = "FR_DENIED";
+        FF_ERRORS[8] = "FR_EXIST";
+        FF_ERRORS[9] = "FR_INVALID_OBJECT";
+        FF_ERRORS[10] = "FR_WRITE_PROTECTED";
+        FF_ERRORS[11] = "FR_INVALID_DRIVE";
+        FF_ERRORS[12] = "FR_NOT_ENABLED";
+        FF_ERRORS[13] = "FR_NO_FILESYSTEM";
+        FF_ERRORS[14] = "FR_MKFS_ABORTED";
+        FF_ERRORS[15] = "FR_TIMEOUT";
+        FF_ERRORS[16] = "FR_LOCKED";
+        FF_ERRORS[17] = "FR_NOT_ENOUGH_CORE";
+        FF_ERRORS[18] = "FR_TOO_MANY_OPEN_FILES";
+        FF_ERRORS[19] = "FR_INVALID_PARAMETER";
+
     // Start off the first camera image frame.
     camera_start_capture_image();
     
