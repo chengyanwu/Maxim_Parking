@@ -30,20 +30,9 @@
 * ownership rights.
 *
 ******************************************************************************/
-#ifndef _UTILS_H_
-#define _UTILS_H_
-
-/*****************************     INCLUDES  *********************************/
-#include <stdint.h>
-
-/*****************************     MACROS    *********************************/
-
-/*****************************     VARIABLES *********************************/
-
-/*****************************     FUNCTIONS *********************************/
-void utils_delay_ms(uint32_t ms);
-uint32_t utils_get_time_ms(void);
-void utils_hexDump(const char* title, uint8_t* buf, uint32_t len);
-int  utils_send_img_to_pc(uint8_t* img, uint32_t imgLen, int w, int h, uint8_t* pixelformat);
-
-#endif // _UTILS_H_
+__attribute__((section(".bin_storage_img"))) __attribute__((__used__))
+__attribute__ ((aligned (2)))
+const   unsigned char image_rgb565[${imglen}] = {
+    ${imgsize},
+	${imgdata}
+};

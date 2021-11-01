@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>CameraIF</name>
+	<name>snake_game_demo</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -32,12 +32,12 @@
 		<link>
 			<name>PeriphDrivers-Includes</name>
 			<type>2</type>
-			<locationURI>PARENT-3-ECLIPSE_HOME/Libraries/PeriphDrivers/Include/MAX32570</locationURI>
+			<locationURI>PARENT-3-ECLIPSE_HOME/Libraries/PeriphDrivers/Include/MAX78000</locationURI>
 		</link>
 		<link>
 			<name>PeriphDrivers-Registers</name>
 			<type>2</type>
-			<locationURI>PARENT-3-ECLIPSE_HOME/Libraries/CMSIS/Device/Maxim/MAX32570/Include</locationURI>
+			<locationURI>PARENT-3-ECLIPSE_HOME/Libraries/CMSIS/Device/Maxim/MAX78000/Include</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
