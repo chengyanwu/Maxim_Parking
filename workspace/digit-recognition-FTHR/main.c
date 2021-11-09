@@ -68,9 +68,9 @@
 const char classes[CNN_NUM_OUTPUTS][10] = {"0","1","2","3","4","5","6","7","8","9"};
 
 volatile uint32_t cnn_time; // Stopwatch
-uint32_t input_0_camera[784];
-uint32_t input_1_camera[784];
-uint32_t input_2_camera[784];
+uint32_t input_0_camera[1024];
+uint32_t input_1_camera[1024];
+uint32_t input_2_camera[1024];
 
 uint32_t input_mnist[116];
 
@@ -294,21 +294,19 @@ int main(void)
   // CNN clock: 50 MHz div 1
   cnn_enable(MXC_S_GCR_PCLKDIV_CNNCLKSEL_PCLK, MXC_S_GCR_PCLKDIV_CNNCLKDIV_DIV1);
 
-  printf("\n*** CNN Inference Test ***\n");
+  // printf("\n*** CNN Inference Test ***\n");
 
+
+  // cnn_boost_enable(gpio_out, MXC_GPIO_PIN_5);
   // Configure P2.5, turn on the CNN Boost
-  mxc_gpio_cfg_t gpio_out;
-  // gpio_out.port = MXC_GPIO2;
-  gpio_out.port = MXC_GPIO0;
-  gpio_out.mask = MXC_GPIO_PIN_5;
-  gpio_out.pad = MXC_GPIO_PAD_NONE;
-  gpio_out.func = MXC_GPIO_FUNC_OUT;
-  MXC_GPIO_Config(&gpio_out);
-  MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
+  // mxc_gpio_cfg_t gpio_out;
+  // gpio_out.port = MXC_GPIO0;
+  // gpio_out.mask = MXC_GPIO_PIN_5;
+  // gpio_out.pad = MXC_GPIO_PAD_NONE;
+  // gpio_out.func = MXC_GPIO_FUNC_OUT;
+  // MXC_GPIO_Config(&gpio_out);
+  // MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
 
-  printf("\n*** CNN Test ***\n");
-
- 
   // Initialize camera.
   printf("Init Camera.\n");
   camera_init(CAMERA_FREQ);
@@ -318,6 +316,7 @@ int main(void)
   dma_channel = MXC_DMA_AcquireChannel();
 
   ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
+  // ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_YUV422, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
   if (ret != STATUS_OK) {
     printf("Error returned from setting up camera. Error %d\n", ret);
     return -1;
@@ -327,108 +326,67 @@ int main(void)
 
   int frame = 0;
 
+
+  cnn_init(); // Bring state machine into consistent state
+  cnn_load_weights(); // Load kernels
+  cnn_load_bias();
+  cnn_configure(); // Configure state machine
+
   while (1) {
-    printf("********** Press PB1 to capture an image **********\r\n");
-    while(!PB_Get(0));
-    printf("------test1---------\n");
+    // printf("********** Press PB1 to capture an image **********\r\n");
+    // while(!PB_Get(0));
+    MXC_Delay(SEC(1));
 
     // Capture a single camera frame.
     printf("\nCapture a camera frame %d\n", ++frame);
     capture_camera_img();
-    while(!camera_is_image_rcv());
     // Copy the image data to the CNN input arrays.
     process_camera_img(input_0_camera, input_1_camera, input_2_camera);
 
     convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
 
-    printf("------test2---------\n");
     cnn_init(); // Bring state machine into consistent state
-    cnn_load_weights(); // Load kernels
-    cnn_load_bias();
+    // cnn_load_weights(); // Load kernels
+    // cnn_load_bias();
     cnn_configure(); // Configure state machine
     load_input(); // Load data input via FIFO
     cnn_start(); // Start CNN processing
-    MXC_TMR_SW_Start(MXC_TMR0);
-
-    printf("------test3---------\n");
+    // MXC_TMR_SW_Start(MXC_TMR0);
 
 
     while (cnn_time == 0)
-      printf("------test4---------\n");
-      __WFI(); // Wait for CNN
-
+      printf("------WAITING FOR CNN---------\n");
+      // __WFI(); // Wait for CNN
+    printf("------FINISHED WAITING FOR CNN---------\n");
     softmax_layer();
-    printf("------test5---------\n");
+
+    cnn_stop();
+    // Disable CNN clock to save power
+    // MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
 
     printf("Time for CNN: %d us\n\n", cnn_time);
 
     printf("Classification results:\n");
+    int max=0;
+    int dig_recognized = -1;
     for (i = 0; i < CNN_NUM_OUTPUTS; i++) {
       digs = (1000 * ml_softmax[i] + 0x4000) >> 15;
       tens = digs % 10;
       digs = digs / 10;
       result[i] = digs;
+      if(digs > max){
+        max = digs;
+        dig_recognized = i;
+      }
       printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], digs, tens);
     }
+    printf("Digit Recognized: %d\n", dig_recognized);
 
-    printf("\n");
-    // memset(buff,32,TFT_BUFF_SIZE);
-
-    char* kyle; 
-    if (result[0] > 60) {
-      kyle = "0";
-      // TFT_Print(buff, 30, 55, urw_gothic_12_white_bg_grey);
-      printf("User choose: %s \r\n", classes[0]);
-
-    } else if (result[1] > 60) {
-      kyle = "1";
-      // TFT_Print(buff, 30, 55, urw_gothic_12_white_bg_grey);
-      printf("User choose: %s \r\n", classes[1]);
-
-    } else if (result[2] > 60) {
-      kyle = "2";
-
-
-
-      // TFT_Print(buff, 30, 55, urw_gothic_12_white_bg_grey);
-      printf("User choose: %s \r\n", classes[2]);
-    } else if (result[3] > 60) {
-      kyle = "3";
-      printf("User choose: %s \r\n", classes[3]);
-
-    } else if (result[4] > 60) {
-      kyle = "4";
-      printf("User choose: %s \r\n", classes[4]);
-
-    }else if (result[5] > 60) {
-      kyle = "5";
-      printf("User choose: %s \r\n", classes[5]);
-
-    }else if (result[6] > 60) {
-      kyle = "6";
-      printf("User choose: %s \r\n", classes[6]);
-
-    }else if (result[7] > 60) {
-      kyle = "7";
-      printf("User choose: %s \r\n", classes[7]);
-
-    }else if (result[8] > 60) {
-      kyle = "8";
-      // TFT_Print(buff, 30, 55, urw_gothic_12_white_bg_grey);
-      printf("User choose: %s \r\n", classes[8]);
-
-    }else if (result[9] > 60){
-      kyle = "9";
-    }else{
-      kyle = "unknown";
-    }
-    convert_img_signed_to_unsigned(input_0_camera, input_1_camera, input_2_camera);
+    // convert_img_signed_to_unsigned(input_0_camera, input_1_camera, input_2_camera);
     memcpy32(input_0_camera, 0, 1024);
     memcpy32(input_1_camera, 0, 1024);
     memcpy32(input_2_camera, 0, 1024);
 
-    user_choice = 0;
-    kyle = "";
     printf("-----------END----------\n");
   }
 
