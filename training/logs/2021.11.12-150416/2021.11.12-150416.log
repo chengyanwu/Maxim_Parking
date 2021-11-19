@@ -1,0 +1,148 @@
+2021-11-12 15:04:16,417 - Log file for this run: /Users/kylewong/Documents/School/ece189/ai8x-training/logs/2021.11.12-150416/2021.11.12-150416.log
+2021-11-12 15:04:16,418 - Number of CPUs: 10
+2021-11-12 15:04:16,418 - Number of GPUs: 0
+2021-11-12 15:04:16,418 - CUDA version: None
+2021-11-12 15:04:16,418 - CUDNN version: None
+2021-11-12 15:04:16,418 - Kernel: 21.0.1
+2021-11-12 15:04:16,418 - Python: 3.8.11 (default, Aug  6 2021, 08:56:27) 
+[Clang 10.0.0 ]
+2021-11-12 15:04:16,418 - pip freeze: {'absl-py': '1.0.0', 'appdirs': '1.4.4', 'appnope': '0.1.2', 'argon2-cffi': '21.1.0', 'atomicwrites': '1.4.0', 'attrs': '21.2.0', 'audioread': '2.1.9', 'backcall': '0.2.0', 'bleach': '4.1.0', 'bqplot': '0.11.5', 'cachetools': '4.2.4', 'certifi': '2021.10.8', 'cffi': '1.15.0', 'charset-normalizer': '2.0.7', 'cloudpickle': '2.0.0', 'cycler': '0.11.0', 'debugpy': '1.5.1', 'decorator': '5.1.0', 'defusedxml': '0.7.1', 'distiller': '0.4.0rc0', 'entrypoints': '0.3', 'future': '0.18.2', 'gitdb': '4.0.9', 'gitpython': '3.1.0', 'google-auth': '1.35.0', 'google-auth-oauthlib': '0.4.6', 'graphviz': '0.10.1', 'grpcio': '1.41.1', 'gym': '0.12.5', 'idna': '3.3', 'importlib-resources': '5.4.0', 'ipykernel': '6.5.0', 'ipython': '7.29.0', 'ipython-genutils': '0.2.0', 'ipywidgets': '7.4.2', 'jedi': '0.18.0', 'jinja2': '3.0.3', 'joblib': '1.1.0', 'jsonpatch': '1.32', 'jsonpointer': '2.2', 'jsonschema': '4.2.1', 'jupyter': '1.0.0', 'jupyter-client': '7.0.6', 'jupyter-console': '6.4.0', 'jupyter-core': '4.9.1', 'jupyterlab-pygments': '0.1.2', 'kiwisolver': '1.3.2', 'librosa': '0.8.1', 'llvmlite': '0.32.1', 'markdown': '3.3.4', 'markupsafe': '2.0.1', 'matplotlib': '3.4.3', 'matplotlib-inline': '0.1.3', 'mistune': '0.8.4', 'more-itertools': '8.11.0', 'munch': '2.5.0', 'nbclient': '0.5.5', 'nbconvert': '6.2.0', 'nbformat': '5.1.3', 'nest-asyncio': '1.5.1', 'notebook': '6.4.5', 'numba': '0.49.1', 'numpy': '1.20.3', 'oauthlib': '3.1.1', 'opencv-python': '4.5.4.58', 'packaging': '21.2', 'pandas': '1.3.4', 'pandocfilters': '1.5.0', 'parso': '0.8.2', 'pexpect': '4.8.0', 'pickleshare': '0.7.5', 'pillow': '8.4.0', 'pip': '21.2.4', 'pluggy': '0.13.1', 'pooch': '1.5.2', 'pretrainedmodels': '0.7.4', 'prometheus-client': '0.12.0', 'prompt-toolkit': '3.0.22', 'protobuf': '3.19.1', 'ptyprocess': '0.7.0', 'py': '1.11.0', 'pyasn1': '0.4.8', 'pyasn1-modules': '0.2.8', 'pycparser': '2.21', 'pydot': '1.4.1', 'pyglet': '1.5.21', 'pygments': '2.10.0', 'pyparsing': '2.4.7', 'pyrsistent': '0.18.0', 'pytest': '4.6.11', 'python-dateutil': '2.8.2', 'pytsmod': '0.3.3', 'pytz': '2021.3', 'pyyaml': '6.0', 'pyzmq': '22.3.0', 'qgrid': '1.1.1', 'qtconsole': '5.2.0', 'qtpy': '1.11.2', 'requests': '2.26.0', 'requests-oauthlib': '1.3.0', 'resampy': '0.2.2', 'rsa': '4.7.2', 'scikit-learn': '0.23.2', 'scipy': '1.7.2', 'send2trash': '1.8.0', 'setuptools': '58.0.4', 'shap': '0.40.0', 'six': '1.16.0', 'slicer': '0.0.7', 'smmap': '5.0.0', 'soundfile': '0.10.3.post1', 'tabulate': '0.8.3', 'tensorboard': '2.4.1', 'tensorboard-plugin-wit': '1.8.0', 'terminado': '0.12.1', 'testpath': '0.5.0', 'threadpoolctl': '3.0.0', 'tk': '0.1.0', 'torch': '1.8.1', 'torchfile': '0.1.0', 'torchnet': '0.0.4', 'torchvision': '0.9.1', 'tornado': '6.1', 'tqdm': '4.33.0', 'traitlets': '5.1.1', 'traittypes': '0.2.1', 'typing-extensions': '3.10.0.2', 'urllib3': '1.26.7', 'visdom': '0.1.8.9', 'wcwidth': '0.2.5', 'webencodings': '0.5.1', 'websocket-client': '1.2.1', 'werkzeug': '2.0.2', 'wheel': '0.37.0', 'widgetsnbextension': '3.4.2', 'xlsxwriter': '3.0.2', 'zipp': '3.6.0'}
+2021-11-12 15:04:16,557 - Active Git branch: None, Git is in 'detached HEAD' state
+2021-11-12 15:04:16,577 - Git commit: 26b8d727083cd821812dd74502d34479596a598d
+2021-11-12 15:04:16,578 - Command line: ./train.py --epochs 5 --optimizer Adam --lr 0.001 --deterministic --compress schedule-catsdogs.yaml --model ai85cdnet --dataset cats_vs_dogs --confusion --param-hist --embedding --device MAX78000
+2021-11-12 15:04:16,586 - Optimizer Type: <class 'torch.optim.adam.Adam'>
+2021-11-12 15:04:16,586 - Optimizer Args: {'lr': 0.001, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0, 'amsgrad': False}
+2021-11-12 15:04:16,644 - Dataset sizes:
+	training=12792
+	validation=1421
+	test=3547
+2021-11-12 15:04:16,645 - Reading compression schedule from: schedule-catsdogs.yaml
+2021-11-12 15:04:16,646 - Schedule contents:
+{
+  "lr_schedulers": {
+    "training_lr": {
+      "class": "MultiStepLR",
+      "milestones": [
+        60
+      ],
+      "gamma": 0.1
+    }
+  },
+  "policies": [
+    {
+      "lr_scheduler": {
+        "instance_name": "training_lr"
+      },
+      "starting_epoch": 0,
+      "ending_epoch": 100,
+      "frequency": 1
+    }
+  ]
+}
+2021-11-12 15:04:16,647 - 
+
+2021-11-12 15:04:16,647 - Training epoch: 12792 samples (256 per mini-batch)
+2021-11-12 15:04:32,079 - Epoch: [0][   10/   50]    Overall Loss 0.624283    Objective Loss 0.624283    Top1 64.375000    LR 0.001000    Time 1.543067    
+2021-11-12 15:04:40,063 - Epoch: [0][   20/   50]    Overall Loss 0.532398    Objective Loss 0.532398    Top1 73.964844    LR 0.001000    Time 1.170705    
+2021-11-12 15:04:48,059 - Epoch: [0][   30/   50]    Overall Loss 0.483813    Objective Loss 0.483813    Top1 77.135417    LR 0.001000    Time 1.047001    
+2021-11-12 15:04:56,037 - Epoch: [0][   40/   50]    Overall Loss 0.448199    Objective Loss 0.448199    Top1 79.619141    LR 0.001000    Time 0.984671    
+2021-11-12 15:05:03,975 - Epoch: [0][   50/   50]    Overall Loss 0.416069    Objective Loss 0.416069    Top1 81.840213    LR 0.001000    Time 0.946489    
+2021-11-12 15:05:23,991 - --- validate (epoch=0)-----------
+2021-11-12 15:05:23,993 - 1421 samples (256 per mini-batch)
+2021-11-12 15:05:33,462 - Epoch: [0][    6/    6]    Loss 0.261169    Top1 92.610837    
+2021-11-12 15:05:53,472 - ==> Top1: 92.611    Loss: 0.261
+
+2021-11-12 15:05:53,476 - ==> Confusion:
+[[660  44]
+ [ 61 656]]
+
+2021-11-12 15:05:53,488 - ==> Best [Top1: 92.611   Sparsity:0.00   Params: 54015 on epoch: 0]
+2021-11-12 15:05:53,489 - Saving checkpoint to: logs/2021.11.12-150416/checkpoint.pth.tar
+2021-11-12 15:05:53,501 - 
+
+2021-11-12 15:05:53,501 - Training epoch: 12792 samples (256 per mini-batch)
+2021-11-12 15:06:09,368 - Epoch: [1][   10/   50]    Overall Loss 0.259352    Objective Loss 0.259352    Top1 92.812500    LR 0.001000    Time 1.586594    
+2021-11-12 15:06:17,432 - Epoch: [1][   20/   50]    Overall Loss 0.256094    Objective Loss 0.256094    Top1 92.968750    LR 0.001000    Time 1.196464    
+2021-11-12 15:06:25,493 - Epoch: [1][   30/   50]    Overall Loss 0.250689    Objective Loss 0.250689    Top1 93.294271    LR 0.001000    Time 1.066281    
+2021-11-12 15:06:33,537 - Epoch: [1][   40/   50]    Overall Loss 0.242332    Objective Loss 0.242332    Top1 93.681641    LR 0.001000    Time 1.000809    
+2021-11-12 15:06:41,493 - Epoch: [1][   50/   50]    Overall Loss 0.235005    Objective Loss 0.235005    Top1 94.019700    LR 0.001000    Time 0.959759    
+2021-11-12 15:07:01,506 - --- validate (epoch=1)-----------
+2021-11-12 15:07:01,509 - 1421 samples (256 per mini-batch)
+2021-11-12 15:07:11,152 - Epoch: [1][    6/    6]    Loss 0.202313    Top1 95.988740    
+2021-11-12 15:07:31,165 - ==> Top1: 95.989    Loss: 0.202
+
+2021-11-12 15:07:31,167 - ==> Confusion:
+[[673  31]
+ [ 26 691]]
+
+2021-11-12 15:07:31,173 - ==> Best [Top1: 95.989   Sparsity:0.00   Params: 54015 on epoch: 1]
+2021-11-12 15:07:31,174 - Saving checkpoint to: logs/2021.11.12-150416/checkpoint.pth.tar
+2021-11-12 15:07:31,185 - 
+
+2021-11-12 15:07:31,186 - Training epoch: 12792 samples (256 per mini-batch)
+2021-11-12 15:07:46,683 - Epoch: [2][   10/   50]    Overall Loss 0.198438    Objective Loss 0.198438    Top1 96.406250    LR 0.001000    Time 1.549501    
+2021-11-12 15:07:54,669 - Epoch: [2][   20/   50]    Overall Loss 0.196112    Objective Loss 0.196112    Top1 96.523438    LR 0.001000    Time 1.173982    
+2021-11-12 15:08:02,658 - Epoch: [2][   30/   50]    Overall Loss 0.191978    Objective Loss 0.191978    Top1 96.601562    LR 0.001000    Time 1.048950    
+2021-11-12 15:08:10,675 - Epoch: [2][   40/   50]    Overall Loss 0.189496    Objective Loss 0.189496    Top1 96.630859    LR 0.001000    Time 0.987096    
+2021-11-12 15:08:18,621 - Epoch: [2][   50/   50]    Overall Loss 0.186854    Objective Loss 0.186854    Top1 96.763602    LR 0.001000    Time 0.948590    
+2021-11-12 15:08:38,635 - --- validate (epoch=2)-----------
+2021-11-12 15:08:38,636 - 1421 samples (256 per mini-batch)
+2021-11-12 15:08:48,125 - Epoch: [2][    6/    6]    Loss 0.183352    Top1 96.551724    
+2021-11-12 15:09:08,135 - ==> Top1: 96.552    Loss: 0.183
+
+2021-11-12 15:09:08,140 - ==> Confusion:
+[[658  46]
+ [  3 714]]
+
+2021-11-12 15:09:08,149 - ==> Best [Top1: 96.552   Sparsity:0.00   Params: 54015 on epoch: 2]
+2021-11-12 15:09:08,150 - Saving checkpoint to: logs/2021.11.12-150416/checkpoint.pth.tar
+2021-11-12 15:09:08,159 - 
+
+2021-11-12 15:09:08,159 - Training epoch: 12792 samples (256 per mini-batch)
+2021-11-12 15:09:24,244 - Epoch: [3][   10/   50]    Overall Loss 0.186195    Objective Loss 0.186195    Top1 96.953125    LR 0.001000    Time 1.608363    
+2021-11-12 15:09:32,269 - Epoch: [3][   20/   50]    Overall Loss 0.180132    Objective Loss 0.180132    Top1 97.109375    LR 0.001000    Time 1.205321    
+2021-11-12 15:09:40,302 - Epoch: [3][   30/   50]    Overall Loss 0.174724    Objective Loss 0.174724    Top1 97.408854    LR 0.001000    Time 1.071283    
+2021-11-12 15:09:48,342 - Epoch: [3][   40/   50]    Overall Loss 0.172962    Objective Loss 0.172962    Top1 97.500000    LR 0.001000    Time 1.004437    
+2021-11-12 15:09:56,305 - Epoch: [3][   50/   50]    Overall Loss 0.170157    Objective Loss 0.170157    Top1 97.654784    LR 0.001000    Time 0.962804    
+2021-11-12 15:10:16,321 - --- validate (epoch=3)-----------
+2021-11-12 15:10:16,323 - 1421 samples (256 per mini-batch)
+2021-11-12 15:10:25,903 - Epoch: [3][    6/    6]    Loss 0.159101    Top1 98.311049    
+2021-11-12 15:10:45,914 - ==> Top1: 98.311    Loss: 0.159
+
+2021-11-12 15:10:45,914 - ==> Confusion:
+[[695   9]
+ [ 15 702]]
+
+2021-11-12 15:10:45,918 - ==> Best [Top1: 98.311   Sparsity:0.00   Params: 54015 on epoch: 3]
+2021-11-12 15:10:45,918 - Saving checkpoint to: logs/2021.11.12-150416/checkpoint.pth.tar
+2021-11-12 15:10:45,930 - 
+
+2021-11-12 15:10:45,931 - Training epoch: 12792 samples (256 per mini-batch)
+2021-11-12 15:11:02,445 - Epoch: [4][   10/   50]    Overall Loss 0.159101    Objective Loss 0.159101    Top1 98.320312    LR 0.001000    Time 1.651271    
+2021-11-12 15:11:10,479 - Epoch: [4][   20/   50]    Overall Loss 0.161448    Objective Loss 0.161448    Top1 98.007812    LR 0.001000    Time 1.227228    
+2021-11-12 15:11:18,502 - Epoch: [4][   30/   50]    Overall Loss 0.158745    Objective Loss 0.158745    Top1 98.216146    LR 0.001000    Time 1.085555    
+2021-11-12 15:11:26,508 - Epoch: [4][   40/   50]    Overall Loss 0.158685    Objective Loss 0.158685    Top1 98.242188    LR 0.001000    Time 1.014281    
+2021-11-12 15:11:34,463 - Epoch: [4][   50/   50]    Overall Loss 0.158533    Objective Loss 0.158533    Top1 98.241088    LR 0.001000    Time 0.970515    
+2021-11-12 15:11:54,474 - --- validate (epoch=4)-----------
+2021-11-12 15:11:54,477 - 1421 samples (256 per mini-batch)
+2021-11-12 15:12:03,710 - Epoch: [4][    6/    6]    Loss 0.154855    Top1 98.522167    
+2021-11-12 15:12:23,720 - ==> Top1: 98.522    Loss: 0.155
+
+2021-11-12 15:12:23,721 - ==> Confusion:
+[[689  15]
+ [  6 711]]
+
+2021-11-12 15:12:23,724 - ==> Best [Top1: 98.522   Sparsity:0.00   Params: 54015 on epoch: 4]
+2021-11-12 15:12:23,724 - Saving checkpoint to: logs/2021.11.12-150416/checkpoint.pth.tar
+2021-11-12 15:12:23,736 - --- test ---------------------
+2021-11-12 15:12:23,737 - 3547 samples (256 per mini-batch)
+2021-11-12 15:12:34,397 - Test: [   10/   14]    Loss 0.205532    Top1 95.625000    
+2021-11-12 15:12:35,608 - Test: [   14/   14]    Loss 0.207971    Top1 95.319989    
+2021-11-12 15:12:55,617 - ==> Top1: 95.320    Loss: 0.208
+
+2021-11-12 15:12:55,619 - ==> Confusion:
+[[1761   16]
+ [ 150 1620]]
+
+2021-11-12 15:12:55,626 - 
+2021-11-12 15:12:55,626 - Log file for this run: /Users/kylewong/Documents/School/ece189/ai8x-training/logs/2021.11.12-150416/2021.11.12-150416.log
