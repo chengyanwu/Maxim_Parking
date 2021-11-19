@@ -1,15 +1,15 @@
-/Users/ianwu/Desktop/Maxim-Parking/MAX78000_SDK-09056510448d101b893d84c8d89cac098a957ca2/Examples/MAX78000/CNN/rps-demo/build/pb.o: \
+/Users/kylewong/Documents/School/ece189/Maxim_Parking/workspace/Examples/MAX78000/CNN/digit-recognition-FTHR/build/pb.o: \
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/pb.c \
- /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
+ /Users/kylewong/Documents/School/ece189/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
- /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
- /Applications/ARM/arm-none-eabi/include/stdint.h \
- /Applications/ARM/arm-none-eabi/include/machine/_default_types.h \
- /Applications/ARM/arm-none-eabi/include/sys/features.h \
- /Applications/ARM/arm-none-eabi/include/_newlib_version.h \
- /Applications/ARM/arm-none-eabi/include/sys/_intsup.h \
- /Applications/ARM/arm-none-eabi/include/sys/_stdint.h \
+ /Users/kylewong/Documents/School/ece189/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+ /Users/kylewong/Documents/School/ece189/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdint.h \
+ /Users/kylewong/Documents/School/ece189/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h \
+ /Users/kylewong/Documents/School/ece189/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/features.h \
+ /Users/kylewong/Documents/School/ece189/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/_newlib_version.h \
+ /Users/kylewong/Documents/School/ece189/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_intsup.h \
+ /Users/kylewong/Documents/School/ece189/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h \
  ../../../../Libraries/CMSIS/Include/core_cm4.h \
  ../../../../Libraries/CMSIS/Include/core_cmInstr.h \
  ../../../../Libraries/CMSIS/Include/core_cmFunc.h \
