@@ -1,0 +1,766 @@
+Archive member included to satisfy reference by file (symbol)
+
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o (exit)
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-impure.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o) (_global_impure_ptr)
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-init.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o (__libc_init_array)
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-memset.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o (memset)
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o) (__call_exitprocs)
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-atexit.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o) (atexit)
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-fini.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o) (__libc_fini_array)
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o) (__retarget_lock_acquire_recursive)
+/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__atexit.o)
+                              /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-atexit.o) (__register_exitproc)
+
+Discarded input sections
+
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crti.o
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crti.o
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crti.o
+ .data          0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+ .rodata        0x0000000000000000       0x24 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o
+ .ARM.extab     0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .group         0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text          0x0000000000000000        0x0 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .data          0x0000000000000000        0x0 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .bss           0x0000000000000000        0x0 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.initGPIOForChannel
+                0x0000000000000000       0x64 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_Init
+                0x0000000000000000       0x1c ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_Shutdown
+                0x0000000000000000       0x18 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_Busy
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_EnableInt
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_DisableInt
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_GetFlags
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_ClearFlags
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .rodata.MXC_ADC_SetConversionSpeed.str1.4
+                0x0000000000000000       0x6d ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_SetConversionSpeed
+                0x0000000000000000       0x80 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_GetConversionSpeed
+                0x0000000000000000       0x10 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_SetDataAlignment
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_SetExtScale
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_EnableMonitor
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_DisableMonitor
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_SetMonitorHighThreshold
+                0x0000000000000000       0x10 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_GetMonitorHighThreshold
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_SetMonitorLowThreshold
+                0x0000000000000000       0x10 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_GetMonitorLowThreshold
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_SetMonitorChannel
+                0x0000000000000000       0x24 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_GetMonitorChannel
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_EnableMonitorAsync
+                0x0000000000000000        0x4 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_DisableMonitorAsync
+                0x0000000000000000        0x4 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_StartConversion
+                0x0000000000000000       0x1c ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_StartConversionAsync
+                0x0000000000000000       0x20 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_StartConversionDMA
+                0x0000000000000000       0x28 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_Handler
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_Convert
+                0x0000000000000000       0x1c ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_ConvertAsync
+                0x0000000000000000       0x28 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_Monitor
+                0x0000000000000000       0x24 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_MonitorAsync
+                0x0000000000000000       0x24 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text.MXC_ADC_GetData
+                0x0000000000000000        0xc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_info    0x0000000000000000     0x16b8 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_abbrev  0x0000000000000000      0x249 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_loc     0x0000000000000000      0x62d ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_aranges
+                0x0000000000000000      0x110 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_ranges  0x0000000000000000      0x100 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x2bf ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0xa96 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x22 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x8e ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x51 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x103 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x6a ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x1df ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x302 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x11a ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x6a ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x2f8 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x722 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x4d6 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x52 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x3b ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x2d ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x42 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0xd39 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x3a ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x5ec ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x7c ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x504 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0xdc ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x22 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x16 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0xb2 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x823 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x64 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x1e ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x35 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x34 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x16 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x97 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x341 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0xfd ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x10 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x16 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x43 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x34 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x10 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x58 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x182 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x10 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x1c ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x52 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x22 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x10 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x52 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0xd5 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x1c ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x3d ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x16 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000      0x16f ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_macro   0x0000000000000000       0x6a ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_line    0x0000000000000000      0x96f ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_str     0x0000000000000000    0x2380c ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .comment       0x0000000000000000       0x4a ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .debug_frame   0x0000000000000000      0x2a4 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-impure.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-init.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-init.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-init.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-memset.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-memset.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-atexit.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-atexit.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-atexit.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-fini.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-fini.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-fini.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_init
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_init_recursive
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_close
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_close_recursive
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_acquire
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire_recursive
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_release
+                0x0000000000000000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss.__lock___arc4random_mutex
+                0x0000000000000000        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss.__lock___at_quick_exit_mutex
+                0x0000000000000000        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss.__lock___dd_hash_mutex
+                0x0000000000000000        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss.__lock___env_recursive_mutex
+                0x0000000000000000        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss.__lock___malloc_recursive_mutex
+                0x0000000000000000        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss.__lock___sfp_recursive_mutex
+                0x0000000000000000        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss.__lock___sinit_recursive_mutex
+                0x0000000000000000        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .bss.__lock___tz_mutex
+                0x0000000000000000        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__atexit.o)
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__atexit.o)
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__atexit.o)
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtend.o
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtend.o
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtend.o
+ .rodata        0x0000000000000000       0x24 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtend.o
+ .text          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtn.o
+ .data          0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtn.o
+ .bss           0x0000000000000000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crti.o
+LOAD /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+LOAD /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o
+LOAD ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+START GROUP
+LOAD /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/libgcc.a
+LOAD /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a
+END GROUP
+LOAD /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtend.o
+LOAD /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtn.o
+                [!provide]                        PROVIDE (__executable_start = SEGMENT_START ("text-segment", 0x8000))
+                0x0000000000008000                . = SEGMENT_START ("text-segment", 0x8000)
+
+.interp
+ *(.interp)
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.hash
+ *(.hash)
+
+.gnu.hash
+ *(.gnu.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.dyn        0x0000000000008000        0x0
+ *(.rel.init)
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+ *(.rel.fini)
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+ *(.rel.data.rel.ro .rel.data.rel.ro.* .rel.gnu.linkonce.d.rel.ro.*)
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+ *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
+ *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
+ *(.rel.ctors)
+ *(.rel.dtors)
+ *(.rel.got)
+ *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
+                [!provide]                        PROVIDE (__rel_iplt_start = .)
+ *(.rel.iplt)
+ .rel.iplt      0x0000000000008000        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+                [!provide]                        PROVIDE (__rel_iplt_end = .)
+
+.rela.dyn       0x0000000000008000        0x0
+ *(.rela.init)
+ *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+ *(.rela.fini)
+ *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+ *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+ *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+ *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+ *(.rela.ctors)
+ *(.rela.dtors)
+ *(.rela.got)
+ *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+                [!provide]                        PROVIDE (__rela_iplt_start = .)
+ *(.rela.iplt)
+                [!provide]                        PROVIDE (__rela_iplt_end = .)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.init           0x0000000000008000        0xc
+ *(SORT_NONE(.init))
+ .init          0x0000000000008000        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crti.o
+                0x0000000000008000                _init
+ .init          0x0000000000008004        0x8 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtn.o
+
+.plt
+ *(.plt)
+
+.iplt           0x000000000000800c        0x0
+ *(.iplt)
+ .iplt          0x000000000000800c        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+
+.text           0x000000000000800c      0x374
+ *(.text.unlikely .text.*_unlikely .text.unlikely.*)
+ *(.text.exit .text.exit.*)
+ .text.exit     0x000000000000800c       0x20 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o)
+                0x000000000000800c                exit
+ *(.text.startup .text.startup.*)
+ .text.startup.register_fini
+                0x000000000000802c       0x14 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+ *(.text.hot .text.hot.*)
+ *(SORT_BY_NAME(.text.sorted.*))
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text          0x0000000000008040       0x40 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+ .text          0x0000000000008080       0x7c /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o
+                0x0000000000008080                _stack_init
+                0x0000000000008088                _mainCRTStartup
+                0x0000000000008088                _start
+ .text.__libc_init_array
+                0x00000000000080fc       0x48 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-init.o)
+                0x00000000000080fc                __libc_init_array
+ .text.memset   0x0000000000008144       0xa4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-memset.o)
+                0x0000000000008144                memset
+ .text.__call_exitprocs
+                0x00000000000081e8       0xcc /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+                0x00000000000081e8                __call_exitprocs
+ .text.atexit   0x00000000000082b4        0xc /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-atexit.o)
+                0x00000000000082b4                atexit
+ .text.__libc_fini_array
+                0x00000000000082c0       0x2c /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-fini.o)
+                0x00000000000082c0                __libc_fini_array
+ .text.__retarget_lock_acquire_recursive
+                0x00000000000082ec        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+                0x00000000000082ec                __retarget_lock_acquire_recursive
+ .text.__retarget_lock_release_recursive
+                0x00000000000082f0        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+                0x00000000000082f0                __retarget_lock_release_recursive
+ .text.__register_exitproc
+                0x00000000000082f4       0x8c /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__atexit.o)
+                0x00000000000082f4                __register_exitproc
+ *(.gnu.warning)
+ *(.glue_7t)
+ .glue_7t       0x0000000000008380        0x0 linker stubs
+ *(.glue_7)
+ .glue_7        0x0000000000008380        0x0 linker stubs
+ *(.vfp11_veneer)
+ .vfp11_veneer  0x0000000000008380        0x0 linker stubs
+ *(.v4_bx)
+ .v4_bx         0x0000000000008380        0x0 linker stubs
+
+.fini           0x0000000000008380        0xc
+ *(SORT_NONE(.fini))
+ .fini          0x0000000000008380        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crti.o
+                0x0000000000008380                _fini
+ .fini          0x0000000000008384        0x8 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtn.o
+                [!provide]                        PROVIDE (__etext = .)
+                [!provide]                        PROVIDE (_etext = .)
+                [!provide]                        PROVIDE (etext = .)
+
+.rodata         0x000000000000838c        0x4
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata._global_impure_ptr
+                0x000000000000838c        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-impure.o)
+                0x000000000000838c                _global_impure_ptr
+
+.rodata1
+ *(.rodata1)
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+
+.ARM.exidx      0x0000000000008390        0x8
+                [!provide]                        PROVIDE (__exidx_start = .)
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx     0x0000000000008390        0x8 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o
+                                         0x10 (size before relaxing)
+                [!provide]                        PROVIDE (__exidx_end = .)
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+ *(.eh_frame_entry .eh_frame_entry.*)
+
+.eh_frame       0x0000000000008398        0x4
+ *(.eh_frame)
+ .eh_frame      0x0000000000008398        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+ .eh_frame      0x0000000000008398        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtend.o
+ *(.eh_frame.*)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.gnu_extab
+ *(.gnu_extab*)
+
+.exception_ranges
+ *(.exception_ranges*)
+                0x000000000001839c                . = (ALIGN (CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 0x1)))
+
+.eh_frame
+ *(.eh_frame)
+ *(.eh_frame.*)
+
+.gnu_extab
+ *(.gnu_extab)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.exception_ranges
+ *(.exception_ranges*)
+
+.tdata          0x000000000001839c        0x0
+                [!provide]                        PROVIDE (__tdata_start = .)
+ *(.tdata .tdata.* .gnu.linkonce.td.*)
+
+.tbss
+ *(.tbss .tbss.* .gnu.linkonce.tb.*)
+ *(.tcommon)
+
+.preinit_array  0x000000000001839c        0x0
+                0x000000000001839c                PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                0x000000000001839c                PROVIDE (__preinit_array_end = .)
+
+.init_array     0x000000000001839c        0x8
+                0x000000000001839c                PROVIDE (__init_array_start = .)
+ *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
+ .init_array.00000
+                0x000000000001839c        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+ *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
+ .init_array    0x00000000000183a0        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+                0x00000000000183a4                PROVIDE (__init_array_end = .)
+
+.fini_array     0x00000000000183a4        0x4
+                0x00000000000183a4                PROVIDE (__fini_array_start = .)
+ *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
+ *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
+ .fini_array    0x00000000000183a4        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+                0x00000000000183a8                PROVIDE (__fini_array_end = .)
+
+.ctors
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+
+.dtors
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+
+.jcr
+ *(.jcr)
+
+.data.rel.ro
+ *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
+ *(.data.rel.ro .data.rel.ro.* .gnu.linkonce.d.rel.ro.*)
+
+.dynamic
+ *(.dynamic)
+
+.got            0x00000000000183a8        0x0
+ *(.got.plt)
+ *(.igot.plt)
+ .igot.plt      0x00000000000183a8        0x0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+ *(.got)
+ *(.igot)
+
+.data           0x00000000000183a8      0x42c
+                0x00000000000183a8                __data_start = .
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data.impure_data
+                0x00000000000183a8      0x428 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-impure.o)
+ .data.__atexit_recursive_mutex
+                0x00000000000187d0        0x4 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+                0x00000000000187d0                __atexit_recursive_mutex
+
+.data1
+ *(.data1)
+                0x00000000000187d4                _edata = .
+                [!provide]                        PROVIDE (edata = .)
+
+.persistent     0x00000000000187d4        0x0
+                0x00000000000187d4                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__persistent_start = .)
+ *(.persistent .persistent.* .gnu.linkonce.p.*)
+                0x00000000000187d4                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__persistent_end = .)
+                0x00000000000187d4                . = .
+                0x00000000000187d4                __bss_start = .
+                0x00000000000187d4                __bss_start__ = .
+
+.bss            0x00000000000187d4       0x20
+ *(.dynbss)
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x00000000000187d4       0x1c /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+ .bss.__lock___atexit_recursive_mutex
+                0x00000000000187f0        0x1 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+                0x00000000000187f0                __lock___atexit_recursive_mutex
+ *(COMMON)
+                0x00000000000187f4                . = ALIGN ((. != 0x0)?0x4:0x1)
+ *fill*         0x00000000000187f1        0x3 
+                0x00000000000187f4                _bss_end__ = .
+                0x00000000000187f4                __bss_end__ = .
+
+.noinit         0x00000000000187f4        0x0
+                0x00000000000187f4                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__noinit_start = .)
+ *(.noinit .noinit.* .gnu.linkonce.n.*)
+                0x00000000000187f4                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__noinit_end = .)
+                0x00000000000187f4                . = ALIGN (0x4)
+                0x00000000000187f4                . = SEGMENT_START ("ldata-segment", .)
+                0x00000000000187f4                . = ALIGN (0x4)
+                0x00000000000187f4                __end__ = .
+                0x00000000000187f4                _end = .
+                [!provide]                        PROVIDE (end = .)
+
+.stack          0x0000000000080000        0x0
+                0x0000000000080000                _stack = .
+ *(.stack)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.gnu.build.attributes
+ *(.gnu.build.attributes .gnu.build.attributes.*)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info .gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line .debug_line.* .debug_line_end)
+
+.debug_frame    0x0000000000000000      0x220
+ *(.debug_frame)
+ .debug_frame   0x0000000000000000       0x28 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o)
+ .debug_frame   0x0000000000000028       0x2c /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-init.o)
+ .debug_frame   0x0000000000000054       0x2c /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000080       0x68 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00000000000000e8       0x20 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-atexit.o)
+ .debug_frame   0x0000000000000108       0x34 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-fini.o)
+ .debug_frame   0x000000000000013c       0xb0 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .debug_frame   0x00000000000001ec       0x34 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__atexit.o)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_addr
+ *(.debug_addr)
+
+.debug_line_str
+ *(.debug_line_str)
+
+.debug_loclists
+ *(.debug_loclists)
+
+.debug_macro
+ *(.debug_macro)
+
+.debug_names
+ *(.debug_names)
+
+.debug_rnglists
+ *(.debug_rnglists)
+
+.debug_str_offsets
+ *(.debug_str_offsets)
+
+.debug_sup
+ *(.debug_sup)
+
+.ARM.attributes
+                0x0000000000000000       0x2e
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x0000000000000000       0x1e /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crti.o
+ .ARM.attributes
+                0x000000000000001e       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+ .ARM.attributes
+                0x0000000000000050       0x1c /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/crt0.o
+ .ARM.attributes
+                0x000000000000006c       0x32 ../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17.o
+ .ARM.attributes
+                0x000000000000009e       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-exit.o)
+ .ARM.attributes
+                0x00000000000000d0       0x30 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-impure.o)
+ .ARM.attributes
+                0x0000000000000100       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-init.o)
+ .ARM.attributes
+                0x0000000000000132       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000164       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__call_atexit.o)
+ .ARM.attributes
+                0x0000000000000196       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-atexit.o)
+ .ARM.attributes
+                0x00000000000001c8       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-fini.o)
+ .ARM.attributes
+                0x00000000000001fa       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-lock.o)
+ .ARM.attributes
+                0x000000000000022c       0x32 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(lib_a-__atexit.o)
+ .ARM.attributes
+                0x000000000000025e       0x30 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtend.o
+ .ARM.attributes
+                0x000000000000028e       0x1e /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/softfp/crtn.o
+ *(.gnu.attributes)
+
+.note.gnu.arm.ident
+ *(.note.gnu.arm.ident)
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+OUTPUT(../../../../Libraries/PeriphDrivers/bin/MAX78000/softfp/adc_me17 elf32-littlearm)
+LOAD linker stubs
