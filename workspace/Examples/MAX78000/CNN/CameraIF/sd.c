@@ -59,10 +59,11 @@
 
 /***** Definitions *****/
 #define MAXLEN 256
+#define buffLen 1024
 
 /***** Globals *****/
 TCHAR message[MAXLEN], directory[MAXLEN], cwd[MAXLEN], filename[MAXLEN], volume_label[24], volume = '0';
-TCHAR imageRawData[20000];
+TCHAR imageRawBuffer[buffLen];
 TCHAR* FF_ERRORS[20];
 DWORD clusters_free = 0, sectors_free = 0, sectors_total = 0, volume_sn = 0;
 UINT bytes_written = 0, bytes_read = 0, mounted = 0;
@@ -245,14 +246,10 @@ int createFile()
 
 int createRawImage(uint8_t* raw, uint32_t len, int imgNum)
 {
-
     if (!mounted) {
         mount();
     }
-    unsigned int length = len;
-
-    //printf("Enter the name of the text file: \n");
-    //scanf("%255s", filename);
+    unsigned int length = buffLen;
 
     snprintf(filename, MAXLEN, "image%d", imgNum);
 
@@ -265,29 +262,44 @@ int createRawImage(uint8_t* raw, uint32_t len, int imgNum)
     }
 
     printf("File opened!\n");
-    for (int i = 0 ; i < length; i++) {
-            imageRawData[i] =  raw[i];
+    unsigned int j = 0;
+    for (int i = 0 ; i < len; i++) {
+    	if (j < length)
+    	{
+    		imageRawBuffer[j] = raw[i];
+            j++;
+    	}
+    	else
+    	{
+    		j = 0;
+    		if ((err = f_write(&file, &imageRawBuffer, length, &bytes_written)) != FR_OK) {
+    		    //printf("Error writing file: %s\n", FF_ERRORS[err]);
+    		    f_mount(NULL, "", 0);
+    		    return err;
+    		 }
+    		imageRawBuffer[j] = raw[i];
+    	    //printf("%d bytes written to file!\n", bytes_written);
+    	    j++;
+    	}
+    }
+    if ((err = f_write(&file, &imageRawBuffer, j+1, &bytes_written)) != FR_OK) {
+        	//printf("Error writing file: %s\n", FF_ERRORS[err]);
+            f_mount(NULL, "", 0);
+            return err;
+        }
+       //printf("%d bytes written to file!\n", bytes_written);
+
+
+        if ((err = f_close(&file)) != FR_OK) {
+            printf("Error closing file: %s\n", FF_ERRORS[err]);
+            f_mount(NULL, "", 0);
+            return err;
         }
 
-    //generateMessage(length);
-
-    if ((err = f_write(&file, &imageRawData, length, &bytes_written)) != FR_OK) {
-        printf("Error writing file: %s\n", FF_ERRORS[err]);
-        f_mount(NULL, "", 0);
+        printf("File Closed!\n");
         return err;
-    }
-
-    printf("%d bytes written to file!\n", bytes_written);
-
-    if ((err = f_close(&file)) != FR_OK) {
-        printf("Error closing file: %s\n", FF_ERRORS[err]);
-        f_mount(NULL, "", 0);
-        return err;
-    }
-
-    printf("File Closed!\n");
-    return err;
 }
+
 
 int appendFile()
 {

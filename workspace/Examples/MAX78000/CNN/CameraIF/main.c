@@ -67,8 +67,8 @@
 #include "ff.h"
 #include "sd.h"
 
-#define IMAGE_XRES  64
-#define IMAGE_YRES  64
+#define IMAGE_XRES  250
+#define IMAGE_YRES  200
 #define CAMERA_FREQ (10 * 1000 * 1000)
 
 #define STRINGIFY(x) #x
@@ -81,7 +81,7 @@ extern FRESULT err;
 extern TCHAR cwd[MAXLEN];
 extern TCHAR* FF_ERRORS[20];
 
-int imgCount = 0;
+int imgNum = 0;
 
 void process_img(void)
 {
@@ -95,8 +95,8 @@ void process_img(void)
     // A python program will read from the console and write
     // to an image file.
     //utils_send_img_to_pc(raw, imgLen, w, h, camera_get_pixel_format());
-    createRawImage(raw, imgLen, imgCount);
-    imgCount++;
+    createRawImage(raw, imgLen,imgNum);
+    imgNum++;
 
 }
 
@@ -140,9 +140,9 @@ int main(void)
     
     printf("Camera Manufacture ID is %04x\n", id);
     
-    // Setup the camera image dimensions, pixel format and data aquiring details.
-    ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
-    
+    // Setup the camera image dimensions, pixel format and data aquiring details.PIXFORMAT_RGB565, FIFO_FOUR_BYTE
+    //ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
+    ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
     if (ret != STATUS_OK) {
         printf("Error returned from setting up camera. Error %d\n", ret);
         return -1;
@@ -151,8 +151,6 @@ int main(void)
     // Display a human readable banner.  After this banner then send image in binary format.
     printf("Use the pc_utility/grab_image.py script to capture frames from this example.\n");
     printf("Will start sending camera frames in binary format\n");
-    printf("In 5 seconds...\n");
-    MXC_Delay(SEC(5));
     
     	FF_ERRORS[0] = "FR_OK";
         FF_ERRORS[1] = "FR_DISK_ERR";
@@ -183,7 +181,6 @@ int main(void)
         if (camera_is_image_rcv()) {
             // Process the image, send it through the UART console.
             process_img();
-            MXC_Delay(SEC(2));
             // Prepare for another frame capture.
             camera_start_capture_image();
         }
