@@ -19,8 +19,8 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-byte mydata[100];
-//static uint8_t mydata[] = "Hello, world!";
+//byte mydata[100];
+//uint8_t mydata[] = "Hello, world!";
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
@@ -100,14 +100,34 @@ void onEvent (ev_t ev) {
     }
 }
 
+
+static uint8_t placeholder[] = "No Data from UART"; 
+String rx_str;
+
+byte rx_data[24];
+
 void do_send(osjob_t* j){
     // Check if there is not a current TX/RX job running
     if (LMIC.opmode & OP_TXRXPEND) {
         SerialUSB.println(F("OP_TXRXPEND, not sending"));
     }
     else{
+          if (Serial1.available()>0) {
+            SerialUSB.println("Recieved from UART");
+            rx_str = Serial1.readString();  
+            SerialUSB.println(rx_str);
+
+            Serial1.readBytes(rx_data, 24);
+            LMIC_setTxData2(1, rx_data, sizeof(rx_data)-1, 0);
+            Serial1.flush();
+          }
+          else {
+//            placeholder.getBytes(mydata, 99);
+              SerialUSB.println(String((char*)placeholder));
+              LMIC_setTxData2(1, placeholder, sizeof(placeholder)-1, 0);
+          }
         // Prepare upstream data transmission at the next possible time.
-        LMIC_setTxData2(1, mydata, sizeof(mydata)-1, 0);
+        
         SerialUSB.println(F("Packet queued"));
     // Next TX is scheduled after TX_COMPLETE event.
     }
@@ -164,15 +184,17 @@ void setup() {
     
     // Start job
     do_send(&sendjob);
+    Serial1.flush();
 }
 
-String rx_str;
-
 void loop() {
-  if (Serial1.available()>0) {
-    rx_str = Serial1.readString();  
-    SerialUSB.println(rx_str);
-    rx_str.getBytes(mydata, 99);
-    do_send(&sendjob);
-  }  
+  os_runloop_once();
+//  if (Serial1.available()>0) {
+//    SerialUSB.println(Serial1.available());
+//    rx_str = Serial1.readString();  
+//    SerialUSB.println(rx_str);
+//    rx_str.getBytes(mydata, 99);
+//    do_send(&sendjob);
+//    Serial1.flush();
+//  }  
 }
