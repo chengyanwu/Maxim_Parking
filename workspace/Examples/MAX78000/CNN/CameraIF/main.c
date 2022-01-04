@@ -67,8 +67,8 @@
 #include "ff.h"
 #include "sd.h"
 
-#define IMAGE_XRES  250
-#define IMAGE_YRES  200
+#define IMAGE_XRES  128
+#define IMAGE_YRES  64
 #define CAMERA_FREQ (10 * 1000 * 1000)
 
 #define STRINGIFY(x) #x
@@ -89,14 +89,17 @@ void process_img(void)
     uint32_t  imgLen;
     uint32_t  w, h;
     
+
+
     // Get the details of the image from the camera driver.
     camera_get_image(&raw, &imgLen, &w, &h);
     // Send the image through the UART to the console.
     // A python program will read from the console and write
     // to an image file.
     //utils_send_img_to_pc(raw, imgLen, w, h, camera_get_pixel_format());
-    createRawImage(raw, imgLen,imgNum);
-    imgNum++;
+    int err = createRawImage(raw, imgLen,imgNum);
+    if (err==0)
+    	imgNum++;
 
 }
 
@@ -180,7 +183,9 @@ int main(void)
         // Check if image is aquired.
         if (camera_is_image_rcv()) {
             // Process the image, send it through the UART console.
+        	LED_On(LED1);
             process_img();
+            LED_Off(LED1);
             // Prepare for another frame capture.
             camera_start_capture_image();
         }

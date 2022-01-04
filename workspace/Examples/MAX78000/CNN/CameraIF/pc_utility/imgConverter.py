@@ -202,14 +202,13 @@ def convert(bytesequence, outputfile, xres, yres, pixelformat):
 	for i in range(yres):
 		line = []
 		offset = (xres * 3) * i
-		
 		for j in range(xres * 3):
 			line.append(imagepixels[j + offset])
 		image.append(line)
 
 	print("Output image to file xres {}, yres {}".format(xres,yres), flush=True)
 
-	g_pil_image = generate_img(outputfile, (0, 0, 0), (xres, yres))
+	g_pil_image = generate_img("image-out.png", (0, 0, 0), (xres, yres))
 	x = 0
 	y = 0
 	for i in range(int(len(imagepixels) / 3)):
@@ -223,4 +222,4 @@ def convert(bytesequence, outputfile, xres, yres, pixelformat):
 			y = y + 1
 			if y > (yres - 1):
 				break
-	g_pil_image.save(outputfile)
+	g_pil_image.save("image-out.png")
