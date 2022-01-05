@@ -67,8 +67,8 @@
 #include "ff.h"
 #include "sd.h"
 
-#define IMAGE_XRES  128
-#define IMAGE_YRES  64
+#define IMAGE_XRES  250
+#define IMAGE_YRES  200
 #define CAMERA_FREQ (10 * 1000 * 1000)
 
 #define STRINGIFY(x) #x
