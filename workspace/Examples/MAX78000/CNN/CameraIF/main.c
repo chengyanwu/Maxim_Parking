@@ -90,14 +90,18 @@ void process_img(void)
     uint32_t  w, h;
     
 
-
     // Get the details of the image from the camera driver.
     camera_get_image(&raw, &imgLen, &w, &h);
-    // Send the image through the UART to the console.
-    // A python program will read from the console and write
-    // to an image file.
-    //utils_send_img_to_pc(raw, imgLen, w, h, camera_get_pixel_format());
+
+
+    uint8_t imgSeg[64*64*2];
+    uint32_t imgSegLen = 64*64*2;
+    segment_image(raw, imgLen, w, h, 32, 32, 64, imgSeg);
+
+
     int err = createRawImage(raw, imgLen,imgNum);
+    err = createRawImage(imgSeg, imgSegLen,imgNum+1000);
+
     if (err==0)
     	imgNum++;
 

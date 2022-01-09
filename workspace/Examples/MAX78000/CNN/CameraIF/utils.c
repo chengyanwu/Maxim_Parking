@@ -139,3 +139,19 @@ int utils_send_img_to_pc(uint8_t* img, uint32_t imgLen, int w, int h, uint8_t* p
     
     return 0;
 }
+
+void segment_image(uint8_t* img, uint32_t imgLen, int w, int h, int xLoc, int yLoc, int segLen, uint8_t* imgOut)
+{
+    if ((xLoc + segLen > w)||(yLoc + segLen > h))
+        return;
+
+    int ind = 0;
+    for (int i=yLoc*w*2; i< yLoc*w*2 + segLen*w*2; i=i+w*2)
+    {
+        for (int j = i+xLoc*2; j < i+xLoc*2 + segLen*2; j++)
+        {
+            imgOut[ind] = img[j];
+            ind++;
+        }
+    }
+}

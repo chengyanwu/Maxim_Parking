@@ -253,7 +253,7 @@ int createRawImage(uint8_t* raw, uint32_t len, int imgNum)
 
     snprintf(filename, MAXLEN, "image%d", imgNum);
 
-    printf("Creating file %s with length %d\n", filename, length);
+    printf("Creating file %s with length %d\n", filename, len);
 
     if ((err = f_open(&file, (const TCHAR*) filename, FA_CREATE_ALWAYS | FA_WRITE)) != FR_OK) {
         printf("Error opening file: %s\n", FF_ERRORS[err]);
