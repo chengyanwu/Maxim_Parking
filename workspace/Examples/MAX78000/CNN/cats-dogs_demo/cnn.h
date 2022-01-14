@@ -6,7 +6,7 @@
 **************************************************************************************************/
 
 /*
- * This header file was automatically generated for the cars-100 network from a template.
+ * This header file was automatically generated for the cars-50 network from a template.
  * Please do not edit; instead, edit the template and regenerate.
  */
 
