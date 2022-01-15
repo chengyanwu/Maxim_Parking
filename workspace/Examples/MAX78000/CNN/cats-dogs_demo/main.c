@@ -313,9 +313,9 @@ int main(void)
     /* Enable camera power */
     Camera_Power(POWER_ON);
     //MXC_Delay(300000);
-    printf("\n\nCats-vs-Dogs Feather Demo\n");
+    printf("\n\nCar Detection Demo / Feather Board\n");
 #else
-    printf("\n\nCats-vs-Dogs Evkit Demo\n");
+    printf("\n\nCar Detection Demo / Ev-Kit\n");
 #endif
 
     /* Enable cache */
@@ -348,13 +348,12 @@ int main(void)
   mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
   MXC_TFT_Init(MXC_SPI0, 1, &tft_reset_pin, NULL);
   MXC_TFT_ClearScreen();
-    MXC_TFT_ShowImage(0, 0, image_bitmap_1);
+  MXC_TFT_SetRotation(SCREEN_FLIP);
 #endif
 #ifdef BOARD_FTHR_REVA
     /* Initialize TFT display */
     MXC_TFT_Init(MXC_SPI0, 1, NULL, NULL);
     MXC_TFT_SetRotation(ROTATE_270);
-    MXC_TFT_ShowImage(0, 0, image_bitmap_1);
     MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
 #endif
     MXC_Delay(1000000);
@@ -376,13 +375,12 @@ int main(void)
   }
 
 #ifdef TFT_ENABLE
-    MXC_TFT_SetPalette(image_bitmap_2);
+    // MXC_TFT_SetPalette(image_bitmap_2);
   MXC_TFT_SetBackGroundColor(4);
-    MXC_TFT_ShowImage(1, 1, image_bitmap_2);
+    // MXC_TFT_ShowImage(1, 1, image_bitmap_2);
   memset(buff,32,TFT_BUFF_SIZE);
-    TFT_Print(buff, 55, 50, font_2, sprintf(buff, "MAXIM INTEGRATED"));
-    TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Cats-vs-Dogs Demo"));
-    TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
+  TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Car Detection Demo"));
+  TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
 #endif
 
   int frame = 0;
@@ -393,8 +391,7 @@ int main(void)
 
 #ifdef TFT_ENABLE
     MXC_TFT_ClearScreen();
-        MXC_TFT_ShowImage(1, 1, image_bitmap_2);
-        TFT_Print(buff, 55, 110, font_2, sprintf(buff, "CAPTURING IMAGE...."));
+      TFT_Print(buff, 55, 110, font_2, sprintf(buff, "CAPTURING IMAGE...."));
 #endif
 
 #ifdef USE_SAMPLEDATA
@@ -416,7 +413,6 @@ int main(void)
 #ifdef TFT_ENABLE
     // Show the input data on the lcd.
     MXC_TFT_ClearScreen();
-        MXC_TFT_ShowImage(1, 1, image_bitmap_2);
     printf("Show camera frame on LCD.\n");
     lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024);
 #endif
@@ -459,18 +455,18 @@ int main(void)
     printf("\n");
 
 #ifdef TFT_ENABLE
-    memset(buff,32,TFT_BUFF_SIZE);
-        TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
+    // memset(buff,32,TFT_BUFF_SIZE);
+        // TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
     memset(buff,0,TFT_BUFF_SIZE);
         TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
         memset(buff, 32, TFT_BUFF_SIZE);
 
     if (result[0] > result[1]) {
-            TFT_Print(buff, 195, 150, font_1, sprintf(buff, "CAT"));
+            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
             TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
         }
         else if (result[1] > result[0]) {
-            TFT_Print(buff, 195, 150, font_1, sprintf(buff, "DOG"));
+            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
             TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
         }
         else {
