@@ -61,8 +61,8 @@
 // #define USE_SAMPLEDATA
 
 #define CAMERA_TO_LCD   (1)
-#define IMAGE_SIZE_X  (128)
-#define IMAGE_SIZE_Y  (128)
+#define IMAGE_SIZE_X  (160)
+#define IMAGE_SIZE_Y  (120)
 #define CAMERA_FREQ   (10 * 1000 * 1000)
 
 #define TFT_BUFF_SIZE   30    // TFT buffer size
