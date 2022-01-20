@@ -61,8 +61,8 @@
 // #define USE_SAMPLEDATA
 
 #define CAMERA_TO_LCD   (1)
-#define IMAGE_SIZE_X  (128)
-#define IMAGE_SIZE_Y  (128)
+#define IMAGE_SIZE_X  (160)
+#define IMAGE_SIZE_Y  (120)
 #define CAMERA_FREQ   (10 * 1000 * 1000)
 
 #define TFT_BUFF_SIZE   30    // TFT buffer size
@@ -89,7 +89,7 @@ uint32_t input_2_camera[1024];
 
 uint8_t   *frame_buffer;
 uint32_t  imgLen;
-uint32_t  w, h, x, y;
+uint32_t  w, h;
 uint8_t imgBlock[64*64*4];
 
 void fail(void)
@@ -170,7 +170,7 @@ void TFT_Print(char* str, int x, int y, int font, int length)
   MXC_TFT_PrintFont(x, y, font, &text, NULL);
 }
 
-#define X_OFFSET    47
+#define X_OFFSET    15
 #define Y_OFFSET    15
 #define SCALE       2.2
 
@@ -191,8 +191,8 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
   uint8_t *ptr1;
   uint8_t *ptr2;
 
-    x = X_OFFSET;
-    y = Y_OFFSET;
+  x = X_OFFSET;
+  y = Y_OFFSET;
 
   for (i = 0; i < length; i++) {
     ptr0 = (uint8_t *)&data0[i];
@@ -256,8 +256,8 @@ void process_camera_img(uint8_t* imgBlock, uint32_t *data0, uint32_t *data1, uin
   ptr2 = (uint8_t *)data2;
   buffer = imgBlock;
 
-  for (y = 0; y < 64; y++) {
-    for (x = 0; x < 64; x++, ptr0++, ptr1++, ptr2++) {
+  for (int y = 0; y < 64; y++) {
+    for (int x = 0; x < 64; x++, ptr0++, ptr1++, ptr2++) {
             *ptr0 = (*buffer);
             buffer++;
             *ptr1 = (*buffer);
