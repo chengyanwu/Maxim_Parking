@@ -61,8 +61,8 @@
 // #define USE_SAMPLEDATA
 
 #define CAMERA_TO_LCD   (1)
-#define IMAGE_SIZE_X  (160)
-#define IMAGE_SIZE_Y  (120)
+#define IMAGE_SIZE_X  (128)
+#define IMAGE_SIZE_Y  (128)
 #define CAMERA_FREQ   (10 * 1000 * 1000)
 
 #define TFT_BUFF_SIZE   30    // TFT buffer size
@@ -170,12 +170,12 @@ void TFT_Print(char* str, int x, int y, int font, int length)
   MXC_TFT_PrintFont(x, y, font, &text, NULL);
 }
 
-#define X_OFFSET    15
+#define X_OFFSET    10
 #define Y_OFFSET    15
 #define SCALE       2.2
 
 /* **************************************************************************** */
-void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int length)
+void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int length, int inputNum)
 {
   int i;
   int j;
@@ -184,7 +184,7 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
   int r;
   int g;
   int b;
-    int scale = SCALE;
+  int scale = SCALE;
     
   uint32_t color;
   uint8_t *ptr0;
@@ -208,14 +208,14 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
 #ifdef BOARD_FTHR_REVA
             color = RGB(r, g, b); // convert to RGB565
 #endif
-      MXC_TFT_WritePixel(x * scale, y * scale, scale, scale, color);
+      MXC_TFT_WritePixel(x * scale + 160*inputNum, y * scale, scale, scale, color);
       x += 1;
 
-            if (x >= (IMAGE_SIZE_X + X_OFFSET)) {
+            if (x >= (64 + X_OFFSET)) {
                 x = X_OFFSET;
         y += 1;
 
-                if ((y + 6) >= (IMAGE_SIZE_Y + Y_OFFSET)) {
+                if ((y + 6) >= (64 + Y_OFFSET)) {
                     return;
                 }
       }
@@ -403,12 +403,9 @@ int main(void)
   }
 
 #ifdef TFT_ENABLE
-    MXC_TFT_SetPalette(image_bitmap_2);
   MXC_TFT_SetBackGroundColor(4);
-    MXC_TFT_ShowImage(1, 1, image_bitmap_2);
   memset(buff,32,TFT_BUFF_SIZE);
-    TFT_Print(buff, 55, 50, font_2, sprintf(buff, "MAXIM INTEGRATED"));
-    TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Cats-vs-Dogs Demo"));
+    TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Car Detection Demo"));
     TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
 #endif
 
@@ -418,20 +415,21 @@ int main(void)
   {
     printf("********** Press PB1 to capture an image **********\r\n");
     while(!PB_Get(0));
-    int inputNum = 1;
+    int inputNum = 0;
 
     // Capture a single camera frame. 
     printf("\nCapture a camera frame %d\n", ++frame);
             capture_camera_img();
             camera_get_image(&frame_buffer, &imgLen, &w, &h);
 
-    while(inputNum<2){
-
-      #ifdef TFT_ENABLE
+#ifdef TFT_ENABLE
           MXC_TFT_ClearScreen();
               // MXC_TFT_ShowImage(1, 1, image_bitmap_2);
-              TFT_Print(buff, 55, 110, font_2, sprintf(buff, "CAPTURING IMAGE...."));
-      #endif
+              // TFT_Print(buff, 55, 110, font_2, sprintf(buff, "CAPTURING IMAGE...."));
+#endif
+
+    while(inputNum<2){
+
           // Segment the image
           segment_image(frame_buffer, imgLen, w, h, inputNum*64, 32, 64, imgBlock, 888);
           // Copy the image data to the CNN input arrays.
@@ -440,10 +438,10 @@ int main(void)
 
       #ifdef TFT_ENABLE
           // Show the input data on the lcd.
-          MXC_TFT_ClearScreen();
+          // MXC_TFT_ClearScreen();
               // MXC_TFT_ShowImage(1, 1, image_bitmap_2);
           printf("Show camera frame on LCD.\n");
-          lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024);
+          lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024, inputNum);
           
       #endif
 
@@ -475,7 +473,7 @@ int main(void)
 
           printf("Classification results:\n");
 
-              for (i = 0; i < CNN_NUM_OUTPUTS; i++) {
+          for (i = 0; i < CNN_NUM_OUTPUTS; i++) {
             digs = (1000 * ml_softmax[i] + 0x4000) >> 15;
             tens = digs % 10;
             digs = digs / 10;
@@ -483,31 +481,66 @@ int main(void)
                   printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], result[i], tens);
           }
           printf("\n");
-      inputNum++;
-    }
+          // if (result[0] > result[1]) {
+          //   detected[inputNum] = 0;
+          //   prabablity[inputNum] = result[0];
+          // } else{
+          //   detected[inputNum] = 1;
+          //   prabablity[inputNum] = result[1];
+          // }
+
 #ifdef TFT_ENABLE
     // memset(buff,32,TFT_BUFF_SIZE);
         // TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
-    memset(buff,0,TFT_BUFF_SIZE);
-        TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
-        memset(buff, 32, TFT_BUFF_SIZE);
+    // memset(buff,0,TFT_BUFF_SIZE);
+    //     TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
+    //     memset(buff, 32, TFT_BUFF_SIZE);
 
     if (result[0] > result[1]) {
-            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
-            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
+            TFT_Print(buff, 10 + inputNum*180, 150, font_1, sprintf(buff, "Car Detected"));
+            TFT_Print(buff, 10 + inputNum*180, 180, font_1, sprintf(buff, "%d%%", result[0]));
         }
         else if (result[1] > result[0]) {
-            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
-            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
+            TFT_Print(buff, 10 + inputNum*180, 150, font_1, sprintf(buff, "No Car"));
+            TFT_Print(buff, 10 + inputNum*180, 180, font_1, sprintf(buff, "%d%%", result[1]));
         }
         else {
-            TFT_Print(buff, 195, 150, font_1, sprintf(buff, "Unknown"));
+            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Unknown"));
       memset(buff,32,TFT_BUFF_SIZE);
-            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "NA"));
+            TFT_Print(buff, 10, 180, font_1, sprintf(buff, "NA"));
     }
 
-        TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
+        // TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
 #endif
+
+
+
+
+      inputNum++;
+    }
+// #ifdef TFT_ENABLE
+//     // memset(buff,32,TFT_BUFF_SIZE);
+//         // TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
+//     memset(buff,0,TFT_BUFF_SIZE);
+//         TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
+//         memset(buff, 32, TFT_BUFF_SIZE);
+
+//     if (result[0] > result[1]) {
+//             TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
+//             TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
+//         }
+//         else if (result[1] > result[0]) {
+//             TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
+//             TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
+//         }
+//         else {
+//             TFT_Print(buff, 195, 150, font_1, sprintf(buff, "Unknown"));
+//       memset(buff,32,TFT_BUFF_SIZE);
+//             TFT_Print(buff, 135, 180, font_1, sprintf(buff, "NA"));
+//     }
+
+//         TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
+// #endif
   }
 
   return 0;
