@@ -89,7 +89,7 @@ uint32_t input_2_camera[1024];
 
 uint8_t   *frame_buffer;
 uint32_t  imgLen;
-uint32_t  w, h, x, y;
+uint32_t  w, h;
 uint8_t imgBlock[64*64*4];
 
 void fail(void)
@@ -170,7 +170,7 @@ void TFT_Print(char* str, int x, int y, int font, int length)
   MXC_TFT_PrintFont(x, y, font, &text, NULL);
 }
 
-#define X_OFFSET    47
+#define X_OFFSET    15
 #define Y_OFFSET    15
 #define SCALE       2.2
 
@@ -191,8 +191,8 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
   uint8_t *ptr1;
   uint8_t *ptr2;
 
-    x = X_OFFSET;
-    y = Y_OFFSET;
+  x = X_OFFSET;
+  y = Y_OFFSET;
 
   for (i = 0; i < length; i++) {
     ptr0 = (uint8_t *)&data0[i];
@@ -256,8 +256,8 @@ void process_camera_img(uint8_t* imgBlock, uint32_t *data0, uint32_t *data1, uin
   ptr2 = (uint8_t *)data2;
   buffer = imgBlock;
 
-  for (y = 0; y < 64; y++) {
-    for (x = 0; x < 64; x++, ptr0++, ptr1++, ptr2++) {
+  for (int y = 0; y < 64; y++) {
+    for (int x = 0; x < 64; x++, ptr0++, ptr1++, ptr2++) {
             *ptr0 = (*buffer);
             buffer++;
             *ptr1 = (*buffer);
@@ -375,7 +375,7 @@ int main(void)
   mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
   MXC_TFT_Init(MXC_SPI0, 1, &tft_reset_pin, NULL);
   MXC_TFT_ClearScreen();
-    MXC_TFT_ShowImage(0, 0, image_bitmap_1);
+  MXC_TFT_SetRotation(SCREEN_FLIP);
 #endif
 #ifdef BOARD_FTHR_REVA
     /* Initialize TFT display */
@@ -418,7 +418,7 @@ int main(void)
   {
     printf("********** Press PB1 to capture an image **********\r\n");
     while(!PB_Get(0));
-    int inputNum = 0;
+    int inputNum = 1;
 
     // Capture a single camera frame. 
     printf("\nCapture a camera frame %d\n", ++frame);
@@ -485,29 +485,29 @@ int main(void)
           printf("\n");
       inputNum++;
     }
-    #ifdef TFT_ENABLE
-        memset(buff,32,TFT_BUFF_SIZE);
-            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
-        memset(buff,0,TFT_BUFF_SIZE);
-            TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
-            memset(buff, 32, TFT_BUFF_SIZE);
+#ifdef TFT_ENABLE
+    // memset(buff,32,TFT_BUFF_SIZE);
+        // TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
+    memset(buff,0,TFT_BUFF_SIZE);
+        TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
+        memset(buff, 32, TFT_BUFF_SIZE);
 
-        if (result[0] > result[1]) {
-                TFT_Print(buff, 195, 150, font_1, sprintf(buff, "CAT"));
-                TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
-            }
-            else if (result[1] > result[0]) {
-                TFT_Print(buff, 195, 150, font_1, sprintf(buff, "DOG"));
-                TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
-            }
-            else {
-                TFT_Print(buff, 195, 150, font_1, sprintf(buff, "Unknown"));
-          memset(buff,32,TFT_BUFF_SIZE);
-                TFT_Print(buff, 135, 180, font_1, sprintf(buff, "NA"));
+    if (result[0] > result[1]) {
+            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
+            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
         }
+        else if (result[1] > result[0]) {
+            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
+            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
+        }
+        else {
+            TFT_Print(buff, 195, 150, font_1, sprintf(buff, "Unknown"));
+      memset(buff,32,TFT_BUFF_SIZE);
+            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "NA"));
+    }
 
-            TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
-    #endif
+        TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
+#endif
   }
 
   return 0;
