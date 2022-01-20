@@ -323,8 +323,13 @@ int main(void)
   int i;
   int digs, tens;
   int ret = 0;
-    int result[CNN_NUM_OUTPUTS];// = {0};
-    int dma_channel;
+  int result[CNN_NUM_OUTPUTS];// = {0};
+  int dma_channel;
+  // array of detected output
+  int detected[2];
+  // array of detected prabability
+  int prabablity[2];
+
 #ifdef TFT_ENABLE
   char buff[TFT_BUFF_SIZE];
 #endif
@@ -414,44 +419,32 @@ int main(void)
     printf("********** Press PB1 to capture an image **********\r\n");
     while(!PB_Get(0));
     int inputNum = 0;
-    while(inputNum<2)
-    {
+
+    // Capture a single camera frame. 
+    printf("\nCapture a camera frame %d\n", ++frame);
+            capture_camera_img();
+            camera_get_image(&frame_buffer, &imgLen, &w, &h);
+
+    while(inputNum<2){
 
       #ifdef TFT_ENABLE
           MXC_TFT_ClearScreen();
-              MXC_TFT_ShowImage(1, 1, image_bitmap_2);
+              // MXC_TFT_ShowImage(1, 1, image_bitmap_2);
               TFT_Print(buff, 55, 110, font_2, sprintf(buff, "CAPTURING IMAGE...."));
       #endif
-
-      #ifdef USE_SAMPLEDATA
-          // Copy the sampledata reference to the camera buffer as a test.
-          printf("\nCapturing sampledata %d times\n", ++frame);
-          memcpy32(input_0_camera, input_0, 1024);
-          memcpy32(input_1_camera, input_1, 1024);
-          memcpy32(input_2_camera, input_2, 1024);
-          convert_img_signed_to_unsigned(input_0_camera, input_1_camera, input_2_camera);
-      #else
-          // Capture a single camera frame.
-          if (inputNum==0)
-          {
-            printf("\nCapture a camera frame %d\n", ++frame);
-            capture_camera_img();
-            camera_get_image(&frame_buffer, &imgLen, &w, &h);
-          }
-
+          // Segment the image
           segment_image(frame_buffer, imgLen, w, h, inputNum*64, 32, 64, imgBlock, 888);
-
           // Copy the image data to the CNN input arrays.
           printf("Copy camera frame to CNN input buffers.\n");
           process_camera_img(imgBlock, input_0_camera, input_1_camera, input_2_camera);
-      #endif
 
       #ifdef TFT_ENABLE
           // Show the input data on the lcd.
           MXC_TFT_ClearScreen();
-              MXC_TFT_ShowImage(1, 1, image_bitmap_2);
+              // MXC_TFT_ShowImage(1, 1, image_bitmap_2);
           printf("Show camera frame on LCD.\n");
           lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024);
+          
       #endif
 
           convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
@@ -490,32 +483,31 @@ int main(void)
                   printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], result[i], tens);
           }
           printf("\n");
-
-      #ifdef TFT_ENABLE
-          memset(buff,32,TFT_BUFF_SIZE);
-              TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
-          memset(buff,0,TFT_BUFF_SIZE);
-              TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
-              memset(buff, 32, TFT_BUFF_SIZE);
-
-          if (result[0] > result[1]) {
-                  TFT_Print(buff, 195, 150, font_1, sprintf(buff, "CAT"));
-                  TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
-              }
-              else if (result[1] > result[0]) {
-                  TFT_Print(buff, 195, 150, font_1, sprintf(buff, "DOG"));
-                  TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
-              }
-              else {
-                  TFT_Print(buff, 195, 150, font_1, sprintf(buff, "Unknown"));
-            memset(buff,32,TFT_BUFF_SIZE);
-                  TFT_Print(buff, 135, 180, font_1, sprintf(buff, "NA"));
-          }
-
-              TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
-      #endif
       inputNum++;
     }
+    #ifdef TFT_ENABLE
+        memset(buff,32,TFT_BUFF_SIZE);
+            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
+        memset(buff,0,TFT_BUFF_SIZE);
+            TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
+            memset(buff, 32, TFT_BUFF_SIZE);
+
+        if (result[0] > result[1]) {
+                TFT_Print(buff, 195, 150, font_1, sprintf(buff, "CAT"));
+                TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
+            }
+            else if (result[1] > result[0]) {
+                TFT_Print(buff, 195, 150, font_1, sprintf(buff, "DOG"));
+                TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
+            }
+            else {
+                TFT_Print(buff, 195, 150, font_1, sprintf(buff, "Unknown"));
+          memset(buff,32,TFT_BUFF_SIZE);
+                TFT_Print(buff, 135, 180, font_1, sprintf(buff, "NA"));
+        }
+
+            TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
+    #endif
   }
 
   return 0;
