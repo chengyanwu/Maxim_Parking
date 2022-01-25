@@ -57,7 +57,7 @@
 #endif
 
 #define CAMERA_TO_LCD   (1)
-#define IMAGE_SIZE_X  (240)
+#define IMAGE_SIZE_X  (200)
 #define IMAGE_SIZE_Y  (180)
 #define CAMERA_FREQ   (10 * 1000 * 1000)
 
@@ -86,7 +86,8 @@ uint32_t input_2_camera[1024];
 uint8_t   *frame_buffer;
 uint32_t  imgLen;
 uint32_t  w, h;
-uint8_t imgBlock[64*64*2];
+uint8_t imgBlock565[64*64*2];
+uint8_t imgBlock888[64*64*4];
 
 void fail(void)
 {
@@ -242,7 +243,15 @@ void RGB565ToRGB888Char(uint8_t* rgb565, uint8_t* rgb888)
     rgb888[2] = (*n565Color & 0x001f) << 3;
 }
 
-
+void img565To888(uint8_t* img565, uint8_t* img888)
+{
+  int j = 0;
+  int imgLen = 64*64*2;
+  for (int i = 0; i < imgLen; i+=2)
+  {
+    RGB565ToRGB888Char(img565+i, img888+(j++)*3);
+  }
+}
 
 /* **************************************************************************** */
 void process_camera_img(uint8_t* imgBlock, uint32_t *data0, uint32_t *data1, uint32_t *data2)
@@ -254,16 +263,7 @@ void process_camera_img(uint8_t* imgBlock, uint32_t *data0, uint32_t *data1, uin
   ptr0 = (uint8_t *)data0;
   ptr1 = (uint8_t *)data1;
   ptr2 = (uint8_t *)data2;
-
-  uint8_t temp[64*64*4];
-  int j = 0;
-
-  for (int i = 0; i < imgLen; i+=2)
-  {
-    RGB565ToRGB888Char(imgBlock+i, temp+(j++)*3);
-  }
-
-  buffer = temp;
+  buffer = imgBlock;
 
   for (int y = 0; y < 64; y++) {
     for (int x = 0; x < 64; x++, ptr0++, ptr1++, ptr2++) {
@@ -438,10 +438,11 @@ int main(void)
     while(inputNum<2){
 
           // Segment the image
-          segment_image(frame_buffer, imgLen, w, h, inputNum*64, 32, 64, imgBlock, 565);
+          segment_image(frame_buffer, imgLen, w, h, inputNum*64, 32, 64, imgBlock565, 565);
+          img565To888(imgBlock565, imgBlock888);
           // Copy the image data to the CNN input arrays.
           printf("Copy camera frame to CNN input buffers.\n");
-          process_camera_img(imgBlock, input_0_camera, input_1_camera, input_2_camera);
+          process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
 
       #ifdef TFT_ENABLE
           printf("Show camera frame on LCD.\n");
