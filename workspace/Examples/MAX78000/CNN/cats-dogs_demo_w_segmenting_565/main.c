@@ -57,8 +57,8 @@
 #endif
 
 #define CAMERA_TO_LCD   (1)
-#define IMAGE_SIZE_X  (200)
-#define IMAGE_SIZE_Y  (180)
+#define IMAGE_SIZE_X  (240)
+#define IMAGE_SIZE_Y  (160)
 #define CAMERA_FREQ   (10 * 1000 * 1000)
 
 #define TFT_BUFF_SIZE   30    // TFT buffer size
@@ -237,19 +237,41 @@ void segment_image(uint8_t* img, uint32_t imgLen, int w, int h, int xLoc, int yL
 //https://blog.fearcat.in/a?ID=00900-e289dd3c-202f-4105-8437-7de05cc65166
 void RGB565ToRGB888Char(uint8_t* rgb565, uint8_t* rgb888)
 {
-    uint16_t *n565Color = (uint16_t*)rgb565;
-    rgb888[0] = (*n565Color & 0xf800) >> 8;
-    rgb888[1] = (*n565Color & 0x07e0) >> 3;
-    rgb888[2] = (*n565Color & 0x001f) << 3;
+    uint8_t byte1 = rgb565[2];
+    uint8_t byte2 = rgb565[3];
+    uint8_t byte3 = rgb565[0];
+    uint8_t byte4 = rgb565[1];
+
+    uint16_t pixel1 = byte1 * 0x100 + byte2;
+    uint16_t pixel2 = byte3 * 0x100 + byte4;
+
+    uint8_t r1 = (pixel1 >>11) & 0x1f;
+    uint8_t g1 = (pixel1 >>5) & 0x3f;
+    uint8_t b1 = (pixel1 >>0) & 0x1f;
+    r1 = r1 * 255 / 31;
+    g1 = g1 * 255 / 63;
+    b1 = b1 * 255 / 31;
+    rgb888[3] = (r1);
+    rgb888[4] = (g1);
+    rgb888[5] = (b1);
+
+    uint8_t r2 = (pixel2 >>11) & 0x1f;
+    uint8_t g2 = (pixel2 >>5) & 0x3f;
+    uint8_t b2 = (pixel2 >>0) & 0x1f;
+    r2 = r2 * 255 / 31;
+    g2 = g2 * 255 / 63;
+    b2 = b2 * 255 / 31;
+    rgb888[0] = (r2);
+    rgb888[1] = (g2);
+    rgb888[2] = (b2);
 }
 
 void img565To888(uint8_t* img565, uint8_t* img888)
 {
-  int j = 0;
-  int imgLen = 64*64*2;
-  for (int i = 0; i < imgLen; i+=2)
+  int len = 64*64*2;
+  for (int i = 0; i < len/4; i++)
   {
-    RGB565ToRGB888Char(img565+i, img888+(j++)*3);
+    RGB565ToRGB888Char(&img565[i*4], &img888[i*6]);
   }
 }
 
@@ -435,10 +457,10 @@ int main(void)
     MXC_TFT_ClearScreen();
 #endif
 
-    while(inputNum<2){
+    while(inputNum<4){
 
           // Segment the image
-          segment_image(frame_buffer, imgLen, w, h, inputNum*64, 32, 64, imgBlock565, 565);
+          segment_image(frame_buffer, imgLen, w, h, inputNum*58, 48, 64, imgBlock565, 565);
           img565To888(imgBlock565, imgBlock888);
           // Copy the image data to the CNN input arrays.
           printf("Copy camera frame to CNN input buffers.\n");

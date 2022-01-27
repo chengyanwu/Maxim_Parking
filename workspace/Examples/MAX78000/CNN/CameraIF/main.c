@@ -67,8 +67,8 @@
 #include "ff.h"
 #include "sd.h"
 
-#define IMAGE_XRES  256
-#define IMAGE_YRES  192
+#define IMAGE_XRES  64
+#define IMAGE_YRES  64
 #define CAMERA_FREQ (10 * 1000 * 1000)
 
 #define STRINGIFY(x) #x
@@ -83,6 +83,47 @@ extern TCHAR* FF_ERRORS[20];
 
 int imgNum = 0;
 
+//https://blog.fearcat.in/a?ID=00900-e289dd3c-202f-4105-8437-7de05cc65166
+void RGB565ToRGB888Char(uint8_t* rgb565, uint8_t* rgb888)
+{
+    uint8_t byte1 = rgb565[2];
+    uint8_t byte2 = rgb565[3];
+    uint8_t byte3 = rgb565[0];
+    uint8_t byte4 = rgb565[1];
+
+    uint16_t pixel1 = byte1 * 0x100 + byte2;
+    uint16_t pixel2 = byte3 * 0x100 + byte4;
+
+    uint8_t r1 = (pixel1 >>11) & 0x1f;
+    uint8_t g1 = (pixel1 >>5) & 0x3f;
+    uint8_t b1 = (pixel1 >>0) & 0x1f;
+    r1 = r1 * 255 / 31;
+    g1 = g1 * 255 / 63;
+    b1 = b1 * 255 / 31;
+    rgb888[3] = (r1);
+    rgb888[4] = (g1);
+    rgb888[5] = (b1);
+
+    uint8_t r2 = (pixel2 >>11) & 0x1f;
+    uint8_t g2 = (pixel2 >>5) & 0x3f;
+    uint8_t b2 = (pixel2 >>0) & 0x1f;
+    r2 = r2 * 255 / 31;
+    g2 = g2 * 255 / 63;
+    b2 = b2 * 255 / 31;
+    rgb888[0] = (r2);
+    rgb888[1] = (g2);
+    rgb888[2] = (b2);
+}
+
+void img565To888(uint8_t* img565, uint8_t* img888)
+{
+  int imgLen = 64*64*2;
+  for (int i = 0; i < imgLen/4; i++)
+  {
+    RGB565ToRGB888Char(&img565[i*4], &img888[i*6]);
+  }
+}
+
 void process_img(void)
 {
     uint8_t*   raw;
@@ -94,10 +135,10 @@ void process_img(void)
     camera_get_image(&raw, &imgLen, &w, &h);
 
 
-    uint8_t imgSeg[64*64*2];
-    uint32_t imgSegLen = 64*64*2;
-    segment_image(raw, imgLen, w, h, 32, 32, 64, imgSeg);
+    uint8_t *imgSeg = (uint8_t*)malloc(64*64*4*sizeof(uint8_t));
+    uint32_t imgSegLen = 64*64*4;
 
+    img565To888(raw, imgSeg);
 
     int err = createRawImage(raw, imgLen,imgNum);
     err = createRawImage(imgSeg, imgSegLen,imgNum+1000);
