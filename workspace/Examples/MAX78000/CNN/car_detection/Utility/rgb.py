@@ -5,7 +5,7 @@ import sys
 import cv2
 
 np.set_printoptions(threshold=sys.maxsize)
-im = (Image.open('./scissor7.png'))
+im = (Image.open('./dog.jpeg'))
 size = (64,64)
 
 img = ImageOps.fit(im, size, Image.ANTIALIAS)
@@ -89,7 +89,7 @@ with open('sampledata.h', 'w') as outfile:
 				outfile.write('\n\t')
 				outfile.write('0x{0:08x},\t'.format((out_arr_red[i])))
 
-	outfile.write('\\')
+	outfile.write('\\')			
 	outfile.write('\n')
 	outfile.write('}')
 	outfile.write('\n')
@@ -112,7 +112,7 @@ with open('sampledata.h', 'a') as outfile:
 				outfile.write('\n\t')
 				outfile.write('0x{0:08x},\t'.format((out_arr_green[i])))
 
-	outfile.write('\\')
+	outfile.write('\\')			
 	outfile.write('\n')
 	outfile.write('}')
 	outfile.write('\n')
@@ -135,7 +135,7 @@ with open('sampledata.h', 'a') as outfile:
 				outfile.write('\n\t')
 				outfile.write('0x{0:08x},\t'.format((out_arr_blue[i])))
 
-	outfile.write('\\')
+	outfile.write('\\')			
 	outfile.write('\n')
 	outfile.write('}')
 	outfile.write('\n')

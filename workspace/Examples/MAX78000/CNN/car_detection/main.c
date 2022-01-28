@@ -32,47 +32,60 @@
 * ownership rights.
 *******************************************************************************/
 
-// rps-demo
-// Created using ./ai8xize.py --verbose --log --test-dir pytorch --prefix rps-demo --checkpoint-file trained/ai85-rps82-chw.pth.tar --config-file networks/rps-chw.yaml --softmax --embedded-code --device MAX78000 --compact-data --mexpress --timer 0 --display-checkpoint --fifo
-
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
 #include "mxc_device.h"
 #include "mxc_sys.h"
-#include "bbfc_regs.h"
 #include "fcr_regs.h"
 #include "icc.h"
-#include "dma.h"
 #include "led.h"
 #include "tmr.h"
-#include "tft.h"
+#include "dma.h"
 #include "pb.h"
 #include "cnn.h"
 #include "weights.h"
 #include "sampledata.h"
 #include "mxc_delay.h"
 #include "camera.h"
+#ifdef BOARD_EVKIT_V1
 #include "bitmap.h"
+#include "tft.h"
+#endif
+#ifdef BOARD_FTHR_REVA
+#include "tft_fthr.h"
+#endif
 
 // Comment out USE_SAMPLEDATA to use Camera module
-//#define USE_SAMPLEDATA
+// #define USE_SAMPLEDATA
 
 #define CAMERA_TO_LCD   (1)
 #define IMAGE_SIZE_X  (64)
 #define IMAGE_SIZE_Y  (64)
 #define CAMERA_FREQ   (10 * 1000 * 1000)
 
-#define CNN_NUM_OUTPUTS     2     // number of classes
-const char classes[CNN_NUM_OUTPUTS][5] = {"Car", "Non"};
+#define TFT_BUFF_SIZE   30    // TFT buffer size
+
+#ifdef BOARD_EVKIT_V1
+int image_bitmap_1 = img_1_bmp;
+int image_bitmap_2 = logo_white_bg_darkgrey_bmp;
+int font_1 = urw_gothic_12_white_bg_grey;
+int font_2 = urw_gothic_13_white_bg_grey;
+#endif
+#ifdef BOARD_FTHR_REVA
+int image_bitmap_1 = (int)& img_1_rgb565[0];
+int image_bitmap_2 = (int)& logo_rgb565[0];
+int font_1 = (int)& SansSerif16x16[0];
+int font_2 = (int)& SansSerif16x16[0];
+#endif
+
+const char classes[CNN_NUM_OUTPUTS][10] = {"Car", "Non-Car"};
 
 volatile uint32_t cnn_time; // Stopwatch
 uint32_t input_0_camera[1024];
 uint32_t input_1_camera[1024];
 uint32_t input_2_camera[1024];
-
-uint32_t input_mnist[116];
 
 void fail(void)
 {
@@ -82,14 +95,14 @@ void fail(void)
 
 #ifdef USE_SAMPLEDATA
 // Data input: CHW 3x64x64 (12288 bytes total / 4096 bytes per channel):
-static const uint32_t input_0[] = SAMPLE_INPUT_0;
-static const uint32_t input_1[] = SAMPLE_INPUT_1;
-static const uint32_t input_2[] = SAMPLE_INPUT_2;
+  static const uint32_t input_0[] = SAMPLE_INPUT_0;
+  static const uint32_t input_1[] = SAMPLE_INPUT_16;
+  static const uint32_t input_2[] = SAMPLE_INPUT_32;
 #endif
-void load_input(void)
-{
-  // This function loads the sample data input -- replace with actual data
 
+/* **************************************************************************** */
+void cnn_load_input(void)
+{
   int i;
 #ifdef USE_SAMPLEDATA
   const uint32_t *in0 = input_0;
@@ -101,75 +114,18 @@ void load_input(void)
   const uint32_t *in2 = input_2_camera;
 #endif
 
-  for (i = 0; i < 1024; i++) {
-    while (((*((volatile uint32_t *) 0x50000004) & 1)) != 0); // Wait for FIFO 0
-    *((volatile uint32_t *) 0x50000008) = *in0++; // Write FIFO 0
-    while (((*((volatile uint32_t *) 0x50000004) & 2)) != 0); // Wait for FIFO 1
-    *((volatile uint32_t *) 0x5000000c) = *in1++; // Write FIFO 1
-    while (((*((volatile uint32_t *) 0x50000004) & 4)) != 0); // Wait for FIFO 2
-    *((volatile uint32_t *) 0x50000010) = *in2++; // Write FIFO 2
-  }
-  // uint8_t *ptr0;
-	// uint8_t *ptr1;
-	// uint8_t *ptr2;
-	// ptr0 = (uint8_t *)input_0_camera;
-	// ptr1 = (uint8_t *)input_1_camera;
-	// ptr2 = (uint8_t *)input_2_camera;
-	// uint8_t grayscale[4096];
+  // for (i = 0; i < 1024; i++) {
+  //   while (((*((volatile uint32_t *) 0x50000004) & 1)) != 0); // Wait for FIFO 0
+  //   *((volatile uint32_t *) 0x50000008) = *in0++; // Write FIFO 0
+  //   while (((*((volatile uint32_t *) 0x50000004) & 2)) != 0); // Wait for FIFO 1
+  //   *((volatile uint32_t *) 0x5000000c) = *in1++; // Write FIFO 1
+  //   while (((*((volatile uint32_t *) 0x50000004) & 4)) != 0); // Wait for FIFO 2
+  //   *((volatile uint32_t *) 0x50000010) = *in2++; // Write FIFO 2
+  // }
 
-	// // grayscale
-	// for (i = 0; i < 4096; i++)
-	// {
-	// 	grayscale[i] = (*ptr0 + *ptr1 + *ptr2) / 3;
-	// 	ptr0++;
-	// 	ptr1++;
-	// 	ptr2++;
-	// }
-
-	// uint8_t grayscale2d[64][64];
-
-	// // convert to 2d array for rescaling
-	// for (int j = 0; j < 64; j++)
-	// {
-	// 	for (int k = 0; k < 64; k++)
-	// 	{
-	// 		grayscale2d[j][k] = grayscale[64 * j + k];
-	// 	}
-	// }
-
-	// uint8_t resize2d[28][28];
-
-	// // rescale
-	// for (int j = 0; j < 28; j++)
-	// {
-	// 	for (int k = 0; k < 28; k++)
-	// 	{
-	// 		resize2d[j][k] = grayscale2d[j * 2 + 3][k * 2 + 3];
-	// 	}
-	// }
-
-	// // convert to 1-d array for cnn loading
-	// uint8_t resize[784];
-	// for (int j = 0; j < 28; j++)
-	// {
-	// 	for (int k = 0; k < 28; k++)
-	// 	{
-	// 		resize[j * 28 + k] = resize2d[j][k];
-	// 	}
-	// }
-
-  // memcpy32((uint32_t *) 0x50400000, resize, 196);
-  
-}
-
-// Expected output of layer 6 for rps-demo given the sample input
-int check_output(void)
-{
-  if ((*((volatile uint32_t *) 0x50401000)) != 0x00079c32) return CNN_FAIL; // 0,0,0
-  if ((*((volatile uint32_t *) 0x50401004)) != 0xfffae676) return CNN_FAIL; // 0,0,1
-  if ((*((volatile uint32_t *) 0x50401008)) != 0xfff657b6) return CNN_FAIL; // 0,0,2
-
-  return CNN_OK;
+  memcpy32((uint32_t *) 0x50400000, input_0_camera, 1024);
+  memcpy32((uint32_t *) 0x50800000, input_1_camera, 1024);
+  memcpy32((uint32_t *) 0x50c00000, input_2_camera, 1024);
 }
 
 // Classification layer:
@@ -179,51 +135,120 @@ static q15_t ml_softmax[CNN_NUM_OUTPUTS];
 void softmax_layer(void)
 {
   cnn_unload((uint32_t *) ml_data);
-  softmax_q17p14_q15((const q31_t *) ml_data, CNN_NUM_OUTPUTS, ml_softmax);
+    softmax_q17p14_q15((const q31_t*) ml_data, CNN_NUM_OUTPUTS, ml_softmax);
 }
 
 /* **************************************************************************** */
-static uint8_t signed_to_unsigned(int8_t val) {
-  uint8_t value;
-  if (val < 0) {
-    value = ~val + 1;
-    return (128 - value);
+static uint8_t signed_to_unsigned(int8_t val)
+{
+        uint8_t value;
+        if (val < 0) {
+                value = ~val + 1;
+                return (128 - value);
+        }
+        return val + 128;
+}
+
+/* **************************************************************************** */
+int8_t unsigned_to_signed(uint8_t val)
+{
+        return val - 128;
+}
+
+/* **************************************************************************** */
+void TFT_Print(char* str, int x, int y, int font, int length)
+{
+  // fonts id
+  text_t text;
+  text.data = str;
+    text.len = length;
+  MXC_TFT_PrintFont(x, y, font, &text, NULL);
+}
+
+#define X_OFFSET    47
+#define Y_OFFSET    15
+#define SCALE       2.2
+
+/* **************************************************************************** */
+void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int length)
+{
+  int i;
+  int j;
+  int x;
+  int y;
+  int r;
+  int g;
+  int b;
+    int scale = SCALE;
+    
+  uint32_t color;
+  uint8_t *ptr0;
+  uint8_t *ptr1;
+  uint8_t *ptr2;
+
+    x = X_OFFSET;
+    y = Y_OFFSET;
+
+  for (i = 0; i < length; i++) {
+    ptr0 = (uint8_t *)&data0[i];
+    ptr1 = (uint8_t *)&data1[i];
+    ptr2 = (uint8_t *)&data2[i];
+    for (j = 0; j < 4; j++) {
+      r = ptr0[j];
+      g = ptr1[j];
+      b = ptr2[j];        
+#ifdef BOARD_EVKIT_V1
+      color  = (0x01000100 | ((b & 0xF8) << 13) | ((g & 0x1C) << 19) | ((g & 0xE0) >> 5) | (r & 0xF8));
+#endif
+#ifdef BOARD_FTHR_REVA
+            color = RGB(r, g, b); // convert to RGB565
+#endif
+      MXC_TFT_WritePixel(x * scale, y * scale, scale, scale, color);
+      x += 1;
+
+            if (x >= (IMAGE_SIZE_X + X_OFFSET)) {
+                x = X_OFFSET;
+        y += 1;
+
+                if ((y + 6) >= (IMAGE_SIZE_Y + Y_OFFSET)) {
+                    return;
+                }
+      }
+    }
   }
-  return val + 128;
-}
-
-/* **************************************************************************** */
-int8_t unsigned_to_signed(uint8_t val) {
-  return val - 128;
 }
 
 /* **************************************************************************** */
 void process_camera_img(uint32_t *data0, uint32_t *data1, uint32_t *data2)
 {
-  uint8_t   *frame_buffer;
-  uint32_t  imgLen;
-  uint32_t  w, h, x, y;
+ 	uint8_t   *frame_buffer;
+	uint32_t  imgLen;
+	uint32_t  w, h, x, y;
   uint8_t *ptr0;
   uint8_t *ptr1;
   uint8_t *ptr2;
   uint8_t *buffer;
 
-  camera_get_image(&frame_buffer, &imgLen, &w, &h);
+	camera_get_image(&frame_buffer, &imgLen, &w, &h);
   ptr0 = (uint8_t *)data0;
   ptr1 = (uint8_t *)data1;
   ptr2 = (uint8_t *)data2;
   buffer = frame_buffer;
   for (y = 0; y < h; y++) {
     for (x = 0; x < w; x++, ptr0++, ptr1++, ptr2++) {
-      *ptr0 = (*buffer); buffer++;
-      *ptr1 = (*buffer); buffer++;
-      *ptr2 = (*buffer); buffer++;
+            *ptr0 = (*buffer);
+            buffer++;
+            *ptr1 = (*buffer);
+            buffer++;
+            *ptr2 = (*buffer);
+            buffer++;
     }
   }
 }
 
 /* **************************************************************************** */
-void capture_camera_img(void) {
+void capture_camera_img(void)
+{
   camera_start_capture_image();
   while (1) {
     if (camera_is_image_rcv()) {
@@ -233,162 +258,225 @@ void capture_camera_img(void) {
 }
 
 /* **************************************************************************** */
-void convert_img_unsigned_to_signed(uint32_t *data0, uint32_t *data1, uint32_t *data2) {
-  uint8_t *ptr0;
-  uint8_t *ptr1;
-  uint8_t *ptr2;
-  ptr0 = (uint8_t *)data0;
-  ptr1 = (uint8_t *)data1;
-  ptr2 = (uint8_t *)data2;
-  for(int i=0; i<4096; i++) {
-    *ptr0 = unsigned_to_signed(*ptr0); ptr0++;
-    *ptr1 = unsigned_to_signed(*ptr1); ptr1++;
-    *ptr2 = unsigned_to_signed(*ptr2); ptr2++;
-  }
-}
-
-/* **************************************************************************** */
-void convert_img_signed_to_unsigned(uint32_t *data0, uint32_t *data1, uint32_t *data2) {
-  uint8_t *ptr0;
-  uint8_t *ptr1;
-  uint8_t *ptr2;
-  ptr0 = (uint8_t *)data0;
-  ptr1 = (uint8_t *)data1;
-  ptr2 = (uint8_t *)data2;
-  for(int i=0; i<4096; i++) {
-    *ptr0 = signed_to_unsigned(*ptr0); ptr0++;
-    *ptr1 = signed_to_unsigned(*ptr1); ptr1++;
-    *ptr2 = signed_to_unsigned(*ptr2); ptr2++;
-  }
-}
-
-/* **************************************************************************** */
-void cnn_wait(void)
+void convert_img_unsigned_to_signed(uint32_t* data0, uint32_t* data1, uint32_t* data2)
 {
-  while ((*((volatile uint32_t *) 0x50100000) & (1<<12)) != 1<<12) ;
-  CNN_COMPLETE; // Signal that processing is complete
-  cnn_time = MXC_TMR_SW_Stop(MXC_TMR0);
+  uint8_t *ptr0;
+  uint8_t *ptr1;
+  uint8_t *ptr2;
+  ptr0 = (uint8_t *)data0;
+  ptr1 = (uint8_t *)data1;
+  ptr2 = (uint8_t *)data2;
+  for(int i=0; i<4096; i++) {
+        *ptr0 = unsigned_to_signed(*ptr0);
+        ptr0++;
+        *ptr1 = unsigned_to_signed(*ptr1);
+        ptr1++;
+        *ptr2 = unsigned_to_signed(*ptr2);
+        ptr2++;
+  }
+}
+
+/* **************************************************************************** */
+void convert_img_signed_to_unsigned(uint32_t* data0, uint32_t* data1, uint32_t* data2)
+{
+  uint8_t *ptr0;
+  uint8_t *ptr1;
+  uint8_t *ptr2;
+  ptr0 = (uint8_t *)data0;
+  ptr1 = (uint8_t *)data1;
+  ptr2 = (uint8_t *)data2;
+  for(int i=0; i<4096; i++) {
+        *ptr0 = signed_to_unsigned(*ptr0);
+        ptr0++;
+        *ptr1 = signed_to_unsigned(*ptr1);
+        ptr1++;
+        *ptr2 = signed_to_unsigned(*ptr2);
+        ptr2++;
+  }
 }
 
 /* **************************************************************************** */
 int main(void)
 {
-  int i, dma_channel;
+  int i;
   int digs, tens;
   int ret = 0;
-  uint8_t user_choice = 0;
-  int result[CNN_NUM_OUTPUTS] = {0};
+    int result[CNN_NUM_OUTPUTS];// = {0};
+    int dma_channel;
+#ifdef TFT_ENABLE
+  char buff[TFT_BUFF_SIZE];
+#endif
 
-  MXC_ICC_Enable(MXC_ICC0); // Enable cache
+#if defined (BOARD_FTHR_REVA)
+    // Wait for PMIC 1.8V to become available, about 180ms after power up.
+    MXC_Delay(200000);
+    /* Enable camera power */
+    Camera_Power(POWER_ON);
+    //MXC_Delay(300000);
+    printf("\n\nCar Detection Demo / Feather Board\n");
+#else
+    printf("\n\nCar Detection Demo / Ev-Kit\n");
+#endif
 
-  // Switch to 100 MHz clock
+    /* Enable cache */
+    MXC_ICC_Enable(MXC_ICC0);
+
+    /* Switch to 100 MHz clock */
   MXC_SYS_Clock_Select(MXC_SYS_CLOCK_IPO);
   SystemCoreClockUpdate();
 
-  printf("Waiting...\n");
+    /* Enable peripheral, enable CNN interrupt, turn on CNN clock */
+    /* CNN clock: 50 MHz div 1 */
+    cnn_enable(MXC_S_GCR_PCLKDIV_CNNCLKSEL_PCLK, MXC_S_GCR_PCLKDIV_CNNCLKDIV_DIV1);
 
-  // DO NOT DELETE THIS LINE:
-  MXC_Delay(SEC(2)); // Let debugger interrupt if needed
+    /* Configure P2.5, turn on the CNN Boost */
+    cnn_boost_enable(MXC_GPIO2, MXC_GPIO_PIN_5);
 
-  // Enable peripheral, enable CNN interrupt, turn on CNN clock
-  // CNN clock: 50 MHz div 1
-  cnn_enable(MXC_S_GCR_PCLKDIV_CNNCLKSEL_PCLK, MXC_S_GCR_PCLKDIV_CNNCLKDIV_DIV1);
+    /* Bring CNN state machine into consistent state */
+    cnn_init();
+    /* Load CNN kernels */
+    cnn_load_weights();
+    /* Load CNN bias */
+    cnn_load_bias();
+    /* Configure CNN state machine */
+    cnn_configure();
 
-  // printf("\n*** CNN Inference Test ***\n");
+#ifdef TFT_ENABLE
+    /* Initialize TFT display */
+  printf("Init LCD.\n");
+#ifdef BOARD_EVKIT_V1
+  mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
+  MXC_TFT_Init(MXC_SPI0, 1, &tft_reset_pin, NULL);
+  MXC_TFT_ClearScreen();
+  MXC_TFT_SetRotation(SCREEN_FLIP);
+#endif
+#ifdef BOARD_FTHR_REVA
+    /* Initialize TFT display */
+    MXC_TFT_Init(MXC_SPI0, 1, NULL, NULL);
+    MXC_TFT_SetRotation(ROTATE_270);
+    MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
+#endif
+    MXC_Delay(1000000);
+#endif
 
-
-  // cnn_boost_enable(gpio_out, MXC_GPIO_PIN_5);
-  // Configure P2.5, turn on the CNN Boost
-  // mxc_gpio_cfg_t gpio_out;
-  // gpio_out.port = MXC_GPIO0;
-  // gpio_out.mask = MXC_GPIO_PIN_5;
-  // gpio_out.pad = MXC_GPIO_PAD_NONE;
-  // gpio_out.func = MXC_GPIO_FUNC_OUT;
-  // MXC_GPIO_Config(&gpio_out);
-  // MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
+    // Initialize DMA for camera interface
+    MXC_DMA_Init();
+    dma_channel = MXC_DMA_AcquireChannel();
 
   // Initialize camera.
   printf("Init Camera.\n");
-  camera_init(CAMERA_FREQ);
+    camera_init(CAMERA_FREQ);
 
-  // Initialize DMA for camera interface
-  MXC_DMA_Init();
-  dma_channel = MXC_DMA_AcquireChannel();
+    ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
 
-  ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
-  // ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_YUV422, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
   if (ret != STATUS_OK) {
-    printf("Error returned from setting up camera. Error %d\n", ret);
-    return -1;
+      printf("Error returned from setting up camera. Error %d\n", ret);
+      return -1;
   }
 
-  MXC_Delay(1000000);
+#ifdef TFT_ENABLE
+    // MXC_TFT_SetPalette(image_bitmap_2);
+  MXC_TFT_SetBackGroundColor(4);
+    // MXC_TFT_ShowImage(1, 1, image_bitmap_2);
+  memset(buff,32,TFT_BUFF_SIZE);
+  TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Car Detection Demo"));
+  TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
+#endif
 
   int frame = 0;
 
-
-  // cnn_init(); // Bring state machine into consistent state
-  // cnn_load_weights(); // Load kernels
-  // cnn_load_bias();
-  // cnn_configure(); // Configure state machine
-
   while (1) {
-    // printf("********** Press PB1 to capture an image **********\r\n");
-    // while(!PB_Get(0));
-    MXC_Delay(SEC(2));
+    printf("********** Press PB1 to capture an image **********\r\n");
+    while(!PB_Get(0));
 
+#ifdef TFT_ENABLE
+    MXC_TFT_ClearScreen();
+      TFT_Print(buff, 55, 110, font_2, sprintf(buff, "CAPTURING IMAGE...."));
+#endif
+
+#ifdef USE_SAMPLEDATA
+    // Copy the sampledata reference to the camera buffer as a test.
+    printf("\nCapturing sampledata %d times\n", ++frame);
+    memcpy32(input_0_camera, input_0, 1024);
+    memcpy32(input_1_camera, input_1, 1024);
+    memcpy32(input_2_camera, input_2, 1024);
+    convert_img_signed_to_unsigned(input_0_camera, input_1_camera, input_2_camera);
+#else
     // Capture a single camera frame.
     printf("\nCapture a camera frame %d\n", ++frame);
     capture_camera_img();
     // Copy the image data to the CNN input arrays.
+    printf("Copy camera frame to CNN input buffers.\n");
     process_camera_img(input_0_camera, input_1_camera, input_2_camera);
+#endif
+
+#ifdef TFT_ENABLE
+    // Show the input data on the lcd.
+    MXC_TFT_ClearScreen();
+    printf("Show camera frame on LCD.\n");
+    lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024);
+#endif
 
     convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
 
-    cnn_init(); // Bring state machine into consistent state
-    cnn_load_weights(); // Load kernels
-    cnn_load_bias();
-    cnn_configure(); // Configure state machine
-    load_input(); // Load data input via FIFO
-    cnn_start(); // Start CNN processing
-    // MXC_TMR_SW_Start(MXC_TMR0);
+        // Enable CNN clock
+        MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
 
+        cnn_init(); // Bring state machine into consistent state
+        //cnn_load_weights(); // No need to reload kernels
+        //cnn_load_bias(); // No need to reload bias
+        cnn_configure(); // Configure state machine
 
-    while (cnn_time == 0)
-      printf("------WAITING FOR CNN---------\n");
-      // __WFI(); // Wait for CNN
-    printf("------FINISHED WAITING FOR CNN---------\n");
-    softmax_layer();
+        cnn_load_input();
+        cnn_start();
 
-    cnn_stop();
-    // Disable CNN clock to save power
-    // MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
+        while (cnn_time == 0) {
+            __WFI();    // Wait for CNN interrupt
+        }
+
+        // Unload CNN data
+        softmax_layer();
+
+        cnn_stop();
+        // Disable CNN clock to save power
+        MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
 
     printf("Time for CNN: %d us\n\n", cnn_time);
 
     printf("Classification results:\n");
-    int max=0;
-    int dig_recognized = -1;
-    for (i = 0; i < CNN_NUM_OUTPUTS; i++) {
+
+        for (i = 0; i < CNN_NUM_OUTPUTS; i++) {
       digs = (1000 * ml_softmax[i] + 0x4000) >> 15;
       tens = digs % 10;
       digs = digs / 10;
       result[i] = digs;
-      if(digs > max){
-        max = digs;
-        dig_recognized = i;
-      }
-      printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], digs, tens);
+            printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], result[i], tens);
     }
-    if(dig_recognized == "car")
-      printf("Car Recognized");
+    printf("\n");
 
-    convert_img_signed_to_unsigned(input_0_camera, input_1_camera, input_2_camera);
-    memcpy32(input_0_camera, 0, 1024);
-    memcpy32(input_1_camera, 0, 1024);
-    memcpy32(input_2_camera, 0, 1024);
+#ifdef TFT_ENABLE
+    // memset(buff,32,TFT_BUFF_SIZE);
+        // TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
+    memset(buff,0,TFT_BUFF_SIZE);
+        TFT_Print(buff, 10, 180, font_1, sprintf(buff, "Probability : "));
+        memset(buff, 32, TFT_BUFF_SIZE);
 
-    printf("-----------END----------\n");
+    if (result[0] > result[1]) {
+            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
+            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
+        }
+        else if (result[1] > result[0]) {
+            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
+            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
+        }
+        else {
+            TFT_Print(buff, 195, 150, font_1, sprintf(buff, "Unknown"));
+      memset(buff,32,TFT_BUFF_SIZE);
+            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "NA"));
+    }
+
+        TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
+#endif
   }
 
   return 0;

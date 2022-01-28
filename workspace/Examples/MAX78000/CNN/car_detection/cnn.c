@@ -32,8 +32,8 @@
 * ownership rights.
 *******************************************************************************/
 
-// cars-test
-// Created using ./ai8xize.py --test-dir sdk/Examples/MAX78000/CNN --prefix cars-test --checkpoint-file cars-test/best_q8.pth.tar --config-file networks/cats-dogs-chw.yaml --softmax --device MAX78000 --compact-data --mexpress --timer 0 --display-checkpoint --verbose
+// cars-50
+// Created using ./ai8xize.py --test-dir sdk/Examples/MAX78000/CNN --prefix cars-50 --checkpoint-file cars-50/proj_q8.pth.tar --config-file networks/cats-dogs-chw.yaml --softmax --device MAX78000 --compact-data --mexpress --timer 0 --display-checkpoint --verbose
 
 // DO NOT EDIT - regenerate this file instead!
 
@@ -677,7 +677,7 @@ int cnn_configure(void)
   *((volatile uint32_t *) 0x50100a28) = 0x0000080f; // Layer control 2
   *((volatile uint32_t *) 0x50100628) = 0x27602858; // Mask offset and count
   *((volatile uint32_t *) 0x50100128) = 0x00000100; // 1D
-  *((volatile uint32_t *) 0x501007a8) = 0x00025000; // Post processing register
+  *((volatile uint32_t *) 0x501007a8) = 0x00023000; // Post processing register
   *((volatile uint32_t *) 0x50100728) = 0xffffffff; // Mask and processor enables
 
   // Layer 6 group 1
@@ -689,7 +689,7 @@ int cnn_configure(void)
   *((volatile uint32_t *) 0x50500a28) = 0x0000080f; // Layer control 2
   *((volatile uint32_t *) 0x50500628) = 0x27602858; // Mask offset and count
   *((volatile uint32_t *) 0x50500128) = 0x00000100; // 1D
-  *((volatile uint32_t *) 0x505007a8) = 0x00024000; // Post processing register
+  *((volatile uint32_t *) 0x505007a8) = 0x00022000; // Post processing register
   *((volatile uint32_t *) 0x50500728) = 0x3fff3fff; // Mask and processor enables
 
   // Layer 6 group 2
@@ -701,7 +701,7 @@ int cnn_configure(void)
   *((volatile uint32_t *) 0x50900a28) = 0x0000080f; // Layer control 2
   *((volatile uint32_t *) 0x50900628) = 0x27602858; // Mask offset and count
   *((volatile uint32_t *) 0x50900128) = 0x00000100; // 1D
-  *((volatile uint32_t *) 0x509007a8) = 0x00024000; // Post processing register
+  *((volatile uint32_t *) 0x509007a8) = 0x00022000; // Post processing register
 
   // Layer 6 group 3
   *((volatile uint32_t *) 0x50d00328) = 0x00000400; // SRAM write ptr
@@ -712,7 +712,7 @@ int cnn_configure(void)
   *((volatile uint32_t *) 0x50d00a28) = 0x0000080f; // Layer control 2
   *((volatile uint32_t *) 0x50d00628) = 0x27602858; // Mask offset and count
   *((volatile uint32_t *) 0x50d00128) = 0x00000100; // 1D
-  *((volatile uint32_t *) 0x50d007a8) = 0x00024000; // Post processing register
+  *((volatile uint32_t *) 0x50d007a8) = 0x00022000; // Post processing register
 
 
   return CNN_OK;

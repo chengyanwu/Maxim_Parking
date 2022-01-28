@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*
+/* 
  * Portions Copyright (C) 2020 Maxim Integrated Products, Inc.
  */
 
@@ -121,6 +121,7 @@ void softmax_q17p14_q15(const q31_t * vec_in, const uint16_t dim_vec, q15_t * p_
             	out = 32767;
 
             p_out[i] = (q15_t)out;
+
 
         } else
         {

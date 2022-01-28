@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/car_detection/build/sccb.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo/build/sccb.o: \
  c:\maximsdk\libraries\boards\max78000\source\sccb.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdio.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
@@ -32,12 +32,11 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/ca
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdint.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdint.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\_intsup.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
  c:\maximsdk\libraries\boards\max78000\include\sccb.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
  c:/MaximSDK/Libraries/CMSIS/Include/core_cm4.h \

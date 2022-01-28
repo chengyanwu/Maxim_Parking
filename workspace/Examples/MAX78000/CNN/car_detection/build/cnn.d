@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/car_detection/build/cnn.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo/build/cnn.o: \
  cnn.c c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdlib.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\machine\ieeefp.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
@@ -57,15 +57,16 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/ca
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/lpgcr_regs.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gcr_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/nvic_table.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
  c:\maximsdk\libraries\boards\max78000\include\led.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  c:\maximsdk\libraries\boards\max78000\include\pb.h \
- c:\maximsdk\libraries\boards\max78000\include\tft_fthr.h \
+ c:\maximsdk\libraries\boards\max78000\include\tft.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/spi.h \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdbool.h \
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
+ c:\maximsdk\libraries\boards\max78000\include\touchscreen.h \
  c:\maximsdk\libraries\boards\max78000\include\touchscreen.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/adc.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/adc_regs.h \
