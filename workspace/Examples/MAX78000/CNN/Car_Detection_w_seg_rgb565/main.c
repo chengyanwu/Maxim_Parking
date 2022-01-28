@@ -162,7 +162,7 @@ void TFT_Print(char* str, int x, int y, int font, int length)
 
 #define X_OFFSET    10
 #define Y_OFFSET    15
-#define SCALE       2.2
+#define SCALE       1
 
 /* **************************************************************************** */
 void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int length, int inputNum)
@@ -191,23 +191,33 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
     for (j = 0; j < 4; j++) {
       r = ptr0[j];
       g = ptr1[j];
-      b = ptr2[j];        
+      b = ptr2[j];
 #ifdef BOARD_EVKIT_V1
       color  = (0x01000100 | ((b & 0xF8) << 13) | ((g & 0x1C) << 19) | ((g & 0xE0) >> 5) | (r & 0xF8));
 #endif
 #ifdef BOARD_FTHR_REVA
             color = RGB(r, g, b); // convert to RGB565
 #endif
-      MXC_TFT_WritePixel(x * scale + 160*inputNum, y * scale, scale, scale, color);
-      x += 1;
-
-            if (x >= (64 + X_OFFSET)) {
-                x = X_OFFSET;
-        y += 1;
-
-                if ((y + 6) >= (64 + Y_OFFSET)) {
-                    return;
-                }
+      if(inputNum < 2){
+        MXC_TFT_WritePixel(x * scale + 160*inputNum, y * scale, scale, scale, color);
+        x += 1;
+        if (x >= (64 + X_OFFSET)) {
+          x = X_OFFSET;
+          y += 1;
+          if ((y + 6) >= (64 + Y_OFFSET)) {
+              return;
+          }
+        }
+      }else{
+        MXC_TFT_WritePixel(x * scale + 160*(inputNum-2), y * scale + 110, scale, scale, color);
+        x += 1;
+        if (x >= (64 + X_OFFSET)) {
+          x = X_OFFSET;
+          y += 1;
+          if ((y + 6) >= (64 + Y_OFFSET)) {
+              return;
+          }
+        }
       }
     }
   }
@@ -442,13 +452,13 @@ int main(void)
 
   int frame = 0;
 
-  while (1) 
+  while (1)
   {
     printf("********** Press PB1 to capture an image **********\r\n");
     while(!PB_Get(0));
     int inputNum = 0;
 
-    // Capture a single camera frame. 
+    // Capture a single camera frame.
     printf("\nCapture a camera frame %d\n", ++frame);
             capture_camera_img();
             camera_get_image(&frame_buffer, &imgLen, &w, &h);
@@ -517,19 +527,34 @@ int main(void)
           // }
 
 #ifdef TFT_ENABLE
-
-    if (result[0] > result[1]) {
-            TFT_Print(buff, 10 + inputNum*180, 150, font_1, sprintf(buff, "Car Detected"));
-            TFT_Print(buff, 10 + inputNum*180, 180, font_1, sprintf(buff, "%d%%", result[0]));
-        }
-        else if (result[1] > result[0]) {
-            TFT_Print(buff, 10 + inputNum*180, 150, font_1, sprintf(buff, "No Car"));
-            TFT_Print(buff, 10 + inputNum*180, 180, font_1, sprintf(buff, "%d%%", result[1]));
-        }
-        else {
-            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Unknown"));
-      memset(buff,32,TFT_BUFF_SIZE);
-            TFT_Print(buff, 10, 180, font_1, sprintf(buff, "NA"));
+    if(inputNum < 2){
+      if (result[0] > result[1]) {
+              TFT_Print(buff, 10 + inputNum*180, 80, font_1, sprintf(buff, "YES"));
+              TFT_Print(buff, 10 + inputNum*180, 100, font_1, sprintf(buff, "%d%%", result[0]));
+          }
+          else if (result[1] > result[0]) {
+              TFT_Print(buff, 10 + inputNum*180, 80, font_1, sprintf(buff, "No"));
+              TFT_Print(buff, 10 + inputNum*180, 100, font_1, sprintf(buff, "%d%%", result[1]));
+          }
+          else {
+              TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Unknown"));
+        memset(buff,32,TFT_BUFF_SIZE);
+              TFT_Print(buff, 10, 180, font_1, sprintf(buff, "NA"));
+      }
+    }else{
+      if (result[0] > result[1]) {
+              TFT_Print(buff, 10 + (inputNum-2)*180, 180, font_1, sprintf(buff, "YES"));
+              TFT_Print(buff, 10 + (inputNum-2)*180, 210, font_1, sprintf(buff, "%d%%", result[0]));
+          }
+          else if (result[1] > result[0]) {
+              TFT_Print(buff, 10 + (inputNum-2)*180, 180, font_1, sprintf(buff, "NO"));
+              TFT_Print(buff, 10 + (inputNum-2)*180, 210, font_1, sprintf(buff, "%d%%", result[1]));
+          }
+          else {
+              TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Unknown"));
+        memset(buff,32,TFT_BUFF_SIZE);
+              TFT_Print(buff, 10, 180, font_1, sprintf(buff, "NA"));
+      }
     }
 #endif
       inputNum++;
@@ -538,3 +563,4 @@ int main(void)
 
   return 0;
 }
+
