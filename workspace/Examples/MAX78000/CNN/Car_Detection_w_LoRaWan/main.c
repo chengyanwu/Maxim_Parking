@@ -116,9 +116,6 @@ void readCallback(mxc_uart_req_t* req, int error)
     READ_FLAG = error;
 }
 
-char TxData1[] = "Car Detected!";
-char TxData2[] = "Car Not Detected!";
-
 void fail(void)
 {
   printf("\n*** FAIL ***\n\n");
@@ -450,27 +447,27 @@ int main(void){
 
     convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
 
-        // Enable CNN clock
-        MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
+    // Enable CNN clock
+    MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
 
-        cnn_init(); // Bring state machine into consistent state
-        //cnn_load_weights(); // No need to reload kernels
-        //cnn_load_bias(); // No need to reload bias
-        cnn_configure(); // Configure state machine
+    cnn_init(); // Bring state machine into consistent state
+    //cnn_load_weights(); // No need to reload kernels
+    //cnn_load_bias(); // No need to reload bias
+    cnn_configure(); // Configure state machine
 
-        cnn_load_input();
-        cnn_start();
+    cnn_load_input();
+    cnn_start();
 
-        while (cnn_time == 0) {
-            __WFI();    // Wait for CNN interrupt
-        }
+    while (cnn_time == 0) {
+        __WFI();    // Wait for CNN interrupt
+    }
 
-        // Unload CNN data
-        softmax_layer();
+    // Unload CNN data
+    softmax_layer();
 
-        cnn_stop();
-        // Disable CNN clock to save power
-        MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
+    cnn_stop();
+    // Disable CNN clock to save power
+    MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
 
     printf("Time for CNN: %d us\n\n", cnn_time);
 
@@ -512,6 +509,7 @@ int main(void){
 
     int error, i, fail = 0;
     uint8_t RxData[BUFF_SIZE];
+    char TxData[] = "Car";
 
     printf("\n\n**************** UART Example ******************\n");
     printf("This example sends data from one UART to another.\n");
@@ -551,18 +549,10 @@ int main(void){
 
     mxc_uart_req_t write_req;
     write_req.uart = MXC_UART_GET_UART(WRITING_UART);
-    write_req.txData = TxData1;
+    write_req.txData = TxData;
     write_req.txLen = BUFF_SIZE;
     write_req.rxLen = 0;
     write_req.callback = NULL;
-
-    mxc_uart_req_t write_req2;
-    write_req.uart = MXC_UART_GET_UART(WRITING_UART);
-    write_req.txData = TxData2;
-    write_req.txLen = BUFF_SIZE;
-    write_req.rxLen = 0;
-    write_req.callback = NULL;
-    
 
     READ_FLAG = 1;
     DMA_FLAG = 1;
@@ -599,7 +589,7 @@ if (error != E_NO_ERROR) {
     
 #else
     
-    printf(TxData1);
+    printf(TxData);
 
     while (READ_FLAG);
     
@@ -611,7 +601,7 @@ if (error != E_NO_ERROR) {
 	#endif
 
 
-    if ((error = memcmp(RxData, TxData1, BUFF_SIZE)) != 0) {
+    if ((error = memcmp(RxData, TxData, BUFF_SIZE)) != 0) {
         printf("-->Error verifying Data: %d\n", error);
         fail++;
     }
