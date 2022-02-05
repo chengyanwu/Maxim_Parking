@@ -51,7 +51,11 @@ COMPILER=GCC
 
 # Specify the board used
 ifeq "$(BOARD)" ""
+<<<<<<< HEAD
 # BOARD=EvKit_V1
+=======
+#BOARD=EvKit_V1
+>>>>>>> 1c935f2eb1ac9dec3064a47097f8c93673f92095
 BOARD=FTHR_RevA
 endif
 

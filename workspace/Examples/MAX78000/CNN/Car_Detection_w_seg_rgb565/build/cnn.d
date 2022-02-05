@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo_w_segmenting/build/cnn.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/cnn.o: \
  cnn.c c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdlib.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\machine\ieeefp.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
