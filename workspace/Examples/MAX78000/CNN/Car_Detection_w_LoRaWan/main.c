@@ -518,15 +518,21 @@ int main(void){
     printf("\n-->UART Baud \t: %d Hz\n", UART_BAUD);
     printf("\n-->Test Length \t: %d bytes\n", BUFF_SIZE);
 
-    memset(RxData, 0x0, BUFF_SIZE);
-    NVIC_ClearPendingIRQ(MXC_UART_GET_IRQ(READING_UART));
-    NVIC_DisableIRQ(MXC_UART_GET_IRQ(READING_UART));
-    NVIC_SetVector(MXC_UART_GET_IRQ(READING_UART), UART_Handler);
-    NVIC_EnableIRQ(MXC_UART_GET_IRQ(READING_UART));
+    // memset(RxData, 0x0, BUFF_SIZE);
+    // NVIC_ClearPendingIRQ(MXC_UART_GET_IRQ(READING_UART));
+    // NVIC_DisableIRQ(MXC_UART_GET_IRQ(READING_UART));
+    // NVIC_SetVector(MXC_UART_GET_IRQ(READING_UART), UART_Handler);
+    // NVIC_EnableIRQ(MXC_UART_GET_IRQ(READING_UART));
 
 
     // Initialize the UART
-    if((error = MXC_UART_Init(MXC_UART_GET_UART(READING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
+    // if((error = MXC_UART_Init(MXC_UART_GET_UART(READING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
+    //     printf("-->Error initializing UART: %d\n", error);
+    //     printf("-->Example Failed\n");
+    //     while (1) {}
+    // }
+
+    if((error = MXC_UART_Init(MXC_UART_GET_UART(WRITING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
         printf("-->Error initializing UART: %d\n", error);
         printf("-->Example Failed\n");
         while (1) {}
@@ -535,14 +541,6 @@ int main(void){
     printf("-->UART Initialized test 5\n\n");
 
     printf("break.5");
-    
-    mxc_uart_req_t read_req;
-
-    read_req.uart = MXC_UART_GET_UART(READING_UART);
-    read_req.rxData = RxData;
-    read_req.rxLen = BUFF_SIZE;
-    read_req.txLen = 0;
-    read_req.callback = readCallback;
     
     printf("break0");
 
@@ -553,33 +551,13 @@ int main(void){
     write_req.txLen = BUFF_SIZE;
     write_req.rxLen = 0;
     write_req.callback = NULL;
-
-    READ_FLAG = 1;
-    DMA_FLAG = 1;
-
-    printf("break1");
-
-    MXC_UART_ClearRXFIFO(MXC_UART_GET_UART(READING_UART));
-
-#ifdef DMA
-      error = MXC_UART_TransactionDMA(&read_req);
-#else
-    error = MXC_UART_TransactionAsync(&read_req);
-#endif
-if (error != E_NO_ERROR) {
-        printf("-->Error starting async read: %d\n", error);
-        printf("-->Example Failed\n");
-        while (1) {}
-    }
-
     
-    error = MXC_UART_Transaction(&write_req);
-    
-    if (error != E_NO_ERROR) {
-        printf("-->Error starting sync write: %d\n", error);
-        printf("-->Example Failed\n");
-        while (1) {}
-    }
+    // error = MXC_UART_Transaction(&write_req);
+    // if (error != E_NO_ERROR) {
+    //     printf("-->Error starting sync write: %d\n", error);
+    //     printf("-->Example Failed\n");
+    //     while (1) {}
+    // }
     
 //    printf("break3");
 
@@ -590,40 +568,36 @@ if (error != E_NO_ERROR) {
 #else
     
     printf(TxData);
-
-    while (READ_FLAG);
-    
-    if (READ_FLAG != E_NO_ERROR) {
-        printf("-->Error with UART_ReadAsync callback; %d\n", READ_FLAG);
-        fail++;
-    }
     
 	#endif
 
 
-    if ((error = memcmp(RxData, TxData, BUFF_SIZE)) != 0) {
-        printf("-->Error verifying Data: %d\n", error);
-        fail++;
-    }
-    else {
-        printf("-->Data verified\n");
-    }
+    // if ((error = memcmp(RxData, TxData, BUFF_SIZE)) != 0) {
+    //     printf("-->Error verifying Data: %d\n", error);
+    //     fail++;
+    // }
+    // else {
+    //     printf("-->Data verified\n");
+    // }
     
-    printf("\n");
+    // printf("\n");
     
-    if (fail == 0) {
-        LED_On(LED1);
-        printf("-->EXAMPLE SUCCEEDED\n");
-    }
-    else {
-        printf("-->EXAMPLE FAILED\n");
-    }
+    // if (fail == 0) {
+    //     LED_On(LED1);
+    //     printf("-->EXAMPLE SUCCEEDED\n");
+    // }
+    // else {
+    //     printf("-->EXAMPLE FAILED\n");
+    // }
     
     int wait;
     while (1) {
+      
+      // LED_ON(LED1);
     	MXC_UART_Transaction(&write_req);
     	printf("->10s");
-    	MXC_Delay(10000000);
+    	MXC_Delay(2000000);
+      // LED_OFF(LED1);
     }
 
   }
