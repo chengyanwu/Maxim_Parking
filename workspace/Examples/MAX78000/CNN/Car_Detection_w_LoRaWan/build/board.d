@@ -1,5 +1,5 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo/build/board.o: \
- c:/MaximSDK/Libraries/Boards/MAX78000/EvKit_V1/Source/board.c \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaWan/build/board.o: \
+ c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Source/board.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdio.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\newlib.h \
@@ -48,7 +48,8 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/ca
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/lpgcr_regs.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gcr_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/uart.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h \
@@ -56,4 +57,7 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/ca
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
  c:\maximsdk\libraries\boards\max78000\include\led.h \
  c:\maximsdk\libraries\boards\max78000\include\pb.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/simo_regs.h
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/simo_regs.h \
+ c:\maximsdk\libraries\boards\max78000\include\max20303.h \
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/i2c_regs.h \
+ c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h

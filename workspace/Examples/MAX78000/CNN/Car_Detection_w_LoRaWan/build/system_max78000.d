@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo/build/system_max78000.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaWan/build/system_max78000.o: \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Source/system_max78000.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\string.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \

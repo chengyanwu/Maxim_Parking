@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo_w_segmenting/build/camera.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/camera.o: \
  c:\maximsdk\libraries\boards\max78000\source\camera.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdlib.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\machine\ieeefp.h \

@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo_w_segmenting/build/stdio.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/stdio.o: \
  c:\maximsdk\libraries\boards\max78000\source\stdio.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\errno.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\reent.h \
