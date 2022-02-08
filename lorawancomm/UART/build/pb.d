@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/lorawancomm/UART/build/pb.o: \
+c:/Users/izack/Downloads/Examples/MAX78000/UART/build/pb.o: \
  c:\maximsdk\libraries\boards\max78000\source\pb.c \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stddef.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \

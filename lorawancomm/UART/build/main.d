@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/lorawancomm/UART/build/main.o: \
+c:/Users/izack/OneDrive/Documents/Maxim_Parking/lorawan_comm/UART/build/main.o: \
  main.c c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdio.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\newlib.h \

@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/lorawancomm/UART/build/led.o: \
+c:/Users/izack/Downloads/Examples/MAX78000/UART/build/led.o: \
  c:\maximsdk\libraries\boards\max78000\source\led.c \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
@@ -20,7 +20,7 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/lorawancomm/UART/build/led.o: \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
  c:\maximsdk\libraries\boards\max78000\include\led.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdio.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\newlib.h \
@@ -46,5 +46,4 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/lorawancomm/UART/build/led.o: \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\sched.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\machine\types.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\stdio.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h

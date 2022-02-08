@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/lorawancomm/UART/build/system_max78000.o: \
+c:/Users/izack/Downloads/Examples/MAX78000/UART/build/system_max78000.o: \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Source/system_max78000.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\string.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
