@@ -105,7 +105,9 @@ int main(void)
 //    for (i = 0; i < BUFF_SIZE; i++) {
 //        TxData[i] = i+1;
 //    }
-    char TxData [24]= "Hello From Feather Board !!\n";
+    // char TxData [24]= "Hello From Feather Board !!\n";
+    const char* TxData;
+    TxData = "Hello From Feather Board !!\n";
     memset(RxData, 0x0, BUFF_SIZE);
     
 //#ifdef DMA
