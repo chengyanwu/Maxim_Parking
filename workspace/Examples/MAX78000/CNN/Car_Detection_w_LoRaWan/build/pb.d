@@ -1,24 +1,24 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaWan/build/pb.o: \
- c:\maximsdk\libraries\boards\max78000\source\pb.c \
- c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stddef.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
- c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdint.h \
- c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdint.h \
- c:\maximsdk\tools\gnutools\arm-none-eabi\include\machine\_default_types.h \
- c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\features.h \
- c:\maximsdk\tools\gnutools\arm-none-eabi\include\_newlib_version.h \
- c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\_intsup.h \
- c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\_stdint.h \
- c:/MaximSDK/Libraries/CMSIS/Include/core_cm4.h \
- c:/MaximSDK/Libraries/CMSIS/Include/core_cmInstr.h \
- c:/MaximSDK/Libraries/CMSIS/Include/core_cmFunc.h \
- c:/MaximSDK/Libraries/CMSIS/Include/core_cm4_simd.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/system_max78000.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_errors.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- c:\maximsdk\libraries\boards\max78000\include\pb.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaWan/build/pb.o: \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/pb.c \
+ /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
+ /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+ /Applications/ARM/arm-none-eabi/include/stdint.h \
+ /Applications/ARM/arm-none-eabi/include/machine/_default_types.h \
+ /Applications/ARM/arm-none-eabi/include/sys/features.h \
+ /Applications/ARM/arm-none-eabi/include/_newlib_version.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_intsup.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_stdint.h \
+ ../../../../Libraries/CMSIS/Include/core_cm4.h \
+ ../../../../Libraries/CMSIS/Include/core_cmInstr.h \
+ ../../../../Libraries/CMSIS/Include/core_cmFunc.h \
+ ../../../../Libraries/CMSIS/Include/core_cm4_simd.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/system_max78000.h \
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_errors.h \
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/pb.h \
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h
