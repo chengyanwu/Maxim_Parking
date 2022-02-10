@@ -70,7 +70,7 @@
 
 #define TFT_BUFF_SIZE   30    // TFT buffer size
 
-#define UART_BAUD           115200
+#define UART_BAUD           2400
 #define BUFF_SIZE           1024
 
 /***** Globals *****/
@@ -412,10 +412,11 @@ int main(void){
 #endif
 
   int frame = 0;
-
   while (1) {
-    printf("********** Press PB1 to capture an image **********\r\n");
-    while(!PB_Get(0));
+    // printf("********** Press PB1 to capture an image **********\r\n");
+    // while(!PB_Get(0));
+    MXC_Delay(SEC(2));
+    LED_On(LED1);
 
 #ifdef TFT_ENABLE
     MXC_TFT_ClearScreen();
@@ -482,6 +483,7 @@ int main(void){
     }
     printf("\n");
 
+    const char *TxData;
 #ifdef TFT_ENABLE
     // memset(buff,32,TFT_BUFF_SIZE);
         // TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
@@ -491,29 +493,30 @@ int main(void){
 
     if (result[0] > result[1]) {
 
-            TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
-            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
-        }
-    else if (result[1] > result[0]) {
-        TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
-        TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
+      TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
+      TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
+      TxData = "Car Detected!\n";
     }
-    else {
-            TFT_Print(buff, 195, 150, font_1, sprintf(buff, "Unknown"));
-      memset(buff,32,TFT_BUFF_SIZE);
-            TFT_Print(buff, 135, 180, font_1, sprintf(buff, "NA"));
+    else{
+      TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
+      TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
+      TxData = "Car Not Detected!\n";
     }
 
-        TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
+    TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
+#else
+    if (result[0] > result[1]) {
+      TxData = "Car Detected!\n";
+    }
+    else{
+      TxData = "Car Not Detected!\n";
+    }
+
 #endif
 
     int error, i, fail = 0;
-    uint8_t RxData[BUFF_SIZE];
-    char TxData[] = "Car";
 
-    printf("\n\n**************** UART Example ******************\n");
-    printf("This example sends data from one UART to another.\n");
-    printf("\nConnect the TX pin of UART%d to the RX pin of UART%d for this example.\n", WRITING_UART, READING_UART);
+    printf("\nSending Detection Result to LoRa Module\n", WRITING_UART, READING_UART);
     
     printf("\n-->UART Baud \t: %d Hz\n", UART_BAUD);
     printf("\n-->Test Length \t: %d bytes\n", BUFF_SIZE);
@@ -531,7 +534,6 @@ int main(void){
     //     printf("-->Example Failed\n");
     //     while (1) {}
     // }
-
     if((error = MXC_UART_Init(MXC_UART_GET_UART(WRITING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
         printf("-->Error initializing UART: %d\n", error);
         printf("-->Example Failed\n");
@@ -543,7 +545,6 @@ int main(void){
     printf("break.5");
     
     printf("break0");
-
 
     mxc_uart_req_t write_req;
     write_req.uart = MXC_UART_GET_UART(WRITING_UART);
@@ -560,17 +561,8 @@ int main(void){
     // }
     
 //    printf("break3");
-
-#ifdef DMA
-    
-    while (DMA_FLAG);
-    
-#else
     
     printf(TxData);
-    
-	#endif
-
 
     // if ((error = memcmp(RxData, TxData, BUFF_SIZE)) != 0) {
     //     printf("-->Error verifying Data: %d\n", error);
@@ -588,17 +580,10 @@ int main(void){
     // }
     // else {
     //     printf("-->EXAMPLE FAILED\n");
-    // }
-    
-    int wait;
-    while (1) {
-      
-      // LED_ON(LED1);
-    	MXC_UART_Transaction(&write_req);
-    	printf("->10s");
-    	MXC_Delay(2000000);
-      // LED_OFF(LED1);
-    }
+    // } 
+    // LED_Off(LED1);
+    MXC_UART_Transaction(&write_req);
+    LED_Off(LED1);
 
   }
 
