@@ -77,8 +77,8 @@
 volatile int READ_FLAG;
 volatile int DMA_FLAG;
 
-#define READING_UART        2
-#define WRITING_UART        3
+// #define READING_UART        2
+#define WRITING_UART        2
 // #define DMA
 
 #ifdef BOARD_EVKIT_V1
@@ -106,10 +106,10 @@ void DMA_Handler(void)
     MXC_DMA_Handler();
     DMA_FLAG = 0;
 }
-void UART_Handler(void)
-{
-    MXC_UART_AsyncHandler(MXC_UART_GET_UART(READING_UART));
-}
+// void UART_Handler(void)
+// {
+//     MXC_UART_AsyncHandler(MXC_UART_GET_UART(READING_UART));
+// }
 
 void readCallback(mxc_uart_req_t* req, int error)
 {
@@ -329,8 +329,11 @@ int main(void){
   int i;
   int digs, tens;
   int ret = 0;
-    int result[CNN_NUM_OUTPUTS];// = {0};
-    int dma_channel;
+  int result[CNN_NUM_OUTPUTS];// = {0};
+  int dma_channel;
+
+  const char *TxData;
+
 #ifdef TFT_ENABLE
   char buff[TFT_BUFF_SIZE];
 #endif
@@ -482,8 +485,11 @@ int main(void){
             printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], result[i], tens);
     }
     printf("\n");
+    // char TxData[24] = "Hello From FeatherBoard!!!\n";
+    // int ind = 0;
+    
 
-    const char *TxData;
+    memset(TxData, 0, 30);
 #ifdef TFT_ENABLE
     // memset(buff,32,TFT_BUFF_SIZE);
         // TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
@@ -507,6 +513,7 @@ int main(void){
 #else
     if (result[0] > result[1]) {
       TxData = "Car Detected!\n";
+      
     }
     else{
       TxData = "Car Not Detected!\n";
@@ -516,7 +523,7 @@ int main(void){
 
     int error, i, fail = 0;
 
-    printf("\nSending Detection Result to LoRa Module\n", WRITING_UART, READING_UART);
+    // printf("\nSending Detection Result to LoRa Module\n", WRITING_UART, READING_UART);
     
     printf("\n-->UART Baud \t: %d Hz\n", UART_BAUD);
     printf("\n-->Test Length \t: %d bytes\n", BUFF_SIZE);
