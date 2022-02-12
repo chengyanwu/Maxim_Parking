@@ -60,8 +60,7 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Ca
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/lpgcr_regs.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gcr_regs.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/uart.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h

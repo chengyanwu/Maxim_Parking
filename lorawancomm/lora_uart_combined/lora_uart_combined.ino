@@ -2,7 +2,7 @@
 #include <hal/hal.h>
 #include <SPI.h>
 
-int baud_rate = 9600;
+int baud_rate = 2400;
 
 // LoRaWAN NwkSKey, network session key
 //static const PROGMEM u1_t NWKSKEY[16] = { 0x82, 0xDE, 0xD9, 0x1D, 0x69, 0x58, 0xF3, 0x66, 0xBA, 0x3A, 0x8E, 0x15, 0x77, 0xA7, 0xAB, 0xD8 };  
@@ -110,7 +110,7 @@ static uint8_t placeholder[] = "No Data from UART";
 //String rx_str;
 
 char rx_str[24];
-byte rx_data[24]; 
+byte rx_data[64]; 
 int rx_len;
 
 void do_send(osjob_t* j){
@@ -120,18 +120,22 @@ void do_send(osjob_t* j){
     }
     else{
           if (Serial1.available() > 0) {
-            memset(rx_data, 0, sizeof(rx_data));
+            memset(rx_data, 0, 64);
+            delay(200);
             //            rx_str = Serial1.readString();
             //            SerialUSB.println(rx_str);
-            rx_len = Serial1.readBytesUntil(byte(atoi("!")), rx_data, 24);
+            //rx_len = Serial1.readBytesUntil(byte(atoi("!")), rx_data, 17);
+            Serial1.readBytes(rx_data, 64);
             //      rx_len = Serial1.readBytesUntil(byte(atoi("d")), rx_data, 40);
       //      rx_len = Serial1.readBytes(rx_data, 24);
-            SerialUSB.println("Recieved from UART");
-            SerialUSB.println("Message Recieved:");
-            SerialUSB.write(rx_data, rx_len);
-            delay(1);
-            //            SerialUSB.println(rx_data);
+            SerialUSB.println("Message Recieved from UART:");
+            SerialUSB.println("-----------------------");
+            //SerialUSB.write(rx_data, rx_len);
+            SerialUSB.println((char*)rx_data);
+            SerialUSB.println("-----------------------");
             LMIC_setTxData2(1, (uint8_t*)rx_data, rx_len, 0);
+            while(Serial1.read()>=0){}
+            delay(200);
             Serial1.flush();
           }
           else {

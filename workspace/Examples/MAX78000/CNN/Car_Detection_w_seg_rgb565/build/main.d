@@ -58,8 +58,7 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Ca
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/icc_regs.h \
  c:\maximsdk\libraries\boards\max78000\include\led.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/tmr.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/tmr_regs.h \
@@ -71,7 +70,9 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Ca
  c:\maximsdk\libraries\boards\max78000\include\pb.h cnn.h weights.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
  c:\maximsdk\libraries\boards\max78000\include\camera.h \
- c:\maximsdk\libraries\boards\max78000\include\tft_fthr.h \
+ TFT/evkit/bitmap.h c:\maximsdk\libraries\boards\max78000\include\tft.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/spi.h \
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h
+ c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h \
+ c:\maximsdk\libraries\boards\max78000\include\touchscreen.h

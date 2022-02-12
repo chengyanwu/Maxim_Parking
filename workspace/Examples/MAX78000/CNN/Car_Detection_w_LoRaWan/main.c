@@ -71,7 +71,7 @@
 #define TFT_BUFF_SIZE   30    // TFT buffer size
 
 #define UART_BAUD           2400
-#define BUFF_SIZE           1024
+#define BUFF_SIZE           17
 
 /***** Globals *****/
 volatile int READ_FLAG;
@@ -322,8 +322,27 @@ void convert_img_signed_to_unsigned(uint32_t* data0, uint32_t* data1, uint32_t* 
         *ptr2 = signed_to_unsigned(*ptr2);
         ptr2++;
   }
-}
+}/* **************************************************************************** */
+void send_through_UART(char* tx_data)
+{
+  int error, i, fail = 0;
 
+  if((error = MXC_UART_Init(MXC_UART_GET_UART(WRITING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
+        printf("-->Error initializing UART: %d\n", error);
+        printf("-->Example Failed\n");
+        while (1) {}
+    }
+
+  
+    mxc_uart_req_t write_req;
+    write_req.uart = MXC_UART_GET_UART(WRITING_UART);
+    write_req.txData = tx_data;
+    write_req.txLen = BUFF_SIZE;
+    write_req.rxLen = 0;
+    write_req.callback = NULL;
+
+    MXC_UART_Transaction(&write_req);
+}
 /* **************************************************************************** */
 int main(void){
   int i;
@@ -332,7 +351,7 @@ int main(void){
   int result[CNN_NUM_OUTPUTS];// = {0};
   int dma_channel;
 
-  const char *TxData;
+  //const char *TxData;
 
 #ifdef TFT_ENABLE
   char buff[TFT_BUFF_SIZE];
@@ -485,11 +504,9 @@ int main(void){
             printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], result[i], tens);
     }
     printf("\n");
-    // char TxData[24] = "Hello From FeatherBoard!!!\n";
-    // int ind = 0;
     
+    char TxData[17];
 
-    memset(TxData, 0, 30);
 #ifdef TFT_ENABLE
     // memset(buff,32,TFT_BUFF_SIZE);
         // TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Image Detected : "));
@@ -501,95 +518,33 @@ int main(void){
 
       TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
       TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
-      TxData = "Car Detected!\n";
+      TxData = "Car Detected!";
     }
     else{
       TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
       TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
-      TxData = "Car Not Detected!\n";
+      TxData = "Car Not Detected!";
     }
 
     TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
 #else
     if (result[0] > result[1]) {
-      TxData = "Car Detected!\n";
+      strcpy(TxData, "Car is Detected!");
       
     }
     else{
-      TxData = "Car Not Detected!\n";
+      strcpy(TxData,"Car Not Detected!");
     }
 
 #endif
 
-    int error, i, fail = 0;
-
-    // printf("\nSending Detection Result to LoRa Module\n", WRITING_UART, READING_UART);
-    
-    printf("\n-->UART Baud \t: %d Hz\n", UART_BAUD);
-    printf("\n-->Test Length \t: %d bytes\n", BUFF_SIZE);
-
-    // memset(RxData, 0x0, BUFF_SIZE);
-    // NVIC_ClearPendingIRQ(MXC_UART_GET_IRQ(READING_UART));
-    // NVIC_DisableIRQ(MXC_UART_GET_IRQ(READING_UART));
-    // NVIC_SetVector(MXC_UART_GET_IRQ(READING_UART), UART_Handler);
-    // NVIC_EnableIRQ(MXC_UART_GET_IRQ(READING_UART));
-
-
-    // Initialize the UART
-    // if((error = MXC_UART_Init(MXC_UART_GET_UART(READING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
-    //     printf("-->Error initializing UART: %d\n", error);
-    //     printf("-->Example Failed\n");
-    //     while (1) {}
-    // }
-    if((error = MXC_UART_Init(MXC_UART_GET_UART(WRITING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
-        printf("-->Error initializing UART: %d\n", error);
-        printf("-->Example Failed\n");
-        while (1) {}
-    }
-    
-    printf("-->UART Initialized test 5\n\n");
-
-    printf("break.5");
-    
-    printf("break0");
-
-    mxc_uart_req_t write_req;
-    write_req.uart = MXC_UART_GET_UART(WRITING_UART);
-    write_req.txData = TxData;
-    write_req.txLen = BUFF_SIZE;
-    write_req.rxLen = 0;
-    write_req.callback = NULL;
-    
-    // error = MXC_UART_Transaction(&write_req);
-    // if (error != E_NO_ERROR) {
-    //     printf("-->Error starting sync write: %d\n", error);
-    //     printf("-->Example Failed\n");
-    //     while (1) {}
-    // }
-    
-//    printf("break3");
     
     printf(TxData);
 
-    // if ((error = memcmp(RxData, TxData, BUFF_SIZE)) != 0) {
-    //     printf("-->Error verifying Data: %d\n", error);
-    //     fail++;
-    // }
-    // else {
-    //     printf("-->Data verified\n");
-    // }
-    
-    // printf("\n");
-    
-    // if (fail == 0) {
-    //     LED_On(LED1);
-    //     printf("-->EXAMPLE SUCCEEDED\n");
-    // }
-    // else {
-    //     printf("-->EXAMPLE FAILED\n");
-    // } 
-    // LED_Off(LED1);
-    MXC_UART_Transaction(&write_req);
+    printf("\n-->UART Baud \t: %d Hz\n", UART_BAUD);
+    printf("\n-->Test Length \t: %d bytes\n", BUFF_SIZE);
+
+    send_through_UART(TxData);
     LED_Off(LED1);
 
   }

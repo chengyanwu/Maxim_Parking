@@ -1,5 +1,5 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/tft_fthr.o: \
- c:\maximsdk\libraries\boards\max78000\source\tft_fthr.c \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/touchscreen.o: \
+ c:\maximsdk\libraries\boards\max78000\source\touchscreen.c \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stddef.h \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdint.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdint.h \
@@ -47,8 +47,7 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Ca
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
- c:\maximsdk\libraries\boards\max78000\include\tft_fthr.h \
+ c:\maximsdk\libraries\boards\max78000\include\touchscreen.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/spi.h \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdbool.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
