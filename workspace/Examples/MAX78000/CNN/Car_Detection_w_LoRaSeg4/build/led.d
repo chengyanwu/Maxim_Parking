@@ -1,14 +1,14 @@
-/Users/ianwu/Desktop/SpotOn/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/led.o: \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/led.o: \
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/led.c \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdint.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/features.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/_newlib_version.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_intsup.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h \
+ /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+ /Applications/ARM/arm-none-eabi/include/stdint.h \
+ /Applications/ARM/arm-none-eabi/include/machine/_default_types.h \
+ /Applications/ARM/arm-none-eabi/include/sys/features.h \
+ /Applications/ARM/arm-none-eabi/include/_newlib_version.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_intsup.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_stdint.h \
  ../../../../Libraries/CMSIS/Include/core_cm4.h \
  ../../../../Libraries/CMSIS/Include/core_cmInstr.h \
  ../../../../Libraries/CMSIS/Include/core_cmFunc.h \
@@ -21,30 +21,30 @@
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/led.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdio.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/_ansi.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/newlib.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/config.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/ieeefp.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/cdefs.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/reent.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/_ansi.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_types.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_types.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/lock.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/types.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/endian.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_endian.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/select.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_sigset.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_timeval.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/timespec.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_timespec.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_pthreadtypes.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/sched.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/types.h \
- /usr/local/gcc_arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/stdio.h \
+ /Applications/ARM/arm-none-eabi/include/stdio.h \
+ /Applications/ARM/arm-none-eabi/include/_ansi.h \
+ /Applications/ARM/arm-none-eabi/include/newlib.h \
+ /Applications/ARM/arm-none-eabi/include/sys/config.h \
+ /Applications/ARM/arm-none-eabi/include/machine/ieeefp.h \
+ /Applications/ARM/arm-none-eabi/include/sys/cdefs.h \
+ /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
+ /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
+ /Applications/ARM/arm-none-eabi/include/sys/reent.h \
+ /Applications/ARM/arm-none-eabi/include/_ansi.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_types.h \
+ /Applications/ARM/arm-none-eabi/include/machine/_types.h \
+ /Applications/ARM/arm-none-eabi/include/sys/lock.h \
+ /Applications/ARM/arm-none-eabi/include/sys/types.h \
+ /Applications/ARM/arm-none-eabi/include/machine/endian.h \
+ /Applications/ARM/arm-none-eabi/include/machine/_endian.h \
+ /Applications/ARM/arm-none-eabi/include/sys/select.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_sigset.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_timeval.h \
+ /Applications/ARM/arm-none-eabi/include/sys/timespec.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_timespec.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_pthreadtypes.h \
+ /Applications/ARM/arm-none-eabi/include/sys/sched.h \
+ /Applications/ARM/arm-none-eabi/include/machine/types.h \
+ /Applications/ARM/arm-none-eabi/include/sys/stdio.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h
