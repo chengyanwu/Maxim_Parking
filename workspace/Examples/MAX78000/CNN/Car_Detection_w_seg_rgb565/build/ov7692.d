@@ -1,5 +1,5 @@
-/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/sccb.o: \
- ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/sccb.c \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/ov7692.o: \
+ ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Source/ov7692.c \
  /Applications/ARM/arm-none-eabi/include/stdio.h \
  /Applications/ARM/arm-none-eabi/include/_ansi.h \
  /Applications/ARM/arm-none-eabi/include/newlib.h \
@@ -32,12 +32,20 @@
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /Applications/ARM/arm-none-eabi/include/stdint.h \
  /Applications/ARM/arm-none-eabi/include/sys/_intsup.h \
- ../../../../Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
- ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
- ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
- ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/sccb.h \
+ /Applications/ARM/arm-none-eabi/include/stdlib.h \
+ /Applications/ARM/arm-none-eabi/include/machine/stdlib.h \
+ /Applications/ARM/arm-none-eabi/include/alloca.h \
+ /Applications/ARM/arm-none-eabi/include/string.h \
+ /Applications/ARM/arm-none-eabi/include/sys/_locale.h \
+ /Applications/ARM/arm-none-eabi/include/strings.h \
+ /Applications/ARM/arm-none-eabi/include/sys/string.h \
+ /Applications/ARM/arm-none-eabi/include/math.h \
+ ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/camera.h \
+ ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/ov7692_regs.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/tmr_regs.h \
+ ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/sccb.h \
+ ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/ov7692_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
- ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
  ../../../../Libraries/CMSIS/Include/core_cm4.h \
@@ -47,4 +55,5 @@
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/system_max78000.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_errors.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
- ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h
