@@ -74,8 +74,13 @@
 volatile int READ_FLAG;
 volatile int DMA_FLAG;
 
-#define READING_UART        2
+#ifdef BOARD_EVKIT_V1
+#define READING_UART        1
 #define WRITING_UART        2
+#else
+#define READING_UART        1
+#define WRITING_UART        2
+#endif
 // #define DMA
 
 #ifdef BOARD_EVKIT_V1
@@ -176,7 +181,7 @@ void TFT_Print(char* str, int x, int y, int font, int length)
 
 #define X_OFFSET    10
 #define Y_OFFSET    15
-#define SCALE       1
+#define SCALE       1.9
 
 /* **************************************************************************** */
 void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int length, int inputNum)
@@ -213,7 +218,7 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
             color = RGB(r, g, b); // convert to RGB565
 #endif
       if(inputNum < 2){
-        MXC_TFT_WritePixel(x * scale + 160*inputNum, y * scale, scale, scale, color);
+        MXC_TFT_WritePixel(x * scale + 140*inputNum, y * scale, scale, scale, color);
         x += 1;
         if (x >= (64 + X_OFFSET)) {
           x = X_OFFSET;
@@ -223,7 +228,7 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
           }
         }
       }else{
-        MXC_TFT_WritePixel(x * scale + 160*(inputNum-2), y * scale + 110, scale, scale, color);
+        MXC_TFT_WritePixel(x * scale + 140*(inputNum-2), y * scale + 110, scale, scale, color);
         x += 1;
         if (x >= (64 + X_OFFSET)) {
           x = X_OFFSET;
@@ -457,8 +462,7 @@ int main(void)
 #ifdef BOARD_FTHR_REVA
     /* Initialize TFT display */
     MXC_TFT_Init(MXC_SPI0, 1, NULL, NULL);
-    MXC_TFT_SetRotation(ROTATE_270);
-    MXC_TFT_ShowImage(0, 0, image_bitmap_1);
+    MXC_TFT_SetRotation(ROTATE_180);
     MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
 #endif
     MXC_Delay(1000000);
@@ -483,21 +487,23 @@ int main(void)
   MXC_TFT_SetBackGroundColor(4);
   memset(buff,32,TFT_BUFF_SIZE);
   TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Car Detection Demo"));
-  TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
+  // TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
 #endif
 
   int frame = 0;
 
   while (1)
   {
-    printf("********** Press PB1 to capture an image **********\r\n");
-    while(!PB_Get(0));
+    // printf("********** Press PB1 to capture an image **********\r\n");
+    // while(!PB_Get(0));
+    // MXC_DELAY_SEC(4);
+    LED_On(LED_RED);
     int inputNum = 0;
     memset(TxData, 0, 64);
     // Capture a single camera frame.
     printf("\nCapture a camera frame %d\n", ++frame);
-            capture_camera_img();
-            camera_get_image(&frame_buffer, &imgLen, &w, &h);
+    capture_camera_img();
+    camera_get_image(&frame_buffer, &imgLen, &w, &h);
 
 #ifdef TFT_ENABLE
     MXC_TFT_ClearScreen();
@@ -505,116 +511,109 @@ int main(void)
 
     while(inputNum<4){
 
-          // Segment the image
-          segment_image(frame_buffer, imgLen, w, h, inputNum*58, 48, 64, imgBlock565, 565);
-          img565To888(imgBlock565, imgBlock888);
-          // Copy the image data to the CNN input arrays.
-          printf("Copy camera frame to CNN input buffers.\n");
-          process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
+    // Segment the image
+    segment_image(frame_buffer, imgLen, w, h, inputNum*58, 48, 64, imgBlock565, 565);
+    img565To888(imgBlock565, imgBlock888);
+    // Copy the image data to the CNN input arrays.
+    printf("Copy camera frame to CNN input buffers.\n");
+    process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
 
-      #ifdef TFT_ENABLE
-          printf("Show camera frame on LCD.\n");
-          lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024, inputNum);
+#ifdef TFT_ENABLE
+    printf("Show camera frame on LCD.\n");
+    lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024, inputNum);
           
-      #endif
+#endif
 
-          convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
+    convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
 
-              // Enable CNN clock
-              MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
+    // Enable CNN clock
+    MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
 
-              cnn_init(); // Bring state machine into consistent state
-              //cnn_load_weights(); // No need to reload kernels
-              //cnn_load_bias(); // No need to reload bias
-              cnn_configure(); // Configure state machine
+    cnn_init(); // Bring state machine into consistent state
+    //cnn_load_weights(); // No need to reload kernels
+    //cnn_load_bias(); // No need to reload bias
+    cnn_configure(); // Configure state machine
 
-              cnn_load_input();
-              cnn_start();
+    cnn_load_input();
+    cnn_start();
 
-              while (cnn_time == 0) {
-                  __WFI();    // Wait for CNN interrupt
-              }
+    while (cnn_time == 0) {
+        __WFI();    // Wait for CNN interrupt
+    }
 
-              // Unload CNN data
-              softmax_layer();
+    // Unload CNN data
+    softmax_layer();
 
-              cnn_stop();
-              // Disable CNN clock to save power
-              MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
+    cnn_stop();
+    // Disable CNN clock to save power
+    MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
 
-          printf("Time for CNN: %d us\n\n", cnn_time);
+    printf("Time for CNN: %d us\n\n", cnn_time);
 
-          printf("Classification results:\n");
+    printf("Classification results:\n");
 
-          for (i = 0; i < CNN_NUM_OUTPUTS; i++) {
-            digs = (1000 * ml_softmax[i] + 0x4000) >> 15;
-            tens = digs % 10;
-            digs = digs / 10;
-            result[i] = digs;
-            printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], result[i], tens);
-          }
-          printf("\n");
-          // if (result[0] > result[1]) {
-          //   detected[inputNum] = 0;
-          //   prabablity[inputNum] = result[0];
-          // } else{
-          //   detected[inputNum] = 1;
-          //   prabablity[inputNum] = result[1];
-          // }
-          if (result[0]>result[1])
-          {
-              char result[10];
-              sprintf(result, "Spot%d:%d, ", inputNum, 1);
-              strcat(TxData, result);
-          }
-          else
-          {
-              char result[10];
-              sprintf(result, "Spot%d:%d, ", inputNum, 0);
-              strcat(TxData, result);
-          }
+    for (i = 0; i < CNN_NUM_OUTPUTS; i++) {
+      digs = (1000 * ml_softmax[i] + 0x4000) >> 15;
+      tens = digs % 10;
+      digs = digs / 10;
+      result[i] = digs;
+      printf("[%7d] -> Class %d %8s: %d.%d%%\r\n", ml_data[i], i, classes[i], result[i], tens);
+    }
+    printf("\n");
+    // if (result[0] > result[1]) {
+    //   detected[inputNum] = 0;
+    //   prabablity[inputNum] = result[0];
+    // } else{
+    //   detected[inputNum] = 1;
+    //   prabablity[inputNum] = result[1];
+    // }
+    if (result[0]>result[1])
+    {
+        char result[10];
+        sprintf(result, "Spot%d:%d, ", inputNum+1, 1);
+        strcat(TxData, result);
+    }
+    else
+    {
+        char result[10];
+        sprintf(result, "Spot%d:%d, ", inputNum+1, 0);
+        strcat(TxData, result);
+    }
 
 #ifdef TFT_ENABLE
     if(inputNum < 2){
       if (result[0] > result[1]) {
-              TFT_Print(buff, 10 + inputNum*180, 80, font_1, sprintf(buff, "YES"));
-              TFT_Print(buff, 10 + inputNum*180, 100, font_1, sprintf(buff, "%d%%", result[0]));
+        TFT_Print(buff, 10 + inputNum*140, 80, font_1, sprintf(buff, "YES"));
+        TFT_Print(buff, 10 + inputNum*140, 100, font_1, sprintf(buff, "%d%%", result[0]));
 
-              //TxData = "Spot " + inputNum + " : Detected\n";
-          }
-          else if (result[1] > result[0]) {
-              TFT_Print(buff, 10 + inputNum*180, 80, font_1, sprintf(buff, "No"));
-              TFT_Print(buff, 10 + inputNum*180, 100, font_1, sprintf(buff, "%d%%", result[1]));
-              //TxData = "Spot " + inputNum + " : Not Detected\n";
-          }
-          else {
-              TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Unknown"));
-        memset(buff,32,TFT_BUFF_SIZE);
-              //TFT_Print(buff, 10, 180, font_1, sprintf(buff, "NA"));
+        //TxData = "Spot " + inputNum + " : Detected\n";
+      }
+      else{
+        TFT_Print(buff, 10 + inputNum*140, 80, font_1, sprintf(buff, "No"));
+        TFT_Print(buff, 10 + inputNum*140, 100, font_1, sprintf(buff, "%d%%", result[1]));
+        //TxData = "Spot " + inputNum + " : Not Detected\n";
       }
     }else{
       if (result[0] > result[1]) {
-              TFT_Print(buff, 10 + (inputNum-2)*180, 180, font_1, sprintf(buff, "YES"));
-              TFT_Print(buff, 10 + (inputNum-2)*180, 210, font_1, sprintf(buff, "%d%%", result[0]));
-              //TxData = "Spot " + inputNum + " : Detected\n";
-          }
-          else if (result[1] > result[0]) {
-              TFT_Print(buff, 10 + (inputNum-2)*180, 180, font_1, sprintf(buff, "NO"));
-              TFT_Print(buff, 10 + (inputNum-2)*180, 210, font_1, sprintf(buff, "%d%%", result[1]));
-              //TxData = "Spot " + inputNum + " : Not Detected\n";
-          }
-          else {
-              TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Unknown"));
-        memset(buff,32,TFT_BUFF_SIZE);
-              TFT_Print(buff, 10, 180, font_1, sprintf(buff, "NA"));
-      }
+        TFT_Print(buff, 10 + (inputNum-2)*140, 190, font_1, sprintf(buff, "YES"));
+        TFT_Print(buff, 10 + (inputNum-2)*140, 210, font_1, sprintf(buff, "%d%%", result[0]));
+        //TxData = "Spot " + inputNum + " : Detected\n";
+      }else{
+        TFT_Print(buff, 10 + (inputNum-2)*140, 190, font_1, sprintf(buff, "NO"));
+        TFT_Print(buff, 10 + (inputNum-2)*140, 210, font_1, sprintf(buff, "%d%%", result[1]));
+        //TxData = "Spot " + inputNum + " : Not Detected\n";
+        }
     }
+  
 #endif
       inputNum++;
     }
+    // MXC_DELAY_SEC(6);
     printf(TxData);
     printf("\n");
     send_through_UART(TxData);
+    LED_Off(LED_RED);
+    MXC_Delay(4000000);
   }
 
   return 0;

@@ -77,9 +77,14 @@
 volatile int READ_FLAG;
 volatile int DMA_FLAG;
 
-// #define READING_UART        2
+// #define WRITING_UART        2
+#ifdef BOARD_EVKIT_V1
+#define READING_UART        1
 #define WRITING_UART        2
-// #define DMA
+#else
+#define READING_UART        1
+#define WRITING_UART        2
+#endif
 
 #ifdef BOARD_EVKIT_V1
 int image_bitmap_1 = img_1_bmp;
@@ -259,6 +264,7 @@ void process_camera_img(uint32_t *data0, uint32_t *data1, uint32_t *data2)
   uint8_t *buffer;
 
 	camera_get_image(&frame_buffer, &imgLen, &w, &h);
+  
   ptr0 = (uint8_t *)data0;
   ptr1 = (uint8_t *)data1;
   ptr2 = (uint8_t *)data2;
@@ -328,20 +334,35 @@ void send_through_UART(char* tx_data)
   int error, i, fail = 0;
 
   if((error = MXC_UART_Init(MXC_UART_GET_UART(WRITING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
-        printf("-->Error initializing UART: %d\n", error);
-        printf("-->Example Failed\n");
-        while (1) {}
-    }
+    printf("-->Error initializing UART: %d\n", error);
+    printf("-->Example Failed\n");
+    while (1) {}
+  }
 
+  // if((error = MXC_UART_Init(MXC_UART_GET_UART(READING_UART), UART_BAUD, MXC_UART_APB_CLK)) != E_NO_ERROR) {
+  //   printf("-->Error initializing UART: %d\n", error);
+  //   printf("-->Example Failed\n");
+  //   while (1) {}
+  // }
   
-    mxc_uart_req_t write_req;
-    write_req.uart = MXC_UART_GET_UART(WRITING_UART);
-    write_req.txData = tx_data;
-    write_req.txLen = BUFF_SIZE;
-    write_req.rxLen = 0;
-    write_req.callback = NULL;
 
-    MXC_UART_Transaction(&write_req);
+
+
+
+  mxc_uart_req_t write_req;
+  write_req.uart = MXC_UART_GET_UART(WRITING_UART);
+  write_req.txData = tx_data;
+  write_req.txLen = BUFF_SIZE;
+  write_req.rxLen = 0;
+  write_req.callback = NULL;
+
+  error = MXC_UART_Transaction(&write_req);
+
+  if(error != E_NO_ERROR){
+    printf("Error Code: %d\n", error);
+    while(1);
+  }
+
 }
 /* **************************************************************************** */
 int main(void){
@@ -518,12 +539,12 @@ int main(void){
 
       TFT_Print(buff, 10, 150, font_1, sprintf(buff, "Car Detected"));
       TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[0]));
-      TxData = "Car Detected!";
+      strcpy(TxData, "Car Detected!");
     }
     else{
       TFT_Print(buff, 10, 150, font_1, sprintf(buff, "No Car"));
       TFT_Print(buff, 135, 180, font_1, sprintf(buff, "%d%%", result[1]));
-      TxData = "Car Not Detected!";
+      strcpy(TxData,"Car Not Detected!");
     }
 
     TFT_Print(buff, 10, 210, font_1, sprintf(buff, "PRESS PB1 TO CAPTURE IMAGE"));
@@ -540,8 +561,8 @@ int main(void){
 
     
     printf(TxData);
-
-    printf("\n-->UART Baud \t: %d Hz\n", UART_BAUD);
+    printf("\n-->Sending Through UART \t: %d \n", WRITING_UART);
+    printf("\n-->UART Baud \t: %d Hz\n", MXC_UART_GetFrequency(MXC_UART_GET_UART(WRITING_UART)));
     printf("\n-->Test Length \t: %d bytes\n", BUFF_SIZE);
 
     send_through_UART(TxData);
