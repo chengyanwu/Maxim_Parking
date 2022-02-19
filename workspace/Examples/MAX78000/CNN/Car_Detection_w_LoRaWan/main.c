@@ -259,6 +259,7 @@ void process_camera_img(uint32_t *data0, uint32_t *data1, uint32_t *data2)
   uint8_t *buffer;
 
 	camera_get_image(&frame_buffer, &imgLen, &w, &h);
+  
   ptr0 = (uint8_t *)data0;
   ptr1 = (uint8_t *)data1;
   ptr2 = (uint8_t *)data2;
