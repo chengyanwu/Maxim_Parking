@@ -2,7 +2,7 @@
 #include <hal/hal.h>
 #include <SPI.h>
 
-int baud_rate = 2400;
+int baud_rate = 115200;
 
 // LoRaWAN NwkSKey, network session key
 //static const PROGMEM u1_t NWKSKEY[16] = { 0x82, 0xDE, 0xD9, 0x1D, 0x69, 0x58, 0xF3, 0x66, 0xBA, 0x3A, 0x8E, 0x15, 0x77, 0xA7, 0xAB, 0xD8 };  
@@ -121,7 +121,7 @@ void do_send(osjob_t* j){
     else{
           if (Serial1.available() > 0) {
             memset(rx_data, 0, 64);
-            delay(200);
+            delay(500);
             //            rx_str = Serial1.readString();
             //            SerialUSB.println(rx_str);
             //rx_len = Serial1.readBytesUntil(byte(atoi("!")), rx_data, 17);

@@ -57,6 +57,7 @@
 #include "camera.h"
 #include "utils.h"
 #include "dma.h"
+#include "pb.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -214,7 +215,7 @@ void TFT_Print(char* str, int x, int y, int font, int length)
   MXC_TFT_PrintFont(x, y, font, &text, NULL);
 }
 
-#define X_OFFSET    47
+#define X_OFFSET    15
 #define Y_OFFSET    15
 #define SCALE       2.2
 
@@ -363,9 +364,9 @@ int main(void)
     #ifdef TFT_ENABLE
             // MXC_TFT_SetPalette(image_bitmap_2);
         MXC_TFT_SetBackGroundColor(4);
+        MXC_TFT_SetRotation(ROTATE_180);
             // MXC_TFT_ShowImage(1, 1, image_bitmap_2);
         memset(buff,32,TFT_BUFF_SIZE);
-        TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Camera  App!"));
     #endif
 
 
@@ -385,24 +386,37 @@ int main(void)
         if (camera_is_image_rcv()) {
             // Process the image, send it through the UART console.
         	LED_On(LED1);
-            #ifdef TFT_ENABLE
-                MXC_TFT_ClearScreen();
-                TFT_Print(buff, 55, 110, font_2, sprintf(buff, "CAPTURING IMAGE...."));
-            #endif
-
+            // #ifdef TFT_ENABLE
+            //     MXC_TFT_ClearScreen();
+            //     TFT_Print(buff, 40, 110, font_2, sprintf(buff, "CAPTURING IMAGE.."));
+            // #endif
             camera_get_image(&raw, &imgLen, &w, &h);
+            // #ifdef TFT_ENABLE
+            //     MXC_TFT_ClearScreen();
+            // #endif
+
             img565To888(raw, imgBlock888);
-            process_camera_img(raw,input_0_camera, input_1_camera, input_2_camera);
+            process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
             lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024);
             
             //process_img();
+          while(1){
+            if(PB_Get(0))
+            {
+              TFT_Print(buff, 40, 200, font_1, sprintf(buff, "Saved"));
+              int err = createRawImage(raw, imgLen ,imgNum);
+              if (!err)
+    	          imgNum++;
+                break;
+            }
+            if(PB_Get(1))
+            {
+              TFT_Print(buff, 40, 200, font_1, sprintf(buff, "Deleted"));
+              break;
+            }
 
-            int err = createRawImage(raw, 64*64*4 ,imgNum);
-            if (err==0)
-    	        imgNum++;
-
-            MXC_Delay(2000000);
-            
+          } 
+            MXC_TFT_ClearScreen();
             LED_Off(LED1);
             // Prepare for another frame capture.
             camera_start_capture_image();

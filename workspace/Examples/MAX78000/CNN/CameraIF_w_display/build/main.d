@@ -59,6 +59,7 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/Ca
  utils.h c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/dma.h \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdbool.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/dma_regs.h \
+ c:\maximsdk\libraries\boards\max78000\include\pb.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdlib.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\machine\stdlib.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\alloca.h \
