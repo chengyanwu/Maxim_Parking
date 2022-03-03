@@ -24,8 +24,57 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
+#include "mxc_device.h"
+#include "mxc_delay.h"
+#include "mxc_pins.h"
+#include "nvic_table.h"
+#include "uart.h"
+#include "spi.h"
+#include "dma.h"
+#include "board.h"
 
 #include "lmic.h"
+
+/***** Definitions *****/
+#define DATA_LEN        100         // Words
+#define DATA_VALUE      0xA5A5      // This is for master mode only...
+#define VALUE           0xFFFF
+#define SPI_SPEED       100000      // Bit Rate
+
+#define SPI_INSTANCE_NUM    1
+
+/***** Globals *****/
+uint16_t rx_data[DATA_LEN];
+uint16_t tx_data[DATA_LEN];
+volatile int SPI_FLAG;
+volatile uint8_t DMA_FLAG = 0;
+
+/***** Functions *****/
+#if defined (BOARD_FTHR_REVA)
+#define SPI         MXC_SPI0
+#define SPI_IRQ     SPI0_IRQn
+void SPI0_IRQHandler(void)
+{
+    MXC_SPI_AsyncHandler(SPI);
+}
+#elif defined (BOARD_EVKIT_V1)
+#define SPI         MXC_SPI1
+#define SPI_IRQ     SPI1_IRQn
+void SPI1_IRQHandler(void)
+{
+    MXC_SPI_AsyncHandler(SPI);
+}
+#endif
+
+void SPI_Callback(mxc_spi_req_t* req, int error)
+{
+    SPI_FLAG = error;
+}
+
 //#include "hw.h"
 
 // -----------------------------------------------------------------------------
@@ -113,6 +162,7 @@ void hal_pin_rxtx (u1_t val) {
 //     hw_set_pin(GPIOx(RX_PORT), RX_PIN, ~val);
 // #endif
 //     hw_set_pin(GPIOx(TX_PORT), TX_PIN, val);
+
 }
 
 
@@ -219,16 +269,47 @@ static void hal_spi_init () {
 //     // configure and activate the SPI (master, internal slave select, software slave mgmt)
 //     // (use default mode: 8-bit, 2-wire, no crc, MSBF, PCLK/2, CPOL0, CPHA0)
 //     SPI1->CR1 = SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_SPE;
-// }
+    mxc_spi_pins_t spi_pins;
+    spi_pins.clock = TRUE;
+    spi_pins.miso = TRUE;
+    spi_pins.mosi = TRUE;
+    spi_pins.sdio2 = FALSE;
+    spi_pins.sdio3 = FALSE;
+    spi_pins.ss0 = TRUE;
+    spi_pins.ss1 = FALSE;
+    spi_pins.ss2 = FALSE;
+
+    if (MXC_SPI_Init(SPI, 1, 0, 1, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
+            printf("\nSPI INITIALIZATION ERROR\n");
+            while (1) {}
+        }
+}
 
 // // perform SPI transaction with radio
-// u1_t hal_spi (u1_t out) {
+u1_t hal_spi (u1_t out) {
 //     SPI1->DR = out;
 //     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
 //     return SPI1->DR; // in
+    int retVal;
+    mxc_spi_req_t req;
+    uint8_t rx_data;
+    req.spi = SPI;
+    req.txData = (uint8_t*) out;
+    req.rxData = (uint8_t*) rx_data;
+    req.txLen = DATA_LEN;
+    req.rxLen = DATA_LEN;
+    req.ssIdx = 0;
+    req.ssDeassert = 1;
+    req.txCnt = 0;
+    req.rxCnt = 0;
+    req.completeCB = (spi_complete_cb_t) SPI_Callback;
+    SPI_FLAG = 1;
+    retVal = MXC_SPI_SetDataSize(SPI, 8);
+    MXC_SPI_MasterTransaction(&req);
+    return rx_data;
 }
 
-#ifdef CFG_lmic_clib
+// #ifdef CFG_lmic_clib
 
 // -----------------------------------------------------------------------------
 // TIME
@@ -274,7 +355,7 @@ u4_t hal_ticks () {
     // }
     // hal_enableIRQs();
     // return (t<<16)|cnt;
-    return NULL;
+    return 1;
 }
 
 // return modified delta ticks from now to specified ticktime (0 for past, FFFF for far future)
@@ -354,13 +435,13 @@ void hal_init () {
 //     hal_time_init();
 
 //     hal_enableIRQs();
-// }
+}
 
-// void hal_failed () {
+void hal_failed () {
 //     // HALT...
 //     hal_disableIRQs();
 //     hal_sleep();
 //     while(1);
 }
 
-#endif // CFG_lmic_clib
+// #endif // CFG_lmic_clib

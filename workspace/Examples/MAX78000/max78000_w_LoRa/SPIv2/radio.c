@@ -278,7 +278,7 @@ static u1_t randbuf[16];
 
 static void writeReg (u1_t addr, u1_t data ) {
     hal_pin_nss(0);
-    hal_spi(addr | 0x80);
+    //os_getTime((addr | 0x80));
     hal_spi(data);
     hal_pin_nss(1);
 }
