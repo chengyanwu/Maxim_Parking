@@ -55,6 +55,7 @@
 #include "lmic.h"
 
 
+
 /***** Preprocessors *****/
 #define MASTERSYNC
 // #define MASTERASYNC
@@ -241,7 +242,7 @@ int main(void)
             }
         }
     }
-    os_init();
+    //os_init();
     printf("\nExample Complete.\n");
     return E_NO_ERROR;
 }

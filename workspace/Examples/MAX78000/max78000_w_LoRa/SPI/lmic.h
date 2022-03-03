@@ -7,7 +7,7 @@
  *
  * Contributors:
  *    IBM Zurich Research Lab - initial API, implementation and documentation
- *******************************************************************************/
+ **************config*****************************************************************/
 
 //! @file
 //! @brief LMIC API

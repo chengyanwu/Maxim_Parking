@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPI/build/max20303.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/max20303.o: \
  c:\maximsdk\libraries\boards\max78000\source\max20303.c \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdint.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdint.h \

@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPI/build/sccb.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/sccb.o: \
  c:\maximsdk\libraries\boards\max78000\source\sccb.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdio.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
