@@ -36,6 +36,7 @@
 #include "spi.h"
 #include "dma.h"
 #include "board.h"
+#include "gpio.h"
 
 #include "lmic.h"
 
@@ -69,6 +70,10 @@ void SPI1_IRQHandler(void)
     MXC_SPI_AsyncHandler(SPI);
 }
 #endif
+
+/***** GPIO ***************/
+#define MXC_GPIO_PORT_OUT               MXC_GPIO0
+#define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_9
 
 void SPI_Callback(mxc_spi_req_t* req, int error)
 {
@@ -179,6 +184,13 @@ void hal_pin_rst (u1_t val) {
     // } else { // keep pin floating
     //     hw_cfg_pin(GPIOx(RST_PORT), RST_PIN, GPIOCFG_MODE_INP | GPIOCFG_OSPEED_40MHz | GPIOCFG_OTYPE_OPEN);
     // }
+    mxc_gpio_cfg_t gpio_out;
+    gpio_out.port = MXC_GPIO_PORT_OUT;
+    gpio_out.mask = MXC_GPIO_PIN_OUT;
+    gpio_out.pad = MXC_GPIO_PAD_NONE;
+    gpio_out.func = MXC_GPIO_FUNC_OUT;
+    MXC_GPIO_Config(&gpio_out);
+    MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
 }
 
 extern void radio_irq_handler(u1_t dio);

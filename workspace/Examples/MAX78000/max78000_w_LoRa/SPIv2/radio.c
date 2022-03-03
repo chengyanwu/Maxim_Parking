@@ -277,36 +277,36 @@ static u1_t randbuf[16];
 
 
 static void writeReg (u1_t addr, u1_t data ) {
-    hal_pin_nss(0);
+    //hal_pin_nss(0);
     //os_getTime((addr | 0x80));
     hal_spi(data);
-    hal_pin_nss(1);
+    //hal_pin_nss(1);
 }
 
 static u1_t readReg (u1_t addr) {
-    hal_pin_nss(0);
+    //hal_pin_nss(0);
     hal_spi(addr & 0x7F);
     u1_t val = hal_spi(0x00);
-    hal_pin_nss(1);
+    //hal_pin_nss(1);
     return val;
 }
 
 static void writeBuf (u1_t addr, xref2u1_t buf, u1_t len) {
-    hal_pin_nss(0);
+    //hal_pin_nss(0);
     hal_spi(addr | 0x80);
     for (u1_t i=0; i<len; i++) {
         hal_spi(buf[i]);
     }
-    hal_pin_nss(1);
+    //hal_pin_nss(1);
 }
 
 static void readBuf (u1_t addr, xref2u1_t buf, u1_t len) {
-    hal_pin_nss(0);
+    //hal_pin_nss(0);
     hal_spi(addr & 0x7F);
     for (u1_t i=0; i<len; i++) {
         buf[i] = hal_spi(0x00);
     }
-    hal_pin_nss(1);
+    //hal_pin_nss(1);
 }
 
 static void opmode (u1_t mode) {
@@ -483,7 +483,7 @@ static void txfsk () {
     writeBuf(RegFifo, LMIC.frame, LMIC.dataLen);
 
     // enable antenna switch for TX
-    hal_pin_rxtx(1);
+    //hal_pin_rxtx(1);
     
     // now we actually start the transmission
     opmode(OPMODE_TX);
@@ -523,7 +523,7 @@ static void txlora () {
     writeBuf(RegFifo, LMIC.frame, LMIC.dataLen);
 
     // enable antenna switch for TX
-    hal_pin_rxtx(1);
+    //hal_pin_rxtx(1);
     
     // now we actually start the transmission
     opmode(OPMODE_TX);
@@ -592,7 +592,7 @@ static void rxlora (u1_t rxmode) {
     writeReg(LORARegIrqFlagsMask, ~rxlorairqmask[rxmode]);
 
     // enable antenna switch for RX
-    hal_pin_rxtx(0);
+    //hal_pin_rxtx(0);
 
     // now instruct the radio to receive
     if (rxmode == RXMODE_SINGLE) { // single rx
@@ -647,7 +647,7 @@ static void rxfsk (u1_t rxmode) {
     writeReg(RegDioMapping1, MAP_DIO0_FSK_READY|MAP_DIO1_FSK_NOP|MAP_DIO2_FSK_TIMEOUT);
 
     // enable antenna switch for RX
-    hal_pin_rxtx(0);
+    //hal_pin_rxtx(0);
     
     // now instruct the radio to receive
     hal_waitUntil(LMIC.rxtime); // busy wait until exact rx time
