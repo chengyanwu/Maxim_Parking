@@ -90,11 +90,35 @@ static void hal_spi_init () {
 }
 
 void hal_pin_nss (u1_t val) {
-//}
+        if (!val)
+        SPI.beginTransaction(settings);
+    else
+        SPI.endTransaction();
+
+    //Serial.println(val?">>":"<<");
+    digitalWrite(lmic_pins.nss, val);
+}
 
 // perform SPI transaction with radio
-//u1_t hal_spi (u1_t out) {
+u1_t hal_spi (u1_t out) {
     //u1_t res = SPI.transfer(out);
+    mxc_spi_req_t req;
+    uint8_t rx_data;
+    req.spi = SPI;
+    req.txData = (uint8_t*) out;
+    req.rxData = (uint8_t*) rx_data;
+    req.txLen = DATA_LEN;
+    req.rxLen = DATA_LEN;
+    req.ssIdx = 0;
+    req.ssDeassert = 1;
+    req.txCnt = 0;
+    req.rxCnt = 0;
+    req.completeCB = (spi_complete_cb_t) SPI_Callback;
+    SPI_FLAG = 1;
+    retVal = MXC_SPI_SetDataSize(SPI, 8);
+    MXC_SPI_MasterTransaction(&req);
+    return rx_data;
+
 /*
     Serial.print(">");
     Serial.print(out, HEX);
