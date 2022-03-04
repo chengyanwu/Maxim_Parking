@@ -40,6 +40,11 @@
 
 #include "lmic.h"
 
+/***** Preprocessors *****/
+#define MASTERSYNC
+// #define MASTERASYNC
+// #define MASTERDMA
+
 /***** Definitions *****/
 #define DATA_LEN        100         // Words
 #define DATA_VALUE      0xA5A5      // This is for master mode only...
@@ -73,7 +78,7 @@ void SPI1_IRQHandler(void)
 
 /***** GPIO ***************/
 #define MXC_GPIO_PORT_OUT               MXC_GPIO0
-#define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_9
+#define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_19
 
 void SPI_Callback(mxc_spi_req_t* req, int error)
 {

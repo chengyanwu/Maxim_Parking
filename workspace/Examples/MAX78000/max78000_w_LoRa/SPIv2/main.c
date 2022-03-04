@@ -54,66 +54,118 @@
 
 #include "lmic.h"
 
+// application router ID (LSBF)
+static const u1_t APPEUI[8]  = { 0x02, 0x00, 0x00, 0x00, 0x00, 0xEE, 0xFF, 0xC0 };
 
+// unique device ID (LSBF)
+static const u1_t DEVEUI[8]  = { 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF };
 
-/***** Preprocessors *****/
-#define MASTERSYNC
-// #define MASTERASYNC
-// #define MASTERDMA
+// device-specific AES key (derived from device EUI)
+static const u1_t DEVKEY[16] = { 0xAB, 0x89, 0xEF, 0xCD, 0x23, 0x01, 0x67, 0x45, 0x54, 0x76, 0x10, 0x32, 0xDC, 0xFE, 0x98, 0xBA };
 
-/***** Definitions *****/
-#define DATA_LEN        100         // Words
-#define DATA_VALUE      0xA5A5      // This is for master mode only...
-#define VALUE           0xFFFF
-#define SPI_SPEED       100000      // Bit Rate
-
-#define SPI_INSTANCE_NUM    1
-
-/***** Globals *****/
-// uint16_t rx_data[DATA_LEN];
-// uint16_t tx_data[DATA_LEN];
-// volatile int SPI_FLAG;
-// volatile uint8_t DMA_FLAG = 0;
-
-/***** Functions *****/
-#if defined (BOARD_FTHR_REVA)
-#define SPI         MXC_SPI0
-#define SPI_IRQ     SPI0_IRQn
-// void SPI0_IRQHandler(void)
-// {
-//     MXC_SPI_AsyncHandler(SPI);
-// }
-#elif defined (BOARD_EVKIT_V1)
-#define SPI         MXC_SPI1
-#define SPI_IRQ     SPI1_IRQn
-// void SPI1_IRQHandler(void)
-// {
-//     MXC_SPI_AsyncHandler(SPI);
-// }
-#else
-#error "This example has been configured to work with the EV Kit or the FTHR boards."
-#endif
-
-void DMA0_IRQHandler(void)
-{
-    MXC_DMA_Handler();
+void debug_event (int ev) {
+    static const char* evnames[] = {
+        [EV_SCAN_TIMEOUT]   = "SCAN_TIMEOUT",
+        [EV_BEACON_FOUND]   = "BEACON_FOUND",
+        [EV_BEACON_MISSED]  = "BEACON_MISSED",
+        [EV_BEACON_TRACKED] = "BEACON_TRACKED",
+        [EV_JOINING]        = "JOINING",
+        [EV_JOINED]         = "JOINED",
+        [EV_RFU1]           = "RFU1",
+        [EV_JOIN_FAILED]    = "JOIN_FAILED",
+        [EV_REJOIN_FAILED]  = "REJOIN_FAILED",
+        [EV_TXCOMPLETE]     = "TXCOMPLETE",
+        [EV_LOST_TSYNC]     = "LOST_TSYNC",
+        [EV_RESET]          = "RESET",
+        [EV_RXCOMPLETE]     = "RXCOMPLETE",
+        [EV_LINK_DEAD]      = "LINK_DEAD",
+        [EV_LINK_ALIVE]     = "LINK_ALIVE",
+        [EV_SCAN_FOUND]     = "SCAN_FOUND",
+        [EV_TXSTART]        = "EV_TXSTART",
+    };
+    // debug_str((ev < sizeof(evnames)/sizeof(evnames[0])) ? evnames[ev] : "EV_UNKNOWN" );
+    // debug_char('\r');
+    // debug_char('\n');
 }
 
-void DMA1_IRQHandler(void)
-{
-    MXC_DMA_Handler();
-    //DMA_FLAG = 1;
+
+
+//////////////////////////////////////////////////
+// APPLICATION CALLBACKS
+//////////////////////////////////////////////////
+
+// provide application router ID (8 bytes, LSBF)
+void os_getArtEui (u1_t* buf) {
+    memcpy(buf, APPEUI, 8);
 }
 
-// void SPI_Callback(mxc_spi_req_t* req, int error)
-// {
-//     SPI_FLAG = error;
-// }
+// provide device ID (8 bytes, LSBF)
+void os_getDevEui (u1_t* buf) {
+    memcpy(buf, DEVEUI, 8);
+}
 
-int main(void)
-{
-   
+// provide device key (16 bytes)
+void os_getDevKey (u1_t* buf) {
+    memcpy(buf, DEVKEY, 16);
+}
+
+
+//////////////////////////////////////////////////
+// MAIN - INITIALIZATION AND STARTUP
+//////////////////////////////////////////////////
+
+// initial job
+static void initfunc (osjob_t* j) {
+    // reset MAC state
+    LMIC_reset();
+    // start joining
+    LMIC_startJoining();
+    // init done - onEvent() callback will be invoked...
+}
+
+
+// application entry point
+int main () {
+    osjob_t initjob;
+
+    // initialize runtime env
     os_init();
-    printf("\nExample Complete.\n");
-    return E_NO_ERROR;
+    // initialize debug library
+    //debug_init();
+    // setup initial job
+    os_setCallback(&initjob, initfunc);
+    // execute scheduled jobs and events
+    os_runloop();
+    // (not reached)
+    return 0;
+}
+
+
+//////////////////////////////////////////////////
+// LMIC EVENT CALLBACK
+//////////////////////////////////////////////////
+
+void onEvent (ev_t ev) {
+    debug_event(ev);
+
+    switch(ev) {
+   
+      // network joined, session established
+      case EV_JOINED:
+          //debug_val("netid = ", LMIC.netid);
+          goto tx;
+        
+      // scheduled data sent (optionally data received)
+      case EV_TXCOMPLETE:
+          if(LMIC.dataLen) { // data received in rx slot after tx
+              //debug_buf(LMIC.frame+LMIC.dataBeg, LMIC.dataLen);
+          }
+        tx:
+	  // immediately prepare next transmission
+	  LMIC.frame[0] = LMIC.snr;
+	  // schedule transmission (port 1, datalen 1, no ack requested)
+	  LMIC_setTxData2(1, LMIC.frame, 1, 0);
+          // (will be sent as soon as duty cycle permits)
+	  break;
+    }
 }

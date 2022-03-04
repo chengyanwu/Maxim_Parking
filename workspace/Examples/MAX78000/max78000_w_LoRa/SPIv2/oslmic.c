@@ -26,6 +26,8 @@
  */
 
 #include "lmic.h"
+#include "led.h"
+#include "mxc_delay.h"
 
 // RUNTIME STATE
 static struct {
@@ -102,6 +104,8 @@ void os_setTimedCallback (osjob_t* job, ostime_t time, osjobcb_t cb) {
 // execute jobs from timer and from run queue
 void os_runloop () {
     while(1) {
+        LED_On(LED1);
+        MXC_Delay(500000);
         osjob_t* j = NULL;
         hal_disableIRQs();
         // check for runnable jobs
@@ -118,5 +122,7 @@ void os_runloop () {
         if(j) { // run job callback
             j->func(j);
         }
+        LED_Off(LED1);
+        MXC_Delay(500000);
     }
 }

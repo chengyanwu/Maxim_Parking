@@ -62,5 +62,6 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max780
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/dma.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/dma_regs.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h lmic.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
+ c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h lmic.h \
  oslmic.h config.h hal.h lorabase.h

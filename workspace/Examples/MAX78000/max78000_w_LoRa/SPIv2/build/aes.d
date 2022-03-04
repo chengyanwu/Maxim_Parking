@@ -1,6 +1,5 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/other.o: \
- other.c oslmic.h \
- c:\maximsdk\tools\gnutools\arm-none-eabi\include\string.h \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o: \
+ aes.c oslmic.h c:\maximsdk\tools\gnutools\arm-none-eabi\include\string.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\newlib.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_newlib_version.h \

@@ -75,7 +75,8 @@ export CMSIS_ROOT
 # Source files for this test (add path to VPATH below)
 SRCS  = main.c
 SRCS += lmic.c
-SRCS += other.c
+SRCS += aes.c
+# SRCS += other.c
 SRCS += oslmic.c
 SRCS += radio.c
 SRCS += hal.c
