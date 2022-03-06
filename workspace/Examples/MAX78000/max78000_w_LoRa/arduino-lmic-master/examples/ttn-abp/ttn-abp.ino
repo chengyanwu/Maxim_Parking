@@ -1,71 +1,50 @@
-/**
- * @file    main.c
- * @brief   SPI Master Demo
- * @details Shows Master loopback demo for SPI
- *          Read the printf() for instructions
- */
-
 /*******************************************************************************
-* Copyright (C) Maxim Integrated Products, Inc., All Rights Reserved.
-*
-* Permission is hereby granted, free of charge, to any person obtaining a
-* copy of this software and associated documentation files (the "Software"),
-* to deal in the Software without restriction, including without limitation
-* the rights to use, copy, modify, merge, publish, distribute, sublicense,
-* and/or sell copies of the Software, and to permit persons to whom the
-* Software is furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included
-* in all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-* OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-* IN NO EVENT SHALL MAXIM INTEGRATED BE LIABLE FOR ANY CLAIM, DAMAGES
-* OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-* ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-* OTHER DEALINGS IN THE SOFTWARE.
-*
-* Except as contained in this notice, the name of Maxim Integrated
-* Products, Inc. shall not be used except as stated in the Maxim Integrated
-* Products, Inc. Branding Policy.
-*
-* The mere transfer of this software does not imply any licenses
-* of trade secrets, proprietary technology, copyrights, patents,
-* trademarks, maskwork rights, or any other form of intellectual
-* property whatsoever. Maxim Integrated Products, Inc. retains all
-* ownership rights.
-*
-******************************************************************************/
+ * Copyright (c) 2015 Thomas Telkamp and Matthijs Kooijman
+ *
+ * Permission is hereby granted, free of charge, to anyone
+ * obtaining a copy of this document and accompanying files,
+ * to do whatever they want with them without any restriction,
+ * including, but not limited to, copying, modification and redistribution.
+ * NO WARRANTY OF ANY KIND IS PROVIDED.
+ *
+ * This example sends a valid LoRaWAN packet with payload "Hello,
+ * world!", using frequency and encryption settings matching those of
+ * the The Things Network.
+ *
+ * This uses ABP (Activation-by-personalisation), where a DevAddr and
+ * Session keys are preconfigured (unlike OTAA, where a DevEUI and
+ * application key is configured, while the DevAddr and session keys are
+ * assigned/generated in the over-the-air-activation procedure).
+ *
+ * Note: LoRaWAN per sub-band duty-cycle limitation is enforced (1% in
+ * g1, 0.1% in g2), but not the TTN fair usage policy (which is probably
+ * violated by this sketch when left running for longer)!
+ *
+ * To use this sketch, first register your application and device with
+ * the things network, to set or generate a DevAddr, NwkSKey and
+ * AppSKey. Each device should have their own unique values for these
+ * fields.
+ *
+ * Do not forget to define the radio type correctly in config.h.
+ *
+ *******************************************************************************/
 
-/***** Includes *****/
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <string.h>
-#include "mxc_device.h"
-#include "mxc_delay.h"
-#include "mxc_pins.h"
-#include "nvic_table.h"
-#include "uart.h"
-#include "spi.h"
-#include "dma.h"
-#include "board.h"
-
-#include "lmic.h"
+#include <lmic.h>
+#include <hal/hal.h>
+#include <SPI.h>
 
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the early prototype TTN
 // network.
-static const u1_t NWKSKEY[16] = {0x40, 0xBE, 0x38, 0x2D, 0xB8, 0x26, 0x67, 0xBF, 0x91, 0xAE, 0x83, 0x20, 0xC6, 0xD0, 0x9E, 0x06};
+static const PROGMEM u1_t NWKSKEY[16] = { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C };
 
 // LoRaWAN AppSKey, application session key
 // This is the default Semtech key, which is used by the early prototype TTN
 // network.
-static const u1_t APPSKEY[16] = { 0xDA, 0xBF, 0xD5, 0x35, 0x76, 0x48, 0x84, 0x6C, 0x0D, 0x43, 0xBD, 0xC1, 0x96, 0x54, 0x63, 0x91 };
+static const u1_t PROGMEM APPSKEY[16] = { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C };
 
 // LoRaWAN end-device address (DevAddr)
-static const u4_t DEVADDR = 0x260C2BE5; // <-- Change this address for every node!
+static const u4_t DEVADDR = 0x03FF0001 ; // <-- Change this address for every node!
 
 // These callbacks are only used in over-the-air activation, so they are
 // left empty here (we cannot leave them out completely unless
@@ -81,97 +60,104 @@ static osjob_t sendjob;
 // cycle limitations).
 const unsigned TX_INTERVAL = 60;
 
-
-void do_send(osjob_t* j){
-    // Check if there is not a current TX/RX job running
-    if (LMIC.opmode & OP_TXRXPEND) {
-        printf("OP_TXRXPEND, not sending");
-    } else {
-        // Prepare upstream data transmission at the next possible time.
-        LMIC_setTxData2(1, mydata, sizeof(mydata)-1, 0);
-        printf("Packet queued");
-    }
-    // Next TX is scheduled after TX_COMPLETE event.
-}
+// Pin mapping
+const lmic_pinmap lmic_pins = {
+    .nss = 6,
+    .rxtx = LMIC_UNUSED_PIN,
+    .rst = 5,
+    .dio = {2, 3, 4},
+};
 
 void onEvent (ev_t ev) {
-    printf(os_getTime());
-    printf(": ");
+    Serial.print(os_getTime());
+    Serial.print(": ");
     switch(ev) {
         case EV_SCAN_TIMEOUT:
-            printf("EV_SCAN_TIMEOUT");
+            Serial.println(F("EV_SCAN_TIMEOUT"));
             break;
         case EV_BEACON_FOUND:
-            printf("EV_BEACON_FOUND");
+            Serial.println(F("EV_BEACON_FOUND"));
             break;
         case EV_BEACON_MISSED:
-            printf("EV_BEACON_MISSED");
+            Serial.println(F("EV_BEACON_MISSED"));
             break;
         case EV_BEACON_TRACKED:
-            printf("EV_BEACON_TRACKED");
+            Serial.println(F("EV_BEACON_TRACKED"));
             break;
         case EV_JOINING:
-            printf("EV_JOINING");
+            Serial.println(F("EV_JOINING"));
             break;
         case EV_JOINED:
-            printf("EV_JOINED");
+            Serial.println(F("EV_JOINED"));
             break;
         case EV_RFU1:
-            printf("EV_RFU1");
+            Serial.println(F("EV_RFU1"));
             break;
         case EV_JOIN_FAILED:
-            printf("EV_JOIN_FAILED");
+            Serial.println(F("EV_JOIN_FAILED"));
             break;
         case EV_REJOIN_FAILED:
-            printf("EV_REJOIN_FAILED");
+            Serial.println(F("EV_REJOIN_FAILED"));
             break;
         case EV_TXCOMPLETE:
-            printf("EV_TXCOMPLETE (includes waiting for RX windows)");
+            Serial.println(F("EV_TXCOMPLETE (includes waiting for RX windows)"));
             if (LMIC.txrxFlags & TXRX_ACK)
-              printf("Received ack");
+              Serial.println(F("Received ack"));
             if (LMIC.dataLen) {
-              printf("Received ");
-              printf(LMIC.dataLen);
-              printf(" bytes of payload");
+              Serial.println(F("Received "));
+              Serial.println(LMIC.dataLen);
+              Serial.println(F(" bytes of payload"));
             }
             // Schedule next transmission
             os_setTimedCallback(&sendjob, os_getTime()+sec2osticks(TX_INTERVAL), do_send);
             break;
         case EV_LOST_TSYNC:
-            printf("EV_LOST_TSYNC");
+            Serial.println(F("EV_LOST_TSYNC"));
             break;
         case EV_RESET:
-            printf("EV_RESET");
+            Serial.println(F("EV_RESET"));
             break;
         case EV_RXCOMPLETE:
             // data received in ping slot
-            printf("EV_RXCOMPLETE");
+            Serial.println(F("EV_RXCOMPLETE"));
             break;
         case EV_LINK_DEAD:
-            printf("EV_LINK_DEAD");
+            Serial.println(F("EV_LINK_DEAD"));
             break;
         case EV_LINK_ALIVE:
-            printf("EV_LINK_ALIVE");
+            Serial.println(F("EV_LINK_ALIVE"));
             break;
          default:
-            printf("Unknown event");
+            Serial.println(F("Unknown event"));
             break;
     }
 }
 
-void setup(void) {
-    printf("Starting");
+void do_send(osjob_t* j){
+    // Check if there is not a current TX/RX job running
+    if (LMIC.opmode & OP_TXRXPEND) {
+        Serial.println(F("OP_TXRXPEND, not sending"));
+    } else {
+        // Prepare upstream data transmission at the next possible time.
+        LMIC_setTxData2(1, mydata, sizeof(mydata)-1, 0);
+        Serial.println(F("Packet queued"));
+    }
+    // Next TX is scheduled after TX_COMPLETE event.
+}
 
-    // #ifdef VCC_ENABLE
-    // // For Pinoccio Scout boards
-    // pinMode(VCC_ENABLE, OUTPUT);
-    // digitalWrite(VCC_ENABLE, HIGH);
-    // delay(1000);
-    // #endif
+void setup() {
+    Serial.begin(115200);
+    Serial.println(F("Starting"));
+
+    #ifdef VCC_ENABLE
+    // For Pinoccio Scout boards
+    pinMode(VCC_ENABLE, OUTPUT);
+    digitalWrite(VCC_ENABLE, HIGH);
+    delay(1000);
+    #endif
 
     // LMIC init
     os_init();
-    LED_On(LED1);
     // Reset the MAC state. Session and pending data transfers will be discarded.
     LMIC_reset();
 
@@ -235,21 +221,6 @@ void setup(void) {
     do_send(&sendjob);
 }
 
-void loop(void) {
+void loop() {
     os_runloop_once();
-}
-
-// application entry point
-int main (void) {
-    setup();
-    while(1)
-    {
-        //loop();
-        //LED_On(LED1);
-        // MXC_Delay(500000);
-        // LED_Off(LED1);
-        // MXC_Delay(500000);
-
-    }
-    return 0;
 }

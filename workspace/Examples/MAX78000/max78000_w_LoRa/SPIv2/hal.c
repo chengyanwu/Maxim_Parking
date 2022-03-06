@@ -37,6 +37,7 @@
 #include "dma.h"
 #include "board.h"
 #include "gpio.h"
+#include "rtc.h"
 
 #include "lmic.h"
 
@@ -372,21 +373,21 @@ u4_t hal_ticks () {
     // }
     // hal_enableIRQs();
     // return (t<<16)|cnt;
-    return 1;
+    u4_t time = MXC_RTC_GetSubSecond();
+    return time;
 }
 
 // return modified delta ticks from now to specified ticktime (0 for past, FFFF for far future)
 static u2_t deltaticks (u4_t time) {
-    // u4_t t = hal_ticks();
-    // s4_t d = time - t;
-    // if( d<=0 ) return 0;    // in the past
-    // if( (d>>16)!=0 ) return 0xFFFF; // far ahead
-    // return (u2_t)d;
-    return  NULL;
+    u4_t t = hal_ticks();
+    s4_t d = time - t;
+    if( d<=0 ) return 0;    // in the past
+    if( (d>>16)!=0 ) return 0xFFFF; // far ahead
+    return (u2_t)d;
 }
 
 void hal_waitUntil (u4_t time) {
-    // while( deltaticks(time) != 0 ); // busy wait until timestamp is reached
+    while( deltaticks(time) != 0 ); // busy wait until timestamp is reached
 }
 
 // check and rewind for target time
@@ -452,6 +453,15 @@ void hal_init () {
 //     hal_time_init();
 
 //     hal_enableIRQs();
+    NVIC_EnableIRQ(RTC_IRQn);
+    if (MXC_RTC_Init(0, 0) != E_NO_ERROR) {
+        printf("Failed RTC Initialization\n");
+        printf("Example Failed\n");   
+        while (1);
+    }
+    printf("RTC started\n");
+    printTime();
+    
 }
 
 void hal_failed () {

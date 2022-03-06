@@ -37,6 +37,7 @@ static struct {
 
 void os_init () {
     memset(&OS, 0x00, sizeof(OS));
+    LED_On(LED1);
     //hal_init();
     radio_init();
     LMIC_init();
@@ -104,25 +105,65 @@ void os_setTimedCallback (osjob_t* job, ostime_t time, osjobcb_t cb) {
 // execute jobs from timer and from run queue
 void os_runloop () {
     while(1) {
-        LED_On(LED1);
-        MXC_Delay(500000);
-        osjob_t* j = NULL;
-        hal_disableIRQs();
-        // check for runnable jobs
-        if(OS.runnablejobs) {
-            j = OS.runnablejobs;
-            OS.runnablejobs = j->next;
-        } else if(OS.scheduledjobs && hal_checkTimer(OS.scheduledjobs->deadline)) { // check for expired timed jobs
-            j = OS.scheduledjobs;
-            OS.scheduledjobs = j->next;
-        } else { // nothing pending
-            hal_sleep(); // wake by irq (timer already restarted)
-        }
-        hal_enableIRQs();
-        if(j) { // run job callback
-            j->func(j);
-        }
-        LED_Off(LED1);
-        MXC_Delay(500000);
+        os_runloop_once();
     }
 }
+
+void os_runloop_once() {
+    LED_On(LED1);
+    MXC_Delay(500000);
+    #if LMIC_DEBUG_LEVEL > 1
+        bool has_deadline = false;
+    #endif
+    osjob_t* j = NULL;
+    hal_disableIRQs();
+    // check for runnable jobs
+    if(OS.runnablejobs) {
+        j = OS.runnablejobs;
+        OS.runnablejobs = j->next;
+    } else if(OS.scheduledjobs && hal_checkTimer(OS.scheduledjobs->deadline)) { // check for expired timed jobs
+        j = OS.scheduledjobs;
+        OS.scheduledjobs = j->next;
+        #if LMIC_DEBUG_LEVEL > 1
+            has_deadline = true;
+        #endif
+    } else { // nothing pending
+        hal_sleep(); // wake by irq (timer already restarted)
+    }
+    hal_enableIRQs();
+    if(j) { // run job callback
+        #if LMIC_DEBUG_LEVEL > 1
+            lmic_printf("%lu: Running job %p, cb %p, deadline %lu\n", os_getTime(), j, j->func, has_deadline ? j->deadline : 0);
+        #endif
+        j->func(j);
+    }
+    LED_Off(LED1);
+    MXC_Delay(500000);
+}
+
+
+// execute jobs from timer and from run queue
+// void os_runloop () {
+//     while(1) {
+//         LED_On(LED1);
+//         MXC_Delay(500000);
+//         osjob_t* j = NULL;
+//         hal_disableIRQs();
+//         // check for runnable jobs
+//         if(OS.runnablejobs) {
+//             j = OS.runnablejobs;
+//             OS.runnablejobs = j->next;
+//         } else if(OS.scheduledjobs && hal_checkTimer(OS.scheduledjobs->deadline)) { // check for expired timed jobs
+//             j = OS.scheduledjobs;
+//             OS.scheduledjobs = j->next;
+//         } else { // nothing pending
+//             hal_sleep(); // wake by irq (timer already restarted)
+//         }
+//         hal_enableIRQs();
+//         if(j) { // run job callback
+//             j->func(j);
+//         }
+//         LED_Off(LED1);
+//         MXC_Delay(500000);
+//     }
+// }
