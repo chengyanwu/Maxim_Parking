@@ -26,6 +26,8 @@
  */
 
 #include "lmic.h"
+#include "mxc_delay.h"
+#include "led.h"
 
 // ---------------------------------------- 
 // Registers Mapping
@@ -278,7 +280,7 @@ static u1_t randbuf[16];
 
 static void writeReg (u1_t addr, u1_t data ) {
     //hal_pin_nss(0);
-    //os_getTime((addr | 0x80));
+    hal_spi(addr | 0x80);
     hal_spi(data);
     //hal_pin_nss(1);
 }
@@ -675,9 +677,11 @@ void radio_init () {
 #else
     hal_pin_rst(1); // drive RST pin high
 #endif
-    hal_waitUntil(os_getTime()+ms2osticks(1)); // wait >100us
+    //hal_waitUntil(os_getTime()+ms2osticks(1)); // wait >100us
+    MXC_Delay(100);
     hal_pin_rst(2); // configure RST pin floating!
-    hal_waitUntil(os_getTime()+ms2osticks(5)); // wait 5ms
+    MXC_Delay(5000);
+    //hal_waitUntil(os_getTime()+ms2osticks(5)); // wait 5ms
 
     opmode(OPMODE_SLEEP);
 

@@ -37,9 +37,9 @@ static struct {
 
 void os_init () {
     memset(&OS, 0x00, sizeof(OS));
-    LED_On(LED1);
-    //hal_init();
+    hal_init();
     radio_init();
+    LED_On(LED1);
     LMIC_init();
 }
 

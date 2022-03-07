@@ -47,7 +47,7 @@
 // #define MASTERDMA
 
 /***** Definitions *****/
-#define DATA_LEN        100         // Words
+#define DATA_LEN        8         // Words
 #define DATA_VALUE      0xA5A5      // This is for master mode only...
 #define VALUE           0xFFFF
 #define SPI_SPEED       100000      // Bit Rate
@@ -55,8 +55,8 @@
 #define SPI_INSTANCE_NUM    1
 
 /***** Globals *****/
-uint16_t rx_data[DATA_LEN];
-uint16_t tx_data[DATA_LEN];
+uint8_t rx_data;
+uint8_t tx_data;
 volatile int SPI_FLAG;
 volatile uint8_t DMA_FLAG = 0;
 
@@ -195,8 +195,17 @@ void hal_pin_rst (u1_t val) {
     gpio_out.mask = MXC_GPIO_PIN_OUT;
     gpio_out.pad = MXC_GPIO_PAD_NONE;
     gpio_out.func = MXC_GPIO_FUNC_OUT;
-    MXC_GPIO_Config(&gpio_out);
-    MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
+
+    //POTENTIAL ISSUE
+    if (val == 0|| val == 1)
+    {
+        MXC_GPIO_Init(gpio_out.mask);
+        MXC_GPIO_Config(&gpio_out);
+        if (val==0)
+             MXC_GPIO_OutClr(gpio_out.port, gpio_out.mask);
+        if (val==1)
+            MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
+    }
 }
 
 extern void radio_irq_handler(u1_t dio);
@@ -266,13 +275,12 @@ void EXTI_IRQHandler () {
 
 // for sx1272 and 1276
 
-#define SCK_PORT   0 // SCK:  PA5
-#define SCK_PIN    5
-#define MISO_PORT  0 // MISO: PA6
-#define MISO_PIN   6
-#define MOSI_PORT  0 // MOSI: PA7
-#define MOSI_PIN   7
-
+// #define SCK_PORT   0 // SCK:  PA5
+// #define SCK_PIN    5
+// #define MISO_PORT  0 // MISO: PA6
+// #define MISO_PIN   6
+// #define MOSI_PORT  0 // MOSI: PA7
+// #define MOSI_PIN   7
 #define GPIO_AF_SPI1        0x05
 
 static void hal_spi_init () {
@@ -297,10 +305,18 @@ static void hal_spi_init () {
     spi_pins.ss1 = FALSE;
     spi_pins.ss2 = FALSE;
 
-    if (MXC_SPI_Init(SPI, 1, 0, 1, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
+    if (MXC_SPI_Init(SPI, 1, 0, 1, 0, SPI_SPEED, spi_pins) != E_NO_ERROR && MXC_SPI_SetMode(SPI, SPI_MODE_0)!=E_NO_ERROR) {
             printf("\nSPI INITIALIZATION ERROR\n");
             while (1) {}
         }
+    if (MXC_SPI_SetMode(SPI, SPI_MODE_0)!=E_NO_ERROR) {
+        printf("\nSPI INITIALIZATION ERROR\n");
+        while (1) {}
+    }
+    if (MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD)!=E_NO_ERROR) {
+        printf("\nSPI INITIALIZATION ERROR\n");
+        while (1) {}
+    }
 }
 
 // // perform SPI transaction with radio
@@ -309,18 +325,18 @@ u1_t hal_spi (u1_t out) {
 //     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
 //     return SPI1->DR; // in
     int retVal;
+    tx_data = out;
     mxc_spi_req_t req;
-    uint8_t rx_data;
     req.spi = SPI;
     req.txData = (uint8_t*) out;
     req.rxData = (uint8_t*) rx_data;
-    req.txLen = DATA_LEN;
-    req.rxLen = DATA_LEN;
+    req.txLen = 1;
+    req.rxLen = 1;
     req.ssIdx = 0;
     req.ssDeassert = 1;
     req.txCnt = 0;
     req.rxCnt = 0;
-    req.completeCB = (spi_complete_cb_t) SPI_Callback;
+    //req.completeCB = (spi_complete_cb_t) SPI_Callback;
     SPI_FLAG = 1;
     retVal = MXC_SPI_SetDataSize(SPI, 8);
     MXC_SPI_MasterTransaction(&req);
@@ -358,6 +374,14 @@ static void hal_time_init () {
     
 //     // Enable timer counting
 //     TIM9->CR1 = TIM_CR1_CEN;
+    NVIC_EnableIRQ(RTC_IRQn);
+    if (MXC_RTC_Init(0, 0) != E_NO_ERROR) {
+        printf("Failed RTC Initialization\n");
+        printf("Example Failed\n");   
+        while (1);
+    }
+    printf("RTC started\n");
+    //printTime();
 }
 
 u4_t hal_ticks () {
@@ -448,19 +472,11 @@ void hal_init () {
 //     // configure radio I/O and interrupt handler
 //     hal_io_init();
 //     // configure radio SPI
-//     hal_spi_init();
+        hal_spi_init();
 //     // configure timer and interrupt handler
-//     hal_time_init();
+        hal_time_init();
 
 //     hal_enableIRQs();
-    NVIC_EnableIRQ(RTC_IRQn);
-    if (MXC_RTC_Init(0, 0) != E_NO_ERROR) {
-        printf("Failed RTC Initialization\n");
-        printf("Example Failed\n");   
-        while (1);
-    }
-    printf("RTC started\n");
-    printTime();
     
 }
 

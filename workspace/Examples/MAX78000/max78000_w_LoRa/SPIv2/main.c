@@ -171,7 +171,7 @@ void setup(void) {
 
     // LMIC init
     os_init();
-    LED_On(LED1);
+    
     // Reset the MAC state. Session and pending data transfers will be discarded.
     LMIC_reset();
 

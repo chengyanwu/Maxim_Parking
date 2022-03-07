@@ -770,7 +770,7 @@ bit_t LMIC_setupChannel (u1_t chidx, u4_t freq, u2_t drmap, s1_t band) {
     LMIC.xchFreq[chidx] = freq;
     LMIC.xchDrMap[chidx] = drmap==0 ? DR_RANGE_MAP(DR_SF10,DR_SF8C) : drmap;
     LMIC.channelMap[chidx>>4] |= (1<<(chidx&0xF));
-    return 1;
+    return 1;LMIC_enableChannel
 }
 
 void LMIC_disableChannel (u1_t channel) {
