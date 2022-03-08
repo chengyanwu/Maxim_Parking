@@ -55,8 +55,8 @@
 #define SPI_INSTANCE_NUM    1
 
 /***** Globals *****/
-uint8_t rx_data;
-uint8_t tx_data;
+// uint8_t rx_data;
+// uint8_t tx_data;
 volatile int SPI_FLAG;
 volatile uint8_t DMA_FLAG = 0;
 
@@ -313,10 +313,6 @@ static void hal_spi_init () {
         printf("\nSPI INITIALIZATION ERROR\n");
         while (1) {}
     }
-    if (MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD)!=E_NO_ERROR) {
-        printf("\nSPI INITIALIZATION ERROR\n");
-        while (1) {}
-    }
 }
 
 // // perform SPI transaction with radio
@@ -325,7 +321,7 @@ u1_t hal_spi (u1_t out) {
 //     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
 //     return SPI1->DR; // in
     int retVal;
-    tx_data = out;
+    uint8_t rx_data = 0;
     mxc_spi_req_t req;
     req.spi = SPI;
     req.txData = (uint8_t*) out;
@@ -337,10 +333,21 @@ u1_t hal_spi (u1_t out) {
     req.txCnt = 0;
     req.rxCnt = 0;
     //req.completeCB = (spi_complete_cb_t) SPI_Callback;
-    SPI_FLAG = 1;
+    //SPI_FLAG = 1;
     retVal = MXC_SPI_SetDataSize(SPI, 8);
+    if (MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD)!=E_NO_ERROR) {
+        printf("\nSPI INITIALIZATION ERROR\n");
+        while (1) {}
+    }
     MXC_SPI_MasterTransaction(&req);
     return rx_data;
+}
+u1_t hal_spi_write(u1_t out, int len){
+    return NULL;
+}
+
+u1_t hal_spi_read(u1_t out, int len){
+    return NULL;
 }
 
 // #ifdef CFG_lmic_clib

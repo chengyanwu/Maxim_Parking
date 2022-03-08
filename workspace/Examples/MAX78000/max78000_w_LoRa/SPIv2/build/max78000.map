@@ -231,14 +231,12 @@ AsyncWritten        0xc               c:/MaximSDK/Libraries/PeriphDrivers/bin/MA
 LMIC                0x144             c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
 AsyncRead           0xc               c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
 SPI_FLAG            0x4               c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
-rx_data             0x1               c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
 char_y              0x4               c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/tft_fthr.o
 __lock___at_quick_exit_mutex
                     0x1               c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lock.o)
 __lock___dd_hash_mutex
                     0x1               c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lock.o)
 __lock___tz_mutex   0x1               c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lock.o)
-tx_data             0x1               c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
 __lock___sfp_recursive_mutex
                     0x1               c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lock.o)
 
@@ -711,6 +709,10 @@ Discarded input sections
                 0x00000000        0x2 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
  .text.EXTI_IRQHandler
                 0x00000000        0x2 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ .text.hal_spi_write
+                0x00000000        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ .text.hal_spi_read
+                0x00000000        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
  .text.hal_checkTimer
                 0x00000000        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
  .text.TIM9_IRQHandler
@@ -776,6 +778,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xe6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
  .debug_macro   0x00000000       0x11 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
  .debug_macro   0x00000000       0x1d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ COMMON         0x00000000        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
  .group         0x00000000        0xc c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
  .group         0x00000000        0xc c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
  .group         0x00000000        0xc c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
@@ -6697,509 +6700,509 @@ LOAD c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+f
                 0x10003006        0x2 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
                 0x10003006                hal_enableIRQs
  .text.hal_init
-                0x10003008       0xc0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+                0x10003008       0xb0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
                 0x10003008                hal_init
  .text.hal_failed
-                0x100030c8        0x2 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
-                0x100030c8                hal_failed
- *fill*         0x100030ca        0x2 
+                0x100030b8        0x2 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+                0x100030b8                hal_failed
+ *fill*         0x100030ba        0x2 
  .text.mxc_assert
-                0x100030cc       0x10 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
-                0x100030cc                mxc_assert
+                0x100030bc       0x10 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+                0x100030bc                mxc_assert
  .text.Console_Init
-                0x100030dc       0x18 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
-                0x100030dc                Console_Init
+                0x100030cc       0x18 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+                0x100030cc                Console_Init
  .text.Board_Init
-                0x100030f4       0x60 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
-                0x100030f4                Board_Init
+                0x100030e4       0x60 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+                0x100030e4                Board_Init
  .text.NMI_Handler
-                0x10003154        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
-                0x10003154                NMI_Handler
- .text._close   0x10003158        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
-                0x10003158                _close
- .text._isatty  0x1000315e        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
-                0x1000315e                _isatty
- .text._lseek   0x10003164        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
-                0x10003164                _lseek
- .text._fstat   0x1000316a        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
-                0x1000316a                _fstat
- .text._read    0x10003170       0x54 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
-                0x10003170                _read
- .text._write   0x100031c4       0x54 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
-                0x100031c4                _write
- .text.LED_On   0x10003218       0x44 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
-                0x10003218                LED_On
- .text.LED_Off  0x1000325c       0x44 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
-                0x1000325c                LED_Off
+                0x10003144        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+                0x10003144                NMI_Handler
+ .text._close   0x10003148        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+                0x10003148                _close
+ .text._isatty  0x1000314e        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+                0x1000314e                _isatty
+ .text._lseek   0x10003154        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+                0x10003154                _lseek
+ .text._fstat   0x1000315a        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+                0x1000315a                _fstat
+ .text._read    0x10003160       0x54 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+                0x10003160                _read
+ .text._write   0x100031b4       0x54 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+                0x100031b4                _write
+ .text.LED_On   0x10003208       0x44 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+                0x10003208                LED_On
+ .text.LED_Off  0x1000324c       0x44 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+                0x1000324c                LED_Off
  .text.LED_Init
-                0x100032a0       0x3c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
-                0x100032a0                LED_Init
- .text.PB_Init  0x100032dc       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
-                0x100032dc                PB_Init
+                0x10003290       0x3c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+                0x10003290                LED_Init
+ .text.PB_Init  0x100032cc       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+                0x100032cc                PB_Init
  .text.GPIO0_IRQHandler
-                0x10003314        0xa c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
-                0x10003314                GPIO0_IRQHandler
+                0x10003304        0xa c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+                0x10003304                GPIO0_IRQHandler
  .text.GPIO1_IRQHandler
-                0x1000331e        0xa c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
-                0x1000331e                GPIO1_IRQHandler
+                0x1000330e        0xa c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+                0x1000330e                GPIO1_IRQHandler
  .text.GPIO2_IRQHandler
-                0x10003328        0xa c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
-                0x10003328                GPIO2_IRQHandler
- *fill*         0x10003332        0x2 
- .text          0x10003334      0x148 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/startup_max78000.o
-                0x10003334                Reset_Handler
-                0x10003372                HardFault_Handler
-                0x10003374                MemManage_Handler
-                0x10003376                BusFault_Handler
-                0x10003378                UsageFault_Handler
-                0x1000337a                SVC_Handler
-                0x1000337c                DebugMon_Handler
-                0x1000337e                PendSV_Handler
-                0x10003380                SysTick_Handler
-                0x10003382                Default_Handler
-                0x10003384                PF_IRQHandler
-                0x10003386                WDT0_IRQHandler
-                0x10003388                RSV02_IRQHandler
-                0x1000338a                RTC_IRQHandler
-                0x1000338c                TRNG_IRQHandler
-                0x1000338e                TMR0_IRQHandler
-                0x10003390                TMR1_IRQHandler
-                0x10003392                TMR2_IRQHandler
-                0x10003394                TMR3_IRQHandler
-                0x10003396                TMR4_IRQHandler
-                0x10003398                TMR5_IRQHandler
-                0x1000339a                RSV11_IRQHandler
-                0x1000339c                RSV12_IRQHandler
-                0x1000339e                I2C0_IRQHandler
-                0x100033a0                UART0_IRQHandler
-                0x100033a2                UART1_IRQHandler
-                0x100033a4                SPI1_IRQHandler
-                0x100033a6                RSV17_IRQHandler
-                0x100033a8                RSV18_IRQHandler
-                0x100033aa                RSV19_IRQHandler
-                0x100033ac                ADC_IRQHandler
-                0x100033ae                RSV21_IRQHandler
-                0x100033b0                RSV22_IRQHandler
-                0x100033b2                FLC0_IRQHandler
-                0x100033ba                RSV27_IRQHandler
-                0x100033bc                DMA0_IRQHandler
-                0x100033be                DMA1_IRQHandler
-                0x100033c0                DMA2_IRQHandler
-                0x100033c2                DMA3_IRQHandler
-                0x100033c4                RSV32_IRQHandler
-                0x100033c6                RSV33_IRQHandler
-                0x100033c8                UART2_IRQHandler
-                0x100033ca                RSV35_IRQHandler
-                0x100033cc                I2C1_IRQHandler
-                0x100033ce                RSV37_IRQHandler
-                0x100033d0                RSV38_IRQHandler
-                0x100033d2                RSV39_IRQHandler
-                0x100033d4                RSV40_IRQHandler
-                0x100033d6                RSV41_IRQHandler
-                0x100033d8                RSV42_IRQHandler
-                0x100033da                RSV43_IRQHandler
-                0x100033dc                RSV44_IRQHandler
-                0x100033de                RSV45_IRQHandler
-                0x100033e0                RSV46_IRQHandler
-                0x100033e2                RSV47_IRQHandler
-                0x100033e4                RSV48_IRQHandler
-                0x100033e6                RSV49_IRQHandler
-                0x100033e8                RSV50_IRQHandler
-                0x100033ea                RSV51_IRQHandler
-                0x100033ec                RSV52_IRQHandler
-                0x100033ee                WUT_IRQHandler
-                0x100033f0                GPIOWAKE_IRQHandler
-                0x100033f2                RSV55_IRQHandler
-                0x100033f6                WDT1_IRQHandler
-                0x100033f8                RSV58_IRQHandler
-                0x100033fa                PT_IRQHandler
-                0x100033fc                RSV60_IRQHandler
-                0x100033fe                RSV61_IRQHandler
-                0x10003400                I2C2_IRQHandler
-                0x10003402                RISCV_IRQHandler
-                0x10003404                RSV64_IRQHandler
-                0x10003406                RSV65_IRQHandler
-                0x10003408                RSV66_IRQHandler
-                0x1000340a                OWM_IRQHandler
-                0x1000340c                RSV68_IRQHandler
-                0x1000340e                RSV69_IRQHandler
-                0x10003410                RSV70_IRQHandler
-                0x10003412                RSV71_IRQHandler
-                0x10003414                RSV72_IRQHandler
-                0x10003416                RSV73_IRQHandler
-                0x10003418                RSV74_IRQHandler
-                0x1000341a                RSV75_IRQHandler
-                0x1000341c                RSV76_IRQHandler
-                0x1000341e                RSV77_IRQHandler
-                0x10003420                RSV78_IRQHandler
-                0x10003422                RSV79_IRQHandler
-                0x10003424                RSV80_IRQHandler
-                0x10003426                RSV81_IRQHandler
-                0x10003428                ECC_IRQHandler
-                0x1000342a                DVS_IRQHandler
-                0x1000342c                SIMO_IRQHandler
-                0x1000342e                RSV85_IRQHandler
-                0x10003430                RSV86_IRQHandler
-                0x10003432                RSV87_IRQHandler
-                0x10003434                UART3_IRQHandler
-                0x10003436                RSV89_IRQHandler
-                0x10003438                RSV90_IRQHandler
-                0x1000343a                PCIF_IRQHandler
-                0x1000343c                RSV92_IRQHandler
-                0x1000343e                RSV93_IRQHandler
-                0x10003440                RSV94_IRQHandler
-                0x10003442                RSV95_IRQHandler
-                0x10003444                RSV96_IRQHandler
-                0x10003446                AES_IRQHandler
-                0x10003448                RSV98_IRQHandler
-                0x1000344a                I2S_IRQHandler
-                0x1000344c                CNN_FIFO_IRQHandler
-                0x1000344e                CNN_IRQHandler
-                0x10003450                RSV102_IRQHandler
-                0x10003452                LPCMP_IRQHandler
- .text._sbrk    0x1000347c       0x40 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
-                0x1000347c                _sbrk
+                0x10003318        0xa c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+                0x10003318                GPIO2_IRQHandler
+ *fill*         0x10003322        0x2 
+ .text          0x10003324      0x148 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/startup_max78000.o
+                0x10003324                Reset_Handler
+                0x10003362                HardFault_Handler
+                0x10003364                MemManage_Handler
+                0x10003366                BusFault_Handler
+                0x10003368                UsageFault_Handler
+                0x1000336a                SVC_Handler
+                0x1000336c                DebugMon_Handler
+                0x1000336e                PendSV_Handler
+                0x10003370                SysTick_Handler
+                0x10003372                Default_Handler
+                0x10003374                PF_IRQHandler
+                0x10003376                WDT0_IRQHandler
+                0x10003378                RSV02_IRQHandler
+                0x1000337a                RTC_IRQHandler
+                0x1000337c                TRNG_IRQHandler
+                0x1000337e                TMR0_IRQHandler
+                0x10003380                TMR1_IRQHandler
+                0x10003382                TMR2_IRQHandler
+                0x10003384                TMR3_IRQHandler
+                0x10003386                TMR4_IRQHandler
+                0x10003388                TMR5_IRQHandler
+                0x1000338a                RSV11_IRQHandler
+                0x1000338c                RSV12_IRQHandler
+                0x1000338e                I2C0_IRQHandler
+                0x10003390                UART0_IRQHandler
+                0x10003392                UART1_IRQHandler
+                0x10003394                SPI1_IRQHandler
+                0x10003396                RSV17_IRQHandler
+                0x10003398                RSV18_IRQHandler
+                0x1000339a                RSV19_IRQHandler
+                0x1000339c                ADC_IRQHandler
+                0x1000339e                RSV21_IRQHandler
+                0x100033a0                RSV22_IRQHandler
+                0x100033a2                FLC0_IRQHandler
+                0x100033aa                RSV27_IRQHandler
+                0x100033ac                DMA0_IRQHandler
+                0x100033ae                DMA1_IRQHandler
+                0x100033b0                DMA2_IRQHandler
+                0x100033b2                DMA3_IRQHandler
+                0x100033b4                RSV32_IRQHandler
+                0x100033b6                RSV33_IRQHandler
+                0x100033b8                UART2_IRQHandler
+                0x100033ba                RSV35_IRQHandler
+                0x100033bc                I2C1_IRQHandler
+                0x100033be                RSV37_IRQHandler
+                0x100033c0                RSV38_IRQHandler
+                0x100033c2                RSV39_IRQHandler
+                0x100033c4                RSV40_IRQHandler
+                0x100033c6                RSV41_IRQHandler
+                0x100033c8                RSV42_IRQHandler
+                0x100033ca                RSV43_IRQHandler
+                0x100033cc                RSV44_IRQHandler
+                0x100033ce                RSV45_IRQHandler
+                0x100033d0                RSV46_IRQHandler
+                0x100033d2                RSV47_IRQHandler
+                0x100033d4                RSV48_IRQHandler
+                0x100033d6                RSV49_IRQHandler
+                0x100033d8                RSV50_IRQHandler
+                0x100033da                RSV51_IRQHandler
+                0x100033dc                RSV52_IRQHandler
+                0x100033de                WUT_IRQHandler
+                0x100033e0                GPIOWAKE_IRQHandler
+                0x100033e2                RSV55_IRQHandler
+                0x100033e6                WDT1_IRQHandler
+                0x100033e8                RSV58_IRQHandler
+                0x100033ea                PT_IRQHandler
+                0x100033ec                RSV60_IRQHandler
+                0x100033ee                RSV61_IRQHandler
+                0x100033f0                I2C2_IRQHandler
+                0x100033f2                RISCV_IRQHandler
+                0x100033f4                RSV64_IRQHandler
+                0x100033f6                RSV65_IRQHandler
+                0x100033f8                RSV66_IRQHandler
+                0x100033fa                OWM_IRQHandler
+                0x100033fc                RSV68_IRQHandler
+                0x100033fe                RSV69_IRQHandler
+                0x10003400                RSV70_IRQHandler
+                0x10003402                RSV71_IRQHandler
+                0x10003404                RSV72_IRQHandler
+                0x10003406                RSV73_IRQHandler
+                0x10003408                RSV74_IRQHandler
+                0x1000340a                RSV75_IRQHandler
+                0x1000340c                RSV76_IRQHandler
+                0x1000340e                RSV77_IRQHandler
+                0x10003410                RSV78_IRQHandler
+                0x10003412                RSV79_IRQHandler
+                0x10003414                RSV80_IRQHandler
+                0x10003416                RSV81_IRQHandler
+                0x10003418                ECC_IRQHandler
+                0x1000341a                DVS_IRQHandler
+                0x1000341c                SIMO_IRQHandler
+                0x1000341e                RSV85_IRQHandler
+                0x10003420                RSV86_IRQHandler
+                0x10003422                RSV87_IRQHandler
+                0x10003424                UART3_IRQHandler
+                0x10003426                RSV89_IRQHandler
+                0x10003428                RSV90_IRQHandler
+                0x1000342a                PCIF_IRQHandler
+                0x1000342c                RSV92_IRQHandler
+                0x1000342e                RSV93_IRQHandler
+                0x10003430                RSV94_IRQHandler
+                0x10003432                RSV95_IRQHandler
+                0x10003434                RSV96_IRQHandler
+                0x10003436                AES_IRQHandler
+                0x10003438                RSV98_IRQHandler
+                0x1000343a                I2S_IRQHandler
+                0x1000343c                CNN_FIFO_IRQHandler
+                0x1000343e                CNN_IRQHandler
+                0x10003440                RSV102_IRQHandler
+                0x10003442                LPCMP_IRQHandler
+ .text._sbrk    0x1000346c       0x40 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+                0x1000346c                _sbrk
  .text.SystemCoreClockUpdate
-                0x100034bc       0x78 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
-                0x100034bc                SystemCoreClockUpdate
- .text.PreInit  0x10003534        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
-                0x10003534                PreInit
+                0x100034ac       0x78 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+                0x100034ac                SystemCoreClockUpdate
+ .text.PreInit  0x10003524        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+                0x10003524                PreInit
  .text.SystemInit
-                0x10003538       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
-                0x10003538                SystemInit
+                0x10003528       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+                0x10003528                SystemInit
  .text.MXC_DelayInit
-                0x10003570       0x80 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x10003560       0x80 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
  .text.MXC_DelayAsync
-                0x100035f0       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
-                0x100035f0                MXC_DelayAsync
+                0x100035e0       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x100035e0                MXC_DelayAsync
  .text.MXC_DelayAbort
-                0x1000362c       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
-                0x1000362c                MXC_DelayAbort
+                0x1000361c       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x1000361c                MXC_DelayAbort
  .text.MXC_DelayCheck
-                0x10003660       0x58 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
-                0x10003660                MXC_DelayCheck
+                0x10003650       0x58 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x10003650                MXC_DelayCheck
  .text.MXC_Delay
-                0x100036b8       0x4c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
-                0x100036b8                MXC_Delay
+                0x100036a8       0x4c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x100036a8                MXC_Delay
  .text.MXC_SYS_ClockDisable
-                0x10003704       0x44 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x10003704                MXC_SYS_ClockDisable
+                0x100036f4       0x44 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x100036f4                MXC_SYS_ClockDisable
  .text.MXC_SYS_ClockEnable
-                0x10003748       0x4c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x10003748                MXC_SYS_ClockEnable
+                0x10003738       0x4c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x10003738                MXC_SYS_ClockEnable
  .text.MXC_SYS_Clock_Timeout
-                0x10003794       0x2e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x10003794                MXC_SYS_Clock_Timeout
+                0x10003784       0x2e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x10003784                MXC_SYS_Clock_Timeout
  .text.MXC_SYS_ClockSourceEnable
-                0x100037c2       0x6c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x100037c2                MXC_SYS_ClockSourceEnable
- *fill*         0x1000382e        0x2 
+                0x100037b2       0x6c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x100037b2                MXC_SYS_ClockSourceEnable
+ *fill*         0x1000381e        0x2 
  .text.MXC_SYS_Reset_Periph
-                0x10003830       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x10003830                MXC_SYS_Reset_Periph
+                0x10003820       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x10003820                MXC_SYS_Reset_Periph
  .text.MXC_GPIO_Init
-                0x1000386c       0x28 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x1000386c                MXC_GPIO_Init
+                0x1000385c       0x28 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x1000385c                MXC_GPIO_Init
  .text.MXC_GPIO_Config
-                0x10003894      0x178 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10003894                MXC_GPIO_Config
+                0x10003884      0x178 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10003884                MXC_GPIO_Config
  .text.MXC_GPIO_OutSet
-                0x10003a0c       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10003a0c                MXC_GPIO_OutSet
+                0x100039fc       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x100039fc                MXC_GPIO_OutSet
  .text.MXC_GPIO_OutClr
-                0x10003a40       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10003a40                MXC_GPIO_OutClr
+                0x10003a30       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10003a30                MXC_GPIO_OutClr
  .text.MXC_GPIO_Handler
-                0x10003a74        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10003a74                MXC_GPIO_Handler
+                0x10003a64        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10003a64                MXC_GPIO_Handler
  .text.MXC_GPIO_ClearFlags
-                0x10003a78        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10003a78                MXC_GPIO_ClearFlags
+                0x10003a68        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10003a68                MXC_GPIO_ClearFlags
  .text.MXC_GPIO_GetFlags
-                0x10003a7c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10003a7c                MXC_GPIO_GetFlags
+                0x10003a6c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10003a6c                MXC_GPIO_GetFlags
  .text.MXC_GPIO_RevA_OutSet
-                0x10003a80        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x10003a80                MXC_GPIO_RevA_OutSet
+                0x10003a70        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x10003a70                MXC_GPIO_RevA_OutSet
  .text.MXC_GPIO_RevA_OutClr
-                0x10003a84        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x10003a84                MXC_GPIO_RevA_OutClr
+                0x10003a74        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x10003a74                MXC_GPIO_RevA_OutClr
  .text.MXC_GPIO_RevA_ClearFlags
-                0x10003a88        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x10003a88                MXC_GPIO_RevA_ClearFlags
+                0x10003a78        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x10003a78                MXC_GPIO_RevA_ClearFlags
  .text.MXC_GPIO_RevA_GetFlags
-                0x10003a8c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x10003a8c                MXC_GPIO_RevA_GetFlags
+                0x10003a7c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x10003a7c                MXC_GPIO_RevA_GetFlags
  .text.MXC_GPIO_RevA_SetVSSEL
-                0x10003a90       0x24 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x10003a90                MXC_GPIO_RevA_SetVSSEL
+                0x10003a80       0x24 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x10003a80                MXC_GPIO_RevA_SetVSSEL
  .text.MXC_GPIO_RevA_SetAF
-                0x10003ab4       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x10003ab4                MXC_GPIO_RevA_SetAF
+                0x10003aa4       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x10003aa4                MXC_GPIO_RevA_SetAF
  .text.MXC_ICC_Enable
-                0x10003af0        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
-                0x10003af0                MXC_ICC_Enable
+                0x10003ae0        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+                0x10003ae0                MXC_ICC_Enable
  .text.MXC_ICC_RevA_Enable
-                0x10003af4       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
-                0x10003af4                MXC_ICC_RevA_Enable
+                0x10003ae4       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+                0x10003ae4                MXC_ICC_RevA_Enable
  .text.MXC_RTC_Init
-                0x10003b24       0x20 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
-                0x10003b24                MXC_RTC_Init
+                0x10003b14       0x20 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+                0x10003b14                MXC_RTC_Init
  .text.MXC_RTC_GetSubSecond
-                0x10003b44        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
-                0x10003b44                MXC_RTC_GetSubSecond
+                0x10003b34        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+                0x10003b34                MXC_RTC_GetSubSecond
  .text.MXC_RTC_CheckBusy
-                0x10003b48       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
-                0x10003b48                MXC_RTC_CheckBusy
+                0x10003b38       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+                0x10003b38                MXC_RTC_CheckBusy
  .text.MXC_RTC_RevA_Init
-                0x10003b78       0x5a c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
-                0x10003b78                MXC_RTC_RevA_Init
- *fill*         0x10003bd2        0x2 
+                0x10003b68       0x5a c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+                0x10003b68                MXC_RTC_RevA_Init
+ *fill*         0x10003bc2        0x2 
  .text.MXC_RTC_RevA_GetSubSecond
-                0x10003bd4        0xc c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
-                0x10003bd4                MXC_RTC_RevA_GetSubSecond
+                0x10003bc4        0xc c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+                0x10003bc4                MXC_RTC_RevA_GetSubSecond
  .text.MXC_SPI_Init
-                0x10003be0      0x1b8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003be0                MXC_SPI_Init
+                0x10003bd0      0x1b8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003bd0                MXC_SPI_Init
  .text.MXC_SPI_GetPeripheralClock
-                0x10003d98       0x74 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003d98                MXC_SPI_GetPeripheralClock
+                0x10003d88       0x74 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003d88                MXC_SPI_GetPeripheralClock
  .text.MXC_SPI_SetFrequency
-                0x10003e0c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e0c                MXC_SPI_SetFrequency
+                0x10003dfc        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003dfc                MXC_SPI_SetFrequency
  .text.MXC_SPI_SetDataSize
-                0x10003e10        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e10                MXC_SPI_SetDataSize
+                0x10003e00        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e00                MXC_SPI_SetDataSize
  .text.MXC_SPI_GetDataSize
-                0x10003e14        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e14                MXC_SPI_GetDataSize
+                0x10003e04        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e04                MXC_SPI_GetDataSize
  .text.MXC_SPI_SetSlave
-                0x10003e18        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e18                MXC_SPI_SetSlave
+                0x10003e08        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e08                MXC_SPI_SetSlave
  .text.MXC_SPI_SetWidth
-                0x10003e1c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e1c                MXC_SPI_SetWidth
+                0x10003e0c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e0c                MXC_SPI_SetWidth
  .text.MXC_SPI_GetWidth
-                0x10003e20        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e20                MXC_SPI_GetWidth
+                0x10003e10        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e10                MXC_SPI_GetWidth
  .text.MXC_SPI_SetMode
-                0x10003e24        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e24                MXC_SPI_SetMode
+                0x10003e14        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e14                MXC_SPI_SetMode
  .text.MXC_SPI_StartTransmission
-                0x10003e28        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e28                MXC_SPI_StartTransmission
+                0x10003e18        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e18                MXC_SPI_StartTransmission
  .text.MXC_SPI_GetActive
-                0x10003e2c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e2c                MXC_SPI_GetActive
+                0x10003e1c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e1c                MXC_SPI_GetActive
  .text.MXC_SPI_ReadRXFIFO
-                0x10003e30        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e30                MXC_SPI_ReadRXFIFO
+                0x10003e20        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e20                MXC_SPI_ReadRXFIFO
  .text.MXC_SPI_GetRXFIFOAvailable
-                0x10003e34        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e34                MXC_SPI_GetRXFIFOAvailable
+                0x10003e24        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e24                MXC_SPI_GetRXFIFOAvailable
  .text.MXC_SPI_WriteTXFIFO
-                0x10003e38        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e38                MXC_SPI_WriteTXFIFO
+                0x10003e28        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e28                MXC_SPI_WriteTXFIFO
  .text.MXC_SPI_GetTXFIFOAvailable
-                0x10003e3c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e3c                MXC_SPI_GetTXFIFOAvailable
+                0x10003e2c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e2c                MXC_SPI_GetTXFIFOAvailable
  .text.MXC_SPI_SetRXThreshold
-                0x10003e40        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e40                MXC_SPI_SetRXThreshold
+                0x10003e30        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e30                MXC_SPI_SetRXThreshold
  .text.MXC_SPI_SetTXThreshold
-                0x10003e44        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e44                MXC_SPI_SetTXThreshold
+                0x10003e34        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e34                MXC_SPI_SetTXThreshold
  .text.MXC_SPI_MasterTransaction
-                0x10003e48        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e48                MXC_SPI_MasterTransaction
+                0x10003e38        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e38                MXC_SPI_MasterTransaction
  .text.MXC_SPI_AsyncHandler
-                0x10003e4c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
-                0x10003e4c                MXC_SPI_AsyncHandler
+                0x10003e3c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x10003e3c                MXC_SPI_AsyncHandler
  .text.MXC_SPI_RevA_TransSetup
-                0x10003e50      0x164 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10003e40      0x164 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
  .text.MXC_SPI_RevA_TransHandler
-                0x10003fb4      0x140 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10003fa4      0x140 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
  .text.MXC_SPI_RevA_MasterTransHandler
-                0x100040f4       0x64 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x100040e4       0x64 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
  .text.MXC_SPI_RevA_Init
-                0x10004158       0xd0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004158                MXC_SPI_RevA_Init
+                0x10004148       0xd0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004148                MXC_SPI_RevA_Init
  .text.MXC_SPI_RevA_SetFrequency
-                0x10004228       0x70 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004228                MXC_SPI_RevA_SetFrequency
+                0x10004218       0x70 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004218                MXC_SPI_RevA_SetFrequency
  .text.MXC_SPI_RevA_SetDataSize
-                0x10004298       0x94 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004298                MXC_SPI_RevA_SetDataSize
+                0x10004288       0x94 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004288                MXC_SPI_RevA_SetDataSize
  .text.MXC_SPI_RevA_GetDataSize
-                0x1000432c       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x1000432c                MXC_SPI_RevA_GetDataSize
+                0x1000431c       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x1000431c                MXC_SPI_RevA_GetDataSize
  .text.MXC_SPI_RevA_SetSlave
-                0x10004368       0x60 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004368                MXC_SPI_RevA_SetSlave
+                0x10004358       0x60 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004358                MXC_SPI_RevA_SetSlave
  .text.MXC_SPI_RevA_SetWidth
-                0x100043c8       0x60 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x100043c8                MXC_SPI_RevA_SetWidth
+                0x100043b8       0x60 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x100043b8                MXC_SPI_RevA_SetWidth
  .text.MXC_SPI_RevA_GetWidth
-                0x10004428       0x22 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004428                MXC_SPI_RevA_GetWidth
- *fill*         0x1000444a        0x2 
+                0x10004418       0x22 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004418                MXC_SPI_RevA_GetWidth
+ *fill*         0x1000443a        0x2 
  .text.MXC_SPI_RevA_SetMode
-                0x1000444c       0x6c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x1000444c                MXC_SPI_RevA_SetMode
+                0x1000443c       0x6c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x1000443c                MXC_SPI_RevA_SetMode
  .text.MXC_SPI_RevA_StartTransmission
-                0x100044b8       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x100044b8                MXC_SPI_RevA_StartTransmission
+                0x100044a8       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x100044a8                MXC_SPI_RevA_StartTransmission
  .text.MXC_SPI_RevA_GetActive
-                0x100044f8       0x10 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x100044f8                MXC_SPI_RevA_GetActive
+                0x100044e8       0x10 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x100044e8                MXC_SPI_RevA_GetActive
  .text.MXC_SPI_RevA_ReadRXFIFO
-                0x10004508       0x90 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004508                MXC_SPI_RevA_ReadRXFIFO
+                0x100044f8       0x90 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x100044f8                MXC_SPI_RevA_ReadRXFIFO
  .text.MXC_SPI_RevA_GetRXFIFOAvailable
-                0x10004598        0x8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004598                MXC_SPI_RevA_GetRXFIFOAvailable
+                0x10004588        0x8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004588                MXC_SPI_RevA_GetRXFIFOAvailable
  .text.MXC_SPI_RevA_WriteTXFIFO
-                0x100045a0       0x80 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x100045a0                MXC_SPI_RevA_WriteTXFIFO
+                0x10004590       0x80 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004590                MXC_SPI_RevA_WriteTXFIFO
  .text.MXC_SPI_RevA_GetTXFIFOAvailable
-                0x10004620       0x38 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004620                MXC_SPI_RevA_GetTXFIFOAvailable
+                0x10004610       0x38 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004610                MXC_SPI_RevA_GetTXFIFOAvailable
  .text.MXC_SPI_RevA_SetRXThreshold
-                0x10004658       0x4c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004658                MXC_SPI_RevA_SetRXThreshold
+                0x10004648       0x4c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004648                MXC_SPI_RevA_SetRXThreshold
  .text.MXC_SPI_RevA_GetRXThreshold
-                0x100046a4       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x100046a4                MXC_SPI_RevA_GetRXThreshold
+                0x10004694       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004694                MXC_SPI_RevA_GetRXThreshold
  .text.MXC_SPI_RevA_SetTXThreshold
-                0x100046d8       0x48 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x100046d8                MXC_SPI_RevA_SetTXThreshold
+                0x100046c8       0x48 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x100046c8                MXC_SPI_RevA_SetTXThreshold
  .text.MXC_SPI_RevA_MasterTransaction
-                0x10004720       0x2c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x10004720                MXC_SPI_RevA_MasterTransaction
+                0x10004710       0x2c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x10004710                MXC_SPI_RevA_MasterTransaction
  .text.MXC_SPI_RevA_AsyncHandler
-                0x1000474c       0x78 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x1000474c                MXC_SPI_RevA_AsyncHandler
+                0x1000473c       0x78 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x1000473c                MXC_SPI_RevA_AsyncHandler
  .text.MXC_UART_GetFrequency.part.0
-                0x100047c4       0x54 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100047b4       0x54 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
  .text.MXC_UART_Shutdown
-                0x10004818       0x60 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004818                MXC_UART_Shutdown
+                0x10004808       0x60 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10004808                MXC_UART_Shutdown
  .text.MXC_UART_Init
-                0x10004878       0x98 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004878                MXC_UART_Init
+                0x10004868       0x98 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10004868                MXC_UART_Init
  .text.MXC_UART_SetFrequency
-                0x10004910       0xb8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004910                MXC_UART_SetFrequency
+                0x10004900       0xb8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10004900                MXC_UART_SetFrequency
  .text.MXC_UART_GetFrequency
-                0x100049c8       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100049c8                MXC_UART_GetFrequency
+                0x100049b8       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100049b8                MXC_UART_GetFrequency
  .text.MXC_UART_SetDataSize
-                0x100049f8        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100049f8                MXC_UART_SetDataSize
+                0x100049e8        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100049e8                MXC_UART_SetDataSize
  .text.MXC_UART_SetStopBits
-                0x100049fc        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100049fc                MXC_UART_SetStopBits
+                0x100049ec        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100049ec                MXC_UART_SetStopBits
  .text.MXC_UART_SetParity
-                0x10004a00        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004a00                MXC_UART_SetParity
+                0x100049f0        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100049f0                MXC_UART_SetParity
  .text.MXC_UART_ReadCharacterRaw
-                0x10004a04        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004a04                MXC_UART_ReadCharacterRaw
+                0x100049f4        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100049f4                MXC_UART_ReadCharacterRaw
  .text.MXC_UART_WriteCharacterRaw
-                0x10004a08        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004a08                MXC_UART_WriteCharacterRaw
+                0x100049f8        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100049f8                MXC_UART_WriteCharacterRaw
  .text.MXC_UART_ReadCharacter
-                0x10004a0c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004a0c                MXC_UART_ReadCharacter
+                0x100049fc        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100049fc                MXC_UART_ReadCharacter
  .text.MXC_UART_WriteCharacter
-                0x10004a10        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004a10                MXC_UART_WriteCharacter
+                0x10004a00        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10004a00                MXC_UART_WriteCharacter
  .text.MXC_UART_GetRXFIFOAvailable
-                0x10004a14        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004a14                MXC_UART_GetRXFIFOAvailable
+                0x10004a04        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10004a04                MXC_UART_GetRXFIFOAvailable
  .text.MXC_UART_GetTXFIFOAvailable
-                0x10004a18        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004a18                MXC_UART_GetTXFIFOAvailable
+                0x10004a08        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10004a08                MXC_UART_GetTXFIFOAvailable
  .text.MXC_UART_SetRXThreshold
-                0x10004a1c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10004a1c                MXC_UART_SetRXThreshold
+                0x10004a0c        0x4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10004a0c                MXC_UART_SetRXThreshold
  .text.MXC_UART_Common_ReadCharacter
-                0x10004a20       0x18 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
-                0x10004a20                MXC_UART_Common_ReadCharacter
+                0x10004a10       0x18 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+                0x10004a10                MXC_UART_Common_ReadCharacter
  .text.MXC_UART_Common_WriteCharacter
-                0x10004a38       0x1e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
-                0x10004a38                MXC_UART_Common_WriteCharacter
- *fill*         0x10004a56        0x2 
+                0x10004a28       0x1e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+                0x10004a28                MXC_UART_Common_WriteCharacter
+ *fill*         0x10004a46        0x2 
  .text.MXC_UART_RevB_Init
-                0x10004a58       0x68 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004a58                MXC_UART_RevB_Init
+                0x10004a48       0x68 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004a48                MXC_UART_RevB_Init
  .text.MXC_UART_RevB_SetFrequency
-                0x10004ac0       0x88 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004ac0                MXC_UART_RevB_SetFrequency
+                0x10004ab0       0x88 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004ab0                MXC_UART_RevB_SetFrequency
  .text.MXC_UART_RevB_GetFrequency
-                0x10004b48       0x68 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004b48                MXC_UART_RevB_GetFrequency
+                0x10004b38       0x68 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004b38                MXC_UART_RevB_GetFrequency
  .text.MXC_UART_RevB_SetDataSize
-                0x10004bb0       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004bb0                MXC_UART_RevB_SetDataSize
+                0x10004ba0       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004ba0                MXC_UART_RevB_SetDataSize
  .text.MXC_UART_RevB_SetStopBits
-                0x10004bf0       0x44 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004bf0                MXC_UART_RevB_SetStopBits
+                0x10004be0       0x44 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004be0                MXC_UART_RevB_SetStopBits
  .text.MXC_UART_RevB_SetParity
-                0x10004c34       0x94 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004c34                MXC_UART_RevB_SetParity
+                0x10004c24       0x94 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004c24                MXC_UART_RevB_SetParity
  .text.MXC_UART_RevB_ReadCharacterRaw
-                0x10004cc8       0x38 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004cc8                MXC_UART_RevB_ReadCharacterRaw
+                0x10004cb8       0x38 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004cb8                MXC_UART_RevB_ReadCharacterRaw
  .text.MXC_UART_RevB_WriteCharacterRaw
-                0x10004d00       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004d00                MXC_UART_RevB_WriteCharacterRaw
+                0x10004cf0       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004cf0                MXC_UART_RevB_WriteCharacterRaw
  .text.MXC_UART_RevB_GetRXFIFOAvailable
-                0x10004d3c        0x8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004d3c                MXC_UART_RevB_GetRXFIFOAvailable
+                0x10004d2c        0x8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004d2c                MXC_UART_RevB_GetRXFIFOAvailable
  .text.MXC_UART_RevB_GetTXFIFOAvailable
-                0x10004d44        0xc c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004d44                MXC_UART_RevB_GetTXFIFOAvailable
+                0x10004d34        0xc c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004d34                MXC_UART_RevB_GetTXFIFOAvailable
  .text.MXC_UART_RevB_SetRXThreshold
-                0x10004d50       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10004d50                MXC_UART_RevB_SetRXThreshold
+                0x10004d40       0x3c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10004d40                MXC_UART_RevB_SetRXThreshold
  .text.MXC_FreeLock
-                0x10004d8c        0xa c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
-                0x10004d8c                MXC_FreeLock
- *fill*         0x10004d96        0x2 
+                0x10004d7c        0xa c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+                0x10004d7c                MXC_FreeLock
+ *fill*         0x10004d86        0x2 
  .text.MXC_GPIO_Common_Init
-                0x10004d98       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
-                0x10004d98                MXC_GPIO_Common_Init
+                0x10004d88       0x34 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+                0x10004d88                MXC_GPIO_Common_Init
  .text.MXC_GPIO_Common_Handler
-                0x10004dcc       0x84 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
-                0x10004dcc                MXC_GPIO_Common_Handler
- .text.__errno  0x10004e50        0xc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-errno.o)
-                0x10004e50                __errno
+                0x10004dbc       0x84 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+                0x10004dbc                MXC_GPIO_Common_Handler
+ .text.__errno  0x10004e40        0xc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-errno.o)
+                0x10004e40                __errno
  .text.__libc_init_array
-                0x10004e5c       0x48 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-init.o)
-                0x10004e5c                __libc_init_array
+                0x10004e4c       0x48 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-init.o)
+                0x10004e4c                __libc_init_array
  .text._malloc_r
-                0x10004ea4      0x574 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mallocr.o)
-                0x10004ea4                _malloc_r
- .text          0x10005418      0x134 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-memcpy.o)
-                0x10005418                memcpy
- .text.memset   0x1000554c       0xa0 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-memset.o)
-                0x1000554c                memset
+                0x10004e94      0x574 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mallocr.o)
+                0x10004e94                _malloc_r
+ .text          0x10005408      0x134 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-memcpy.o)
+                0x10005408                memcpy
+ .text.memset   0x1000553c       0xa0 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-memset.o)
+                0x1000553c                memset
  .text.__malloc_lock
-                0x100055ec        0xc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mlock.o)
-                0x100055ec                __malloc_lock
+                0x100055dc        0xc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mlock.o)
+                0x100055dc                __malloc_lock
  .text.__malloc_unlock
-                0x100055f8        0xc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mlock.o)
-                0x100055f8                __malloc_unlock
- .text.printf   0x10005604       0x28 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-printf.o)
-                0x10005604                printf
- .text._puts_r  0x1000562c       0x9c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-puts.o)
-                0x1000562c                _puts_r
- .text.puts     0x100056c8       0x10 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-puts.o)
-                0x100056c8                puts
- .text._sbrk_r  0x100056d8       0x24 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-sbrkr.o)
-                0x100056d8                _sbrk_r
- *fill*         0x100056fc        0x4 
+                0x100055e8        0xc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mlock.o)
+                0x100055e8                __malloc_unlock
+ .text.printf   0x100055f4       0x28 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-printf.o)
+                0x100055f4                printf
+ .text._puts_r  0x1000561c       0x9c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-puts.o)
+                0x1000561c                _puts_r
+ .text.puts     0x100056b8       0x10 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-puts.o)
+                0x100056b8                puts
+ .text._sbrk_r  0x100056c8       0x24 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-sbrkr.o)
+                0x100056c8                _sbrk_r
+ *fill*         0x100056ec       0x14 
  .text          0x10005700       0xdc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-strlen.o)
                 0x10005700                strlen
  *fill*         0x100057dc        0x4 
@@ -7465,8 +7468,11 @@ LOAD c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+f
  .rodata.rxlorairqmask
                 0x1000c0ac        0x3 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
  *fill*         0x1000c0af        0x1 
+ .rodata.hal_spi.str1.4
+                0x1000c0b0       0x1a c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ *fill*         0x1000c0ca        0x2 
  .rodata.hal_init.str1.4
-                0x1000c0b0       0x54 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+                0x1000c0cc       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
  .rodata.mxc_assert.str1.4
                 0x1000c104       0x19 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
  *fill*         0x1000c11d        0x3 
@@ -7666,7 +7672,7 @@ LOAD c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+f
 .igot.plt       0x200009d4        0x0 load address 0x1000d00c
  .igot.plt      0x200009d4        0x0 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp/crtbegin.o
 
-.bss            0x200009d4      0x6f4 load address 0x1000d00c
+.bss            0x200009d4      0x6f0 load address 0x1000d00c
                 0x200009d4                . = ALIGN (0x4)
                 0x200009d4                _bss = .
  *(.bss*)
@@ -7703,50 +7709,46 @@ LOAD c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+f
  COMMON         0x20000fd8       0xc0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
                 0x20000fd8                AESKEY
                 0x20001088                AESAUX
- COMMON         0x20001098        0x6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
-                0x20001098                SPI_FLAG
-                0x2000109c                rx_data
-                0x2000109d                tx_data
- COMMON         0x2000109e        0x1 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
-                0x2000109e                async
- *fill*         0x2000109f        0x1 
- COMMON         0x200010a0       0x21 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lock.o)
-                0x200010a0                __lock___atexit_recursive_mutex
-                0x200010a4                __lock___arc4random_mutex
-                0x200010a8                __lock___env_recursive_mutex
-                0x200010ac                __lock___sinit_recursive_mutex
-                0x200010b0                __lock___malloc_recursive_mutex
-                0x200010b4                __lock___at_quick_exit_mutex
-                0x200010b8                __lock___dd_hash_mutex
-                0x200010bc                __lock___tz_mutex
-                0x200010c0                __lock___sfp_recursive_mutex
- *fill*         0x200010c1        0x3 
- COMMON         0x200010c4        0x4 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-reent.o)
-                0x200010c4                errno
-                0x200010c8                _ebss = ALIGN (., 0x4)
+ COMMON         0x20001098        0x1 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x20001098                async
+ *fill*         0x20001099        0x3 
+ COMMON         0x2000109c       0x21 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lock.o)
+                0x2000109c                __lock___atexit_recursive_mutex
+                0x200010a0                __lock___arc4random_mutex
+                0x200010a4                __lock___env_recursive_mutex
+                0x200010a8                __lock___sinit_recursive_mutex
+                0x200010ac                __lock___malloc_recursive_mutex
+                0x200010b0                __lock___at_quick_exit_mutex
+                0x200010b4                __lock___dd_hash_mutex
+                0x200010b8                __lock___tz_mutex
+                0x200010bc                __lock___sfp_recursive_mutex
+ *fill*         0x200010bd        0x3 
+ COMMON         0x200010c0        0x4 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-reent.o)
+                0x200010c0                errno
+                0x200010c4                _ebss = ALIGN (., 0x4)
 
-.shared         0x200010c8        0x4 load address 0x1000d00c
-                0x200010c8                . = ALIGN (0x4)
-                0x200010c8                _shared = .
+.shared         0x200010c4        0x4 load address 0x1000d00c
+                0x200010c4                . = ALIGN (0x4)
+                0x200010c4                _shared = .
  *(.mailbox*)
-                0x200010c8                . = ALIGN (0x4)
+                0x200010c4                . = ALIGN (0x4)
  *(.shared*)
- .shared        0x200010c8        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
-                0x200010c8                SystemCoreClock
-                0x200010cc                _eshared = ALIGN (., 0x4)
+ .shared        0x200010c4        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+                0x200010c4                SystemCoreClock
+                0x200010c8                _eshared = ALIGN (., 0x4)
                 0x1000d00c                __shared_data = LOADADDR (.shared)
                 0x20020000                __StackTop = (ORIGIN (SRAM) + LENGTH (SRAM))
                 0x2001f000                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
 
-.stack_dummy    0x200010d0     0x1000 load address 0x1000d010
+.stack_dummy    0x200010c8     0x1000 load address 0x1000d010
  *(.stack*)
- .stack         0x200010d0     0x1000 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/startup_max78000.o
+ .stack         0x200010c8     0x1000 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/startup_max78000.o
 
-.heap           0x200010d0      0xc00 load address 0x1000d010
-                0x200010d0                . = ALIGN (0x4)
+.heap           0x200010c8      0xc00 load address 0x1000d010
+                0x200010c8                . = ALIGN (0x4)
  *(.heap*)
- .heap          0x200010d0      0xc00 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/startup_max78000.o
-                0x200010d0                __HeapBase
+ .heap          0x200010c8      0xc00 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/startup_max78000.o
+                0x200010c8                __HeapBase
                 0x2001f000                __HeapLimit = ABSOLUTE (__StackLimit)
                 0x20020000                PROVIDE (__stack = __StackTop)
                 0x00000001                ASSERT ((__StackLimit >= _ebss), region RAM overflowed with stack)
@@ -7968,96 +7970,96 @@ OUTPUT(c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000
  .comment       0x00000079       0x7a c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
  .comment       0x00000079       0x7a c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
 
-.debug_info     0x00000000    0x2904c
+.debug_info     0x00000000    0x290b1
  .debug_info    0x00000000     0x1dca c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
  .debug_info    0x00001dca     0x51aa c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
  .debug_info    0x00006f74      0xbce c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
  .debug_info    0x00007b42     0x1873 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/oslmic.o
  .debug_info    0x000093b5     0x2aef c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
- .debug_info    0x0000bea4     0x246c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
- .debug_info    0x0000e310     0x1925 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
- .debug_info    0x0000fc35     0x1513 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
- .debug_info    0x00011148     0x10e9 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
- .debug_info    0x00012231      0xee7 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
- .debug_info    0x00013118      0xa22 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
- .debug_info    0x00013b3a     0x1453 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
- .debug_info    0x00014f8d      0x91e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
- .debug_info    0x000158ab      0x8dd c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
- .debug_info    0x00016188     0x1988 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
- .debug_info    0x00017b10     0x133a c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
- .debug_info    0x00018e4a      0xbf9 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
- .debug_info    0x00019a43      0x951 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
- .debug_info    0x0001a394      0x830 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
- .debug_info    0x0001abc4     0x1423 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
- .debug_info    0x0001bfe7      0xd0f c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
- .debug_info    0x0001ccf6     0x2960 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
- .debug_info    0x0001f656     0x339c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
- .debug_info    0x000229f2     0x1fe6 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
- .debug_info    0x000249d8      0x85e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
- .debug_info    0x00025236     0x2d6f c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
- .debug_info    0x00027fa5      0x7f3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
- .debug_info    0x00028798      0x8b4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+ .debug_info    0x0000bea4     0x24d1 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ .debug_info    0x0000e375     0x1925 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+ .debug_info    0x0000fc9a     0x1513 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+ .debug_info    0x000111ad     0x10e9 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+ .debug_info    0x00012296      0xee7 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+ .debug_info    0x0001317d      0xa22 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+ .debug_info    0x00013b9f     0x1453 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+ .debug_info    0x00014ff2      0x91e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+ .debug_info    0x00015910      0x8dd c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+ .debug_info    0x000161ed     0x1988 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+ .debug_info    0x00017b75     0x133a c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+ .debug_info    0x00018eaf      0xbf9 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+ .debug_info    0x00019aa8      0x951 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+ .debug_info    0x0001a3f9      0x830 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+ .debug_info    0x0001ac29     0x1423 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+ .debug_info    0x0001c04c      0xd0f c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+ .debug_info    0x0001cd5b     0x2960 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+ .debug_info    0x0001f6bb     0x339c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+ .debug_info    0x00022a57     0x1fe6 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+ .debug_info    0x00024a3d      0x85e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+ .debug_info    0x0002529b     0x2d6f c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+ .debug_info    0x0002800a      0x7f3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+ .debug_info    0x000287fd      0x8b4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
 
-.debug_abbrev   0x00000000     0x5067
+.debug_abbrev   0x00000000     0x5089
  .debug_abbrev  0x00000000      0x2f0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
  .debug_abbrev  0x000002f0      0x6f0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
  .debug_abbrev  0x000009e0      0x28f c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
  .debug_abbrev  0x00000c6f      0x32f c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/oslmic.o
  .debug_abbrev  0x00000f9e      0x468 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
- .debug_abbrev  0x00001406      0x508 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
- .debug_abbrev  0x0000190e      0x31d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
- .debug_abbrev  0x00001c2b      0x2a6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
- .debug_abbrev  0x00001ed1      0x2ab c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
- .debug_abbrev  0x0000217c      0x27c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
- .debug_abbrev  0x000023f8      0x232 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
- .debug_abbrev  0x0000262a      0x2e9 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
- .debug_abbrev  0x00002913      0x248 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
- .debug_abbrev  0x00002b5b       0xe3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
- .debug_abbrev  0x00002c3e      0x3b7 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
- .debug_abbrev  0x00002ff5      0x293 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
- .debug_abbrev  0x00003288      0x17b c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
- .debug_abbrev  0x00003403      0x1f5 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
- .debug_abbrev  0x000035f8      0x1bc c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
- .debug_abbrev  0x000037b4      0x209 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
- .debug_abbrev  0x000039bd      0x220 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
- .debug_abbrev  0x00003bdd      0x345 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
- .debug_abbrev  0x00003f22      0x4cb c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
- .debug_abbrev  0x000043ed      0x302 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
- .debug_abbrev  0x000046ef      0x144 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
- .debug_abbrev  0x00004833      0x46e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
- .debug_abbrev  0x00004ca1      0x1c1 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
- .debug_abbrev  0x00004e62      0x205 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+ .debug_abbrev  0x00001406      0x52a c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ .debug_abbrev  0x00001930      0x31d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+ .debug_abbrev  0x00001c4d      0x2a6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+ .debug_abbrev  0x00001ef3      0x2ab c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+ .debug_abbrev  0x0000219e      0x27c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+ .debug_abbrev  0x0000241a      0x232 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+ .debug_abbrev  0x0000264c      0x2e9 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+ .debug_abbrev  0x00002935      0x248 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+ .debug_abbrev  0x00002b7d       0xe3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+ .debug_abbrev  0x00002c60      0x3b7 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+ .debug_abbrev  0x00003017      0x293 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+ .debug_abbrev  0x000032aa      0x17b c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+ .debug_abbrev  0x00003425      0x1f5 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+ .debug_abbrev  0x0000361a      0x1bc c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+ .debug_abbrev  0x000037d6      0x209 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+ .debug_abbrev  0x000039df      0x220 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+ .debug_abbrev  0x00003bff      0x345 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+ .debug_abbrev  0x00003f44      0x4cb c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+ .debug_abbrev  0x0000440f      0x302 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+ .debug_abbrev  0x00004711      0x144 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+ .debug_abbrev  0x00004855      0x46e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+ .debug_abbrev  0x00004cc3      0x1c1 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+ .debug_abbrev  0x00004e84      0x205 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
 
-.debug_loc      0x00000000     0xb65a
+.debug_loc      0x00000000     0xb693
  .debug_loc     0x00000000       0x67 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
  .debug_loc     0x00000067     0x2ea5 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
  .debug_loc     0x00002f0c      0xe33 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
  .debug_loc     0x00003d3f      0x1d6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/oslmic.o
  .debug_loc     0x00003f15      0x6ae c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
- .debug_loc     0x000045c3      0x158 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
- .debug_loc     0x0000471b      0x17c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
- .debug_loc     0x00004897      0x36b c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
- .debug_loc     0x00004c02      0x146 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
- .debug_loc     0x00004d48      0x24f c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
- .debug_loc     0x00004f97       0x71 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
- .debug_loc     0x00005008       0x86 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
- .debug_loc     0x0000508e      0x198 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
- .debug_loc     0x00005226      0x3e3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
- .debug_loc     0x00005609      0x7d4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
- .debug_loc     0x00005ddd      0x2ae c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
- .debug_loc     0x0000608b      0x127 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
- .debug_loc     0x000061b2       0xc3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
- .debug_loc     0x00006275      0x3e6 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
- .debug_loc     0x0000665b      0x398 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
- .debug_loc     0x000069f3      0xcc2 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
- .debug_loc     0x000076b5     0x16f9 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
- .debug_loc     0x00008dae      0xfc4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
- .debug_loc     0x00009d72       0xa3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
- .debug_loc     0x00009e15     0x161e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
- .debug_loc     0x0000b433       0xc0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
- .debug_loc     0x0000b4f3      0x167 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+ .debug_loc     0x000045c3      0x191 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ .debug_loc     0x00004754      0x17c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+ .debug_loc     0x000048d0      0x36b c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+ .debug_loc     0x00004c3b      0x146 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+ .debug_loc     0x00004d81      0x24f c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+ .debug_loc     0x00004fd0       0x71 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+ .debug_loc     0x00005041       0x86 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+ .debug_loc     0x000050c7      0x198 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+ .debug_loc     0x0000525f      0x3e3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+ .debug_loc     0x00005642      0x7d4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+ .debug_loc     0x00005e16      0x2ae c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+ .debug_loc     0x000060c4      0x127 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+ .debug_loc     0x000061eb       0xc3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+ .debug_loc     0x000062ae      0x3e6 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+ .debug_loc     0x00006694      0x398 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+ .debug_loc     0x00006a2c      0xcc2 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+ .debug_loc     0x000076ee     0x16f9 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+ .debug_loc     0x00008de7      0xfc4 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+ .debug_loc     0x00009dab       0xa3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+ .debug_loc     0x00009e4e     0x161e c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+ .debug_loc     0x0000b46c       0xc0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+ .debug_loc     0x0000b52c      0x167 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
 
-.debug_aranges  0x00000000     0x1050
+.debug_aranges  0x00000000     0x1060
  .debug_aranges
                 0x00000000       0x58 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
  .debug_aranges
@@ -8069,80 +8071,80 @@ OUTPUT(c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000
  .debug_aranges
                 0x000003d8       0x80 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
  .debug_aranges
-                0x00000458       0x98 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+                0x00000458       0xa8 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
  .debug_aranges
-                0x000004f0       0x60 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+                0x00000500       0x60 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
  .debug_aranges
-                0x00000550       0x50 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+                0x00000560       0x50 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
  .debug_aranges
-                0x000005a0       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+                0x000005b0       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
  .debug_aranges
-                0x000005d8       0x60 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+                0x000005e8       0x60 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
  .debug_aranges
-                0x00000638       0x20 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+                0x00000648       0x20 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
  .debug_aranges
-                0x00000658       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+                0x00000668       0x38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
  .debug_aranges
-                0x00000690       0x50 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x000006a0       0x50 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
  .debug_aranges
-                0x000006e0       0x18 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+                0x000006f0       0x18 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
  .debug_aranges
-                0x000006f8       0x78 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x00000708       0x78 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
  .debug_aranges
-                0x00000770       0xa8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x00000780       0xa8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
  .debug_aranges
-                0x00000818       0x80 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x00000828       0x80 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
  .debug_aranges
-                0x00000898       0x38 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+                0x000008a8       0x38 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
  .debug_aranges
-                0x000008d0       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+                0x000008e0       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
  .debug_aranges
-                0x00000900       0x98 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+                0x00000910       0x98 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
  .debug_aranges
-                0x00000998       0x90 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+                0x000009a8       0x90 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
  .debug_aranges
-                0x00000a28      0x158 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+                0x00000a38      0x158 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
  .debug_aranges
-                0x00000b80      0x170 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+                0x00000b90      0x170 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
  .debug_aranges
-                0x00000cf0      0x178 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x00000d00      0x178 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
  .debug_aranges
-                0x00000e68       0x28 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+                0x00000e78       0x28 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
  .debug_aranges
-                0x00000e90      0x168 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x00000ea0      0x168 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
  .debug_aranges
-                0x00000ff8       0x28 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+                0x00001008       0x28 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
  .debug_aranges
-                0x00001020       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+                0x00001030       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
 
-.debug_ranges   0x00000000     0x1588
+.debug_ranges   0x00000000     0x1598
  .debug_ranges  0x00000000       0x48 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
  .debug_ranges  0x00000048      0x778 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
  .debug_ranges  0x000007c0       0x30 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
  .debug_ranges  0x000007f0       0x48 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/oslmic.o
  .debug_ranges  0x00000838      0x188 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
- .debug_ranges  0x000009c0       0xd0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
- .debug_ranges  0x00000a90       0x50 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
- .debug_ranges  0x00000ae0       0x40 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
- .debug_ranges  0x00000b20       0x28 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
- .debug_ranges  0x00000b48       0x50 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
- .debug_ranges  0x00000b98       0x10 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
- .debug_ranges  0x00000ba8       0x28 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
- .debug_ranges  0x00000bd0       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
- .debug_ranges  0x00000c10       0x68 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
- .debug_ranges  0x00000c78       0xb0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
- .debug_ranges  0x00000d28       0x70 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
- .debug_ranges  0x00000d98       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
- .debug_ranges  0x00000dd8       0x20 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
- .debug_ranges  0x00000df8       0x88 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
- .debug_ranges  0x00000e80       0x80 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
- .debug_ranges  0x00000f00      0x160 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
- .debug_ranges  0x00001060      0x1e0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
- .debug_ranges  0x00001240      0x168 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
- .debug_ranges  0x000013a8       0x18 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
- .debug_ranges  0x000013c0      0x178 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
- .debug_ranges  0x00001538       0x18 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
- .debug_ranges  0x00001550       0x38 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+ .debug_ranges  0x000009c0       0xe0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ .debug_ranges  0x00000aa0       0x50 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+ .debug_ranges  0x00000af0       0x40 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+ .debug_ranges  0x00000b30       0x28 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+ .debug_ranges  0x00000b58       0x50 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+ .debug_ranges  0x00000ba8       0x10 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+ .debug_ranges  0x00000bb8       0x28 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+ .debug_ranges  0x00000be0       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+ .debug_ranges  0x00000c20       0x68 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+ .debug_ranges  0x00000c88       0xb0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+ .debug_ranges  0x00000d38       0x70 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+ .debug_ranges  0x00000da8       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+ .debug_ranges  0x00000de8       0x20 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+ .debug_ranges  0x00000e08       0x88 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+ .debug_ranges  0x00000e90       0x80 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+ .debug_ranges  0x00000f10      0x160 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+ .debug_ranges  0x00001070      0x1e0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+ .debug_ranges  0x00001250      0x168 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+ .debug_ranges  0x000013b8       0x18 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+ .debug_ranges  0x000013d0      0x178 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+ .debug_ranges  0x00001548       0x18 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+ .debug_ranges  0x00001560       0x38 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
 
 .debug_macro    0x00000000     0xeb65
  .debug_macro   0x00000000      0x339 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
@@ -8277,171 +8279,171 @@ OUTPUT(c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000
  .debug_macro   0x0000e971       0xf6 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
  .debug_macro   0x0000ea67       0xfe c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
 
-.debug_line     0x00000000    0x10e86
+.debug_line     0x00000000    0x10eb2
  .debug_line    0x00000000      0x6a9 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
  .debug_line    0x000006a9     0x2d38 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
  .debug_line    0x000033e1      0x789 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
  .debug_line    0x00003b6a      0x683 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/oslmic.o
- .debug_line    0x000041ed      0xc24 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
- .debug_line    0x00004e11      0x8ea c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
- .debug_line    0x000056fb      0x6c2 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
- .debug_line    0x00005dbd      0x712 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
- .debug_line    0x000064cf      0x5c0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
- .debug_line    0x00006a8f      0x57d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
- .debug_line    0x0000700c      0x335 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
- .debug_line    0x00007341      0x590 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
- .debug_line    0x000078d1      0x5fc c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
- .debug_line    0x00007ecd      0x2ec c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
- .debug_line    0x000081b9      0x9a1 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
- .debug_line    0x00008b5a      0x884 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
- .debug_line    0x000093de      0x5f9 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
- .debug_line    0x000099d7      0x416 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
- .debug_line    0x00009ded      0x48d c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
- .debug_line    0x0000a27a      0x76f c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
- .debug_line    0x0000a9e9      0x8ad c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
- .debug_line    0x0000b296      0xc33 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
- .debug_line    0x0000bec9     0x207b c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
- .debug_line    0x0000df44      0xb60 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
- .debug_line    0x0000eaa4      0x3ff c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
- .debug_line    0x0000eea3     0x1754 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
- .debug_line    0x000105f7      0x396 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
- .debug_line    0x0001098d      0x4f9 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+ .debug_line    0x000041ed      0xc20 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
+ .debug_line    0x00004e0d      0x91a c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ .debug_line    0x00005727      0x6c2 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+ .debug_line    0x00005de9      0x712 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+ .debug_line    0x000064fb      0x5c0 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+ .debug_line    0x00006abb      0x57d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+ .debug_line    0x00007038      0x335 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+ .debug_line    0x0000736d      0x590 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+ .debug_line    0x000078fd      0x5fc c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+ .debug_line    0x00007ef9      0x2ec c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+ .debug_line    0x000081e5      0x9a1 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+ .debug_line    0x00008b86      0x884 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+ .debug_line    0x0000940a      0x5f9 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+ .debug_line    0x00009a03      0x416 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+ .debug_line    0x00009e19      0x48d c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+ .debug_line    0x0000a2a6      0x76f c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+ .debug_line    0x0000aa15      0x8ad c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+ .debug_line    0x0000b2c2      0xc33 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+ .debug_line    0x0000bef5     0x207b c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+ .debug_line    0x0000df70      0xb60 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+ .debug_line    0x0000ead0      0x3ff c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+ .debug_line    0x0000eecf     0x1754 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+ .debug_line    0x00010623      0x396 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+ .debug_line    0x000109b9      0x4f9 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
 
-.debug_str      0x00000000    0x43417
- .debug_str     0x00000000    0x20284 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
+.debug_str      0x00000000    0x4341d
+ .debug_str     0x00000000    0x20277 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
                               0x205ff (size before relaxing)
- .debug_str     0x00020284     0x1433 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
+ .debug_str     0x00020277     0x1433 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
                                0x8539 (size before relaxing)
- .debug_str     0x000216b7      0x28b c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
+ .debug_str     0x000216aa      0x28b c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
                                0x6a8a (size before relaxing)
- .debug_str     0x00021942       0xc8 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/oslmic.o
+ .debug_str     0x00021935       0xc8 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/oslmic.o
                                0xf328 (size before relaxing)
- .debug_str     0x00021a0a     0x122d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
+ .debug_str     0x000219fd     0x122d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
                               0x10599 (size before relaxing)
- .debug_str     0x00022c37     0x149a c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
-                              0x21879 (size before relaxing)
- .debug_str     0x000240d1     0x4439 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+ .debug_str     0x00022c2a     0x14ad c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+                              0x2188c (size before relaxing)
+ .debug_str     0x000240d7     0x4439 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
                               0x21182 (size before relaxing)
- .debug_str     0x0002850a     0x1c0b c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+ .debug_str     0x00028510     0x1c0b c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
                               0x1e891 (size before relaxing)
- .debug_str     0x0002a115       0x65 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+ .debug_str     0x0002a11b       0x65 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
                               0x16a8f (size before relaxing)
- .debug_str     0x0002a17a      0x1a6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+ .debug_str     0x0002a180      0x1a6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
                               0x103cc (size before relaxing)
- .debug_str     0x0002a320       0x99 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+ .debug_str     0x0002a326       0x99 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
                                0x8c87 (size before relaxing)
- .debug_str     0x0002a3b9      0x5c6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+ .debug_str     0x0002a3bf      0x5c6 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
                               0x185f9 (size before relaxing)
- .debug_str     0x0002a97f      0x266 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+ .debug_str     0x0002a985      0x266 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
                               0x1428e (size before relaxing)
- .debug_str     0x0002abe5       0x44 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+ .debug_str     0x0002abeb       0x44 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
                                0xf8f1 (size before relaxing)
- .debug_str     0x0002ac29     0x4486 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+ .debug_str     0x0002ac2f     0x4486 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
                               0x1b71b (size before relaxing)
- .debug_str     0x0002f0af     0x365a c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+ .debug_str     0x0002f0b5     0x365a c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
                               0x1885b (size before relaxing)
- .debug_str     0x00032709       0x45 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+ .debug_str     0x0003270f       0x45 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
                               0x131f5 (size before relaxing)
- .debug_str     0x0003274e      0x4ad c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+ .debug_str     0x00032754      0x4ad c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
                               0x14711 (size before relaxing)
- .debug_str     0x00032bfb       0x51 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+ .debug_str     0x00032c01       0x51 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
                               0x149f0 (size before relaxing)
- .debug_str     0x00032c4c     0x567b c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+ .debug_str     0x00032c52     0x567b c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
                               0x1aacd (size before relaxing)
- .debug_str     0x000382c7       0xf3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+ .debug_str     0x000382cd       0xf3 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
                               0x15e27 (size before relaxing)
- .debug_str     0x000383ba     0x36ae c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+ .debug_str     0x000383c0     0x36ae c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
                               0x2186a (size before relaxing)
- .debug_str     0x0003ba68     0x4ade c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+ .debug_str     0x0003ba6e     0x4ade c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
                               0x25864 (size before relaxing)
- .debug_str     0x00040546     0x2aea c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+ .debug_str     0x0004054c     0x2aea c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
                               0x1bb32 (size before relaxing)
- .debug_str     0x00043030       0x47 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+ .debug_str     0x00043036       0x47 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
                               0x15c66 (size before relaxing)
- .debug_str     0x00043077      0x2de c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+ .debug_str     0x0004307d      0x2de c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
                               0x1fba3 (size before relaxing)
- .debug_str     0x00043355       0x67 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+ .debug_str     0x0004335b       0x67 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
                                0xf946 (size before relaxing)
- .debug_str     0x000433bc       0x5b c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+ .debug_str     0x000433c2       0x5b c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
                                0xfd7c (size before relaxing)
 
-.debug_frame    0x00000000     0x3b38
+.debug_frame    0x00000000     0x3b58
  .debug_frame   0x00000000       0xb8 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/main.o
  .debug_frame   0x000000b8      0x878 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/lmic.o
  .debug_frame   0x00000930       0x40 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/aes.o
  .debug_frame   0x00000970       0xd4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/oslmic.o
  .debug_frame   0x00000a44      0x15c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/radio.o
- .debug_frame   0x00000ba0      0x158 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
- .debug_frame   0x00000cf8       0xd8 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
- .debug_frame   0x00000dd0       0x9c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
- .debug_frame   0x00000e6c       0x78 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
- .debug_frame   0x00000ee4       0xf8 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
- .debug_frame   0x00000fdc       0x28 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
- .debug_frame   0x00001004       0x58 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
- .debug_frame   0x0000105c       0xb8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
- .debug_frame   0x00001114      0x100 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
- .debug_frame   0x00001214      0x164 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
- .debug_frame   0x00001378       0xe0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
- .debug_frame   0x00001458       0x5c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
- .debug_frame   0x000014b4       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
- .debug_frame   0x000014f4      0x148 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
- .debug_frame   0x0000163c      0x180 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
- .debug_frame   0x000017bc      0x2d8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
- .debug_frame   0x00001a94      0x4a0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
- .debug_frame   0x00001f34      0x344 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
- .debug_frame   0x00002278       0x4c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
- .debug_frame   0x000022c4      0x3f0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
- .debug_frame   0x000026b4       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
- .debug_frame   0x000026e4       0x6c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
- .debug_frame   0x00002750       0x20 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-errno.o)
- .debug_frame   0x00002770       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-init.o)
- .debug_frame   0x0000279c       0x4c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mallocr.o)
- .debug_frame   0x000027e8       0x38 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-memset.o)
- .debug_frame   0x00002820       0x30 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mlock.o)
- .debug_frame   0x00002850       0x74 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-printf.o)
- .debug_frame   0x000028c4       0x4c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-puts.o)
- .debug_frame   0x00002910       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-sbrkr.o)
- .debug_frame   0x0000293c       0xbc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-vfprintf.o)
- .debug_frame   0x000029f8       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-wsetup.o)
- .debug_frame   0x00002a24       0x68 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x00002a8c       0x20 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-atexit.o)
- .debug_frame   0x00002aac       0xc4 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-dtoa.o)
- .debug_frame   0x00002b70       0x5c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fflush.o)
- .debug_frame   0x00002bcc      0x14c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-findfp.o)
- .debug_frame   0x00002d18       0x34 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fini.o)
- .debug_frame   0x00002d4c       0x8c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-freer.o)
- .debug_frame   0x00002dd8       0x64 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fvwrite.o)
- .debug_frame   0x00002e3c       0x54 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fwalk.o)
- .debug_frame   0x00002e90       0x40 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-localeconv.o)
- .debug_frame   0x00002ed0       0xb0 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lock.o)
- .debug_frame   0x00002f80       0x6c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-makebuf.o)
- .debug_frame   0x00002fec       0x40 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-memmove.o)
- .debug_frame   0x0000302c      0x264 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mprec.o)
- .debug_frame   0x00003290       0x48 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-reallocr.o)
- .debug_frame   0x000032d8       0x60 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-reent.o)
- .debug_frame   0x00003338       0x30 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-s_frexp.o)
- .debug_frame   0x00003368       0x8c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-stdio.o)
- .debug_frame   0x000033f4       0x38 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-strncpy.o)
- .debug_frame   0x0000342c       0xe8 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-vfiprintf.o)
- .debug_frame   0x00003514       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-writer.o)
- .debug_frame   0x00003540       0x34 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-__atexit.o)
- .debug_frame   0x00003574       0x28 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-callocr.o)
- .debug_frame   0x0000359c       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-closer.o)
- .debug_frame   0x000035c8       0x3c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fclose.o)
- .debug_frame   0x00003604       0xa4 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fputwc.o)
- .debug_frame   0x000036a8       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fstatr.o)
- .debug_frame   0x000036d4       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-isattyr.o)
- .debug_frame   0x00003700       0x54 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-locale.o)
- .debug_frame   0x00003754       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lseekr.o)
- .debug_frame   0x00003780       0x4c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mbtowc_r.o)
- .debug_frame   0x000037cc       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-readr.o)
- .debug_frame   0x000037f8       0x40 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-wbuf.o)
- .debug_frame   0x00003838       0x60 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-wcrtomb.o)
- .debug_frame   0x00003898       0x3c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-wctomb_r.o)
- .debug_frame   0x000038d4       0xac c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_addsubdf3.o)
- .debug_frame   0x00003980       0x50 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_muldivdf3.o)
- .debug_frame   0x000039d0       0xc4 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_cmpdf2.o)
- .debug_frame   0x00003a94       0x20 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_unorddf2.o)
- .debug_frame   0x00003ab4       0x24 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_fixdfsi.o)
- .debug_frame   0x00003ad8       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x00003b04       0x34 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x00000ba0      0x178 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/hal.o
+ .debug_frame   0x00000d18       0xd8 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/board.o
+ .debug_frame   0x00000df0       0x9c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/stdio.o
+ .debug_frame   0x00000e8c       0x78 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/led.o
+ .debug_frame   0x00000f04       0xf8 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/pb.o
+ .debug_frame   0x00000ffc       0x28 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/heap.o
+ .debug_frame   0x00001024       0x58 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/SPIv2/build/system_max78000.o
+ .debug_frame   0x0000107c       0xb8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+ .debug_frame   0x00001134      0x100 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+ .debug_frame   0x00001234      0x164 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+ .debug_frame   0x00001398       0xe0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+ .debug_frame   0x00001478       0x5c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+ .debug_frame   0x000014d4       0x40 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+ .debug_frame   0x00001514      0x148 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_me17.o)
+ .debug_frame   0x0000165c      0x180 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(rtc_reva.o)
+ .debug_frame   0x000017dc      0x2d8 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_me17.o)
+ .debug_frame   0x00001ab4      0x4a0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(spi_reva.o)
+ .debug_frame   0x00001f54      0x344 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+ .debug_frame   0x00002298       0x4c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+ .debug_frame   0x000022e4      0x3f0 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+ .debug_frame   0x000026d4       0x30 c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_lock.o)
+ .debug_frame   0x00002704       0x6c c:/MaximSDK/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+ .debug_frame   0x00002770       0x20 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-errno.o)
+ .debug_frame   0x00002790       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-init.o)
+ .debug_frame   0x000027bc       0x4c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mallocr.o)
+ .debug_frame   0x00002808       0x38 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-memset.o)
+ .debug_frame   0x00002840       0x30 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mlock.o)
+ .debug_frame   0x00002870       0x74 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-printf.o)
+ .debug_frame   0x000028e4       0x4c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-puts.o)
+ .debug_frame   0x00002930       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000295c       0xbc c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-vfprintf.o)
+ .debug_frame   0x00002a18       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-wsetup.o)
+ .debug_frame   0x00002a44       0x68 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00002aac       0x20 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-atexit.o)
+ .debug_frame   0x00002acc       0xc4 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-dtoa.o)
+ .debug_frame   0x00002b90       0x5c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fflush.o)
+ .debug_frame   0x00002bec      0x14c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-findfp.o)
+ .debug_frame   0x00002d38       0x34 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fini.o)
+ .debug_frame   0x00002d6c       0x8c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-freer.o)
+ .debug_frame   0x00002df8       0x64 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fvwrite.o)
+ .debug_frame   0x00002e5c       0x54 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fwalk.o)
+ .debug_frame   0x00002eb0       0x40 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-localeconv.o)
+ .debug_frame   0x00002ef0       0xb0 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lock.o)
+ .debug_frame   0x00002fa0       0x6c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-makebuf.o)
+ .debug_frame   0x0000300c       0x40 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-memmove.o)
+ .debug_frame   0x0000304c      0x264 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mprec.o)
+ .debug_frame   0x000032b0       0x48 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-reallocr.o)
+ .debug_frame   0x000032f8       0x60 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-reent.o)
+ .debug_frame   0x00003358       0x30 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-s_frexp.o)
+ .debug_frame   0x00003388       0x8c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-stdio.o)
+ .debug_frame   0x00003414       0x38 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-strncpy.o)
+ .debug_frame   0x0000344c       0xe8 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-vfiprintf.o)
+ .debug_frame   0x00003534       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-writer.o)
+ .debug_frame   0x00003560       0x34 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-__atexit.o)
+ .debug_frame   0x00003594       0x28 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-callocr.o)
+ .debug_frame   0x000035bc       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-closer.o)
+ .debug_frame   0x000035e8       0x3c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fclose.o)
+ .debug_frame   0x00003624       0xa4 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fputwc.o)
+ .debug_frame   0x000036c8       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-fstatr.o)
+ .debug_frame   0x000036f4       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-isattyr.o)
+ .debug_frame   0x00003720       0x54 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-locale.o)
+ .debug_frame   0x00003774       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-lseekr.o)
+ .debug_frame   0x000037a0       0x4c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-mbtowc_r.o)
+ .debug_frame   0x000037ec       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-readr.o)
+ .debug_frame   0x00003818       0x40 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-wbuf.o)
+ .debug_frame   0x00003858       0x60 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-wcrtomb.o)
+ .debug_frame   0x000038b8       0x3c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp\libc.a(lib_a-wctomb_r.o)
+ .debug_frame   0x000038f4       0xac c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x000039a0       0x50 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x000039f0       0xc4 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_cmpdf2.o)
+ .debug_frame   0x00003ab4       0x20 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_unorddf2.o)
+ .debug_frame   0x00003ad4       0x24 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_arm_fixdfsi.o)
+ .debug_frame   0x00003af8       0x2c c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x00003b24       0x34 c:/maximsdk/tools/gnutools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp\libgcc.a(_udivmoddi4.o)

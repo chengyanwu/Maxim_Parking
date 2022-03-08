@@ -56,6 +56,15 @@ void hal_pin_rst (u1_t val);
 u1_t hal_spi (u1_t outval);
 
 /*
+ * perform 8-bit SPI transaction with radio.
+ *   - write given byte 'outval'
+ *   - read byte and return value
+ */
+u1_t hal_spi_write (u1_t outval, int len);
+
+u1_t hal_spi_read (u1_t outval, int len);
+
+/*
  * disable all CPU interrupts.
  *   - might be invoked nested 
  *   - will be followed by matching call to hal_enableIRQs()
