@@ -15,5 +15,5 @@ monitor reset halt
 load
 compare-sections
 monitor reset halt
-c`
+c
 ```
