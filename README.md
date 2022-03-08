@@ -1,4 +1,4 @@
-## Maxim_Parking
+## SpotOn
 
 ### Loading and Running Applications
 OpenOCD: 
