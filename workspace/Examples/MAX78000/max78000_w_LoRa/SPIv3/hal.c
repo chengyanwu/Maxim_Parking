@@ -55,36 +55,36 @@
 #define SPI_INSTANCE_NUM    1
 
 /***** Globals *****/
-uint8_t* rx_data = 0;
-uint8_t* tx_data = 0;
-volatile int SPI_FLAG;
-volatile uint8_t DMA_FLAG = 0;
+// uint8_t* rx_data = 0;
+// uint8_t* tx_data = 0;
+// volatile int SPI_FLAG;
+// volatile uint8_t DMA_FLAG = 0;
 
 /***** Functions *****/
 #if defined (BOARD_FTHR_REVA)
 #define SPI         MXC_SPI0
 #define SPI_IRQ     SPI0_IRQn
-void SPI0_IRQHandler(void)
-{
-    MXC_SPI_AsyncHandler(SPI);
-}
+// void SPI0_IRQHandler(void)
+// {
+//     MXC_SPI_AsyncHandler(SPI);
+// }
 #elif defined (BOARD_EVKIT_V1)
 #define SPI         MXC_SPI1
 #define SPI_IRQ     SPI1_IRQn
-void SPI1_IRQHandler(void)
-{
-    MXC_SPI_AsyncHandler(SPI);
-}
+// void SPI1_IRQHandler(void)
+// {
+//     MXC_SPI_AsyncHandler(SPI);
+// }
 #endif
 
 /***** GPIO ***************/
 #define MXC_GPIO_PORT_OUT               MXC_GPIO0
 #define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_19
 
-void SPI_Callback(mxc_spi_req_t* req, int error)
-{
-    SPI_FLAG = error;
-}
+// void SPI_Callback(mxc_spi_req_t* req, int error)
+// {
+//     SPI_FLAG = error;
+// }
 
 //#include "hw.h"
 
@@ -319,49 +319,49 @@ static void hal_spi_init () {
 
 
 // // perform SPI transaction with radio
-u1_t hal_spi (u1_t out) {
-//     SPI1->DR = out;
-//     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
-//     return SPI1->DR; // in
-    int retVal;
-    tx_data = out;
-    mxc_spi_req_t req;
-    req.spi = SPI;
-    if (out == 0x00)
-        req.txData = NULL;
-    else
-        req.txData = &tx_data;
-    req.rxData = &rx_data;
-    req.txLen = 1;
-    req.rxLen = 1;
-    req.ssIdx = 0;
-    req.ssDeassert = 1;
-    req.txCnt = 0;
-    req.rxCnt = 0;
-    //req.completeCB = (spi_complete_cb_t) SPI_Callback;
-    //SPI_FLAG = 1;
-    retVal = MXC_SPI_SetDataSize(SPI, 8);
+// u1_t hal_spi (u1_t out) {
+// //     SPI1->DR = out;
+// //     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
+// //     return SPI1->DR; // in
+//     int retVal;
+//     tx_data = out;
+//     mxc_spi_req_t req;
+//     req.spi = SPI;
+//     if (out == 0x00)
+//         req.txData = NULL;
+//     else
+//         req.txData = &tx_data;
+//     req.rxData = &rx_data;
+//     req.txLen = 1;
+//     req.rxLen = 1;
+//     req.ssIdx = 0;
+//     req.ssDeassert = 1;
+//     req.txCnt = 0;
+//     req.rxCnt = 0;
+//     //req.completeCB = (spi_complete_cb_t) SPI_Callback;
+//     //SPI_FLAG = 1;
+//     retVal = MXC_SPI_SetDataSize(SPI, 8);
 
-    if (MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD)!=E_NO_ERROR) {
-        printf("\nSPI INITIALIZATION ERROR\n");
-        while (1) {}
-    }
+//     if (MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD)!=E_NO_ERROR) {
+//         printf("\nSPI INITIALIZATION ERROR\n");
+//         while (1) {}
+//     }
 
-    if (MXC_SPI_MasterTransaction(&req)!=E_NO_ERROR)
-    {
-        printf("\nSPI ERROR\n");
-        while (1) {}
-    };
-    printf(req.rxCnt + "\n");
-    return *req.rxData;
-}
-u1_t hal_spi_write(u1_t out, int len){
-    return NULL;
-}
+//     if (MXC_SPI_MasterTransaction(&req)!=E_NO_ERROR)
+//     {
+//         printf("\nSPI ERROR\n");
+//         while (1) {}
+//     };
+//     printf(req.rxCnt + "\n");
+//     return *req.rxData;
+// }
+// u1_t hal_spi_write(u1_t out, int len){
+//     return NULL;
+// }
 
-u1_t hal_spi_read(u1_t out, int len){
-    return NULL;
-}
+// u1_t hal_spi_read(u1_t out, int len){
+//     return NULL;
+// }
 
 // #ifdef CFG_lmic_clib
 

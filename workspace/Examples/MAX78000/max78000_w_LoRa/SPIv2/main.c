@@ -244,11 +244,11 @@ int main (void) {
     setup();
     while(1)
     {
-        //loop();
-        //LED_On(LED1);
-        // MXC_Delay(500000);
-        // LED_Off(LED1);
-        // MXC_Delay(500000);
+        loop();
+        LED_On(LED1);
+        MXC_Delay(500000);
+        LED_Off(LED1);
+        MXC_Delay(500000);
 
     }
     return 0;
