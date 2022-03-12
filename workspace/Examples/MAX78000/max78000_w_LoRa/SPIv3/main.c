@@ -76,6 +76,8 @@ uint8_t* rx_data;
 uint8_t* tx_data;
 volatile int SPI_FLAG;
 volatile uint8_t DMA_FLAG = 0;
+   mxc_spi_req_t req;
+    mxc_spi_pins_t spi_pins;
 
 /***** Functions *****/
 #if defined (BOARD_FTHR_REVA)
@@ -116,46 +118,36 @@ uint8_t hal_spi (uint8_t out) {
 //     SPI1->DR = out;
 //     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
 //     return SPI1->DR; // in
-    int retVal;
-    tx_data = &out;
-    mxc_spi_req_t req;
-    req.spi = SPI;
-    req.txData = tx_data;
-    req.rxData = rx_data;
-    req.txLen = 1;
-    req.rxLen = 1;
-    req.ssIdx = 0;
-    req.ssDeassert = 1;
-    req.txCnt = 0;
-    req.rxCnt = 0;
-    //req.completeCB = (spi_complete_cb_t) SPI_Callback;
-    //SPI_FLAG = 1;
-    retVal = MXC_SPI_SetDataSize(SPI, 1);
+        req.spi = SPI;
+        req.txData = (uint8_t*) out;
+        req.rxData = rx_data;
+        req.txLen = 1;
+        req.rxLen = 1;
+        req.ssIdx = 1;
+        req.ssDeassert = 1;
+        req.txCnt = 0;
+        req.rxCnt = 0;
+        //req.completeCB = (spi_complete_cb_t) SPI_Callback;
+        
+        uint8_t retVal = MXC_SPI_SetDataSize(SPI, 8);
+        
+        if (retVal != E_NO_ERROR) {
+            printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
+            
+            return 1;
+        }
+        
+        retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
+        
+        if (retVal != E_NO_ERROR) {
+            printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
+            
+            return 1;
+        }
+        
 
-    if (MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD)!=E_NO_ERROR) {
-        printf("\nSPI INITIALIZATION ERROR\n");
-        while (1) {}
-    }
-
-    if (MXC_SPI_SetMode(SPI, SPI_MODE_0)!=E_NO_ERROR) {
-        printf("\nSPI INITIALIZATION ERROR\n");
-        while (1) {}
-    }
-
-    if (MXC_SPI_MasterTransaction(&req)!=E_NO_ERROR)
-    {
-        printf("\nSPI ERROR\n");
-        while (1) {}
-    };
-
-    // if (MXC_SPI_StartTransmission(&req)!=E_NO_ERROR)
-    // {
-    //     printf("\nSPI ERROR\n");
-    //     while (1) {}
-    // };
-
-
-    return *rx_data;
+        MXC_SPI_MasterTransaction(&req);
+        return *rx_data;
 }
 
 void hal_pin_ss (int val) {
@@ -182,11 +174,14 @@ void hal_pin_ss (int val) {
     }
 }
 
+#define TFT_SPI0_PINS 	MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11
 int main(void)
 {
     int i, j, retVal;
-    mxc_spi_req_t req;
-    mxc_spi_pins_t spi_pins;
+
+    MXC_SYS_Clock_Select(MXC_SYS_CLOCK_IPO);
+    SystemCoreClockUpdate();
+    MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, TFT_SPI0_PINS);
     
     printf("\n**************************** SPI MASTER TEST *************************\n");
     
@@ -196,29 +191,32 @@ int main(void)
     spi_pins.sdio2 = FALSE;
     spi_pins.sdio3 = FALSE;
     spi_pins.ss0 = TRUE;
-    spi_pins.ss1 = FALSE;
+    spi_pins.ss1 = TRUE;
     spi_pins.ss2 = FALSE;
-    
-    // Configure the peripheral
-    if (MXC_SPI_Init(SPI, 1, 0, 1, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
-        printf("\nSPI INITIALIZATION ERROR\n");    
-        while (1) {}
-    }  
+
+        if (MXC_SPI_Init(SPI, 1, 0, 2, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
+            printf("\nSPI INITIALIZATION ERROR\n");
+
+            return 1;
+        }
+
+    MXC_Delay(5000);
+
     memset(rx_data, 0x0, sizeof(uint8_t));
     memset(tx_data, 0x0, sizeof(uint8_t));
+
     uint8_t val = 0;
-    //hal_pin_ss (1);
+    hal_pin_ss (1);
+    MXC_Delay(5000);
+    hal_pin_ss (0);
+    //hal_pin_ss (0);
     while(1){
         val = 0;
-        //hal_pin_ss (0);
         val = hal_spi(0x42 & 0x7F);
-        //hal_pin_ss (1);
         printf("val1 = %d\n",val);
         val = 0;
         //MXC_Delay(500000);
-        //hal_pin_ss (0);
         val = hal_spi(0x00);
-        //hal_pin_ss (1);
         if (val!=0)
             LED_On(LED1);
         printf("val2 = %d\n",val);
