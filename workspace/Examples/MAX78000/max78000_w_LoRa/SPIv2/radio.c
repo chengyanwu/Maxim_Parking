@@ -280,8 +280,7 @@ static u1_t randbuf[16];
 
 static void writeReg (u1_t addr, u1_t data) {
     // //hal_pin_nss(0);
-     hal_spi(addr | 0x80);
-     hal_spi(data);
+    hal_spi_write(addr, data);
     // //hal_pin_nss(1);
     //uint8_t temp[2] = {addr | 0x80, data};
     //hal_spi_write(temp, 2);
@@ -289,8 +288,8 @@ static void writeReg (u1_t addr, u1_t data) {
 
 static u1_t readReg (u1_t addr) {
     // //hal_pin_nss(0);
-    u1_t temp = hal_spi(addr & 0x7F);
-    u1_t val = hal_spi(0x00);
+    u1_t val = 0;
+    val = hal_spi_read (addr);
     // //hal_pin_nss(1);
     return val;
 }
