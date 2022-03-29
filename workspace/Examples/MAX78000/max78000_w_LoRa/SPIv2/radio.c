@@ -296,20 +296,22 @@ static u1_t readReg (u1_t addr) {
 
 static void writeBuf (u1_t addr, xref2u1_t buf, u1_t len) {
     //hal_pin_nss(0);
-    hal_spi(addr | 0x80);
-    for (u1_t i=0; i<len; i++) {
-        hal_spi(buf[i]);
-    }
+    // hal_spi(addr | 0x80);
+    // for (u1_t i=0; i<len; i++) {
+    //     hal_spi(buf[i]);
+    // }
     //hal_pin_nss(1);
+    hal_spi_writeBuf(addr, &buf, len);
 }
 
 static void readBuf (u1_t addr, xref2u1_t buf, u1_t len) {
     //hal_pin_nss(0);
-    hal_spi(addr & 0x7F);
-    for (u1_t i=0; i<len; i++) {
-        buf[i] = hal_spi(0x00);
-    }
+    // hal_spi(addr & 0x7F);
+    // for (u1_t i=0; i<len; i++) {
+    //     buf[i] = hal_spi(0x00);
+    // }
     //hal_pin_nss(1);
+    hal_spi_readBuf(addr, &buf, len);
 }
 
 static void opmode (u1_t mode) {

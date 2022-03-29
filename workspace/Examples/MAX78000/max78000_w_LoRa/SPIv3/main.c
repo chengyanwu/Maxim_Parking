@@ -174,30 +174,9 @@ void hal_spi_write (uint8_t addr, uint8_t data) {
         req.rxCnt = 0;
         //req.completeCB = (spi_complete_cb_t) SPI_Callback;
         
-        uint8_t retVal = MXC_SPI_SetDataSize(SPI, 8);
-        
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
-            
-            return 1;
-        }
-        
-        retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
-        
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
-            
-            return 1;
-        }
-        retVal = MXC_SPI_SetMode(SPI, SPI_MODE_0);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET MODE ERROR: %d\n", retVal);
-            
-            return 1;
-        }
 
         //printf("out = %d, txData = %d (before transmit)\n", out ,*req.txData);
-        retVal = MXC_SPI_MasterTransaction(&req);
+        int retVal = MXC_SPI_MasterTransaction(&req);
         if (retVal != E_NO_ERROR) {
             printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
             return 1;
@@ -211,40 +190,21 @@ uint8_t hal_spi_read (uint8_t addr) {
 //     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
 //     return SPI1->DR; // in
         tx_data[0] = addr & 0x7F;
-        memset(rx_data, 0x0, sizeof(uint8_t));
+        //memset(rx_data, 0x0, sizeof(uint8_t));
         req.spi = SPI;
         req.txData = tx_data;
-        req.rxData = rx_data;
+        //req.rxData = rx_data;
         req.txLen = 1;
-        req.rxLen = 1;
+        //req.rxLen = 1;
         req.ssIdx = 1;
         req.ssDeassert = 0;
         req.txCnt = 0;
         req.rxCnt = 0;
         //req.completeCB = (spi_complete_cb_t) SPI_Callback;
         
-        uint8_t retVal = MXC_SPI_SetDataSize(SPI, 8);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
-            
-            return 1;
-        }
-        
-        retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
-            
-            return 1;
-        }
-        retVal = MXC_SPI_SetMode(SPI, SPI_MODE_0);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET MODE ERROR: %d\n", retVal);
-            
-            return 1;
-        }
 
         //printf("out = %d, txData = %d (before transmit)\n", out ,*req.txData);
-        retVal = MXC_SPI_MasterTransaction(&req);
+        int retVal = MXC_SPI_MasterTransaction(&req);
         if (retVal != E_NO_ERROR) {
             printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
             return 1;
@@ -271,6 +231,8 @@ uint8_t hal_spi_read (uint8_t addr) {
         printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
         return rx_data[0];
 }
+
+
 
 void hal_pin_ss (int val) {
     // if(val == 0 || val == 1) { // drive pin
@@ -316,9 +278,21 @@ int main(void)
     spi_pins.ss1 = TRUE;
     spi_pins.ss2 = FALSE;
 
+        if (MXC_SPI_Init(SPI, 1, 0, 2, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
+            printf("\nSPI INITIALIZATION ERROR\n");
+
+            return 1;
+        }
+
+    MXC_Delay(5000);
+        retVal = MXC_SPI_SetDataSize(SPI, 8);
+        if (retVal != E_NO_ERROR) {
+            printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
+            
+            return 1;
+        }
         
         retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
-        
         if (retVal != E_NO_ERROR) {
             printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
             
@@ -331,24 +305,16 @@ int main(void)
             return 1;
         }
 
-        if (MXC_SPI_Init(SPI, 1, 0, 2, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
-            printf("\nSPI INITIALIZATION ERROR\n");
-
-            return 1;
-        }
-
-    MXC_Delay(5000);
-
     memset(rx_data, 0x0, sizeof(uint8_t));
     memset(tx_data, 0x0, sizeof(uint8_t));
 
     uint8_t val = 0;
-    hal_pin_ss (1);
+    //hal_pin_ss (0);
     MXC_Delay(5000);
-    hal_pin_ss (0);
+    //hal_pin_ss (1);
     //hal_pin_ss (1);
     MXC_Delay(1000000);
-    hal_spi_write( 0x01, 0x01);
+    hal_spi_write( 0x01, 0x03);
     while(1){
         val = hal_spi_read(0x01);
         if (val!=0)

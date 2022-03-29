@@ -60,9 +60,13 @@ u1_t hal_spi (u1_t outval);
  *   - write given byte 'outval'
  *   - read byte and return value
  */
-u1_t hal_spi_write (u1_t outval, int len);
+u1_t hal_spi_write (u1_t addr, u1_t data);
 
-u1_t hal_spi_read (u1_t outval, int len);
+u1_t hal_spi_read (u1_t addr);
+
+u1_t hal_spi_readBuf (u1_t addr, u1_t* buf, u1_t len);
+
+u1_t hal_spi_writeBuf (u1_t addr, u1_t* buf, u1_t len);
 
 /*
  * disable all CPU interrupts.

@@ -50,20 +50,23 @@
 #define DATA_LEN        8         // Words
 #define DATA_VALUE      0xA5A5      // This is for master mode only...
 #define VALUE           0xFFFF
-#define SPI_SPEED       300000      // Bit Rate
+#define SPI_SPEED       100000      // Bit Rate
 
 #define SPI_INSTANCE_NUM    1
 
 /***** Globals *****/
-uint8_t* rx_data = 0;
-uint8_t* tx_data = 0;
+// uint8_t* rx_data = 0;
+// uint8_t* tx_data = 0;
 volatile int SPI_FLAG;
 volatile uint8_t DMA_FLAG = 0;
 
 /***** Functions *****/
-#if defined (BOARD_FTHR_REVA)
 #define SPI         MXC_SPI0
 #define SPI_IRQ     SPI0_IRQn
+
+#if defined (BOARD_FTHR_REVA)
+// #define SPI         MXC_SPI0
+// #define SPI_IRQ     SPI0_IRQn
 void SPI0_IRQHandler(void)
 {
     MXC_SPI_AsyncHandler(SPI);
@@ -308,70 +311,73 @@ static void hal_spi_init () {
     spi_pins.ss2 = FALSE;
 
         
-        retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
-        
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
-            
-            return 1;
-        }
-        retVal = MXC_SPI_SetMode(SPI, SPI_MODE_0);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET MODE ERROR: %d\n", retVal);
-            
-            return 1;
-        }
+    if (MXC_SPI_Init(SPI, 1, 0, 2, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
+        printf("\nSPI INITIALIZATION ERROR\n");
 
-        if (MXC_SPI_Init(SPI, 1, 0, 2, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
-            printf("\nSPI INITIALIZATION ERROR\n");
-
-            return 1;
-        }
+        //return 1;
+    }
 
     MXC_Delay(5000);
+    int retVal = MXC_SPI_SetDataSize(SPI, 8);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
+        
+        //return 1;
+    }
+    
+    retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
+        
+        //return 1;
+    }
+    retVal = MXC_SPI_SetMode(SPI, SPI_MODE_0);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI SET MODE ERROR: %d\n", retVal);
+        
+        //return 1;
+    }
 }
 
 
 // // perform SPI transaction with radio
 u1_t hal_spi (u1_t out) {
-//     SPI1->DR = out;
-//     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
-//     return SPI1->DR; // in
-    int retVal;
-    tx_data = out;
-    mxc_spi_req_t req;
-    req.spi = SPI;
-    if (out == 0x00)
-        req.txData = NULL;
-    else
-        req.txData = &tx_data;
-    req.rxData = &rx_data;
-    req.txLen = 1;
-    req.rxLen = 1;
-    req.ssIdx = 0;
-    req.ssDeassert = 1;
-    req.txCnt = 0;
-    req.rxCnt = 0;
-    //req.completeCB = (spi_complete_cb_t) SPI_Callback;
-    //SPI_FLAG = 1;
-    retVal = MXC_SPI_SetDataSize(SPI, 8);
+// //     SPI1->DR = out;
+// //     while( (SPI1->SR & SPI_SR_RXNE ) == 0);
+// //     return SPI1->DR; // in
+//     int retVal;
+//     tx_data = out;
+//     mxc_spi_req_t req;
+//     req.spi = SPI;
+//     if (out == 0x00)
+//         req.txData = NULL;
+//     else
+//         req.txData = &tx_data;
+//     req.rxData = &rx_data;
+//     req.txLen = 1;
+//     req.rxLen = 1;
+//     req.ssIdx = 0;
+//     req.ssDeassert = 1;
+//     req.txCnt = 0;
+//     req.rxCnt = 0;
+//     //req.completeCB = (spi_complete_cb_t) SPI_Callback;
+//     //SPI_FLAG = 1;
 
-    if (MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD)!=E_NO_ERROR) {
-        printf("\nSPI INITIALIZATION ERROR\n");
-        while (1) {}
-    }
 
-    if (MXC_SPI_MasterTransaction(&req)!=E_NO_ERROR)
-    {
-        printf("\nSPI ERROR\n");
-        while (1) {}
-    };
-    printf(req.rxCnt + "\n");
-    return *req.rxData;
+//     if (MXC_SPI_MasterTransaction(&req)!=E_NO_ERROR)
+//     {
+//         printf("\nSPI ERROR\n");
+//         while (1) {}
+//     };
+//     printf(req.rxCnt + "\n");
+//     return *req.rxData;
 }
+
 u1_t hal_spi_write(u1_t addr, u1_t data){
+    mxc_spi_req_t req;
+
     uint8_t temp[2];
-    temp[0]= addr | 0x80;
+    temp[0] = addr | 0x80;
     temp[1] = data;
 
     req.spi = SPI;
@@ -385,30 +391,7 @@ u1_t hal_spi_write(u1_t addr, u1_t data){
     req.rxCnt = 0;
     //req.completeCB = (spi_complete_cb_t) SPI_Callback;
     
-    uint8_t retVal = MXC_SPI_SetDataSize(SPI, 8);
-    
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
-        
-        return 1;
-    }
-    
-    retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
-    
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
-        
-        return 1;
-    }
-
-    retVal = MXC_SPI_SetMode(SPI, SPI_MODE_0);
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI SET MODE ERROR: %d\n", retVal);
-        
-        return 1;
-    }
-
-    retVal = MXC_SPI_MasterTransaction(&req);
+    uint8_t retVal = MXC_SPI_MasterTransaction(&req);
     if (retVal != E_NO_ERROR) {
         printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
         return 1;
@@ -419,63 +402,123 @@ u1_t hal_spi_write(u1_t addr, u1_t data){
 }
 
 u1_t hal_spi_read(u1_t addr){
-     tx_data[0] = addr & 0x7F;
-        memset(rx_data, 0x0, sizeof(uint8_t));
-        req.spi = SPI;
-        req.txData = tx_data;
-        req.rxData = rx_data;
-        req.txLen = 1;
-        req.rxLen = 1;
-        req.ssIdx = 1;
-        req.ssDeassert = 0;
-        req.txCnt = 0;
-        req.rxCnt = 0;
-        
-        uint8_t retVal = MXC_SPI_SetDataSize(SPI, 8);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
-            
-            return 1;
-        }
-        
-        retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
-            
-            return 1;
-        }
-        retVal = MXC_SPI_SetMode(SPI, SPI_MODE_0);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI SET MODE ERROR: %d\n", retVal);
-            
-            return 1;
-        }
+    mxc_spi_req_t req;
 
-        retVal = MXC_SPI_MasterTransaction(&req);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
-            return 1;
-        }
-        
-        tx_data[0] = 0x00;
-        req.txData = tx_data;
-        req.rxData = rx_data;
-        req.txLen = 1;
-        req.rxLen = 1;
-        req.ssIdx = 1;
-        req.ssDeassert = 1;
-        req.txCnt = 0;
-        req.rxCnt = 0;
+    uint8_t tx_data[1] = {addr & 0x7F};
+    //memset(rx_data, 0x0, sizeof(uint8_t));
+    req.spi = SPI;
+    req.txData = tx_data;
+    //req.rxData = rx_data;
+    req.txLen = 1;
+    //req.rxLen = 1;
+    req.ssIdx = 1;
+    req.ssDeassert = 0;
+    req.txCnt = 0;
+    req.rxCnt = 0;
+    
+    uint8_t retVal = MXC_SPI_MasterTransaction(&req);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
+        return 1;
+    }
+    
+    tx_data[0] = 0x00;
+    uint8_t rx_data[1] = {0x00};
+    req.txData = tx_data;
+    req.rxData = rx_data;
+    req.txLen = 1;
+    req.rxLen = 1;
+    req.ssIdx = 1;
+    req.ssDeassert = 1;
+    req.txCnt = 0;
+    req.rxCnt = 0;
 
-        retVal = MXC_SPI_MasterTransaction(&req);
-        if (retVal != E_NO_ERROR) {
-            printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
-            return 1;
-        }
-        
-        //printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
-        //printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
-        return rx_data[0];
+    retVal = MXC_SPI_MasterTransaction(&req);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
+        return 1;
+    }
+    
+    //printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
+    //printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
+    return rx_data[0];
+}
+
+u1_t hal_spi_writeBuf (u1_t addr, u1_t* buf, u1_t len) {
+    mxc_spi_req_t req;
+
+    uint8_t temp[len+1];
+    temp[0]= addr | 0x80;
+    for (int i = 1; i<len+1; i++)
+        temp[i] = buf[i-1];
+
+    req.spi = SPI;
+    req.txData = temp;
+    //req.rxData = rx_data;
+    req.txLen = len+1;
+    //req.rxLen = 1;
+    req.ssIdx = 1;
+    req.ssDeassert = 1;
+    req.txCnt = 0;
+    req.rxCnt = 0;
+    //req.completeCB = (spi_complete_cb_t) SPI_Callback;
+    
+    uint8_t retVal = MXC_SPI_MasterTransaction(&req);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
+        return 1;
+    }
+    //printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
+    //printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
+    return 0;
+
+}
+
+u1_t hal_spi_readBuf (u1_t addr, u1_t* buf, u1_t len) {
+    mxc_spi_req_t req;
+
+    uint8_t tx_data[1] = {addr & 0x7F};
+    //memset(rx_data, 0x0, sizeof(uint8_t));
+    req.spi = SPI;
+    req.txData = tx_data;
+    //req.rxData = rx_data;
+    req.txLen = 1;
+    //req.rxLen = 1;
+    req.ssIdx = 1;
+    req.ssDeassert = 0;
+    req.txCnt = 0;
+    req.rxCnt = 0;
+    
+    uint8_t retVal = MXC_SPI_MasterTransaction(&req);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
+        return 1;
+    }
+    
+    uint8_t txBuf[len];
+    uint8_t rxBuf[len];
+    memset(rxBuf, 0x0, len*sizeof(uint8_t));
+    memset(txBuf, 0x0, len*sizeof(uint8_t));
+
+    req.txData = txBuf;
+    req.rxData = rxBuf;
+    req.txLen = len;
+    req.rxLen = len;
+    req.ssIdx = 1;
+    req.ssDeassert = 1;
+    req.txCnt = 0;
+    req.rxCnt = 0;
+
+    retVal = MXC_SPI_MasterTransaction(&req);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
+        return 1;
+    }
+    
+    //printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
+    //printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
+    //return rx_data[0];
+    return 0;
 }
 
 // #ifdef CFG_lmic_clib
