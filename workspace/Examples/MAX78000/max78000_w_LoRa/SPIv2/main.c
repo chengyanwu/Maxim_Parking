@@ -47,7 +47,7 @@
 #include "mxc_delay.h"
 #include "mxc_pins.h"
 #include "nvic_table.h"
-#include "uart.h"
+//#include "uart.h"
 #include "spi.h"
 #include "dma.h"
 #include "board.h"
@@ -57,15 +57,16 @@
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the early prototype TTN
 // network.
-static const u1_t NWKSKEY[16] = {0x40, 0xBE, 0x38, 0x2D, 0xB8, 0x26, 0x67, 0xBF, 0x91, 0xAE, 0x83, 0x20, 0xC6, 0xD0, 0x9E, 0x06};
+static const u1_t NWKSKEY[16] = {0x4A, 0x96, 0xDF, 0xBE, 0x3D, 0xC0, 0x7F, 0x02, 0xB3, 0xBB, 0xE2, 0xCA, 0xDB, 0x84, 0x70, 0x41};
 
 // LoRaWAN AppSKey, application session key
 // This is the default Semtech key, which is used by the early prototype TTN
 // network.
-static const u1_t APPSKEY[16] = { 0xDA, 0xBF, 0xD5, 0x35, 0x76, 0x48, 0x84, 0x6C, 0x0D, 0x43, 0xBD, 0xC1, 0x96, 0x54, 0x63, 0x91 };
-
+//static const u1_t APPSKEY[16] = { 0xDA, 0xBF, 0xD5, 0x35, 0x76, 0x48, 0x84, 0x6C, 0x0D, 0x43, 0xBD, 0xC1, 0x96, 0x54, 0x63, 0x91 };
+static const u1_t APPSKEY[16] = {0x6C, 0xC5, 0x3C, 0xF2, 0x0D, 0x9A, 0x03, 0x94, 0xAB, 0x31, 0xA4, 0xE4, 0xF9, 0xE0, 0x36, 0x4F};
 // LoRaWAN end-device address (DevAddr)
-static const u4_t DEVADDR = 0x260C2BE5; // <-- Change this address for every node!
+
+static const u4_t DEVADDR = 0x260CA619; // <-- Change this address for every node!
 
 // These callbacks are only used in over-the-air activation, so they are
 // left empty here (we cannot leave them out completely unless
@@ -188,6 +189,10 @@ void setup(void) {
     LMIC_setSession (0x1, DEVADDR, nwkskey, appskey);
     #else
     // If not running an AVR with PROGMEM, just use the arrays directly
+    uint8_t appskey[sizeof(APPSKEY)];
+    uint8_t nwkskey[sizeof(NWKSKEY)];
+    memcpy(appskey, APPSKEY, sizeof(APPSKEY));
+    memcpy(nwkskey, NWKSKEY, sizeof(NWKSKEY));
     LMIC_setSession (0x1, DEVADDR, NWKSKEY, APPSKEY);
     #endif
 
@@ -241,15 +246,17 @@ void loop(void) {
 
 // application entry point
 int main (void) {
+    printf("test");
     setup();
-    while(1)
-    {
-        loop();
-        LED_On(LED1);
-        MXC_Delay(500000);
-        LED_Off(LED1);
-        MXC_Delay(500000);
+    os_runloop ();
+    // while(1)
+    // {
+    //     loop();
+    //     LED_On(LED1);
+    //     MXC_Delay(500000);
+    //     LED_Off(LED1);
+    //     MXC_Delay(500000);
 
-    }
+    // }
     return 0;
 }

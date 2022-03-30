@@ -557,6 +557,7 @@ static const u1_t rxlorairqmask[] = {
 // start LoRa receiver (time=LMIC.rxtime, timeout=LMIC.rxsyms, result=LMIC.frame[LMIC.dataLen])
 static void rxlora (u1_t rxmode) {
     // select LoRa modem (from sleep mode)
+    readReg(RegOpMode);
     opmodeLora();
     ASSERT((readReg(RegOpMode) & OPMODE_LORA) != 0);
     // enter standby mode (warm up))
@@ -682,7 +683,7 @@ void radio_init () {
 #endif
     //hal_waitUntil(os_getTime()+ms2osticks(1)); // wait >100us
     MXC_Delay(100);
-    hal_pin_rst(2); // configure RST pin floating!
+    hal_pin_rst(1); // configure RST pin floating!
     MXC_Delay(5000);
     //hal_waitUntil(os_getTime()+ms2osticks(5)); // wait 5ms
 

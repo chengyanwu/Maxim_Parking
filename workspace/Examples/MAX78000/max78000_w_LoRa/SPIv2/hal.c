@@ -32,7 +32,7 @@
 #include "mxc_delay.h"
 #include "mxc_pins.h"
 #include "nvic_table.h"
-#include "uart.h"
+//#include "uart.h"
 #include "spi.h"
 #include "dma.h"
 #include "board.h"
@@ -313,29 +313,21 @@ static void hal_spi_init () {
         
     if (MXC_SPI_Init(SPI, 1, 0, 2, 0, SPI_SPEED, spi_pins) != E_NO_ERROR) {
         printf("\nSPI INITIALIZATION ERROR\n");
-
-        //return 1;
     }
 
     MXC_Delay(5000);
     int retVal = MXC_SPI_SetDataSize(SPI, 8);
     if (retVal != E_NO_ERROR) {
         printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
-        
-        //return 1;
     }
     
     retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
     if (retVal != E_NO_ERROR) {
         printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
-        
-        //return 1;
     }
     retVal = MXC_SPI_SetMode(SPI, SPI_MODE_0);
     if (retVal != E_NO_ERROR) {
         printf("\nSPI SET MODE ERROR: %d\n", retVal);
-        
-        //return 1;
     }
 }
 
@@ -377,14 +369,14 @@ u1_t hal_spi_write(u1_t addr, u1_t data){
     mxc_spi_req_t req;
 
     uint8_t temp[2];
-    temp[0] = addr | 0x80;
-    temp[1] = data;
+    temp[0] = (uint8_t) addr | 0x80;
+    temp[1] = (uint8_t) data;
 
     req.spi = SPI;
     req.txData = temp;
     //req.rxData = rx_data;
     req.txLen = 2;
-    //req.rxLen = 1;
+    req.rxLen = 0;
     req.ssIdx = 1;
     req.ssDeassert = 1;
     req.txCnt = 0;
@@ -396,8 +388,6 @@ u1_t hal_spi_write(u1_t addr, u1_t data){
         printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
         return 1;
     }
-    //printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
-    //printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
     return 0;
 }
 
@@ -410,7 +400,7 @@ u1_t hal_spi_read(u1_t addr){
     req.txData = tx_data;
     //req.rxData = rx_data;
     req.txLen = 1;
-    //req.rxLen = 1;
+    req.rxLen = 1;
     req.ssIdx = 1;
     req.ssDeassert = 0;
     req.txCnt = 0;
@@ -438,9 +428,6 @@ u1_t hal_spi_read(u1_t addr){
         printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
         return 1;
     }
-    
-    //printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
-    //printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
     return rx_data[0];
 }
 

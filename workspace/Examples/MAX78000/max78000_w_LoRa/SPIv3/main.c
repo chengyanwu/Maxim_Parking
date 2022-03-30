@@ -88,7 +88,7 @@ void SPI0_IRQHandler(void)
 }
 #elif defined (BOARD_EVKIT_V1)
 #define SPI         MXC_SPI1
-#define SPI_IRQ     SPI1_IRQn
+#define SPI_IRQ     SPuartI1_IRQn
 void SPI1_IRQHandler(void)
 {
     MXC_SPI_AsyncHandler(SPI);
@@ -181,7 +181,7 @@ void hal_spi_write (uint8_t addr, uint8_t data) {
             printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
             return 1;
         }
-        printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
+        printf("txData = %d, rxData = %d\n", req.txData[1], *req.rxData);
         printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
 }
 
@@ -309,21 +309,23 @@ int main(void)
     memset(tx_data, 0x0, sizeof(uint8_t));
 
     uint8_t val = 0;
-    //hal_pin_ss (0);
-    MXC_Delay(5000);
-    //hal_pin_ss (1);
-    //hal_pin_ss (1);
-    MXC_Delay(1000000);
-    hal_spi_write( 0x01, 0x03);
-    while(1){
+    hal_pin_ss (0);
+    MXC_Delay(500);
+    hal_pin_ss (1);
+    MXC_Delay(10000);
+    //while(1){
         val = hal_spi_read(0x01);
-        if (val!=0)
-            LED_On(LED1);
-        printf("----------------------------\n");
-        MXC_Delay(500000);
-        LED_Off(LED1);
-        MXC_Delay(500000);
-    }
+        printf("old val: %d\n", val);
+        hal_spi_write(0x01, 0x88);
+        val = hal_spi_read(0x01);
+        printf("new val: %d\n", val);
+        // if (val!=0)
+        //     LED_On(LED1);
+        // printf("----------------------------\n");
+        // MXC_Delay(500000);
+        // LED_Off(LED1);
+        // MXC_Delay(500000);
+    //}
         
     return E_NO_ERROR;
 }
