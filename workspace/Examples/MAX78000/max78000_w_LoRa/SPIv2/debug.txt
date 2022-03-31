@@ -1,4 +1,4 @@
 target remote localhost:3333
 monitor reset halt
-break hal.c:648
+break main.c:86
 c

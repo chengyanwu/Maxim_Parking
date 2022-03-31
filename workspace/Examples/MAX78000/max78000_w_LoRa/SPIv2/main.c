@@ -240,23 +240,19 @@ void setup(void) {
     do_send(&sendjob);
 }
 
-void loop(void) {
-    os_runloop_once();
-}
-
 // application entry point
 int main (void) {
     printf("test");
     setup();
-    os_runloop ();
-    // while(1)
-    // {
-    //     loop();
-    //     LED_On(LED1);
-    //     MXC_Delay(500000);
-    //     LED_Off(LED1);
-    //     MXC_Delay(500000);
+    //os_runloop();
+    while(1)
+    {
+        do_send(&sendjob);
+         LED_On(LED1);
+         MXC_Delay(500000);
+         LED_Off(LED1);
+         MXC_Delay(500000);
 
-    // }
+    }
     return 0;
 }

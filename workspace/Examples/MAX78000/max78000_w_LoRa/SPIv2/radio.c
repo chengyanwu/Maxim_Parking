@@ -301,7 +301,7 @@ static void writeBuf (u1_t addr, xref2u1_t buf, u1_t len) {
     //     hal_spi(buf[i]);
     // }
     //hal_pin_nss(1);
-    hal_spi_writeBuf(addr, &buf, len);
+    hal_spi_writeBuf(addr, buf, len);
 }
 
 static void readBuf (u1_t addr, xref2u1_t buf, u1_t len) {
@@ -311,7 +311,7 @@ static void readBuf (u1_t addr, xref2u1_t buf, u1_t len) {
     //     buf[i] = hal_spi(0x00);
     // }
     //hal_pin_nss(1);
-    hal_spi_readBuf(addr, &buf, len);
+    hal_spi_readBuf(addr, buf, len);
 }
 
 static void opmode (u1_t mode) {

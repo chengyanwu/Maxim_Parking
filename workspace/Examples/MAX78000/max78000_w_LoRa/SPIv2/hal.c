@@ -443,7 +443,7 @@ u1_t hal_spi_writeBuf (u1_t addr, u1_t* buf, u1_t len) {
     req.txData = temp;
     //req.rxData = rx_data;
     req.txLen = len+1;
-    //req.rxLen = 1;
+    req.rxLen = 0;
     req.ssIdx = 1;
     req.ssDeassert = 1;
     req.txCnt = 0;
@@ -470,7 +470,7 @@ u1_t hal_spi_readBuf (u1_t addr, u1_t* buf, u1_t len) {
     req.txData = tx_data;
     //req.rxData = rx_data;
     req.txLen = 1;
-    //req.rxLen = 1;
+    req.rxLen = 1;
     req.ssIdx = 1;
     req.ssDeassert = 0;
     req.txCnt = 0;
@@ -488,7 +488,7 @@ u1_t hal_spi_readBuf (u1_t addr, u1_t* buf, u1_t len) {
     memset(txBuf, 0x0, len*sizeof(uint8_t));
 
     req.txData = txBuf;
-    req.rxData = rxBuf;
+    req.rxData = buf;
     req.txLen = len;
     req.rxLen = len;
     req.ssIdx = 1;
