@@ -47,11 +47,10 @@
 #include "mxc_delay.h"
 #include "mxc_pins.h"
 #include "nvic_table.h"
-//#include "uart.h"
+#include "uart.h"
 #include "spi.h"
 #include "dma.h"
 #include "board.h"
-
 #include "lmic.h"
 
 // LoRaWAN NwkSKey, network session key
@@ -75,7 +74,7 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-static uint8_t mydata[] = "Hello, world!";
+static uint8_t mydata[] = "Hello, LoRa";
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
@@ -237,22 +236,29 @@ void setup(void) {
     LMIC_setDrTxpow(DR_SF7,14);
 
     // Start job
-    do_send(&sendjob);
+    //do_send(&sendjob);
 }
 
 // application entry point
 int main (void) {
-    printf("test");
     setup();
     //os_runloop();
-    while(1)
-    {
+     while(1)
+     {
+        LED_On(LED1);
         do_send(&sendjob);
-         LED_On(LED1);
-         MXC_Delay(500000);
-         LED_Off(LED1);
-         MXC_Delay(500000);
+        MXC_Delay(500000);
 
+        if (LMIC.txrxFlags & TXRX_ACK)
+            printf("Received ack");
+        if (LMIC.dataLen) {
+              printf("Received ");
+              printf(LMIC.dataLen);
+              printf(" bytes of payload");
+        }
+        
+        LED_Off(LED1);
+        MXC_Delay(500000);
     }
     return 0;
 }

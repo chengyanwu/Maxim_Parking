@@ -50,12 +50,14 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max780
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/nvic_table.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/spi.h \
- c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
+ c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/uart.h \
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/lpgcr_regs.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gcr_regs.h \
+ c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/spi.h \
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/dma.h \

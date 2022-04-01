@@ -545,6 +545,7 @@ static void hal_time_init () {
         printf("Example Failed\n");   
         while (1);
     }
+    MXC_RTC_Start();
     printf("RTC started\n");
     //printTime();
 }
@@ -639,13 +640,14 @@ void hal_init () {
 //     // configure radio SPI
         hal_spi_init();
 //     // configure timer and interrupt handler
-        //hal_time_init();
+        hal_time_init();
 
 //     hal_enableIRQs();
     
 }
 
 void hal_failed () {
+    while(1){}
 //     // HALT...
 //     hal_disableIRQs();
 //     hal_sleep();
