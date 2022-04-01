@@ -74,7 +74,7 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-static uint8_t mydata[] = "Hello, LoRa";
+static uint8_t mydata[] = "1234567890";
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
@@ -243,22 +243,18 @@ void setup(void) {
 int main (void) {
     setup();
     //os_runloop();
+    int i = 0;
+    char *message;
      while(1)
      {
+        message = &mydata[i%10];
+        LMIC_setTxData2(1, message, sizeof(mydata[0]), 0);
+        LMIC_clrTxData();
         LED_On(LED1);
-        do_send(&sendjob);
         MXC_Delay(500000);
-
-        if (LMIC.txrxFlags & TXRX_ACK)
-            printf("Received ack");
-        if (LMIC.dataLen) {
-              printf("Received ");
-              printf(LMIC.dataLen);
-              printf(" bytes of payload");
-        }
-        
         LED_Off(LED1);
         MXC_Delay(500000);
+        i++;
     }
     return 0;
 }

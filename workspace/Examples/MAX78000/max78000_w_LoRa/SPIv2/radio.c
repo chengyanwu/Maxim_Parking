@@ -683,7 +683,7 @@ void radio_init () {
 #endif
     //hal_waitUntil(os_getTime()+ms2osticks(1)); // wait >100us
     MXC_Delay(100);
-    hal_pin_rst(1); // configure RST pin floating!
+    hal_pin_rst(2); // configure RST pin floating!
     MXC_Delay(5000);
     //hal_waitUntil(os_getTime()+ms2osticks(5)); // wait 5ms
 

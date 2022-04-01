@@ -196,18 +196,29 @@ void hal_pin_rst (u1_t val) {
     mxc_gpio_cfg_t gpio_out;
     gpio_out.port = MXC_GPIO_PORT_OUT;
     gpio_out.mask = MXC_GPIO_PIN_OUT;
-    gpio_out.pad = MXC_GPIO_PAD_NONE;
-    gpio_out.func = MXC_GPIO_FUNC_OUT;
+    // gpio_out.pad = MXC_GPIO_PAD_NONE;
+    // gpio_out.func = MXC_GPIO_FUNC_OUT;
+    
+    //MXC_GPIO_SetVSSEL(gpio_out.port, MXC_GPIO_VSSEL_VDDIO, gpio_out.mask);
 
     //POTENTIAL ISSUE
     if (val == 0|| val == 1)
     {
+        gpio_out.pad = MXC_GPIO_PAD_PULL_UP;
+        gpio_out.func = MXC_GPIO_FUNC_OUT;
         MXC_GPIO_Init(gpio_out.mask);
         MXC_GPIO_Config(&gpio_out);
         if (val==0)
              MXC_GPIO_OutClr(gpio_out.port, gpio_out.mask);
         if (val==1)
             MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
+    }
+    else
+    {
+        gpio_out.pad = MXC_GPIO_PAD_NONE;
+        gpio_out.func = MXC_GPIO_FUNC_IN;
+        MXC_GPIO_Reset (gpio_out.mask);
+        //MXC_GPIO_InGet (gpio_out.port, gpio_out.mask);
     }
 }
 
