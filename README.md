@@ -8,8 +8,7 @@ Our objective is to design, develop, and implement an intelligent parking sensor
 ### Loading and Running Applications
 OpenOCD: 
 ```bash
-openocd -s $MAXIM_PATH/Tools/OpenOCD/scripts -f interface/cmsis-dap.cfg -f target/max78000.cfg -c "program build/MAX78000.elf reset exit"
-```
+openocd -f interface/cmsis-dap.cfg -f target/max78000.cfg -s/c/MaximSDK/Tools/OpenOCD/scripts```
 GDB:
 ```bash
 arm-none-eabi-gdb max78000.elf
