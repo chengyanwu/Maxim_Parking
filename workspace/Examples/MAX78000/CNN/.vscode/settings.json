@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "dma.h": "c",
+        "nvic_table.h": "c",
+        "lmic.h": "c"
+    }
+}

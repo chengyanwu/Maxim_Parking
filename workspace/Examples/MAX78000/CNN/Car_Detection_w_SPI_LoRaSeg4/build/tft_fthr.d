@@ -1,4 +1,4 @@
-/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/tft_fthr.o: \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_SPI_LoRaSeg4/build/tft_fthr.o: \
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/tft_fthr.c \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \

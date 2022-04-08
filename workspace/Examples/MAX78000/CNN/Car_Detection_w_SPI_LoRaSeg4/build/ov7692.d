@@ -1,4 +1,4 @@
-/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/ov7692.o: \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_SPI_LoRaSeg4/build/ov7692.o: \
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/ov7692.c \
  /Applications/ARM/arm-none-eabi/include/stdio.h \
  /Applications/ARM/arm-none-eabi/include/_ansi.h \

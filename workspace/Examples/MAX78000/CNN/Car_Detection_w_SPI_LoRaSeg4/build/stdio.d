@@ -1,4 +1,4 @@
-/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/stdio.o: \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_SPI_LoRaSeg4/build/stdio.o: \
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/stdio.c \
  /Applications/ARM/arm-none-eabi/include/sys/errno.h \
  /Applications/ARM/arm-none-eabi/include/sys/reent.h \

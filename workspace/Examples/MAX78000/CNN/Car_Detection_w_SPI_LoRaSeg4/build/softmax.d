@@ -1,4 +1,4 @@
-/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/softmax.o: \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_SPI_LoRaSeg4/build/softmax.o: \
  softmax.c ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \

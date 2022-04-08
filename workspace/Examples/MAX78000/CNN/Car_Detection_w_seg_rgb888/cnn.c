@@ -32,8 +32,8 @@
 * ownership rights.
 *******************************************************************************/
 
-// cars-50
-// Created using ./ai8xize.py --test-dir sdk/Examples/MAX78000/CNN --prefix cars-50 --checkpoint-file cars-50/proj_q8.pth.tar --config-file networks/cats-dogs-chw.yaml --softmax --device MAX78000 --compact-data --mexpress --timer 0 --display-checkpoint --verbose
+// cars-50-augment
+// Created using ./ai8xize.py --test-dir sdk/Examples/MAX78000/CNN --prefix cars-50-augment --checkpoint-file cars-50/proj_q8.pth.tar --config-file networks/cats-dogs-chw.yaml --softmax --device MAX78000 --compact-data --mexpress --timer 0 --display-checkpoint --verbose
 
 // DO NOT EDIT - regenerate this file instead!
 

@@ -1,4 +1,4 @@
-/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/pb.o: \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_SPI_LoRaSeg4/build/pb.o: \
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/pb.c \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \

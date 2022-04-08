@@ -1,4 +1,4 @@
-/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_LoRaSeg4/build/camera.o: \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_SPI_LoRaSeg4/build/camera.o: \
  ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/camera.c \
  /Applications/ARM/arm-none-eabi/include/stdlib.h \
  /Applications/ARM/arm-none-eabi/include/machine/ieeefp.h \

@@ -49,9 +49,9 @@
 #include "sampledata.h"
 #include "mxc_delay.h"
 #include "camera.h"
-#include "dma.h"
+// #include "dma.h"
 #include "nvic_table.h"
-#include "lmic/lmic.h"
+#include "lmic.h"
 #ifdef BOARD_EVKIT_V1
 #include "bitmap.h"
 #include "tft.h"
@@ -71,8 +71,8 @@
 #define BUFF_SIZE           64
 
 /***** Globals *****/
-volatile int READ_FLAG;
-volatile int DMA_FLAG;
+// volatile int READ_FLAG;
+// volatile int DMA_FLAG;
 
 #ifdef BOARD_EVKIT_V1
 #define READING_UART        1
@@ -138,6 +138,10 @@ static osjob_t sendjob;
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
 const unsigned TX_INTERVAL = 60;
+
+void onEvent(ev_t ev){
+  printf("Entering onEvent\n");
+}
 
 void setup(void) {
     printf("Starting");
@@ -478,8 +482,11 @@ void convert_img_signed_to_unsigned(uint32_t* data0, uint32_t* data1, uint32_t* 
 void send_through_SPI(char* tx_data)
 {
   printf("Sending to RFM95W through SPI\n");
+  printf("TxData: %s", tx_data);
+  printf("TxData: %d", sizeof(tx_data)-1);
 
-  LMIC_setTxData2(1, tx_data, sizeof(mydata[0]), 0);
+
+  LMIC_setTxData2(1, tx_data, 34, 0);
   LMIC_clrTxData();
   LED_On(LED1);
   MXC_Delay(500000);
