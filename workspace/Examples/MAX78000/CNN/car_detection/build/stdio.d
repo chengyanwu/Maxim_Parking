@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo/build/stdio.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/car_detection/build/stdio.o: \
  c:\maximsdk\libraries\boards\max78000\source\stdio.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\errno.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\reent.h \
@@ -60,7 +60,8 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/ca
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/lpgcr_regs.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gcr_regs.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
+ c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/uart.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h

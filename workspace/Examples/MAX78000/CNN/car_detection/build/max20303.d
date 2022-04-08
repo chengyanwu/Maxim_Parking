@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/cats-dogs_demo/build/max20303.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/car_detection/build/max20303.o: \
  c:\maximsdk\libraries\boards\max78000\source\max20303.c \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdint.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdint.h \
