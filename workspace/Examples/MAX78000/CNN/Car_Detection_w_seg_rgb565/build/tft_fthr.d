@@ -1,5 +1,5 @@
-/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/tft.o: \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Source/tft.c \
+/Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/tft_fthr.o: \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/tft_fthr.c \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /Applications/ARM/arm-none-eabi/include/stdint.h \
@@ -48,7 +48,7 @@
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/tft.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/tft_fthr.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/spi.h \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
@@ -58,5 +58,4 @@
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gcr_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h \
- ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/touchscreen.h
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h

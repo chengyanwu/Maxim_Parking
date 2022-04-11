@@ -1,5 +1,5 @@
 /Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/stdio.o: \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Source/stdio.c \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/stdio.c \
  /Applications/ARM/arm-none-eabi/include/sys/errno.h \
  /Applications/ARM/arm-none-eabi/include/sys/reent.h \
  /Applications/ARM/arm-none-eabi/include/_ansi.h \
@@ -60,7 +60,8 @@
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/lpgcr_regs.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gcr_regs.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/uart.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h

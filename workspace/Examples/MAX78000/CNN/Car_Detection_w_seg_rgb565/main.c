@@ -446,16 +446,18 @@ int main(void)
 #ifdef TFT_ENABLE
   MXC_TFT_SetBackGroundColor(4);
   memset(buff,32,TFT_BUFF_SIZE);
+  MXC_TFT_SetRotation(ROTATE_180);
   TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Car Detection Demo"));
-  TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
+  // TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
 #endif
 
   int frame = 0;
 
   while (1)
   {
-    printf("********** Press PB1 to capture an image **********\r\n");
-    while(!PB_Get(0));
+    // printf("********** Press PB1 to capture an image **********\r\n");
+    // while(!PB_Get(0));
+    MXC_Delay(1000000);
     int inputNum = 0;
 
     // Capture a single camera frame.

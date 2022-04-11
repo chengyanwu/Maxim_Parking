@@ -1,5 +1,5 @@
 /Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/camera.o: \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Source/camera.c \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/camera.c \
  /Applications/ARM/arm-none-eabi/include/stdlib.h \
  /Applications/ARM/arm-none-eabi/include/machine/ieeefp.h \
  /Applications/ARM/arm-none-eabi/include/_ansi.h \
@@ -36,7 +36,7 @@
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
  /Applications/ARM/arm-none-eabi/include/stdio.h \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
  /Applications/ARM/arm-none-eabi/include/sys/types.h \
@@ -51,6 +51,7 @@
  /Applications/ARM/arm-none-eabi/include/sys/sched.h \
  /Applications/ARM/arm-none-eabi/include/machine/types.h \
  /Applications/ARM/arm-none-eabi/include/sys/stdio.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/nvic_table.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/pt.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/pt.h \
@@ -71,7 +72,6 @@
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/camera.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/ov7692_regs.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/camera.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/tmr_regs.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/sccb.h
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/sccb.h

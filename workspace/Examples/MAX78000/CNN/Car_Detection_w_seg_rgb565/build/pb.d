@@ -1,5 +1,5 @@
 /Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/pb.o: \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Source/pb.c \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/pb.c \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
@@ -20,5 +20,5 @@
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/pb.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/pb.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h
