@@ -56,9 +56,10 @@
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/fcr_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/icc.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/icc_regs.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/led.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/led.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/tmr.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/tmr_regs.h \
@@ -67,15 +68,11 @@
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/dma.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/dma_regs.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/pb.h cnn.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/pb.h cnn.h \
  weights.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/camera.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/ov7692_regs.h \
- TFT/evkit/bitmap.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/tft.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/camera.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/tft_fthr.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/spi.h \
- ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/touchscreen.h
+ ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h

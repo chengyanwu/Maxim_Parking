@@ -1,5 +1,5 @@
 /Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/ov7692.o: \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Source/ov7692.c \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/ov7692.c \
  /Applications/ARM/arm-none-eabi/include/stdio.h \
  /Applications/ARM/arm-none-eabi/include/_ansi.h \
  /Applications/ARM/arm-none-eabi/include/newlib.h \
@@ -40,11 +40,10 @@
  /Applications/ARM/arm-none-eabi/include/strings.h \
  /Applications/ARM/arm-none-eabi/include/sys/string.h \
  /Applications/ARM/arm-none-eabi/include/math.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/camera.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/ov7692_regs.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/camera.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/tmr_regs.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/sccb.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/ov7692_regs.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/sccb.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/ov7692_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \

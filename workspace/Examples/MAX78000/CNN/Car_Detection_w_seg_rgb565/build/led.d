@@ -1,5 +1,5 @@
 /Users/ianwu/Desktop/Maxim-Parking/Maxim_Parking/workspace/Examples/MAX78000/CNN/Car_Detection_w_seg_rgb565/build/led.o: \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Source/led.c \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Source/led.c \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
@@ -18,9 +18,9 @@
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/../Include/led.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/../Include/led.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
- ../../../../Libraries/Boards/MAX78000/EvKit_V1/Include/board.h \
+ ../../../../Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
  /Applications/ARM/arm-none-eabi/include/stdio.h \
  /Applications/ARM/arm-none-eabi/include/_ansi.h \
  /Applications/ARM/arm-none-eabi/include/newlib.h \
@@ -46,4 +46,5 @@
  /Applications/ARM/arm-none-eabi/include/sys/sched.h \
  /Applications/ARM/arm-none-eabi/include/machine/types.h \
  /Applications/ARM/arm-none-eabi/include/sys/stdio.h \
+ ../../../../Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
  ../../../../Libraries/PeriphDrivers/Include/MAX78000/gpio.h

@@ -72,6 +72,11 @@ export CMSIS_ROOT
 SRCS  = main.c
 SRCS += cnn.c
 SRCS += softmax.c
+SRCS += lmic.c
+SRCS += aes.c
+SRCS += oslmic.c
+SRCS += radio.c
+SRCS += hal.c
 ifeq "$(BOARD)" "EvKit_V1"
 SRCS += TFT/evkit/all_imgs.c
 endif
@@ -86,6 +91,7 @@ VPATH  = .
 VPATH += ./Camera/
 VPATH += ../Common
 VPATH += ./Camera/src
+VPATH +=./lmic
 ifeq "$(BOARD)" "EvKit_V1"
 VPATH += ./TFT/evkit/
 endif
@@ -99,6 +105,7 @@ IPATH += ./Camera/
 IPATH += ../Common
 IPATH += ./Camera/include
 IPATH += TFT/evkit/
+IPATH += ./lmic
 
 # Enable assertion checking for development
 PROJ_CFLAGS+=-DMXC_ASSERT_ENABLE
@@ -111,7 +118,7 @@ endif
 
 ifeq "$(BOARD)" "FTHR_RevA"
 # Only enable if 2.4" TFT is connected to Feather
-#PROJ_CFLAGS+=-DTFT_ENABLE
+# PROJ_CFLAGS+=-DTFT_ENABLE
 endif
 
 # Enable all warnings
