@@ -1,7 +1,3 @@
----
-typora-root-url: Resources
-
----
 
 # Car Detection with RFM95W through SPI
 
