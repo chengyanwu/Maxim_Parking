@@ -70,7 +70,7 @@
 #define BUFF_SIZE           64
 
 // #define DMA
-#define LoRaWan
+//#define LoRaWan_Enable
 
 #ifdef BOARD_EVKIT_V1
 int image_bitmap_1 = img_1_bmp;

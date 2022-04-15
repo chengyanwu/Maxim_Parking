@@ -1,8 +1,0 @@
-/home/lparm/JenkinsTest/workspace/MnS/MSDK/Devices/ME11/MAX32660/Libraries/PeriphDrivers/Include/MAX32660/spimss.h:58: warning: Refusing to add group spimss to itself
-/home/lparm/JenkinsTest/workspace/MnS/MSDK/Devices/ME11/MAX32660/Libraries/PeriphDrivers/Include/MAX32660/gpio.h:277: warning: explicit link request to 'callback_fn' could not be resolved
-/home/lparm/JenkinsTest/workspace/MnS/MSDK/Devices/ME11/MAX32660/Libraries/PeriphDrivers/Include/MAX32660/gpio.h:278: warning: explicit link request to 'callback_fn' could not be resolved
-/home/lparm/JenkinsTest/workspace/MnS/MSDK/Devices/ME11/MAX32660/Libraries/PeriphDrivers/Include/MAX32660/lp.h:216: warning: argument 'system' of command @param is not found in the argument list of MXC_LP_SetOperatingVoltage(mxc_lp_ovr_t ovr)
-/home/lparm/JenkinsTest/workspace/MnS/MSDK/Devices/ME11/MAX32660/Libraries/PeriphDrivers/Include/MAX32660/lp.h:219: warning: The following parameters of MXC_LP_SetOperatingVoltage(mxc_lp_ovr_t ovr) are not documented:
-  parameter 'ovr'
-/home/lparm/JenkinsTest/workspace/MnS/MSDK/Devices/ME11/MAX32660/Libraries/PeriphDrivers/Include/MAX32660/spimss.h:89: warning: explicit link request to 'spi_req' could not be resolved
-error: Project logo './MI_Logo_Small_Pos_RGB_150dpi.png' specified by PROJECT_LOGO does not exist!

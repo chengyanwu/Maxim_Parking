@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/max_w_lora/build/camera.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/camera.o: \
  c:\maximsdk\libraries\boards\max78000\source\camera.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdlib.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\machine\ieeefp.h \

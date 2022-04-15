@@ -658,7 +658,7 @@ void hal_init () {
 }
 
 void hal_failed () {
-    while(1){}
+    //while(1){}
 //     // HALT...
 //     hal_disableIRQs();
 //     hal_sleep();

@@ -58,6 +58,7 @@
 #include "utils.h"
 #include "dma.h"
 #include "pb.h"
+#include "gpio.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -83,6 +84,10 @@
 
 #define TFT_BUFF_SIZE   30    // TFT buffer size
 
+/***** GPIO ***************/
+#define MXC_GPIO_PORT_OUT               MXC_GPIO0
+#define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_19
+
 #ifdef BOARD_EVKIT_V1
 int image_bitmap_1 = img_1_bmp;
 int image_bitmap_2 = logo_white_bg_darkgrey_bmp;
@@ -100,6 +105,8 @@ int font_2 = (int)& SansSerif16x16[0];
 #define TOSTRING(x) STRINGIFY(x)
 #define MAXLEN 256
 
+#define TFT_SPI0_PIN 	MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11|MXC_GPIO_PIN_19
+
 uint32_t imNum = 0;
 
 extern FRESULT err;
@@ -113,6 +120,35 @@ uint32_t input_1_camera[1024];
 uint32_t input_2_camera[1024];
 
 int imgNum = 0;
+
+// set radio RST pin to given value (or keep floating!)
+void hal_pin_ss (uint8_t val) {
+    mxc_gpio_cfg_t gpio_out;
+    gpio_out.port = MXC_GPIO_PORT_OUT;
+    gpio_out.mask = MXC_GPIO_PIN_OUT;
+
+    
+    MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, TFT_SPI0_PIN);
+
+    if (val == 0|| val == 1)
+    {
+        gpio_out.pad = MXC_GPIO_PAD_PULL_UP;
+        gpio_out.func = MXC_GPIO_FUNC_OUT;
+        MXC_GPIO_Init(gpio_out.mask);
+        MXC_GPIO_Config(&gpio_out);
+        if (val==0)
+             MXC_GPIO_OutClr(gpio_out.port, gpio_out.mask);
+        if (val==1)
+            MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
+    }
+    else
+    {
+        gpio_out.pad = MXC_GPIO_PAD_NONE;
+        gpio_out.func = MXC_GPIO_FUNC_IN;
+        MXC_GPIO_Reset (gpio_out.mask);
+    }
+    //MXC_Delay(5000);
+}
 
 //https://blog.fearcat.in/a?ID=00900-e289dd3c-202f-4105-8437-7de05cc65166
 void RGB565ToRGB888Char(uint8_t* rgb565, uint8_t* rgb888)
@@ -281,6 +317,16 @@ int main(void)
     MXC_DMA_Init();
     dma_channel = MXC_DMA_AcquireChannel();
 
+    mxc_gpio_cfg_t gpio_out;
+    gpio_out.port = MXC_GPIO_PORT_OUT;
+    gpio_out.mask = MXC_GPIO_PIN_OUT;
+
+    MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, TFT_SPI0_PIN);
+    gpio_out.func = MXC_GPIO_FUNC_OUT;
+    MXC_GPIO_Init(gpio_out.mask);
+    MXC_GPIO_Config(&gpio_out);
+    MXC_GPIO_OutSet(MXC_GPIO0, MXC_GPIO_PIN_19);
+  
     // Initialize the camera driver.
     camera_init(CAMERA_FREQ);
     printf("\n\nCameraIF Example\n");
@@ -379,21 +425,15 @@ int main(void)
 
     // Start off the first camera image frame.
     camera_start_capture_image();
-
     
     while (1) {
         // Check if image is aquired.
         if (camera_is_image_rcv()) {
             // Process the image, send it through the UART console.
         	LED_On(LED1);
-            // #ifdef TFT_ENABLE
-            //     MXC_TFT_ClearScreen();
-            //     TFT_Print(buff, 40, 110, font_2, sprintf(buff, "CAPTURING IMAGE.."));
-            // #endif
+
             camera_get_image(&raw, &imgLen, &w, &h);
-            // #ifdef TFT_ENABLE
-            //     MXC_TFT_ClearScreen();
-            // #endif
+
 
             img565To888(raw, imgBlock888);
             process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
