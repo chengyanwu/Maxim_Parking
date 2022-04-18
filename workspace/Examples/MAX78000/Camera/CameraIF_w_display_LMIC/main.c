@@ -371,7 +371,7 @@ void setup(void) {
     LMIC_setDrTxpow(DR_SF7,14);
 }
 /* **************************************************************************** */
-void send_through_SPI(char* tx_data)
+void send_through_SPI(xref2u1_t tx_data)
 {
   printf("Sending to RFM95W through SPI\n");
   printf("TxData: %s", tx_data);
@@ -510,6 +510,7 @@ int main(void)
 
     // Start off the first camera image frame.
     camera_start_capture_image();
+    setup();
     
     while (1) {
         // Check if image is aquired.
@@ -527,7 +528,7 @@ int main(void)
             //process_img();
          
             send_through_SPI(txData);
-
+            MXC_Delay(500000);
             LED_Off(LED2);
             MXC_Delay(500000);
             // Prepare for another frame capture.

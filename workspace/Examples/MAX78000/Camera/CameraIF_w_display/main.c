@@ -374,7 +374,7 @@ int main(void)
     #endif
     #ifdef BOARD_FTHR_REVA
         /* Initialize TFT display */
-        MXC_TFT_Init(MXC_SPI0, 1, NULL, NULL);
+        MXC_TFT_Init(MXC_SPI0, 0, NULL, NULL);
         MXC_TFT_SetRotation(ROTATE_270);
         MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
     #endif
