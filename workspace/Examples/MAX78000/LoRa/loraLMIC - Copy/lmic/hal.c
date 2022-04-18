@@ -81,22 +81,69 @@ void SPI1_IRQHandler(void)
 #endif
 
 /***** GPIO ***************/
-#define LORA_RESET_PORT_OUT               MXC_GPIO1
-#define LORA_RESET_PIN_OUT                MXC_GPIO_PIN_6
-
-#define TFT_SS_PORT_OUT               MXC_GPIO0
-#define TFT_SS_PIN_OUT                MXC_GPIO_PIN_19
-
-
-
-#define LORA_TFT_PINS MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_19 | MXC_GPIO_PIN_11 |MXC_GPIO_PIN_16
-
+#define MXC_GPIO_PORT_OUT               MXC_GPIO0
+#define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_19
 
 void SPI_Callback(mxc_spi_req_t* req, int error)
 {
     SPI_FLAG = error;
 }
 
+//#include "hw.h"
+
+// -----------------------------------------------------------------------------
+// I/O
+
+// #ifdef CFG_sx1276mb1_board
+
+// #define NSS_PORT           1 // NSS: PB6, sx1276
+// #define NSS_PIN            6  // sx1276: PB6
+
+// #define TX_PORT            2 // TX:  PC1
+// #define TX_PIN             1
+
+// #define RST_PORT           0 // RST: PA0
+// #define RST_PIN            0
+
+// #define DIO0_PORT          0 // DIO0: PA10, sx1276   (line 1 irq handler)
+// #define DIO0_PIN           10
+// #define DIO1_PORT          1 // DIO1: PB3, sx1276  (line 10-15 irq handler)
+// #define DIO1_PIN           3
+// #define DIO2_PORT          1 // DIO2: PB5, sx1276  (line 10-15 irq handler)
+// #define DIO2_PIN           5
+
+// static const u1_t outputpins[] = { NSS_PORT, NSS_PIN, TX_PORT, TX_PIN  };
+// static const u1_t inputpins[]  = { DIO0_PORT, DIO0_PIN, DIO1_PORT, DIO1_PIN, DIO2_PORT, DIO2_PIN };
+
+// #elif CFG_wimod_board
+
+// // output lines
+// #define NSS_PORT           1 // NSS: PB0, sx1272
+// #define NSS_PIN            0
+
+// #define TX_PORT            0 // TX:  PA4
+// #define TX_PIN             4
+// #define RX_PORT            2 // RX:  PC13
+// #define RX_PIN            13
+// #define RST_PORT           0 // RST: PA2
+// #define RST_PIN            2
+
+// // input lines
+// #define DIO0_PORT          1 // DIO0: PB1   (line 1 irq handler)
+// #define DIO0_PIN           1
+// #define DIO1_PORT          1 // DIO1: PB10  (line 10-15 irq handler)
+// #define DIO1_PIN          10
+// #define DIO2_PORT          1 // DIO2: PB11  (line 10-15 irq handler)
+// #define DIO2_PIN          11
+
+// static const u1_t outputpins[] = { NSS_PORT, NSS_PIN, TX_PORT, TX_PIN, RX_PORT, RX_PIN };
+// static const u1_t inputpins[]  = { DIO0_PORT, DIO0_PIN, DIO1_PORT, DIO1_PIN, DIO2_PORT, DIO2_PIN };
+
+// #else
+// #error Missing CFG_sx1276mb1_board/CFG_wimod_board!
+// #endif
+
+// HAL state
 static struct {
     int irqlevel;
     u4_t ticks;
@@ -120,11 +167,6 @@ static void hal_io_init () {
     //     hw_cfg_pin(GPIOx(inputpins[i]), inputpins[i+1], GPIOCFG_MODE_INP | GPIOCFG_OSPEED_40MHz | GPIOCFG_OTYPE_OPEN);
     //     hw_cfg_extirq(inputpins[i], inputpins[i+1], GPIO_IRQ_RISING);
     // }
-
-    //MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, LORA_TFT_PINS);
-    //MXC_GPIO_SetVSSEL(MXC_GPIO1, MXC_GPIO_VSSEL_VDDIOH, LORA_RESET_PIN_OUT);
-
-
 }
 
 // val ==1  => tx 1, rx 0 ; val == 0 => tx 0, rx 1
@@ -151,15 +193,20 @@ void hal_pin_rst (u1_t val) {
     // } else { // keep pin floating
     //     hw_cfg_pin(GPIOx(RST_PORT), RST_PIN, GPIOCFG_MODE_INP | GPIOCFG_OSPEED_40MHz | GPIOCFG_OTYPE_OPEN);
     // }
+    mxc_gpio_cfg_t gpio_out;
+    gpio_out.port = MXC_GPIO_PORT_OUT;
+    gpio_out.mask = MXC_GPIO_PIN_OUT;
+    // gpio_out.pad = MXC_GPIO_PAD_NONE;
+    // gpio_out.func = MXC_GPIO_FUNC_OUT;
     
+    //MXC_GPIO_SetVSSEL(gpio_out.port, MXC_GPIO_VSSEL_VDDIO, gpio_out.mask);
+
     //POTENTIAL ISSUE
     if (val == 0|| val == 1)
-    {    
-        mxc_gpio_cfg_t gpio_out;
-        gpio_out.port = LORA_RESET_PORT_OUT;
-        gpio_out.mask = LORA_RESET_PIN_OUT;
+    {
         gpio_out.pad = MXC_GPIO_PAD_PULL_UP;
         gpio_out.func = MXC_GPIO_FUNC_OUT;
+        MXC_GPIO_Init(gpio_out.mask);
         MXC_GPIO_Config(&gpio_out);
         if (val==0)
              MXC_GPIO_OutClr(gpio_out.port, gpio_out.mask);
@@ -168,14 +215,10 @@ void hal_pin_rst (u1_t val) {
     }
     else
     {
-        mxc_gpio_cfg_t gpio_out;
-        gpio_out.port = LORA_RESET_PORT_OUT;
-        gpio_out.mask = LORA_RESET_PIN_OUT;
         gpio_out.pad = MXC_GPIO_PAD_NONE;
         gpio_out.func = MXC_GPIO_FUNC_IN;
-        MXC_GPIO_Config(&gpio_out);
-        //MXC_GPIO_Reset (gpio_out.mask);
-        MXC_GPIO_InGet (gpio_out.port, gpio_out.mask);
+        MXC_GPIO_Reset (gpio_out.mask);
+        //MXC_GPIO_InGet (gpio_out.port, gpio_out.mask);
     }
 }
 
@@ -255,7 +298,19 @@ void EXTI_IRQHandler () {
 //#define GPIO_AF_SPI1        0x05
 
 static void hal_spi_init () {
+//     // enable clock for SPI interface 1
+//     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;
 
+//     // use alternate function SPI1 (SCK, MISO, MOSI)
+//     hw_cfg_pin(GPIOx(SCK_PORT),  SCK_PIN,  GPIOCFG_MODE_ALT | GPIOCFG_OSPEED_40MHz | GPIO_AF_SPI1 | GPIOCFG_OTYPE_PUPD | GPIOCFG_PUPD_PDN);
+//     hw_cfg_pin(GPIOx(MISO_PORT), MISO_PIN, GPIOCFG_MODE_ALT | GPIOCFG_OSPEED_40MHz | GPIO_AF_SPI1 | GPIOCFG_OTYPE_PUPD | GPIOCFG_PUPD_PDN);
+//     hw_cfg_pin(GPIOx(MOSI_PORT), MOSI_PIN, GPIOCFG_MODE_ALT | GPIOCFG_OSPEED_40MHz | GPIO_AF_SPI1 | GPIOCFG_OTYPE_PUPD | GPIOCFG_PUPD_PDN);
+    
+//     // configure and activate the SPI (master, internal slave select, software slave mgmt)
+//     // (use default mode: 8-bit, 2-wire, no crc, MSBF, PCLK/2, CPOL0, CPHA0)
+//     SPI1->CR1 = SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_SPE;
+   
+   
     mxc_spi_pins_t spi_pins;
     spi_pins.clock = TRUE;
     spi_pins.miso = TRUE;
@@ -330,12 +385,14 @@ u1_t hal_spi_write(u1_t addr, u1_t data){
 
     req.spi = SPI;
     req.txData = temp;
+    //req.rxData = rx_data;
     req.txLen = 2;
     req.rxLen = 0;
     req.ssIdx = 1;
     req.ssDeassert = 1;
     req.txCnt = 0;
     req.rxCnt = 0;
+    //req.completeCB = (spi_complete_cb_t) SPI_Callback;
     
     uint8_t retVal = MXC_SPI_MasterTransaction(&req);
     if (retVal != E_NO_ERROR) {
@@ -348,15 +405,15 @@ u1_t hal_spi_write(u1_t addr, u1_t data){
 u1_t hal_spi_read(u1_t addr){
     mxc_spi_req_t req;
 
-    uint8_t tx_data[2] = {addr & 0x7F, 0x00};
-    uint8_t rx_data[2] = {0x00, 0x00};
+    uint8_t tx_data[1] = {addr & 0x7F};
+    //memset(rx_data, 0x0, sizeof(uint8_t));
     req.spi = SPI;
     req.txData = tx_data;
-    req.rxData = rx_data;
-    req.txLen = 2;
-    req.rxLen = 2;
+    //req.rxData = rx_data;
+    req.txLen = 1;
+    req.rxLen = 1;
     req.ssIdx = 1;
-    req.ssDeassert = 1;
+    req.ssDeassert = 0;
     req.txCnt = 0;
     req.rxCnt = 0;
     
@@ -366,32 +423,51 @@ u1_t hal_spi_read(u1_t addr){
         return 1;
     }
     
-    return rx_data[1];
+    tx_data[0] = 0x00;
+    uint8_t rx_data[1] = {0x00};
+    req.txData = tx_data;
+    req.rxData = rx_data;
+    req.txLen = 1;
+    req.rxLen = 1;
+    req.ssIdx = 1;
+    req.ssDeassert = 1;
+    req.txCnt = 0;
+    req.rxCnt = 0;
+
+    retVal = MXC_SPI_MasterTransaction(&req);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
+        return 1;
+    }
+    return rx_data[0];
 }
 
 u1_t hal_spi_writeBuf (u1_t addr, u1_t* buf, u1_t len) {
     mxc_spi_req_t req;
 
-    uint8_t tx_data[len+1];
-    tx_data[0]= addr | 0x80;
+    uint8_t temp[len+1];
+    temp[0]= addr | 0x80;
     for (int i = 1; i<len+1; i++)
-        tx_data[i] = buf[i-1];
+        temp[i] = buf[i-1];
 
     req.spi = SPI;
-    req.txData = tx_data;
+    req.txData = temp;
+    //req.rxData = rx_data;
     req.txLen = len+1;
     req.rxLen = 0;
     req.ssIdx = 1;
     req.ssDeassert = 1;
     req.txCnt = 0;
     req.rxCnt = 0;
+    //req.completeCB = (spi_complete_cb_t) SPI_Callback;
     
     uint8_t retVal = MXC_SPI_MasterTransaction(&req);
     if (retVal != E_NO_ERROR) {
         printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
         return 1;
     }
-
+    //printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
+    //printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
     return 0;
 
 }
@@ -399,19 +475,15 @@ u1_t hal_spi_writeBuf (u1_t addr, u1_t* buf, u1_t len) {
 u1_t hal_spi_readBuf (u1_t addr, u1_t* buf, u1_t len) {
     mxc_spi_req_t req;
 
-    uint8_t tx_data[len+1];
-    uint8_t rx_data[len+1];
-    memset(tx_data, 0x0, sizeof(uint8_t));
-    memset(rx_data, 0x0, sizeof(uint8_t));
-    tx_data[0] = addr & 0x7F;
-    
+    uint8_t tx_data[1] = {addr & 0x7F};
+    //memset(rx_data, 0x0, sizeof(uint8_t));
     req.spi = SPI;
     req.txData = tx_data;
-    req.rxData = rx_data;
-    req.txLen = len+1;
-    req.rxLen = len+1;
+    //req.rxData = rx_data;
+    req.txLen = 1;
+    req.rxLen = 1;
     req.ssIdx = 1;
-    req.ssDeassert = 1;
+    req.ssDeassert = 0;
     req.txCnt = 0;
     req.rxCnt = 0;
     
@@ -421,9 +493,29 @@ u1_t hal_spi_readBuf (u1_t addr, u1_t* buf, u1_t len) {
         return 1;
     }
     
-    for (int i = 1; i<len+1; i++)
-        buf[i-1] = rx_data[i];
+    uint8_t txBuf[len];
+    uint8_t rxBuf[len];
+    memset(rxBuf, 0x0, len*sizeof(uint8_t));
+    memset(txBuf, 0x0, len*sizeof(uint8_t));
 
+    req.txData = txBuf;
+    req.rxData = buf;
+    req.txLen = len;
+    req.rxLen = len;
+    req.ssIdx = 1;
+    req.ssDeassert = 1;
+    req.txCnt = 0;
+    req.rxCnt = 0;
+
+    retVal = MXC_SPI_MasterTransaction(&req);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI TRANSMIT ERROR: %d\n", retVal);
+        return 1;
+    }
+    
+    //printf("txData = %d, rxData = %d\n", *req.txData, *req.rxData);
+    //printf("txCnt = %d, rxCnt =%d\n",req.txCnt, req.rxCnt);
+    //return rx_data[0];
     return 0;
 }
 
@@ -555,7 +647,7 @@ void hal_init () {
 //     hal_disableIRQs();
 
 //     // configure radio I/O and interrupt handler
-        hal_io_init();
+//     hal_io_init();
 //     // configure radio SPI
         hal_spi_init();
 //     // configure timer and interrupt handler

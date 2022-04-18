@@ -88,10 +88,14 @@
 #define TFT_BUFF_SIZE   30    // TFT buffer size
 
 /***** GPIO ***************/
-#define MXC_GPIO_PORT_OUT               MXC_GPIO0
-#define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_19
-#define SPI0_PINS MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_19 | MXC_GPIO_PIN_11
+#define LORA_RESET_PORT_OUT               MXC_GPIO1
+#define LORA_RESET_PIN_OUT                MXC_GPIO_PIN_6
 
+#define TFT_SS_PORT_OUT               MXC_GPIO0
+#define TFT_SS_PIN_OUT                MXC_GPIO_PIN_19
+
+
+#define LORA_TFT_SPI_PINS MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11
 
 /********SPI******************/
 #define SPI         MXC_SPI0
@@ -197,11 +201,14 @@ void send_through_SPI(xref2u1_t tx_data)
   printf("TxData: %d", sizeof(tx_data)-1);
 
   LED_On(LED2);
+  //MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIO, LORA_TFT_SPI_PINS);
+  MXC_Delay(5000);
   LMIC_setTxData2(1, tx_data, 34, 0);
   LMIC_clrTxData();
-  MXC_Delay(1000000);
+  MXC_Delay(100000);
+  //MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, LORA_TFT_SPI_PINS);
+  MXC_Delay(5000);
   LED_Off(LED2);
-
 }
 /* **************************************************************************** */
 void onEvent (ev_t ev) {
@@ -375,19 +382,17 @@ int main(void)
 
     setup();
 
+    //MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, LORA_TFT_SPI_PINS);
+    //MXC_GPIO_SetVSSEL(MXC_GPIO1, MXC_GPIO_VSSEL_VDDIOH, TFT_SS_PIN_OUT);
+
+    mxc_gpio_cfg_t tft_ss_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
+    MXC_GPIO_Config(&tft_ss_pin);
+    MXC_GPIO_OutSet(MXC_GPIO0, MXC_GPIO_PIN_19);
+    
+
     // Initialize DMA for camera interface
     MXC_DMA_Init();
     dma_channel = MXC_DMA_AcquireChannel();
-
-    mxc_gpio_cfg_t gpio_out;
-    gpio_out.port = MXC_GPIO_PORT_OUT;
-    gpio_out.mask = MXC_GPIO_PIN_OUT;
-
-    // MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, TFT_SPI0_PIN);
-    // gpio_out.func = MXC_GPIO_FUNC_OUT;
-    // MXC_GPIO_Init(gpio_out.mask);
-    // MXC_GPIO_Config(&gpio_out);
-    // MXC_GPIO_OutSet(MXC_GPIO0, MXC_GPIO_PIN_19);
   
     // Initialize the camera driver.
     camera_init(CAMERA_FREQ);
@@ -463,7 +468,8 @@ int main(void)
           MXC_SPI_SetDataSize(SPI, 8);
           MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
           */
-          MXC_TFT_Init(SPI, 0, NULL, NULL);
+          mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_16, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
+          MXC_TFT_Init(SPI, 2, &tft_reset_pin, NULL);
           MXC_TFT_SetRotation(ROTATE_270);
           MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
     #endif
@@ -507,7 +513,7 @@ int main(void)
             #ifdef TFT_ENABLE
               lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024);
             #endif
-            MXC_Delay(3000000);
+            MXC_Delay(2000000);
             LED_Off(LED1);
 
             send_through_SPI(txData);
