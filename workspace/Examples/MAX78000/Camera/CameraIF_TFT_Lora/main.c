@@ -118,8 +118,6 @@ int font_2 = (int)& SansSerif16x16[0];
 #define TOSTRING(x) STRINGIFY(x)
 #define MAXLEN 256
 
-#define TFT_SPI0_PIN 	MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11|MXC_GPIO_PIN_19
-
 uint32_t imNum = 0;
 
 
