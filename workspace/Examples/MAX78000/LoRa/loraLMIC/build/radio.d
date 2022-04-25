@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/max_w_lora/build/radio.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/radio.o: \
  lmic/radio.c lmic/lmic.h lmic/oslmic.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\string.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \

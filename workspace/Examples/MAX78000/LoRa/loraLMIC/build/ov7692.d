@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/max_w_lora/build/ov7692.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/ov7692.o: \
  c:\maximsdk\libraries\boards\max78000\source\ov7692.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdio.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \

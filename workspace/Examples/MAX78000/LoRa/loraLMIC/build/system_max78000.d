@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/max_w_lora/build/system_max78000.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/system_max78000.o: \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Source/system_max78000.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\string.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \

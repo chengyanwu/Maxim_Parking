@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/max_w_lora/build/heap.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/heap.o: \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Source/heap.c \
  c:\maximsdk\tools\gnutools\lib\gcc\arm-none-eabi\9.2.1\include\stdint.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdint.h \

@@ -70,7 +70,7 @@
 #define BUFF_SIZE           64
 
 // #define DMA
-//#define LoRaWan_Enable
+#define LoRaWan_Enable
 
 #ifdef BOARD_EVKIT_V1
 int image_bitmap_1 = img_1_bmp;
@@ -422,12 +422,10 @@ void send_through_SPI(char* tx_data)
   printf("TxData: %d", sizeof(tx_data)-1);
 
 
-  LMIC_setTxData2(1, tx_data, 34, 0);
+  LMIC_setTxData2(1, tx_data, 38, 0);
   LMIC_clrTxData();
-  LED_On(LED1);
-  MXC_Delay(500000);
-  LED_Off(LED1);
-  MXC_Delay(500000);
+
+  //MXC_Delay(500000);
   
 }
 /* **************************************************************************** */
@@ -438,6 +436,7 @@ int main(void)
   int ret = 0;
   int result[CNN_NUM_OUTPUTS];// = {0};
   int dma_channel;
+  int loraCount = 0;
 
   char TxData[64];
 
@@ -530,7 +529,7 @@ int main(void)
     // printf("********** Press PB1 to capture an image **********\r\n");
     // while(!PB_Get(0));
     // MXC_DELAY_SEC(4);
-    LED_On(LED_RED);
+    LED_On(LED_GREEN);
     int inputNum = 0;
     memset(TxData, 0, 64);
     // Capture a single camera frame.
@@ -629,13 +628,20 @@ int main(void)
 #endif
       inputNum++;
     }
+
+    char loraCountChar[3];
+    sprintf(loraCountChar, "%d", loraCount++);
+    strcat(TxData, loraCountChar);
+    if(loraCount>99)
+      loraCount = 0;
+
     printf(TxData);
     printf("\n");
 #ifdef LoRaWan_Enable
     send_through_SPI(TxData);
 #endif
-    LED_Off(LED_RED);
-    MXC_Delay(4000000);
+    LED_Off(LED_GREEN);
+    //MXC_Delay(4000000);
   }
 
   return 0;

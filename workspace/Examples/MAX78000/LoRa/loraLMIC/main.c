@@ -247,12 +247,12 @@ int main (void) {
     char *message;
      while(1)
      {
+        LED_On(LED2);
         message = &mydata[i%10];
         LMIC_setTxData2(1, message, sizeof(mydata[0]), 0);
         LMIC_clrTxData();
-        LED_On(LED1);
         MXC_Delay(500000);
-        LED_Off(LED1);
+        LED_Off(LED2);
         MXC_Delay(500000);
         i++;
     }

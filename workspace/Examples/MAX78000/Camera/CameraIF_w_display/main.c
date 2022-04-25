@@ -85,8 +85,17 @@
 #define TFT_BUFF_SIZE   30    // TFT buffer size
 
 /***** GPIO ***************/
-#define MXC_GPIO_PORT_OUT               MXC_GPIO0
-#define MXC_GPIO_PIN_OUT                MXC_GPIO_PIN_19
+#define LORA_RESET_PORT_OUT               MXC_GPIO1
+#define LORA_RESET_PIN_OUT                MXC_GPIO_PIN_6
+
+#define TFT_SS_PORT_OUT               MXC_GPIO0
+#define TFT_SS_PIN_OUT                MXC_GPIO_PIN_19
+
+
+#define LORA_TFT_SPI_PINS MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11
+
+/********SPI******************/
+#define SPI         MXC_SPI0
 
 #ifdef BOARD_EVKIT_V1
 int image_bitmap_1 = img_1_bmp;
@@ -121,34 +130,6 @@ uint32_t input_2_camera[1024];
 
 int imgNum = 0;
 
-// set radio RST pin to given value (or keep floating!)
-void hal_pin_ss (uint8_t val) {
-    mxc_gpio_cfg_t gpio_out;
-    gpio_out.port = MXC_GPIO_PORT_OUT;
-    gpio_out.mask = MXC_GPIO_PIN_OUT;
-
-    
-    MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, TFT_SPI0_PIN);
-
-    if (val == 0|| val == 1)
-    {
-        gpio_out.pad = MXC_GPIO_PAD_PULL_UP;
-        gpio_out.func = MXC_GPIO_FUNC_OUT;
-        MXC_GPIO_Init(gpio_out.mask);
-        MXC_GPIO_Config(&gpio_out);
-        if (val==0)
-             MXC_GPIO_OutClr(gpio_out.port, gpio_out.mask);
-        if (val==1)
-            MXC_GPIO_OutSet(gpio_out.port, gpio_out.mask);
-    }
-    else
-    {
-        gpio_out.pad = MXC_GPIO_PAD_NONE;
-        gpio_out.func = MXC_GPIO_FUNC_IN;
-        MXC_GPIO_Reset (gpio_out.mask);
-    }
-    //MXC_Delay(5000);
-}
 
 //https://blog.fearcat.in/a?ID=00900-e289dd3c-202f-4105-8437-7de05cc65166
 void RGB565ToRGB888Char(uint8_t* rgb565, uint8_t* rgb888)
@@ -312,20 +293,11 @@ int main(void)
     int slaveAddress;
     int id;
     int dma_channel;
+    
 
     // Initialize DMA for camera interface
     MXC_DMA_Init();
     dma_channel = MXC_DMA_AcquireChannel();
-
-    mxc_gpio_cfg_t gpio_out;
-    gpio_out.port = MXC_GPIO_PORT_OUT;
-    gpio_out.mask = MXC_GPIO_PIN_OUT;
-
-    MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, TFT_SPI0_PIN);
-    gpio_out.func = MXC_GPIO_FUNC_OUT;
-    MXC_GPIO_Init(gpio_out.mask);
-    MXC_GPIO_Config(&gpio_out);
-    MXC_GPIO_OutSet(MXC_GPIO0, MXC_GPIO_PIN_19);
   
     // Initialize the camera driver.
     camera_init(CAMERA_FREQ);
@@ -363,8 +335,15 @@ int main(void)
         return -1;
     }
 
+
+
     #ifdef TFT_ENABLE
         /* Initialize TFT display */
+
+    mxc_gpio_cfg_t tft_ss_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
+    MXC_GPIO_Config(&tft_ss_pin);
+    MXC_GPIO_OutSet(MXC_GPIO0, MXC_GPIO_PIN_19);
+    
     printf("Init LCD.\n");
     #ifdef BOARD_EVKIT_V1
         mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
@@ -373,8 +352,36 @@ int main(void)
         MXC_TFT_SetRotation(SCREEN_FLIP);
     #endif
     #ifdef BOARD_FTHR_REVA
-        /* Initialize TFT display */
-        MXC_TFT_Init(MXC_SPI0, 0, NULL, NULL);
+          /* Initialize TFT display */
+          
+          int master = 1;
+          int quadMode = 0;
+          int numSlaves = 2;
+          int ssPol = 0;
+          unsigned int tft_hz = 10000000;
+
+          mxc_spi_pins_t tft_pins;
+
+          tft_pins.clock = true;
+          tft_pins.ss0 = true;       ///< Slave select pin 0
+          tft_pins.ss1 = true;       ///< Slave select pin 1
+          tft_pins.ss2 = false;       ///< Slave select pin 2
+          tft_pins.miso = true;      ///< miso pin
+          tft_pins.mosi = true;      ///< mosi pin
+          tft_pins.sdio2 = false;     ///< SDIO2 pin
+          tft_pins.sdio3 = false;     ///< SDIO3 pin
+
+          MXC_SPI_Init(SPI, master, quadMode, numSlaves, ssPol, tft_hz, tft_pins);
+
+          MXC_Delay(5000);
+
+          // Set  SPI0 pins to VDDIOH (3.3V) to be compatible with TFT display
+          MXC_GPIO_SetVSSEL(SPI, MXC_GPIO_VSSEL_VDDIOH, LORA_TFT_SPI_PINS);
+          MXC_SPI_SetDataSize(SPI, 8);
+          MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
+          
+          mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_16, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
+        MXC_TFT_Init(MXC_SPI0, 2, &tft_reset_pin, NULL);
         MXC_TFT_SetRotation(ROTATE_270);
         MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
     #endif
@@ -444,9 +451,9 @@ int main(void)
             if(PB_Get(0))
             {
               TFT_Print(buff, 40, 200, font_1, sprintf(buff, "Saved"));
-              int err = createRawImage(raw, imgLen ,imgNum);
-              if (!err)
-    	          imgNum++;
+              //int err = createRawImage(raw, imgLen ,imgNum);
+              //if (!err)
+    	          //imgNum++;
                 break;
             }
             if(PB_Get(1))

@@ -32,6 +32,7 @@
 #include "mxc_delay.h"
 #include "mxc_pins.h"
 #include "nvic_table.h"
+#include "led.h"
 //#include "uart.h"
 #include "spi.h"
 #include "dma.h"
@@ -50,7 +51,7 @@
 #define DATA_LEN        8         // Words
 #define DATA_VALUE      0xA5A5      // This is for master mode only...
 #define VALUE           0xFFFF
-#define SPI_SPEED       1000000      // Bit Rate
+#define SPI_SPEED       100000      // Bit Rate
 
 #define SPI_INSTANCE_NUM    1
 
@@ -567,6 +568,7 @@ void hal_init () {
 }
 
 void hal_failed () {
+    LED_On(LED1);
     while(1){}
 //     // HALT...
 //     hal_disableIRQs();

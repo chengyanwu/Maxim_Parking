@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/max_w_lora/build/stdio.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/stdio.o: \
  c:\maximsdk\libraries\boards\max78000\source\stdio.c \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\errno.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\sys\reent.h \

@@ -50,8 +50,12 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/l
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_pins.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/nvic_table.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/spi.h \
+ c:\maximsdk\libraries\boards\max78000\include\led.h \
+ c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
+ c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/spi_regs.h \
+ c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
+ c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/spi.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/lpgcr_regs.h \
@@ -60,8 +64,6 @@ c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/l
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/dma.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/dma_regs.h \
- c:/MaximSDK/Libraries/Boards/MAX78000/FTHR_RevA/Include/board.h \
- c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/gpio.h \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/rtc.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/rtc_regs.h \
  lmic/lmic.h lmic/oslmic.h lmic/config.h lmic/hal.h lmic/lorabase.h

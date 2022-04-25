@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/max78000_w_LoRa/max_w_lora/build/led.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/led.o: \
  c:\maximsdk\libraries\boards\max78000\source\led.c \
  c:/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  c:/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
