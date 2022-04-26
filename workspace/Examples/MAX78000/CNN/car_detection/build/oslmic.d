@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/car_detection/build/oslmic.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/cnn/car_detection/build/oslmic.o: \
  lmic/oslmic.c lmic/lmic.h lmic/oslmic.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\string.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \

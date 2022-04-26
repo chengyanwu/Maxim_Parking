@@ -1,4 +1,4 @@
-c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/CNN/car_detection/build/hal.o: \
+c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/cnn/car_detection/build/hal.o: \
  lmic/hal.c c:\maximsdk\tools\gnutools\arm-none-eabi\include\stdio.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\_ansi.h \
  c:\maximsdk\tools\gnutools\arm-none-eabi\include\newlib.h \

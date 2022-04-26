@@ -77,8 +77,9 @@
 #include "tft_fthr.h"
 #endif
 
-#define IMAGE_XRES  64
-#define IMAGE_YRES  64
+#define IMAGE_XRES  100
+#define IMAGE_YRES  100
+#define TFT_BUFFER_SIZE 2500
 #define IMAGE_LENGTH IMAGE_XRES
 #define CAMERA_FREQ (10 * 1000 * 1000)
 
@@ -124,12 +125,13 @@ extern TCHAR* FF_ERRORS[20];
 
 //imageLength = IMAGE_XRES * IMAGE_YRES;
 
-uint32_t input_0_camera[1024];
-uint32_t input_1_camera[1024];
-uint32_t input_2_camera[1024];
+uint32_t input_0_camera[TFT_BUFFER_SIZE];
+uint32_t input_1_camera[TFT_BUFFER_SIZE];
+uint32_t input_2_camera[TFT_BUFFER_SIZE];
 
 int imgNum = 0;
-
+//32768
+//131072
 
 //https://blog.fearcat.in/a?ID=00900-e289dd3c-202f-4105-8437-7de05cc65166
 void RGB565ToRGB888Char(uint8_t* rgb565, uint8_t* rgb888)
@@ -174,25 +176,25 @@ void img565To888(uint8_t* img565, uint8_t* img888)
 
 void process_img(void)
 {
-    uint8_t*   raw;
-    uint32_t  imgLen;
-    uint32_t  w, h;
+    // uint8_t*   raw;
+    // uint32_t  imgLen;
+    // uint32_t  w, h;
     
 
-    // Get the details of the image from the camera driver.
-    camera_get_image(&raw, &imgLen, &w, &h);
+    // // Get the details of the image from the camera driver.
+    // camera_get_image(&raw, &imgLen, &w, &h);
 
 
-    uint8_t *imgSeg = (uint8_t*)malloc(64*64*4*sizeof(uint8_t));
-    uint32_t imgSegLen = 64*64*4;
+    // uint8_t *imgSeg = (uint8_t*)malloc(64*64*4*sizeof(uint8_t));
+    // uint32_t imgSegLen = 64*64*4;
 
-    img565To888(raw, imgSeg);
+    // img565To888(raw, imgSeg);
 
-    int err = createRawImage(raw, imgLen,imgNum);
-    err = createRawImage(imgSeg, imgSegLen,imgNum+1000);
+    // int err = createRawImage(raw, imgLen,imgNum);
+    // err = createRawImage(imgSeg, imgSegLen,imgNum+1000);
 
-    if (err==0)
-    	imgNum++;
+    // if (err==0)
+    // 	imgNum++;
 
 }
 
@@ -208,8 +210,8 @@ void process_camera_img(uint8_t* imgBlock, uint32_t *data0, uint32_t *data1, uin
   ptr2 = (uint8_t *)data2;
   buffer = imgBlock;
 
-  for (int y = 0; y < 64; y++) {
-    for (int x = 0; x < 64; x++, ptr0++, ptr1++, ptr2++) {
+  for (int y = 0; y < IMAGE_YRES; y++) {
+    for (int x = 0; x < IMAGE_XRES; x++, ptr0++, ptr1++, ptr2++) {
             *ptr0 = (*buffer);
             buffer++;
             *ptr1 = (*buffer);
@@ -328,8 +330,8 @@ int main(void)
     printf("Camera Manufacture ID is %04x\n", id);
     
     // Setup the camera image dimensions, pixel format and data aquiring details.PIXFORMAT_RGB565, FIFO_FOUR_BYTE
-    //ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
-    ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
+    ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
+    //ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
     if (ret != STATUS_OK) {
         printf("Error returned from setting up camera. Error %d\n", ret);
         return -1;
@@ -426,7 +428,7 @@ int main(void)
     uint8_t*   raw;
     uint32_t  imgLen;
     uint32_t  w, h;
-    uint8_t imgBlock888[16384];
+    //uint8_t imgBlock888[16384];
 
     int imgNum = 0;
 
@@ -442,9 +444,10 @@ int main(void)
             camera_get_image(&raw, &imgLen, &w, &h);
 
 
-            img565To888(raw, imgBlock888);
-            process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
-            lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024);
+            //img565To888(raw, imgBlock888);
+            //process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
+            process_camera_img(raw, input_0_camera, input_1_camera, input_2_camera);
+            lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, TFT_BUFFER_SIZE);
             
             //process_img();
           while(1){

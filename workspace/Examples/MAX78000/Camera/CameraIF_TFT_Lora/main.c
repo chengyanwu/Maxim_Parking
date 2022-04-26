@@ -378,14 +378,14 @@ int main(void)
     int id;
     int dma_channel;
 
+    mxc_gpio_cfg_t tft_ss_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
+    MXC_GPIO_Config(&tft_ss_pin);
+    MXC_GPIO_OutSet(MXC_GPIO0, MXC_GPIO_PIN_19);
+
     setup();
 
     //MXC_GPIO_SetVSSEL(MXC_GPIO0, MXC_GPIO_VSSEL_VDDIOH, LORA_TFT_SPI_PINS);
     //MXC_GPIO_SetVSSEL(MXC_GPIO1, MXC_GPIO_VSSEL_VDDIOH, TFT_SS_PIN_OUT);
-
-    mxc_gpio_cfg_t tft_ss_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
-    MXC_GPIO_Config(&tft_ss_pin);
-    MXC_GPIO_OutSet(MXC_GPIO0, MXC_GPIO_PIN_19);
     
 
     // Initialize DMA for camera interface

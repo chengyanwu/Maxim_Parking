@@ -49,7 +49,7 @@
 #include "sampledata.h"
 #include "mxc_delay.h"
 #include "camera.h"
-// #include "dma.h"
+#include "dma.h"
 #include "nvic_table.h"
 #include "lmic.h"
 #ifdef BOARD_EVKIT_V1
@@ -67,7 +67,21 @@
 
 #define TFT_BUFF_SIZE   30    // TFT buffer size
 
-#define BUFF_SIZE           64
+#define BUFF_SIZE       64
+
+/***** GPIO ***************/
+#define LORA_RESET_PORT_OUT               MXC_GPIO1
+#define LORA_RESET_PIN_OUT                MXC_GPIO_PIN_6
+
+#define TFT_SS_PORT_OUT               MXC_GPIO0
+#define TFT_SS_PIN_OUT                MXC_GPIO_PIN_19
+
+
+#define LORA_TFT_SPI_PINS MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11
+
+/********SPI******************/
+#define SPI         MXC_SPI0
+
 
 // #define DMA
 #define LoRaWan_Enable
@@ -126,7 +140,6 @@ void os_getDevKey (u1_t* buf) { }
 const unsigned TX_INTERVAL = 60;
 
 void onEvent(ev_t ev){
-  printf("Entering onEvent\n");
 }
 
 void setup(void) {
@@ -256,7 +269,7 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
             color = RGB(r, g, b); // convert to RGB565
 #endif
       if(inputNum < 2){
-        MXC_TFT_WritePixel(x * scale + 140*inputNum, y * scale, scale, scale, color);
+        MXC_TFT_WritePixel(x * scale + 140*inputNum, y * scale + 40, scale, scale, color);
         x += 1;
         if (x >= (64 + X_OFFSET)) {
           x = X_OFFSET;
@@ -266,7 +279,7 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
           }
         }
       }else{
-        MXC_TFT_WritePixel(x * scale + 140*(inputNum-2), y * scale + 110, scale, scale, color);
+        MXC_TFT_WritePixel(x * scale + 140*(inputNum-2), y * scale + 150, scale, scale, color);
         x += 1;
         if (x >= (64 + X_OFFSET)) {
           x = X_OFFSET;
@@ -301,7 +314,6 @@ void segment_image(uint8_t* img, uint32_t imgLen, int w, int h, int xLoc, int yL
     }
 }
 
-//https://blog.fearcat.in/a?ID=00900-e289dd3c-202f-4105-8437-7de05cc65166
 void RGB565ToRGB888Char(uint8_t* rgb565, uint8_t* rgb888)
 {
     uint8_t byte1 = rgb565[2];
@@ -418,14 +430,9 @@ void convert_img_signed_to_unsigned(uint32_t* data0, uint32_t* data1, uint32_t* 
 void send_through_SPI(char* tx_data)
 {
   printf("Sending to RFM95W through SPI\n");
-  printf("TxData: %s", tx_data);
-  printf("TxData: %d", sizeof(tx_data)-1);
-
-
-  LMIC_setTxData2(1, tx_data, 38, 0);
+  LMIC_setTxData2(1, tx_data, 36, 0);
   LMIC_clrTxData();
-
-  //MXC_Delay(500000);
+  MXC_Delay(500000);
   
 }
 /* **************************************************************************** */
@@ -434,18 +441,20 @@ int main(void)
   int i;
   int digs, tens;
   int ret = 0;
-  int result[CNN_NUM_OUTPUTS];// = {0};
+  int result[CNN_NUM_OUTPUTS];
   int dma_channel;
-  int loraCount = 0;
 
   char TxData[64];
 
-#ifdef LoRaWan_Enable
-  setup();
-#endif
-
 #ifdef TFT_ENABLE
   char buff[TFT_BUFF_SIZE];
+  mxc_gpio_cfg_t tft_ss_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
+  MXC_GPIO_Config(&tft_ss_pin);
+  MXC_GPIO_OutSet(MXC_GPIO0, MXC_GPIO_PIN_19);
+#endif
+
+#ifdef LoRaWan_Enable
+  setup();
 #endif
 
 #if defined (BOARD_FTHR_REVA)
@@ -454,17 +463,28 @@ int main(void)
     /* Enable camera power */
     Camera_Power(POWER_ON);
     //MXC_Delay(300000);
-    printf("\n\nCar Detection FeatherBoard Demo\n");
+    printf("\n\nCar Detection Demo\n");
 #else
-    printf("\n\nCar Detection Evkit Demo\n");
+    printf("\n\nCar Detection Demo\n");
 #endif
+
+    // Initialize camera.
+  printf("Init Camera.\n");
+  camera_init(CAMERA_FREQ);
+
+  ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
+
+  if (ret != STATUS_OK) {
+      printf("Error returned from setting up camera. Error %d\n", ret);
+      return -1;
+  }
 
     /* Enable cache */
     MXC_ICC_Enable(MXC_ICC0);
 
     /* Switch to 100 MHz clock */
-  MXC_SYS_Clock_Select(MXC_SYS_CLOCK_IPO);
-  SystemCoreClockUpdate();
+    MXC_SYS_Clock_Select(MXC_SYS_CLOCK_IPO);
+    SystemCoreClockUpdate();
 
     /* Enable peripheral, enable CNN interrupt, turn on CNN clock */
     /* CNN clock: 50 MHz div 1 */
@@ -493,7 +513,8 @@ int main(void)
 #endif
 #ifdef BOARD_FTHR_REVA
     /* Initialize TFT display */
-    MXC_TFT_Init(MXC_SPI0, 1, NULL, NULL);
+    mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_16, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
+    MXC_TFT_Init(SPI, 2, &tft_reset_pin, NULL);
     MXC_TFT_SetRotation(ROTATE_180);
     MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
 #endif
@@ -504,56 +525,34 @@ int main(void)
     MXC_DMA_Init();
     dma_channel = MXC_DMA_AcquireChannel();
 
-  // Initialize camera.
-  printf("Init Camera.\n");
-    camera_init(CAMERA_FREQ);
-
-    ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
-
-  if (ret != STATUS_OK) {
-      printf("Error returned from setting up camera. Error %d\n", ret);
-      return -1;
-  }
-
 #ifdef TFT_ENABLE
   MXC_TFT_SetBackGroundColor(4);
   memset(buff,32,TFT_BUFF_SIZE);
-  TFT_Print(buff, 55, 90, font_1, sprintf(buff, "Car Detection Demo"));
-  // TFT_Print(buff, 55, 130, font_2, sprintf(buff, "PRESS PB1 TO START!"));
+  TFT_Print(buff, 55, 20, font_1, sprintf(buff, "Car Detection"));
 #endif
 
   int frame = 0;
 
   while (1)
   {
-    // printf("********** Press PB1 to capture an image **********\r\n");
-    // while(!PB_Get(0));
-    // MXC_DELAY_SEC(4);
-    LED_On(LED_GREEN);
     int inputNum = 0;
     memset(TxData, 0, 64);
-    // Capture a single camera frame.
-    printf("\nCapture a camera frame %d\n", ++frame);
+
+    LED_On(LED_GREEN);
+
+    printf("\n****************************************************\n");
+    printf("\nCapture a camera frame %d\n\n", ++frame);
+
     capture_camera_img();
     camera_get_image(&frame_buffer, &imgLen, &w, &h);
 
-#ifdef TFT_ENABLE
-    MXC_TFT_ClearScreen();
-#endif
-
-    while(inputNum<4){
-
-    // Segment the image
+while(inputNum<4){
     segment_image(frame_buffer, imgLen, w, h, inputNum*58, 48, 64, imgBlock565, 565);
     img565To888(imgBlock565, imgBlock888);
-    // Copy the image data to the CNN input arrays.
-    printf("Copy camera frame to CNN input buffers.\n");
     process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
 
 #ifdef TFT_ENABLE
-    printf("Show camera frame on LCD.\n");
     lcd_show_sampledata(input_0_camera, input_1_camera, input_2_camera, 1024, inputNum);
-          
 #endif
 
     convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
@@ -580,9 +579,8 @@ int main(void)
     // Disable CNN clock to save power
     MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
 
-    printf("Time for CNN: %d us\n\n", cnn_time);
-
-    printf("Classification results:\n");
+    //printf("Time for CNN: %d us\n", cnn_time);
+    printf("image%d result:\n", inputNum);
 
     for (i = 0; i < CNN_NUM_OUTPUTS; i++) {
       digs = (1000 * ml_softmax[i] + 0x4000) >> 15;
@@ -608,40 +606,34 @@ int main(void)
 #ifdef TFT_ENABLE
     if(inputNum < 2){
       if (result[0] > result[1]) {
-        TFT_Print(buff, 10 + inputNum*140, 80, font_1, sprintf(buff, "YES"));
-        TFT_Print(buff, 10 + inputNum*140, 100, font_1, sprintf(buff, "%d%%", result[0]));
+        TFT_Print(buff, 10 + inputNum*140, 120, font_1, sprintf(buff, "YES"));
+        TFT_Print(buff, 10 + inputNum*140, 140, font_1, sprintf(buff, "%d%%", result[0]));
       }
       else{
-        TFT_Print(buff, 10 + inputNum*140, 80, font_1, sprintf(buff, "No"));
-        TFT_Print(buff, 10 + inputNum*140, 100, font_1, sprintf(buff, "%d%%", result[1]));
+        TFT_Print(buff, 10 + inputNum*140, 120, font_1, sprintf(buff, "No"));
+        TFT_Print(buff, 10 + inputNum*140, 140, font_1, sprintf(buff, "%d%%", result[1]));
       }
     }else{
       if (result[0] > result[1]) {
-        TFT_Print(buff, 10 + (inputNum-2)*140, 190, font_1, sprintf(buff, "YES"));
-        TFT_Print(buff, 10 + (inputNum-2)*140, 210, font_1, sprintf(buff, "%d%%", result[0]));
+        TFT_Print(buff, 10 + (inputNum-2)*140, 230, font_1, sprintf(buff, "YES"));
+        TFT_Print(buff, 10 + (inputNum-2)*140, 250, font_1, sprintf(buff, "%d%%", result[0]));
       }else{
-        TFT_Print(buff, 10 + (inputNum-2)*140, 190, font_1, sprintf(buff, "NO"));
-        TFT_Print(buff, 10 + (inputNum-2)*140, 210, font_1, sprintf(buff, "%d%%", result[1]));
+        TFT_Print(buff, 10 + (inputNum-2)*140, 230, font_1, sprintf(buff, "NO"));
+        TFT_Print(buff, 10 + (inputNum-2)*140, 250, font_1, sprintf(buff, "%d%%", result[1]));
         }
-    }
-  
+    }  
 #endif
-      inputNum++;
-    }
-
-    char loraCountChar[3];
-    sprintf(loraCountChar, "%d", loraCount++);
-    strcat(TxData, loraCountChar);
-    if(loraCount>99)
-      loraCount = 0;
+    inputNum++;
+  }
 
     printf(TxData);
     printf("\n");
+
 #ifdef LoRaWan_Enable
     send_through_SPI(TxData);
 #endif
     LED_Off(LED_GREEN);
-    //MXC_Delay(4000000);
+    MXC_Delay(3000000);
   }
 
   return 0;
