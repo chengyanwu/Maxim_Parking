@@ -52,6 +52,10 @@
 #include "dma.h"
 #include "nvic_table.h"
 #include "lmic.h"
+#include "lp.h"
+#include "wut.h"
+#include "uart.h"
+
 #ifdef BOARD_EVKIT_V1
 #include "bitmap.h"
 #include "tft.h"
@@ -82,6 +86,12 @@
 /********SPI******************/
 #define SPI         MXC_SPI0
 
+
+/***** WUT *****/
+void WUT_IRQHandler()
+{
+    MXC_WUT_IntClear();
+}
 
 // #define DMA
 #define LoRaWan_Enable
@@ -139,6 +149,9 @@ void os_getDevKey (u1_t* buf) { }
 // cycle limitations).
 const unsigned TX_INTERVAL = 60;
 
+mxc_wut_cfg_t cfg;
+uint32_t ticks;
+
 void onEvent(ev_t ev){
 }
 
@@ -184,7 +197,25 @@ void fail(void)
   printf("\n*** FAIL ***\n\n");
   while (1);
 }
+/* **************************************************************************** */
+void initWUT(void)
+{
+      mxc_wut_cfg_t cfg;
+      uint32_t ticks;
+      // Get ticks based off of milliseconds
+    MXC_WUT_GetTicks(5000, MXC_WUT_UNIT_MILLISEC, &ticks);
 
+    // config structure for one shot timer to trigger in a number of ticks
+    cfg.mode = MXC_WUT_MODE_ONESHOT;
+    cfg.cmp_cnt = ticks;
+
+    // Init WUT
+    MXC_WUT_Init(MXC_WUT_PRES_1);
+
+    //Config WUT
+    MXC_WUT_Config(&cfg);
+    MXC_LP_EnableWUTAlarmWakeup();
+}
 /* **************************************************************************** */
 void cnn_load_input(void)
 {
@@ -269,7 +300,7 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
             color = RGB(r, g, b); // convert to RGB565
 #endif
       if(inputNum < 2){
-        MXC_TFT_WritePixel(x * scale + 140*inputNum, y * scale + 40, scale, scale, color);
+        MXC_TFT_WritePixel(x * scale + 20*inputNum, y * scale + 50, scale, scale, color);
         x += 1;
         if (x >= (64 + X_OFFSET)) {
           x = X_OFFSET;
@@ -278,17 +309,17 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
               return;
           }
         }
-      }else{
-        MXC_TFT_WritePixel(x * scale + 140*(inputNum-2), y * scale + 150, scale, scale, color);
-        x += 1;
-        if (x >= (64 + X_OFFSET)) {
-          x = X_OFFSET;
-          y += 1;
-          if ((y + 6) >= (64 + Y_OFFSET)) {
-              return;
-          }
-        }
-      }
+      }//else{
+      //   MXC_TFT_WritePixel(x * scale + 140*(inputNum-2), y * scale + 150, scale, scale, color);
+      //   x += 1;
+      //   if (x >= (64 + X_OFFSET)) {
+      //     x = X_OFFSET;
+      //     y += 1;
+      //     if ((y + 6) >= (64 + Y_OFFSET)) {
+      //         return;
+      //     }
+      //   }
+      // }
     }
   }
 }
@@ -426,6 +457,7 @@ void convert_img_signed_to_unsigned(uint32_t* data0, uint32_t* data1, uint32_t* 
         ptr2++;
   }
 }
+
 /* **************************************************************************** */
 void send_through_SPI(char* tx_data)
 {
@@ -433,8 +465,8 @@ void send_through_SPI(char* tx_data)
   LMIC_setTxData2(1, tx_data, 36, 0);
   LMIC_clrTxData();
   MXC_Delay(500000);
-  
 }
+
 /* **************************************************************************** */
 int main(void)
 {
@@ -445,6 +477,8 @@ int main(void)
   int dma_channel;
 
   char TxData[64];
+
+  initWUT();
 
 #ifdef TFT_ENABLE
   char buff[TFT_BUFF_SIZE];
@@ -515,7 +549,7 @@ int main(void)
     /* Initialize TFT display */
     mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_16, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
     MXC_TFT_Init(SPI, 2, &tft_reset_pin, NULL);
-    MXC_TFT_SetRotation(ROTATE_180);
+    MXC_TFT_SetRotation(ROTATE_90);
     MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
 #endif
     MXC_Delay(1000000);
@@ -633,7 +667,12 @@ while(inputNum<4){
     send_through_SPI(TxData);
 #endif
     LED_Off(LED_GREEN);
-    MXC_Delay(3000000);
+    
+    while (MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR);
+    NVIC_EnableIRQ(WUT_IRQn);
+    MXC_WUT_Enable();
+    //MXC_LP_EnterLowPowerMode();
+    MXC_LP_EnterSleepMode();
   }
 
   return 0;
