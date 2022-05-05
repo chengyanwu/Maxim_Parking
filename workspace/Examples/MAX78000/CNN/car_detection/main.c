@@ -94,6 +94,7 @@ void WUT_IRQHandler()
 }
 
 // #define DMA
+
 #define LoRaWan_Enable
 
 #ifdef BOARD_EVKIT_V1
@@ -299,8 +300,8 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
 #ifdef BOARD_FTHR_REVA
             color = RGB(r, g, b); // convert to RGB565
 #endif
-      if(inputNum < 2){
-        MXC_TFT_WritePixel(x * scale + 20*inputNum, y * scale + 50, scale, scale, color);
+      if(inputNum < 5){
+        MXC_TFT_WritePixel(x * scale + 80*inputNum, y * scale + 50, scale, scale, color);
         x += 1;
         if (x >= (64 + X_OFFSET)) {
           x = X_OFFSET;
@@ -309,17 +310,7 @@ void lcd_show_sampledata(uint32_t* data0, uint32_t* data1, uint32_t* data2, int 
               return;
           }
         }
-      }//else{
-      //   MXC_TFT_WritePixel(x * scale + 140*(inputNum-2), y * scale + 150, scale, scale, color);
-      //   x += 1;
-      //   if (x >= (64 + X_OFFSET)) {
-      //     x = X_OFFSET;
-      //     y += 1;
-      //     if ((y + 6) >= (64 + Y_OFFSET)) {
-      //         return;
-      //     }
-      //   }
-      // }
+      }
     }
   }
 }
@@ -626,37 +617,32 @@ while(inputNum<4){
     printf("\n");
     if (result[0]>result[1])
     {
-        char result[10];
-        sprintf(result, "Spot%d:%d, ", inputNum+1, 1);
-        strcat(TxData, result);
+        char res[10];
+        sprintf(res, "Spot%d:%d, ", inputNum+1, 1);
+        strcat(TxData, res);
     }
     else
     {
-        char result[10];
-        sprintf(result, "Spot%d:%d, ", inputNum+1, 0);
-        strcat(TxData, result);
+        char res[10];
+        sprintf(res, "Spot%d:%d, ", inputNum+1, 0);
+        strcat(TxData, res);
     }
 
 #ifdef TFT_ENABLE
-    if(inputNum < 2){
-      if (result[0] > result[1]) {
-        TFT_Print(buff, 10 + inputNum*140, 120, font_1, sprintf(buff, "YES"));
-        TFT_Print(buff, 10 + inputNum*140, 140, font_1, sprintf(buff, "%d%%", result[0]));
+ if (result[0] > result[1]) {
+        TFT_Print(buff, 10 + inputNum*80, 140, font_1, sprintf(buff, "YES"));
+        TFT_Print(buff, 10 + inputNum*80, 160, font_1, sprintf(buff, "%d%%", result[0]));
       }
       else{
-        TFT_Print(buff, 10 + inputNum*140, 120, font_1, sprintf(buff, "No"));
-        TFT_Print(buff, 10 + inputNum*140, 140, font_1, sprintf(buff, "%d%%", result[1]));
-      }
-    }else{
-      if (result[0] > result[1]) {
-        TFT_Print(buff, 10 + (inputNum-2)*140, 230, font_1, sprintf(buff, "YES"));
-        TFT_Print(buff, 10 + (inputNum-2)*140, 250, font_1, sprintf(buff, "%d%%", result[0]));
-      }else{
-        TFT_Print(buff, 10 + (inputNum-2)*140, 230, font_1, sprintf(buff, "NO"));
-        TFT_Print(buff, 10 + (inputNum-2)*140, 250, font_1, sprintf(buff, "%d%%", result[1]));
-        }
-    }  
+        TFT_Print(buff, 10 + inputNum*80, 140, font_1, sprintf(buff, "No"));
+        TFT_Print(buff, 10 + inputNum*80, 160, font_1, sprintf(buff, "%d%%", result[1]));
+      }  
 #endif
+
+    memset(input_0_camera,0x0, 1024*4);
+    memset(input_1_camera,0x0, 1024*4);
+    memset(input_2_camera,0x0, 1024*4);
+    
     inputNum++;
   }
 
@@ -668,11 +654,11 @@ while(inputNum<4){
 #endif
     LED_Off(LED_GREEN);
     
-    while (MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR);
+    /*while (MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR);
     NVIC_EnableIRQ(WUT_IRQn);
     MXC_WUT_Enable();
     //MXC_LP_EnterLowPowerMode();
-    MXC_LP_EnterSleepMode();
+    MXC_LP_EnterSleepMode();*/
   }
 
   return 0;
