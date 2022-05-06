@@ -95,7 +95,7 @@ void WUT_IRQHandler()
 
 // #define DMA
 
-#define LoRaWan_Enable
+//#define LoRaWan_Enable
 
 #ifdef BOARD_EVKIT_V1
 int image_bitmap_1 = img_1_bmp;
@@ -204,7 +204,7 @@ void initWUT(void)
       mxc_wut_cfg_t cfg;
       uint32_t ticks;
       // Get ticks based off of milliseconds
-    MXC_WUT_GetTicks(5000, MXC_WUT_UNIT_MILLISEC, &ticks);
+    MXC_WUT_GetTicks(4000, MXC_WUT_UNIT_MILLISEC, &ticks);
 
     // config structure for one shot timer to trigger in a number of ticks
     cfg.mode = MXC_WUT_MODE_ONESHOT;
@@ -493,16 +493,16 @@ int main(void)
     printf("\n\nCar Detection Demo\n");
 #endif
 
-    // Initialize camera.
-  printf("Init Camera.\n");
-  camera_init(CAMERA_FREQ);
+      // Initialize camera.
+    printf("Init Camera.\n");
+    camera_init(CAMERA_FREQ);
 
   ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
 
-  if (ret != STATUS_OK) {
-      printf("Error returned from setting up camera. Error %d\n", ret);
-      return -1;
-  }
+    if (ret != STATUS_OK) {
+        printf("Error returned from setting up camera. Error %d\n", ret);
+        return -1;
+    }
 
     /* Enable cache */
     MXC_ICC_Enable(MXC_ICC0);
@@ -642,7 +642,7 @@ while(inputNum<4){
     memset(input_0_camera,0x0, 1024*4);
     memset(input_1_camera,0x0, 1024*4);
     memset(input_2_camera,0x0, 1024*4);
-    
+
     inputNum++;
   }
 
@@ -657,8 +657,21 @@ while(inputNum<4){
     /*while (MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR);
     NVIC_EnableIRQ(WUT_IRQn);
     MXC_WUT_Enable();
+    Camera_Power(POWER_OFF);
     //MXC_LP_EnterLowPowerMode();
-    MXC_LP_EnterSleepMode();*/
+    MXC_LP_EnterSleepMode();
+    Camera_Power(POWER_ON);
+
+         // Initialize camera.
+    printf("Init Camera.\n");
+    camera_init(CAMERA_FREQ);
+
+  ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
+
+    if (ret != STATUS_OK) {
+        printf("Error returned from setting up camera. Error %d\n", ret);
+        return -1;
+    }*/
   }
 
   return 0;
