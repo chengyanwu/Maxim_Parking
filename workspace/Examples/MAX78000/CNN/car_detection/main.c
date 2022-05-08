@@ -85,7 +85,9 @@
 
 /********SPI******************/
 #define SPI         MXC_SPI0
+/****************** SLEEP MODE *******************/
 
+//#define SLEEPMODE_ENABLE
 
 /***** WUT *****/
 void WUT_IRQHandler()
@@ -95,7 +97,7 @@ void WUT_IRQHandler()
 
 // #define DMA
 
-//#define LoRaWan_Enable
+#define LoRaWan_Enable
 
 #ifdef BOARD_EVKIT_V1
 int image_bitmap_1 = img_1_bmp;
@@ -128,16 +130,19 @@ uint8_t imgBlock888[64*64*4];
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the early prototype TTN
 // network.
-static const u1_t NWKSKEY[16] = {0x4A, 0x96, 0xDF, 0xBE, 0x3D, 0xC0, 0x7F, 0x02, 0xB3, 0xBB, 0xE2, 0xCA, 0xDB, 0x84, 0x70, 0x41};
+//static const u1_t NWKSKEY[16] = {0x4A, 0x96, 0xDF, 0xBE, 0x3D, 0xC0, 0x7F, 0x02, 0xB3, 0xBB, 0xE2, 0xCA, 0xDB, 0x84, 0x70, 0x41};
+static const u1_t NWKSKEY[16] = {0x51, 0xDE, 0xA8, 0x69, 0x2E, 0x8D, 0x0C, 0x20, 0x28, 0x6B, 0x99, 0xEF, 0xE4, 0xA7, 0xE9, 0xB0};
 
 // LoRaWAN AppSKey, application session key
 // This is the default Semtech key, which is used by the early prototype TTN
 // network.
-//static const u1_t APPSKEY[16] = { 0xDA, 0xBF, 0xD5, 0x35, 0x76, 0x48, 0x84, 0x6C, 0x0D, 0x43, 0xBD, 0xC1, 0x96, 0x54, 0x63, 0x91 };
-static const u1_t APPSKEY[16] = {0x6C, 0xC5, 0x3C, 0xF2, 0x0D, 0x9A, 0x03, 0x94, 0xAB, 0x31, 0xA4, 0xE4, 0xF9, 0xE0, 0x36, 0x4F};
+//static const u1_t APPSKEY[16] = {0x6C, 0xC5, 0x3C, 0xF2, 0x0D, 0x9A, 0x03, 0x94, 0xAB, 0x31, 0xA4, 0xE4, 0xF9, 0xE0, 0x36, 0x4F};
+static const u1_t APPSKEY[16] = {0x09, 0xA0, 0x5C, 0x6C, 0x6D, 0x5C, 0xF4, 0xB4, 0xDF, 0x0E, 0x17, 0xBA, 0x25, 0xB4, 0x28, 0x4E};
+
 // LoRaWAN end-device address (DevAddr)
 
-static const u4_t DEVADDR = 0x260CA619; // <-- Change this address for every node!
+//static const u4_t DEVADDR = 0x260CA619; // <-- Change this address for every node!
+static const u4_t DEVADDR = 0x00b3d02a; // <-- Change this address for every node!
 
 // These callbacks are only used in over-the-air activation, so they are
 // left empty here (we cannot leave them out completely unless
@@ -220,9 +225,28 @@ void initWUT(void)
 /* **************************************************************************** */
 void cnn_load_input(void)
 {
+#if 0
+  const uint32_t* in0 = input_0_camera;
+  const uint32_t* in1 = input_1_camera;
+  const uint32_t* in2 = input_2_camera;
+  for (int i = 0; i < 1024; i++) {
+        while (((*((volatile uint32_t*) 0x50000004) & 1)) != 0);  // Wait for FIFO 0
+
+        *((volatile uint32_t*) 0x50000008) = *in0++;  // Write FIFO 0
+
+        while (((*((volatile uint32_t*) 0x50000004) & 2)) != 0);  // Wait for FIFO 1
+
+        *((volatile uint32_t*) 0x5000000c) = *in1++;  // Write FIFO 1
+
+        while (((*((volatile uint32_t*) 0x50000004) & 4)) != 0);  // Wait for FIFO 2
+
+        *((volatile uint32_t*) 0x50000010) = *in2++;  // Write FIFO 2
+    }
+#else
   memcpy32((uint32_t *) 0x50400000, input_0_camera, 1024);
   memcpy32((uint32_t *) 0x50800000, input_1_camera, 1024);
   memcpy32((uint32_t *) 0x50c00000, input_2_camera, 1024);
+#endif
 }
 
 // Classification layer:
@@ -450,10 +474,11 @@ void convert_img_signed_to_unsigned(uint32_t* data0, uint32_t* data1, uint32_t* 
 }
 
 /* **************************************************************************** */
-void send_through_SPI(char* tx_data)
+void send_through_SPI(char* tx_data, int len)
 {
   printf("Sending to RFM95W through SPI\n");
-  LMIC_setTxData2(1, tx_data, 36, 0);
+  LMIC_setTxData2(1, tx_data, len, 0);
+  MXC_Delay(1000);
   LMIC_clrTxData();
   MXC_Delay(500000);
 }
@@ -468,8 +493,11 @@ int main(void)
   int dma_channel;
 
   char TxData[64];
+  int8_t txByte = 0;
 
+#ifdef SLEEPMODE_ENABLE
   initWUT();
+#endif
 
 #ifdef TFT_ENABLE
   char buff[TFT_BUFF_SIZE];
@@ -483,17 +511,13 @@ int main(void)
 #endif
 
 #if defined (BOARD_FTHR_REVA)
-    // Wait for PMIC 1.8V to become available, about 180ms after power up.
     MXC_Delay(200000);
-    /* Enable camera power */
     Camera_Power(POWER_ON);
-    //MXC_Delay(300000);
     printf("\n\nCar Detection Demo\n");
 #else
     printf("\n\nCar Detection Demo\n");
 #endif
 
-      // Initialize camera.
     printf("Init Camera.\n");
     camera_init(CAMERA_FREQ);
 
@@ -528,25 +552,14 @@ int main(void)
     cnn_configure();
 
 #ifdef TFT_ENABLE
-    /* Initialize TFT display */
-  printf("Init LCD.\n");
-#ifdef BOARD_EVKIT_V1
-  mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
-  MXC_TFT_Init(MXC_SPI0, 1, &tft_reset_pin, NULL);
-  MXC_TFT_ClearScreen();
-  MXC_TFT_SetRotation(SCREEN_FLIP);
-#endif
-#ifdef BOARD_FTHR_REVA
-    /* Initialize TFT display */
+    printf("Init LCD.\n");
     mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_16, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
     MXC_TFT_Init(SPI, 2, &tft_reset_pin, NULL);
     MXC_TFT_SetRotation(ROTATE_90);
-    MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
-#endif
+    MXC_TFT_SetForeGroundColor(WHITE);
     MXC_Delay(1000000);
 #endif
-
-    // Initialize DMA for camera interface
+    
     MXC_DMA_Init();
     dma_channel = MXC_DMA_AcquireChannel();
 
@@ -573,6 +586,7 @@ int main(void)
 
 while(inputNum<4){
     segment_image(frame_buffer, imgLen, w, h, inputNum*58, 48, 64, imgBlock565, 565);
+    memset(imgBlock888, 0x0, 64*64*4);
     img565To888(imgBlock565, imgBlock888);
     process_camera_img(imgBlock888, input_0_camera, input_1_camera, input_2_camera);
 
@@ -589,8 +603,9 @@ while(inputNum<4){
     //cnn_load_weights(); // No need to reload kernels
     //cnn_load_bias(); // No need to reload bias
     cnn_configure(); // Configure state machine
-
     cnn_load_input();
+
+    MXC_Delay(1000);
     cnn_start();
 
     while (cnn_time == 0) {
@@ -619,12 +634,14 @@ while(inputNum<4){
     {
         char res[10];
         sprintf(res, "Spot%d:%d, ", inputNum+1, 1);
+        txByte |= (1 << (3 - inputNum));
         strcat(TxData, res);
     }
     else
     {
         char res[10];
         sprintf(res, "Spot%d:%d, ", inputNum+1, 0);
+        txByte |= (0 << (3 - inputNum));
         strcat(TxData, res);
     }
 
@@ -646,34 +663,40 @@ while(inputNum<4){
     inputNum++;
   }
 
-    printf(TxData);
+    //printf(TxData);
+    printf("%x",txByte);
     printf("\n");
 
 #ifdef LoRaWan_Enable
-    send_through_SPI(TxData);
+    //send_through_SPI(TxData, 36);
+    send_through_SPI(&txByte, 1);
+
 #endif
     LED_Off(LED_GREEN);
-    
-    /*while (MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR);
+    txByte = 0;
+
+#ifdef SLEEPMODE_ENABLE
+    while (MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR);
     NVIC_EnableIRQ(WUT_IRQn);
     MXC_WUT_Enable();
     Camera_Power(POWER_OFF);
     //MXC_LP_EnterLowPowerMode();
     MXC_LP_EnterSleepMode();
-    Camera_Power(POWER_ON);
-
-         // Initialize camera.
+    MXC_Delay(200000);
     printf("Init Camera.\n");
+    Camera_Power(POWER_ON);
     camera_init(CAMERA_FREQ);
 
-  ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
+    ret = camera_setup(IMAGE_SIZE_X, IMAGE_SIZE_Y, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
 
     if (ret != STATUS_OK) {
         printf("Error returned from setting up camera. Error %d\n", ret);
         return -1;
-    }*/
+    }
+  MXC_Delay(500000);
+#endif
+
   }
 
   return 0;
 }
-
