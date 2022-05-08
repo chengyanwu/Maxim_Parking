@@ -51,7 +51,7 @@
 #define DATA_LEN        8         // Words
 #define DATA_VALUE      0xA5A5      // This is for master mode only...
 #define VALUE           0xFFFF
-#define SPI_SPEED       500000      // Bit Rate
+#define SPI_SPEED       5000000      // Bit Rate
 
 #define SPI_INSTANCE_NUM    1
 

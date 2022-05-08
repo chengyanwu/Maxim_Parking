@@ -118,7 +118,7 @@ endif
 
 ifeq "$(BOARD)" "FTHR_RevA"
 # Only enable if 2.4" TFT is connected to Feather
-#PROJ_CFLAGS+=-DTFT_ENABLE
+PROJ_CFLAGS+=-DTFT_ENABLE
 endif
 
 # Enable all warnings
