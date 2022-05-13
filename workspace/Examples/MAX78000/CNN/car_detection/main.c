@@ -64,40 +64,18 @@
 #include "tft_fthr.h"
 #endif
 
-#define CAMERA_TO_LCD   (1)
+/*********************************************** CAMERA ****************************************************/
 #define IMAGE_SIZE_X  (240)
 #define IMAGE_SIZE_Y  (160)
 #define CAMERA_FREQ   (10 * 1000 * 1000)
 
-#define TFT_BUFF_SIZE   30    // TFT buffer size
+#define TFT_BUFF_SIZE   30 
 
-#define BUFF_SIZE       64
-
-/***** GPIO ***************/
-#define LORA_RESET_PORT_OUT               MXC_GPIO1
-#define LORA_RESET_PIN_OUT                MXC_GPIO_PIN_6
-
-#define TFT_SS_PORT_OUT               MXC_GPIO0
-#define TFT_SS_PIN_OUT                MXC_GPIO_PIN_19
-
-
-#define LORA_TFT_SPI_PINS MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11
-
-/********SPI******************/
-#define SPI         MXC_SPI0
-/****************** SLEEP MODE *******************/
-
-//#define SLEEPMODE_ENABLE
-
-/***** WUT *****/
-void WUT_IRQHandler()
-{
-    MXC_WUT_IntClear();
-}
-
-// #define DMA
-
-#define LoRaWan_Enable
+uint8_t   *frame_buffer;
+uint32_t  imgLen;
+uint32_t  w, h;
+uint8_t imgBlock565[64*64*2];
+uint8_t imgBlock888[64*64*4];
 
 #ifdef BOARD_EVKIT_V1
 int image_bitmap_1 = img_1_bmp;
@@ -112,6 +90,33 @@ int font_1 = (int)& SansSerif16x16[0];
 int font_2 = (int)& SansSerif16x16[0];
 #endif
 
+/*********************************************** GPIO ****************************************************/
+#define LORA_RESET_PORT_OUT               MXC_GPIO1
+#define LORA_RESET_PIN_OUT                MXC_GPIO_PIN_6
+
+#define TFT_SS_PORT_OUT               MXC_GPIO0
+#define TFT_SS_PIN_OUT                MXC_GPIO_PIN_19
+
+#define LORA_TFT_SPI_PINS MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11
+
+/******************************************** SPI ********************************************************/
+#define SPI         MXC_SPI0
+
+/*************************************** SLEEP MODE ******************************************************/
+
+#define SLEEPMODE_ENABLE
+#define SLEEP_MILISEC 5000
+
+void WUT_IRQHandler()
+{
+    MXC_WUT_IntClear();
+}
+
+/******************************************** LORAWAN ****************************************************/
+#define LoRaWan_Enable
+
+/******************************************** CNN *********************************************************/
+
 const char classes[CNN_NUM_OUTPUTS][10] = {"Car", "Non-Car"};
 
 volatile uint32_t cnn_time; // Stopwatch
@@ -119,11 +124,6 @@ uint32_t input_0_camera[1024];
 uint32_t input_1_camera[1024];
 uint32_t input_2_camera[1024];
 
-uint8_t   *frame_buffer;
-uint32_t  imgLen;
-uint32_t  w, h;
-uint8_t imgBlock565[64*64*2];
-uint8_t imgBlock888[64*64*4];
 
 /* ***********************  LORA Communication **************************************** */
 
@@ -209,7 +209,7 @@ void initWUT(void)
       mxc_wut_cfg_t cfg;
       uint32_t ticks;
       // Get ticks based off of milliseconds
-    MXC_WUT_GetTicks(4000, MXC_WUT_UNIT_MILLISEC, &ticks);
+    MXC_WUT_GetTicks(SLEEP_MILISEC, MXC_WUT_UNIT_MILLISEC, &ticks);
 
     // config structure for one shot timer to trigger in a number of ticks
     cfg.mode = MXC_WUT_MODE_ONESHOT;
@@ -225,28 +225,11 @@ void initWUT(void)
 /* **************************************************************************** */
 void cnn_load_input(void)
 {
-#if 0
-  const uint32_t* in0 = input_0_camera;
-  const uint32_t* in1 = input_1_camera;
-  const uint32_t* in2 = input_2_camera;
-  for (int i = 0; i < 1024; i++) {
-        while (((*((volatile uint32_t*) 0x50000004) & 1)) != 0);  // Wait for FIFO 0
 
-        *((volatile uint32_t*) 0x50000008) = *in0++;  // Write FIFO 0
-
-        while (((*((volatile uint32_t*) 0x50000004) & 2)) != 0);  // Wait for FIFO 1
-
-        *((volatile uint32_t*) 0x5000000c) = *in1++;  // Write FIFO 1
-
-        while (((*((volatile uint32_t*) 0x50000004) & 4)) != 0);  // Wait for FIFO 2
-
-        *((volatile uint32_t*) 0x50000010) = *in2++;  // Write FIFO 2
-    }
-#else
   memcpy32((uint32_t *) 0x50400000, input_0_camera, 1024);
   memcpy32((uint32_t *) 0x50800000, input_1_camera, 1024);
   memcpy32((uint32_t *) 0x50c00000, input_2_camera, 1024);
-#endif
+
 }
 
 // Classification layer:
@@ -680,7 +663,6 @@ while(inputNum<4){
     NVIC_EnableIRQ(WUT_IRQn);
     MXC_WUT_Enable();
     Camera_Power(POWER_OFF);
-    //MXC_LP_EnterLowPowerMode();
     MXC_LP_EnterSleepMode();
     MXC_Delay(200000);
     printf("Init Camera.\n");
