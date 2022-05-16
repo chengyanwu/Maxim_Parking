@@ -1,0 +1,3 @@
+#define SAMPLE_OUTPUT { \
+  0x50401000, 0xffffffff, 0x00000002, 0x00025f78, 0xfffd93bc, 0x00000000 \
+}

@@ -105,6 +105,7 @@ int font_2 = (int)& SansSerif16x16[0];
 /*************************************** SLEEP MODE ******************************************************/
 
 #define SLEEPMODE_ENABLE
+
 #define SLEEP_MILISEC 5000
 
 void WUT_IRQHandler()

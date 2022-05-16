@@ -330,7 +330,8 @@ int main(void)
     printf("Camera Manufacture ID is %04x\n", id);
     
     // Setup the camera image dimensions, pixel format and data aquiring details.PIXFORMAT_RGB565, FIFO_FOUR_BYTE
-    ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
+    //ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB888, FIFO_THREE_BYTE, USE_DMA, dma_channel);
+    ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_BAYER, FIFO_FOUR_BYTE, USE_DMA, dma_channel); // Mono
     //ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA, dma_channel);
     if (ret != STATUS_OK) {
         printf("Error returned from setting up camera. Error %d\n", ret);
@@ -384,7 +385,7 @@ int main(void)
           
           mxc_gpio_cfg_t tft_reset_pin = {MXC_GPIO0, MXC_GPIO_PIN_16, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH};
         MXC_TFT_Init(MXC_SPI0, 2, &tft_reset_pin, NULL);
-        MXC_TFT_SetRotation(ROTATE_270);
+        MXC_TFT_SetRotation(ROTATE_180);
         MXC_TFT_SetForeGroundColor(WHITE);   // set chars to white
     #endif
         MXC_Delay(1000000);
