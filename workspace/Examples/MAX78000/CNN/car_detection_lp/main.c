@@ -114,7 +114,7 @@ void WUT_IRQHandler()
 }
 
 /******************************************** LORAWAN ****************************************************/
-#define LoRaWan_Enable
+//#define LoRaWan_Enable
 
 /******************************************** CNN *********************************************************/
 
@@ -222,6 +222,7 @@ void initWUT(void)
     //Config WUT
     MXC_WUT_Config(&cfg);
     MXC_LP_EnableWUTAlarmWakeup();
+    NVIC_EnableIRQ(WUT_IRQn);
 }
 /* **************************************************************************** */
 void cnn_load_input(void)
@@ -521,15 +522,16 @@ int main(void)
     MXC_ICC_Enable(MXC_ICC0);
 
     /* Switch to 100 MHz clock */
-    MXC_SYS_Clock_Select(MXC_SYS_CLOCK_IPO);
+    MXC_SYS_ClockSourceEnable(MXC_SYS_CLOCK_ISO);
+    MXC_SYS_Clock_Select(MXC_SYS_CLOCK_ISO);
     SystemCoreClockUpdate();
 
     /* Enable peripheral, enable CNN interrupt, turn on CNN clock */
     /* CNN clock: 50 MHz div 1 */
     cnn_enable(MXC_S_GCR_PCLKDIV_CNNCLKSEL_PCLK, MXC_S_GCR_PCLKDIV_CNNCLKDIV_DIV1);
 
-    /* Configure P2.5, turn on the CNN Boost */
-    cnn_boost_enable(MXC_GPIO2, MXC_GPIO_PIN_5);
+    // /* Configure P2.5, turn on the CNN Boost */
+    // cnn_boost_enable(MXC_GPIO2, MXC_GPIO_PIN_5);
 
     /* Bring CNN state machine into consistent state */
     cnn_init();
@@ -562,8 +564,14 @@ int main(void)
     int inputNum = 0;
     memset(TxData, 0, 64);
 
- 
-
+    MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
+    #ifdef SLEEPMODE_ENABLE
+      cnn_init(); // Bring state machine into consistent state
+      cnn_load_weights(); // Reload CNN kernels
+      cnn_load_bias(); // Reload CNN bias
+      cnn_configure(); // Configure state machine
+    #endif
+    
     LED_On(LED_GREEN);
 
     printf("\n****************************************************\n");
@@ -571,6 +579,7 @@ int main(void)
 
     capture_camera_img();
     camera_get_image(&frame_buffer, &imgLen, &w, &h);
+    Camera_Power(POWER_OFF);
     
     
 while(inputNum<4){
@@ -585,20 +594,17 @@ while(inputNum<4){
 
     convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
 
-    // Enable CNN clock
-    MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
-
+    
     cnn_load_input();
-
     MXC_Delay(1000);
-
     cnn_start();
+
+    // Disable Deep Sleep mode
+    SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
 
     while (cnn_time == 0) {
         __WFI();    // Wait for CNN interrupt
     }
-
-    printf("test\n");
 
 
     // Unload CNN data
@@ -606,8 +612,6 @@ while(inputNum<4){
 
     cnn_stop();
 
-    // Disable CNN clock to save power
-    MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
 
     //printf("Time for CNN: %d us\n", cnn_time);
     printf("image%d result:\n", inputNum);
@@ -645,6 +649,7 @@ while(inputNum<4){
         TFT_Print(buff, 10 + inputNum*80, 160, font_1, sprintf(buff, "%d%%", result[1]));
       }  
 #endif
+    
 
     memset(input_0_camera,0x0, 1024*4);
     memset(input_1_camera,0x0, 1024*4);
@@ -653,8 +658,11 @@ while(inputNum<4){
     inputNum++;
   }
 
-    //printf(TxData);
-    printf("%x",txByte);
+    MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
+
+
+    printf(TxData);
+    //printf("%x",txByte);
     printf("\n");
 
 #ifdef LoRaWan_Enable
@@ -667,16 +675,16 @@ while(inputNum<4){
 
 #ifdef SLEEPMODE_ENABLE
     while (MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR);
-    NVIC_EnableIRQ(WUT_IRQn);
     MXC_WUT_Enable();
 
-    Camera_Power(POWER_OFF);
-    cnn_disable();
-    
-    MXC_LP_EnterSleepMode();
+    Camera_Power(POWER_OFF);    
+    //MXC_LP_EnterSleepMode();
+    //MXC_LP_EnterMicroPowerMode();
     //MXC_LP_EnterLowPowerMode();
+    MXC_LP_EnterStandbyMode();
     MXC_Delay(200000);
     printf("Init Camera.\n");
+    #endif
     Camera_Power(POWER_ON);
     camera_init(CAMERA_FREQ);
 
@@ -687,7 +695,6 @@ while(inputNum<4){
         return -1;
     }
     MXC_Delay(500000);
-#endif
 
   }
 

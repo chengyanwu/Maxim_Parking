@@ -1500,7 +1500,7 @@ Discarded input sections
                 0x00000000        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/camera.o
  .data.g_stream_buffer_size
                 0x00000000        0x4 c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/camera.o
- .debug_info    0x00000000     0x221d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/camera.o
+ .debug_info    0x00000000     0x221c c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/camera.o
  .debug_abbrev  0x00000000      0x43e c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/camera.o
  .debug_loc     0x00000000      0x64d c:/Users/hmche/Desktop/capstone/Maxim_Parking/workspace/Examples/MAX78000/LoRa/loraLMIC/build/camera.o
  .debug_aranges

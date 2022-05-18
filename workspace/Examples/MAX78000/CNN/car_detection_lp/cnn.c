@@ -69,9 +69,6 @@ void CNN_ISR(void)
 #else
   cnn_time = 1;
 #endif
-
-  printf("test1\n");
-
 }
 
 

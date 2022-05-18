@@ -104,7 +104,7 @@ int font_2 = (int)& SansSerif16x16[0];
 
 /*************************************** SLEEP MODE ******************************************************/
 
-#define SLEEPMODE_ENABLE
+//#define SLEEPMODE_ENABLE
 
 #define SLEEP_MILISEC 5000
 
@@ -128,26 +128,24 @@ uint32_t input_2_camera[1024];
 
 /* ***********************  LORA Communication **************************************** */
 
-// LoRaWAN NwkSKey, network session key
-// This is the default Semtech key, which is used by the early prototype TTN
-// network.
-//static const u1_t NWKSKEY[16] = {0x4A, 0x96, 0xDF, 0xBE, 0x3D, 0xC0, 0x7F, 0x02, 0xB3, 0xBB, 0xE2, 0xCA, 0xDB, 0x84, 0x70, 0x41};
-static const u1_t NWKSKEY[16] = {0x51, 0xDE, 0xA8, 0x69, 0x2E, 0x8D, 0x0C, 0x20, 0x28, 0x6B, 0x99, 0xEF, 0xE4, 0xA7, 0xE9, 0xB0};
+#define DEVICEID1
 
-// LoRaWAN AppSKey, application session key
-// This is the default Semtech key, which is used by the early prototype TTN
-// network.
-//static const u1_t APPSKEY[16] = {0x6C, 0xC5, 0x3C, 0xF2, 0x0D, 0x9A, 0x03, 0x94, 0xAB, 0x31, 0xA4, 0xE4, 0xF9, 0xE0, 0x36, 0x4F};
-static const u1_t APPSKEY[16] = {0x09, 0xA0, 0x5C, 0x6C, 0x6D, 0x5C, 0xF4, 0xB4, 0xDF, 0x0E, 0x17, 0xBA, 0x25, 0xB4, 0x28, 0x4E};
+#ifdef DEVICEID1
+    static const u1_t NWKSKEY[16] = { 0x51, 0xDE, 0xA8, 0x69, 0x2E, 0x8D, 0x0C, 0x20, 0x28, 0x6B, 0x99, 0xEF, 0xE4, 0xA7, 0xE9, 0xB0};
+    static const u1_t APPSKEY[16] = {0x09, 0xA0, 0x5C, 0x6C, 0x6D, 0x5C, 0xF4, 0xB4, 0xDF, 0x0E, 0x17, 0xBA, 0x25, 0xB4, 0x28, 0x4E};
+    static const u4_t DEVADDR = 0x00b3d02a;
+#endif
+#ifdef DEVICEID2
+    static const u1_t NWKSKEY[16] = { 0x19, 0x1C, 0x54, 0x38, 0xDC, 0x22, 0x2C, 0x6A, 0x16, 0x00, 0x13, 0x2A, 0x3D, 0x00, 0xCA, 0x37};
+    static const u1_t APPSKEY[16] = {0x4E, 0x9A, 0xB8, 0x0C, 0x7F, 0x7B, 0xD5, 0xF5, 0x7F, 0xCC, 0xF8, 0xEC, 0x7C, 0xB9, 0x0B, 0x6F};
+    static const u4_t DEVADDR = 0x017b4031;
+#endif
+#ifdef DEVICEID3
+    static const u1_t NWKSKEY[16] = {0xF9, 0x11, 0x9B, 0x16, 0x6C, 0x48, 0xFE, 0xD3, 0x13, 0xF0, 0x31, 0xBE, 0xA4, 0x40, 0xB7, 0xC7};
+    static const u1_t APPSKEY[16] = {0x48, 0x51, 0x49, 0x11, 0x46, 0xDE, 0xE3, 0xBD, 0xAB, 0x64, 0xDA, 0x33, 0xDC, 0xF7, 0xF3, 0x16};
+    static const u4_t DEVADDR = 0x01d6c312;
+#endif
 
-// LoRaWAN end-device address (DevAddr)
-
-//static const u4_t DEVADDR = 0x260CA619; // <-- Change this address for every node!
-static const u4_t DEVADDR = 0x00b3d02a; // <-- Change this address for every node!
-
-// These callbacks are only used in over-the-air activation, so they are
-// left empty here (we cannot leave them out completely unless
-// DISABLE_JOIN is set in config.h, otherwise the linker will complain).
 void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
@@ -222,6 +220,7 @@ void initWUT(void)
     //Config WUT
     MXC_WUT_Config(&cfg);
     MXC_LP_EnableWUTAlarmWakeup();
+    NVIC_EnableIRQ(WUT_IRQn);
 }
 /* **************************************************************************** */
 void cnn_load_input(void)
@@ -233,6 +232,8 @@ void cnn_load_input(void)
 
 }
 
+/* **************************************************************************** */
+
 // Classification layer:
 static int32_t ml_data[CNN_NUM_OUTPUTS];
 static q15_t ml_softmax[CNN_NUM_OUTPUTS];
@@ -242,8 +243,8 @@ void softmax_layer(void)
   cnn_unload((uint32_t *) ml_data);
     softmax_q17p14_q15((const q31_t*) ml_data, CNN_NUM_OUTPUTS, ml_softmax);
 }
-
 /* **************************************************************************** */
+
 static uint8_t signed_to_unsigned(int8_t val)
 {
         uint8_t value;
@@ -502,6 +503,9 @@ int main(void)
     printf("\n\nCar Detection Demo\n");
 #endif
 
+    MXC_DMA_Init();
+    dma_channel = MXC_DMA_AcquireChannel();
+
     printf("Init Camera.\n");
     camera_init(CAMERA_FREQ);
 
@@ -516,15 +520,16 @@ int main(void)
     MXC_ICC_Enable(MXC_ICC0);
 
     /* Switch to 100 MHz clock */
-    MXC_SYS_Clock_Select(MXC_SYS_CLOCK_IPO);
+    MXC_SYS_ClockSourceEnable(MXC_SYS_CLOCK_ISO);
+    MXC_SYS_Clock_Select(MXC_SYS_CLOCK_ISO);
     SystemCoreClockUpdate();
 
     /* Enable peripheral, enable CNN interrupt, turn on CNN clock */
     /* CNN clock: 50 MHz div 1 */
     cnn_enable(MXC_S_GCR_PCLKDIV_CNNCLKSEL_PCLK, MXC_S_GCR_PCLKDIV_CNNCLKDIV_DIV1);
 
-    /* Configure P2.5, turn on the CNN Boost */
-    cnn_boost_enable(MXC_GPIO2, MXC_GPIO_PIN_5);
+    // /* Configure P2.5, turn on the CNN Boost */
+    // cnn_boost_enable(MXC_GPIO2, MXC_GPIO_PIN_5);
 
     /* Bring CNN state machine into consistent state */
     cnn_init();
@@ -543,9 +548,6 @@ int main(void)
     MXC_TFT_SetForeGroundColor(WHITE);
     MXC_Delay(1000000);
 #endif
-    
-    MXC_DMA_Init();
-    dma_channel = MXC_DMA_AcquireChannel();
 
 #ifdef TFT_ENABLE
   MXC_TFT_SetBackGroundColor(4);
@@ -560,6 +562,14 @@ int main(void)
     int inputNum = 0;
     memset(TxData, 0, 64);
 
+    MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
+    #ifdef SLEEPMODE_ENABLE
+      cnn_init(); // Bring state machine into consistent state
+      cnn_load_weights(); // Reload CNN kernels
+      cnn_load_bias(); // Reload CNN bias
+      cnn_configure(); // Configure state machine
+    #endif
+    
     LED_On(LED_GREEN);
 
     printf("\n****************************************************\n");
@@ -567,7 +577,9 @@ int main(void)
 
     capture_camera_img();
     camera_get_image(&frame_buffer, &imgLen, &w, &h);
-
+    //Camera_Power(POWER_OFF);
+    
+    
 while(inputNum<4){
     segment_image(frame_buffer, imgLen, w, h, inputNum*58, 48, 64, imgBlock565, 565);
     memset(imgBlock888, 0x0, 64*64*4);
@@ -580,28 +592,24 @@ while(inputNum<4){
 
     convert_img_unsigned_to_signed(input_0_camera, input_1_camera, input_2_camera);
 
-    // Enable CNN clock
-    MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
-
-    cnn_init(); // Bring state machine into consistent state
-    //cnn_load_weights(); // No need to reload kernels
-    //cnn_load_bias(); // No need to reload bias
-    cnn_configure(); // Configure state machine
+    
     cnn_load_input();
-
     MXC_Delay(1000);
     cnn_start();
+
+    // Disable Deep Sleep mode
+    SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
 
     while (cnn_time == 0) {
         __WFI();    // Wait for CNN interrupt
     }
 
+
     // Unload CNN data
     softmax_layer();
 
     cnn_stop();
-    // Disable CNN clock to save power
-    MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
+
 
     //printf("Time for CNN: %d us\n", cnn_time);
     printf("image%d result:\n", inputNum);
@@ -639,6 +647,7 @@ while(inputNum<4){
         TFT_Print(buff, 10 + inputNum*80, 160, font_1, sprintf(buff, "%d%%", result[1]));
       }  
 #endif
+    
 
     memset(input_0_camera,0x0, 1024*4);
     memset(input_1_camera,0x0, 1024*4);
@@ -647,8 +656,11 @@ while(inputNum<4){
     inputNum++;
   }
 
-    //printf(TxData);
-    printf("%x",txByte);
+    MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_CNN);
+
+
+    printf(TxData);
+    //printf("%x",txByte);
     printf("\n");
 
 #ifdef LoRaWan_Enable
@@ -661,10 +673,13 @@ while(inputNum<4){
 
 #ifdef SLEEPMODE_ENABLE
     while (MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR);
-    NVIC_EnableIRQ(WUT_IRQn);
     MXC_WUT_Enable();
-    Camera_Power(POWER_OFF);
-    MXC_LP_EnterSleepMode();
+
+    Camera_Power(POWER_OFF);    
+    //MXC_LP_EnterSleepMode();
+    //MXC_LP_EnterMicroPowerMode();
+    //MXC_LP_EnterLowPowerMode();
+    MXC_LP_EnterStandbyMode();
     MXC_Delay(200000);
     printf("Init Camera.\n");
     Camera_Power(POWER_ON);
@@ -676,8 +691,8 @@ while(inputNum<4){
         printf("Error returned from setting up camera. Error %d\n", ret);
         return -1;
     }
-  MXC_Delay(500000);
-#endif
+    MXC_Delay(500000);
+  #endif
 
   }
 
