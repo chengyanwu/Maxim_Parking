@@ -2,7 +2,9 @@
 
 Description
 -----------
-Our objective is to design, develop, and implement an intelligent parking sensor system powered by image recognition. We will use MAX78000 microcontrollers to facilitate the detection of whether parking spaces are occupied or not. The MAX78000 provides CNN acceleration, which will allow us to run a custom ML image recognition model on the board. A LoRa transceiver will be integrated into each PCB, and a central gateway will receive and save the data in Firebase. An react web app will display available parking spaces and their location so that users can locate free parking spots quickly and efficiently.
+Finding parking spots is an issue that plagues every driver. SpotOn addresses this problem by proposing an intelligent parking sensor system powered by ML image recognition. Using an onboard CNN accelerator with a microcontroller, parking spot detection can be accomplished with low cost and low power consumption. Spot statuses are sent to a central database through LoRaWAN communication and rendered on a web application for users to easily access.
+
+Website: https://sites.google.com/view/spoton-ucsb/home
 
 
 ### Loading and Running Applications
